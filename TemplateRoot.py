@@ -101,9 +101,6 @@ def querycreditcard():
 def updatecreditcard():
    return UpdateProfileCreditcardRecord(request)
 
-@app.route("/Profile/QueryProfileRecordALL",methods=['POST'])
-def queryallrecord():
-   return QueryProfileRecordALL()
 @app.route("/profile/MergeProfile",methods=['POST'])
 def mergeprofilerecord():
    return MergeProfile(request)
