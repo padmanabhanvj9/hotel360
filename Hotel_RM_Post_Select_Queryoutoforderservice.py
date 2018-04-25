@@ -54,5 +54,6 @@ def hotel_rm_post_select_queryoutoforderservice(request):
     print(sql1)
     sql = sql + sql1
     result = dbget(sql)
-    return(result)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result  ,'ReturnCode':'RRTS'},indent=4))
+
     
