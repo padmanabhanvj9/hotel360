@@ -266,9 +266,9 @@ def Queryoutoforderservice ():
 @app.route('/Hotel_Rm_Post_Insert_Updateroommaintenance',methods=['POST'])
 def Updateroommaintenance ():
    return hotel_rm_post_insert_updateroommaintenance(request)
-@app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['GET'])
+@app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['GET','POST'])
 def Queryroommaintenance():
-   return hotel_rm_post_select_queryroommaintenance()
+   return hotel_rm_post_select_queryroommaintenance(request)
 @app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
 def updateroomdiscrepancies():
    return hotel_rm_post_update_updateroomdiscrepancies(request)
