@@ -63,6 +63,18 @@ from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryre
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
 from HOTEL_FD_GET_SELECT_QueryQueueReservation import HOTEL_FD_GET_SELECT_QueryQueueReservation
 #<--------------------------------------------------->
+#<---------------Room management------------------------->
+from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroomlist
+from Hotel_RM_Post_Update_Updateroomstatus import hotel_rm_post_update_updateroomstatus
+from Hotel_RM_Post_Select_Queryhousekeepinglist import hotel_rm_post_select_queryhousekeepinglist
+from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroomcondition
+from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateoutoforderservice
+from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_select_queryoutoforderservice
+from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaintenance
+from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
+from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
+from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryreservation
+#<------------------------------------------------------------------->
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -232,6 +244,35 @@ def insertqueue():
 def queryqueue():
     return HOTEL_FD_GET_SELECT_QueryQueueReservation(request)
 #<--------------------------------------------->
+#<----------------------Room maangement route------------------->
+@app.route('/Hotel_Rm_Post_Insert_Updateroomlist',methods=['POST'])
+def Updateroomlist():
+   return hotel_rm_post_insert_updateroomlist(request)
+@app.route('/Hotel_Rm_Post_Update_Updateroomstatus',methods=['GET'])
+def Updateroomstatus():
+   return hotel_rm_post_update_updateroomstatus(request)
+@app.route('/Hotel_Rm_Post_Select_Queryhousekeepinglist',methods=['POST'])
+def Queryhousekeepinglist():
+   return hotel_rm_post_select_queryhousekeepinglist(request)
+@app.route('/Hotel_Rm_Post_Insert_Updateroomcondition',methods=['POST'])
+def Updateroomcondition():
+   return hotel_rm_post_insert_updateroomcondition(request)
+@app.route('/Hotel_Rm_Post_Insert_Updateoutoforderservice',methods=['POST'])
+def Updateoutoforderservice():
+   return hotel_rm_post_insert_updateoutoforderservice(request)
+@app.route('/Hotel_Rm_Post_Select_Queryoutoforderservice',methods=['POST'])
+def Queryoutoforderservice ():
+   return hotel_rm_post_select_queryoutoforderservice(request)
+@app.route('/Hotel_Rm_Post_Insert_Updateroommaintenance',methods=['POST'])
+def Updateroommaintenance ():
+   return hotel_rm_post_insert_updateroommaintenance(request)
+@app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['POST'])
+def Queryroommaintenance():
+   return hotel_rm_post_select_queryroommaintenance(request)
+@app.route('/Hotel_Res_Post_Select_Queryreservation',methods=['POST'])
+def Queryreservation():
+   return hotel_res_post_select_queryreservation(request)
+#<--------------------------------------------------------->
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
