@@ -195,6 +195,7 @@ def querydeposit():
 @app.route("/HOTEL_RES_GET_SELECT_RoomUnassign",methods=['GET'])
 def roomunassign():
     return HOTEL_RES_GET_SELECT_RoomUnassign()
+@app.route("/Hotel_RES_Post_Insert_UpdateGuestPrivileges",methods=['POST'])
 def GuestPrivileges():
     return Hotel_RES_Post_Insert_UpdateGuestPrivileges(request)
 @app.route("/Hotel_RES_Post_Update_UpdateGuestPrivileges",methods=['POST'])
