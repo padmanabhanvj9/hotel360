@@ -32,4 +32,5 @@ def hotel_rm_post_update_updateroomstatus(request):
         print(stri)
         a= dbput("update room_management.RM_Room_List  set  RM_Room_Status='"+room_status+"'  where  RM_Room in ("+stri+")")
         print(a)        
-        return('done')
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
