@@ -48,4 +48,5 @@ def hotel_rm_post_select_queryhousekeepinglist(request):
     sql += " order by rm_room"      
     db_res = (dbget(sql))
     print(db_res)
-    return(db_res)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':db_res  ,'ReturnCode':'RRTS'},indent=4))
+
