@@ -129,9 +129,7 @@ def querycreditcard():
 @app.route("/Profile/UpdateProfileCreditcardRecord",methods=['POST'])
 def updatecreditcard():
    return UpdateProfileCreditcardRecord(request)
-@app.route("/Template/Get",methods=['GET'])
-def temp_get():
-    return Template_Get_String()
+
 
 @app.route("/profile/MergeProfile",methods=['POST'])
 def mergeprofilerecord():
