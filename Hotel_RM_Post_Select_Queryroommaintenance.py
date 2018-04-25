@@ -1,8 +1,10 @@
 from sqlwrapper import dbget,dbfetch
 import json
+import request
 
 def hotel_rm_post_select_queryroommaintenance(request):
-    RM_Room = request.json['RM_room']
+    
+    RM_Room = request.json['RM_Room']
     RM_Room_Class = request.json['RM_Room_Class']
     Show = request.json['Show']
     sql = "select * from room_management.RM_Room_Mainteanance_Acitivity_Log"
