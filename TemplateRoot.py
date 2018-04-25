@@ -269,6 +269,9 @@ def Updateroommaintenance ():
 @app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['POST'])
 def Queryroommaintenance():
    return hotel_rm_post_select_queryroommaintenance(request)
+@app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
+def updateroomdiscrepancies():
+   return hotel_rm_post_update_updateroomdiscrepancies(request)
 
 #<--------------------------------------------------------->
 if __name__ == "__main__":
