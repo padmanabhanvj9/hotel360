@@ -1,6 +1,6 @@
 from sqlwrapper import dbget,dbfetch
 import json
-import request
+from flask import Flask,request, jsonify
 
 def hotel_rm_post_select_queryroommaintenance(request):
     
