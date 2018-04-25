@@ -46,4 +46,5 @@ def hotel_rm_post_select_queryroommaintenance(request):
     sql = sql+sql1
     a = dbget(sql)
     print(a)
-    return(a)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':a  ,'ReturnCode':'RRTS'},indent=4))
+
