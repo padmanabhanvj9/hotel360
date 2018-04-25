@@ -31,4 +31,4 @@ def QueryProfileRecordAll(request):
             return(data)
         else:
             return query(sql1,pval)        
-    return("done")
+    #return("done")
