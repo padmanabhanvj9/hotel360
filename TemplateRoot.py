@@ -225,6 +225,7 @@ def Queryreservation():
    return hotel_res_post_select_queryreservation(request)
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
+@app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
 def insertqueue():
     return HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request)
 @app.route("/HOTEL_FD_GET_SELECT_QueryQueueReservation",methods=['POST'])
