@@ -1,7 +1,20 @@
 import psycopg2
 import json
 import datetime
-
+def dbfetch(sql):
+     print(sql)
+     try:
+      con = psycopg2.connect(user='akvwghpxnyalss',password='bc0080c7c0f0b55e162582666cf6b39227c6160e2759dbb0d7f28d58190952cd',host='ec2-54-235-146-184.compute-1.amazonaws.com',port='5432',database='dfbvc8j8egd076')
+      cur = con.cursor()
+     except psycopg2.Error :
+       return (json.dumps({'Status': 'Failure','Message':'DB connection Error'}, sort_keys=True, indent=4))
+     cur.execute(sql)
+     result = cur.fetchall()
+     fresult = []
+     for i in result:
+         for res in i:
+             fresult.append(res)
+     return(fresult)
 def dbput(sql):
     try:
       con = psycopg2.connect(user='akvwghpxnyalss',password='bc0080c7c0f0b55e162582666cf6b39227c6160e2759dbb0d7f28d58190952cd',host='ec2-54-235-146-184.compute-1.amazonaws.com',port='5432',database='dfbvc8j8egd076')
