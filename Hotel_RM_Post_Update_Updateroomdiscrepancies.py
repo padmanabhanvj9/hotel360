@@ -31,6 +31,7 @@ def hotel_rm_post_update_updateroomdiscrepancies(request):
             d['rm_room_discrepancy'] = 'person'
             print(gensql('update','room_management.RM_Room_List',d,e))
         print(gensql('update','room_management.RM_Room_List',d,e))    
-    return("done")
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
     
 #print(gensql('update','room_management.RM_Room_List',d,e))
