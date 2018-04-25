@@ -40,3 +40,9 @@ worker: gunicorn HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation.py
 worker: gunicorn Hotel_RES_Post_Select_Queryreservation.py
 worker: gunicorn HOTEL_FD_POST_INSERT_UpdateQueueRreservation.py
 worker: gunicorn HOTEL_FD_GET_SELECT_QueryQueueReservation.py
+worker: gunicorn Hotel_RM_Post_Insert_Updateroom.py
+worker: gunicorn Hotel_RM_Post_Select_Queryhousekeepinglist.py
+worker: gunicorn Hotel_RM_Post_Select_Queryoutoforderservice.py
+worker: gunicorn Hotel_RM_Post_Select_Queryroommaintenance.py
+worker: gunicorn Hotel_RM_Post_Update_Updateroomdiscrepancies.py
+worker: gunicorn Hotel_RM_Post_Update_Updateroomstatus.py
