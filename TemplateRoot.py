@@ -57,6 +57,7 @@ from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Post_Insert_Update
 from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Post_Update_UpdateGuestTraces
 from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Get_Select_QueryGuestTraces
 from HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation import HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation
+from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryreservation
 #</--------------reservation webservice---------/>
 from flask_cors import CORS
 app = Flask(__name__)
@@ -214,6 +215,9 @@ def SelectGuestTraces():
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation",methods=['POST'])
 def UpdateFixedChargesReservation():
     return HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request)
+@app.route('/Hotel_Res_Post_Select_Queryreservation',methods=['POST'])
+def Queryreservation():
+   return hotel_res_post_select_queryreservation(request)
 #</----------------------------/>
 if __name__ == "__main__":
     app.run(debug=True)
