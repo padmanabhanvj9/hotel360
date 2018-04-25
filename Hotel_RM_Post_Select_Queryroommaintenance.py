@@ -2,11 +2,11 @@ from sqlwrapper import dbget,dbfetch
 import json
 from flask import Flask,request, jsonify
 
-def hotel_rm_post_select_queryroommaintenance():
+def hotel_rm_post_select_queryroommaintenance(request):
     
-    RM_Room = request.args('RM_Room')
-    RM_Room_Class = request.args('RM_Room_Class')
-    Show = request.args('Show')
+    RM_Room = request.json['RM_Room']
+    RM_Room_Class = request.json['RM_Room_Class']
+    Show = request.json['Show']
     sql = "select * from room_management.RM_Room_Mainteanance_Acitivity_Log"
     sql1 = ''
     if len(RM_Room) != 0:
