@@ -38,3 +38,5 @@ worker: gunicorn HOTEL_RES_POST_UPDATE_UpdateReservation.py
 worker: gunicorn HOTEL_RES_POST_UPDATE_UpdateReservationAlert.py
 worker: gunicorn HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation.py
 worker: gunicorn Hotel_RES_Post_Select_Queryreservation.py
+worker: gunicorn HOTEL_FD_POST_INSERT_UpdateQueueRreservation.py
+worker: gunicorn HOTEL_FD_GET_SELECT_QueryQueueReservation.py
