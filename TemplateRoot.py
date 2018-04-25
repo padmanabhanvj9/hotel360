@@ -73,7 +73,7 @@ from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_select_que
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaintenance
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
 from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
-from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryreservation
+
 #<------------------------------------------------------------------->
 from flask_cors import CORS
 app = Flask(__name__)
@@ -269,9 +269,7 @@ def Updateroommaintenance ():
 @app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['POST'])
 def Queryroommaintenance():
    return hotel_rm_post_select_queryroommaintenance(request)
-@app.route('/Hotel_Res_Post_Select_Queryreservation',methods=['POST'])
-def Queryreservation():
-   return hotel_res_post_select_queryreservation(request)
+
 #<--------------------------------------------------------->
 if __name__ == "__main__":
     app.run(debug=True)
