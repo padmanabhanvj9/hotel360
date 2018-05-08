@@ -75,6 +75,8 @@ from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_query
 from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
 
 #<------------------------------------------------------------------->
+#<---------------------------------amazonlex---------->
+from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -274,6 +276,11 @@ def updateroomdiscrepancies():
    return hotel_rm_post_update_updateroomdiscrepancies(request)
 
 #<--------------------------------------------------------->
+#<--------------amazonlex-------------------------->
+@app.route('/AMAZON_RESERVATION_LAMBDA_LEX',methods=['POST'])
+def amazonlex():
+   return AMAZON_RESERVATION_LAMBDA_LEX(request)
+#<----------------------------------------------->
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
