@@ -87,6 +87,18 @@ from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Post_Update_Update
 from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Get_Select_QueryGuestTraces
 from HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation import HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation
 from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryreservation
+
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Alertarea
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Alertcode
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Origin
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Source
+
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertcode
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Origin
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Source
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
@@ -353,6 +365,41 @@ def UpdateFixedChargesReservation():
 @app.route('/Hotel_Res_Post_Select_Queryreservation',methods=['POST'])
 def Queryreservation():
    return hotel_res_post_select_queryreservation(request)
+
+
+@app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
+def Hotel_RES_POST_INSERT_RestypeInsertvalue():
+    return Hotel_RES_POST_INSERT_RestypeInsert(request)
+@app.route("/Hotel_RES_POST_INSERT_Alertarea",methods=['POST'])
+def Hotel_RES_POST_INSERT_Alertareava():
+    return Hotel_RES_POST_INSERT_Alertarea(request)
+@app.route("/Hotel_RES_POST_INSERT_Alertcode",methods=['POST'])
+def Hotel_RES_POST_INSERT_Alertcodeva():
+    return Hotel_RES_POST_INSERT_Alertcode(request)
+@app.route("/Hotel_RES_POST_INSERT_Origin",methods=['POST'])
+def Hotel_RES_POST_INSERT_Originva():
+    return Hotel_RES_POST_INSERT_Origin(request)
+@app.route("/Hotel_RES_POST_INSERT_Source",methods=['POST'])
+def Hotel_RES_POST_INSERT_Sourceva():
+    return Hotel_RES_POST_INSERT_Source(request)
+   
+
+@app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
+def Hotel_RES_GET_SELECT_RestypeValue():
+    return Hotel_RES_GET_SELECT_Restype()
+@app.route("/Hotel_RES_GET_SELECT_Alertarea",methods=['GET'])
+def Hotel_RES_GET_SELECT_Alertareavalue():
+    return Hotel_RES_GET_SELECT_Alertarea()
+@app.route("/Hotel_RES_GET_SELECT_Alertcode",methods=['GET'])
+def Hotel_RES_GET_SELECT_Alertcodevalue():
+    return Hotel_RES_GET_SELECT_Alertcode()
+@app.route("/Hotel_RES_GET_SELECT_Origin",methods=['GET'])
+def Hotel_RES_GET_SELECT_Originvalue():
+    return Hotel_RES_GET_SELECT_Origin()
+@app.route("/Hotel_RES_GET_SELECT_Source",methods=['GET'])
+def Hotel_RES_GET_SELECT_Sourceva():
+    return Hotel_RES_GET_SELECT_Source()
+
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
