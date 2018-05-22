@@ -47,3 +47,4 @@ worker: gunicorn Hotel_RM_Post_Select_Queryroommaintenance.py
 worker: gunicorn Hotel_RM_Post_Update_Updateroomdiscrepancies.py
 worker: gunicorn Hotel_RM_Post_Update_Updateroomstatus.py
 worker: gunicorn AMAZON_RESERVATION_LAMBDA_LEX.py
+worker: gunicorn profilecity.py
