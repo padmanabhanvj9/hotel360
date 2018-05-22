@@ -43,6 +43,21 @@ from profilecity import profileratecode
 from profilecity import profilenotetype
 from profilecity import profilepreferencegroup
 from profilecity import profilepreferencevalue
+
+from profileinsertvalue import profilecity_insert
+from profileinsertvalue import profilelanguage_insert
+from profileinsertvalue import profilecountry_insert
+from profileinsertvalue import profilestate_insert
+from profileinsertvalue import profilepostalcode_insert
+from profileinsertvalue import profilevip_insert
+from profileinsertvalue import profilenationality_insert
+from profileinsertvalue import profilecurrency_insert
+from profileinsertvalue import profilecommunication_insert
+from profileinsertvalue import profilepftype_insert
+from profileinsertvalue import profileratecode_insert
+from profileinsertvalue import profilenotetype_insert
+from profileinsertvalue import profilepreferencegroup_insert
+from profileinsertvalue import profilepreferencevalue_insert
 #</------profile webservice-------------------/>
 
 #</--------------reservation webservice---------/>
@@ -214,6 +229,48 @@ def profilepreferencegroupvalue():
 def profilepreferencevalues():
    return profilepreferencevalue()
 
+@app.route("/Profile/profilecity_insert",methods=['POST'])
+def profilecity_insertvalue():
+   return profilecity_insert(request)
+@app.route("/Profile/profilelanguage_insert",methods=['POST'])
+def profilelanguage_insertvalue():
+   return profilelanguage_insert(request)
+@app.route("/Profile/profilecountry_insert",methods=['POST'])
+def profilecountry_insertvalue():
+   return profilecountry_insert(request)
+@app.route("/Profile/profilestate_insert",methods=['POST'])
+def profilestate_insertvalue():
+   return profilestate_insert(request)
+@app.route("/Profile/profilepostalcode_insert",methods=['POST'])
+def profilepostalcode_insertvalue():
+   return profilepostalcode_insert(request)
+@app.route("/Profile/profilevip_insert",methods=['POST'])
+def profilevip_insertvalue():
+   return profilevip_insert(request)
+@app.route("/Profile/profilenationality_insert",methods=['POST'])
+def profilenationality_insertvalue():
+   return profilenationality_insert(request)
+@app.route("/Profile/profilecurrency_insert",methods=['POST'])
+def profilecurrency_insertvalue():
+   return profilecurrency_insert(request)
+@app.route("/Profile/profilecommunication_insert",methods=['POST'])
+def profilecommunication_insertvalue():
+   return profilepreferencevalue(request)
+@app.route("/Profile/profilepftype_insert",methods=['POST'])
+def profilepftype_insertvalue():
+   return profilepftype_insert(request)
+@app.route("/Profile/profileratecode_insert",methods=['POST'])
+def profileratecode_insertvalue():
+   return profileratecode_insert(request)
+@app.route("/Profile/profilenotetype_insert",methods=['POST'])
+def profilenotetype_insertvalue():
+   return profilenotetype_insert(request)
+@app.route("/Profile/profilepreferencegroup_insert",methods=['POST'])
+def profilepreferencegroup_insertvalue():
+   return profilepreferencegroup_insert(request)
+@app.route("/Profile/profilepreferencevalue_insert",methods=['POST'])
+def profilepreferencevalue_insertvalue():
+   return profilepreferencevalue_insert(request)
 
 #</----------------------/>
 #</----------------reservation route--------->
