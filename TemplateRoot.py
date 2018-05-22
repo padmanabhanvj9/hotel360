@@ -29,6 +29,20 @@ from UpdateProfileNegotiatedRateRecord import UpdateProfileNegotiatedRateRecord
 from QueryProfileRecord import QueryProfileCreditcard
 from UpdateProfileCreditcardRecord import UpdateProfileCreditcardRecord
 from QueryProfileRecordAll import QueryProfileRecordAll
+from profilecity import profilecity
+from profilecity import profilelanguage
+from profilecity import profilecountry
+from profilecity import profilestate
+from profilecity import profilepostalcode
+from profilecity import profilevip 
+from profilecity import profilenationality
+from profilecity import profilecurrency
+from profilecity import profilecommunication
+from profilecity import profilepftype
+from profilecity import profileratecode
+from profilecity import profilenotetype
+from profilecity import profilepreferencegroup
+from profilecity import profilepreferencevalue
 #</------profile webservice-------------------/>
 
 #</--------------reservation webservice---------/>
@@ -156,6 +170,51 @@ def mergeprofilerecord():
 @app.route("/profile/QueryProfileRecordAll",methods=['POST'])
 def queryallrecord():
    return QueryProfileRecordAll(request)
+@app.route("/Profile/profilecity",methods=['GET'])
+def cityvalue():
+   return profilecity()
+@app.route("/Profile/profilelanguage",methods=['GET'])
+def languagevalue():
+   return profilelanguage()
+@app.route("/Profile/profilecountry",methods=['GET'])
+def countryvalue():
+   return profilecountry()
+@app.route("/Profile/profilestate", methods=['GET'])
+def statevalue():
+   return profilestate()
+@app.route("/Profile/profilepostalcode",methods=['GET'])
+def postalcodevalue():
+   return profilepostalcode()
+@app.route("/Profile/profilevip",methods=['GET'])
+def profilevivalue():
+   return profilevip()
+
+@app.route("/Profile/profilenationality",methods=['GET'])
+def profilenationalityvalue():
+   return profilenationality()
+@app.route("/Profile/profilecurrency",methods=['GET'])
+def profilecurrencyvalue():
+   return profilecurrency()
+@app.route("/Profile/profilecommunication",methods=['GET'])
+def profilecommunicationvalue():
+   return profilecommunication()
+@app.route("/Profile/profilepftype",methods=['GET'])
+def profilepftypevalue():
+   return profilepftype()
+@app.route("/Profile/profileratecode",methods=['GET'])
+def profileratecodevalue():
+   return profileratecode()
+@app.route("/Profile/profilenotetype",methods=['GET'])
+def profilenotetypevalue():
+   return profilenotetype()
+@app.route("/Profile/profilepreferencegroup",methods=['GET'])
+def profilepreferencegroupvalue():
+   return profilepreferencegroup()
+@app.route("/Profile/profilepreferencevalue",methods=['GET'])
+def profilepreferencevalues():
+   return profilepreferencevalue()
+
+
 #</----------------------/>
 #</----------------reservation route--------->
 @app.route("/Hotel_RES_Post_Insert_UpdateFixedChargesReservation",methods=['POST'])
