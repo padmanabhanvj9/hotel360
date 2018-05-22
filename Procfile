@@ -50,3 +50,4 @@ worker: gunicorn AMAZON_RESERVATION_LAMBDA_LEX.py
 worker: gunicorn profilecity.py
 worker: gunicorn profileinsertvalue.py
 worker: gunicorn HOTEL_RES_POST_INSERT_InsertReservationValue.py
+worker: gunicorn HOTEL_RES_GET_SELECT_QueryReservationValue.py
