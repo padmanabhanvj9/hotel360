@@ -91,7 +91,7 @@ def profilenotetype():
     
 def profilepreferencegroup():
  
-    sql_value = gensql('select','profile.preferencegroup','preferencegroup,preferencegroup_desc')
+    sql_value = gensql('select','profile.preferencegroup','prefernecegroup,preferencegroup_desc')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
