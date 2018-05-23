@@ -115,6 +115,17 @@ from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaint
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
 from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
 
+
+from RoomManagementDropdown import select_roomstatus
+from RoomManagementDropdown import select_class
+from RoomManagementDropdown import select_condition
+from RoomManagementDropdown import select_hkstatus_code
+from RoomManagementDropdown import select_room_type
+from RoomManagementDropdown import select_room_no
+from RoomManagementDropdown import select_discription
+from RoomManagementDropdown import select_servicestatus_code
+from RoomManagementDropdown import select_turndownstatus
+
 #<------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -437,6 +448,36 @@ def Queryroommaintenance():
 @app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
 def updateroomdiscrepancies():
    return hotel_rm_post_update_updateroomdiscrepancies(request)
+
+
+
+@app.route("/Select_RoomStatus",methods=['POST'])
+def Select_RoomStatus():
+  return select_roomstatus()
+@app.route("/Select_Class",methods=['POST'])
+def Select_Class():
+  return select_class()
+@app.route("/Select_Condition",methods=['POST'])
+def Select_Condition():
+  return select_condition()
+@app.route("/Select_Hkstatus_Code",methods=['POST'])
+def Select_Hkstatus_Code():
+  return select_hkstatus_code()
+@app.route("/Select_Room_Type",methods=['POST'])
+def Select_Room_Type():
+  return select_room_type()
+@app.route("/Select_Room_No",methods=['POST'])
+def Select_Room_No():
+  return select_room_no()
+@app.route("/Select_Discription",methods=['POST'])
+def Select_Discription():
+  return select_discription()
+@app.route("/Select_Servicestatus_Code",methods=['POST'])
+def Select_Servicestatus_Code():
+  return select_servicestatus_code()
+@app.route("/Select_Turndownstatus",methods=['POST'])
+def Select_Turndownstatus():
+  return select_turndownstatus()
 
 #<--------------------------------------------------------->
 #<--------------amazonlex-------------------------->
