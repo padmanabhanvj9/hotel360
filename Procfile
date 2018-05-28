@@ -52,3 +52,4 @@ worker: gunicorn profileinsertvalue.py
 worker: gunicorn HOTEL_RES_POST_INSERT_InsertReservationValue.py
 worker: gunicorn HOTEL_RES_GET_SELECT_QueryReservationValue.py
 worker: gunicorn RoomManagementDropdown.py
+worker: gunicorn Hotel_Rm_Post_Select_QueryRoomList.py
