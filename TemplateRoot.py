@@ -114,6 +114,7 @@ from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_select_que
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaintenance
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
 from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
+from Hotel_Rm_Post_Select_QueryRoomList import hotel_rm_post_select_queryroomlist
 
 
 from RoomManagementDropdown import select_roomstatus
@@ -448,7 +449,9 @@ def Queryroommaintenance():
 @app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
 def updateroomdiscrepancies():
    return hotel_rm_post_update_updateroomdiscrepancies(request)
-
+@app.route("/Hotel_Rm_Post_Select_QueryRoomList",methods=['POST'])
+def QueryRoomList():
+   return hotel_rm_post_select_queryroomlist(request)
 
 
 @app.route("/Select_RoomStatus",methods=['POST'])
