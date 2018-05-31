@@ -58,6 +58,7 @@ from profileinsertvalue import profileratecode_insert
 from profileinsertvalue import profilenotetype_insert
 from profileinsertvalue import profilepreferencegroup_insert
 from profileinsertvalue import profilepreferencevalue_insert
+from profilesearch import HOTEL_PF_GET_SELECT_QueryProfileSearch
 #</------profile webservice-------------------/>
 
 #</--------------reservation webservice---------/>
@@ -297,7 +298,9 @@ def profilepreferencegroup_insertvalue():
 @app.route("/Profile/profilepreferencevalue_insert",methods=['POST'])
 def profilepreferencevalue_insertvalue():
    return profilepreferencevalue_insert(request)
-
+@app.route("/Profile/HOTEL_PF_GET_SELECT_QueryProfileSearch",methods=['GET'])
+def HOTEL_PF_GET_SELECT_QueryProfileSearchVAlue():
+   return HOTEL_PF_GET_SELECT_QueryProfileSearch()
 #</----------------------/>
 #</----------------reservation route--------->
 @app.route("/Hotel_RES_Post_Insert_UpdateFixedChargesReservation",methods=['POST'])
