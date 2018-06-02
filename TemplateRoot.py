@@ -130,6 +130,18 @@ from RoomManagementDropdown import select_discription
 from RoomManagementDropdown import select_servicestatus_code
 from RoomManagementDropdown import select_turndownstatus
 
+
+#insert
+
+from RoomManagementDropdownInsert import insert_roomstatus
+from RoomManagementDropdownInsert import insert_class
+from RoomManagementDropdownInsert import insert_condition
+from RoomManagementDropdownInsert import insert_hkstatus_code
+from RoomManagementDropdownInsert import insert_room_type
+from RoomManagementDropdownInsert import insert_room_no
+from RoomManagementDropdownInsert import insert_room_discription
+from RoomManagementDropdownInsert import insert_servicestatus_code
+from RoomManagementDropdownInsert import insert_turndownstatus
 #<------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -492,6 +504,36 @@ def Select_Servicestatus_Code():
 @app.route("/Select_Turndownstatus",methods=['POST'])
 def Select_Turndownstatus():
   return select_turndownstatus()
+
+#insert
+@app.route("/Insert_Roomstatus",methods=['POST'])
+def Insert_Roomstatus():
+  return insert_roomstatus(request)
+@app.route("/Insert_Class",methods=['POST'])
+def Insert_Class():
+  return insert_class(request)
+@app.route("/Insert_Condition",methods=['POST'])
+def Insert_Condition():
+  return insert_condition(request)
+@app.route("/insert_hkstatus_code",methods=['POST'])
+def insert_hkstatus_code_value():
+  return insert_hkstatus_code(request)
+@app.route("/insert_room_type",methods=['POST'])
+def insert_room_type_value():
+  return insert_room_type(request)
+@app.route("/insert_room_no",methods=['POST'])
+def insert_room_no_value():
+  return insert_room_no(request)
+@app.route("/insert_room_discription",methods=['POST'])
+def insert_room_discription_value():
+  return insert_room_discription(request)
+@app.route("/insert_servicestatus_code",methods=['POST'])
+def insert_servicestatus_codevalue():
+  return insert_servicestatus_code(request)
+@app.route("/insert_turndownstatus",methods=['POST'])
+def insert_turndownstatus_value():
+  return insert_turndownstatus(request)
+
 
 #<--------------------------------------------------------->
 #<--------------amazonlex-------------------------->
