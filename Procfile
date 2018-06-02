@@ -56,3 +56,4 @@ worker: gunicorn Hotel_Rm_Post_Select_QueryRoomList.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryRoomCondition.py
 worker: gunicorn Hotel_Rm_Post_Update_UpdateRoomCondition.py
 worker: gunicorn profilesearch.py
+worker: gunicorn RoomManagementDropdownInsert.py
