@@ -54,6 +54,7 @@ def QueryProfileCreditcard():
     d['PF_Mobileno'] = PF_Mobileno
     sql_value = gensql('select','profile.pf_creditcard','*',d)
     sql_value = json.loads(sql_value)
+    print(sql_value)
     flag = {"editflag":False}
     result = sql_value + flag
     print(sql_value)
