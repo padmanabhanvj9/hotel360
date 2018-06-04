@@ -54,11 +54,16 @@ def QueryProfileCreditcard():
     d['PF_Mobileno'] = PF_Mobileno
     sql_value = gensql('select','profile.pf_creditcard','*',d)
     sql_value = json.loads(sql_value)
-    #print(sql_value)
-    #flag = {"editflag":False}
-    #result = sql_value + flag
     print(sql_value)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+    print(type(sql_value))
+    for i in sql_value:
+        #flag = {"editflag":False}
+        i['editflag'] = False
+    print(i)
+    
+    #result = sql_value + flag
+    #print(sql_value)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':i  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileAcitivitylog():
    
     Emp_Id = request.args['Emp_Id']
