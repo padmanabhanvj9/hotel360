@@ -64,16 +64,8 @@ def QueryProfilePreference():
     sql_value = json.loads(sql_value)
     print(sql_value)
     
-    s = []
-    for i in sql_value:
-        
-        i['editflag'] = False
-        #print(i)
-        s.append(i)
-        #print(s)
-
-    print(s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
+    
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileCreditcard():
     PF_Firstname = request.args['PF_Firstname']
     PF_Mobileno = request.args['PF_Mobileno']
