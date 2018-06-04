@@ -15,7 +15,16 @@ def QueryNegotiatedRate():
     sql_value = gensql('select','profile.pf_negotiated_rate','*',d)
     sql_value = json.loads(sql_value)
     print(sql_value)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+    s = []
+    for i in sql_value:
+        
+        i['editflag'] = False
+        #print(i)
+        s.append(i)
+        #print(s)
+
+    print(s)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileNotes():
     PF_Firstname = request.args['PF_Firstname']
     PF_Mobileno = request.args['PF_Mobileno']
@@ -29,7 +38,16 @@ def QueryProfileNotes():
     sql_value = gensql('select','profile.pf_notes','*',d)
     sql_value = json.loads(sql_value)
     print(sql_value)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+    s = []
+    for i in sql_value:
+        
+        i['editflag'] = False
+        #print(i)
+        s.append(i)
+        #print(s)
+
+    print(s)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
     
 def QueryProfilePreference():
     PF_Firstname = request.args['PF_Firstname']
@@ -45,7 +63,17 @@ def QueryProfilePreference():
     sql_value = gensql('select','profile.pf_preference','*',d)
     sql_value = json.loads(sql_value)
     print(sql_value)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+    
+    s = []
+    for i in sql_value:
+        
+        i['editflag'] = False
+        #print(i)
+        s.append(i)
+        #print(s)
+
+    print(s)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileCreditcard():
     PF_Firstname = request.args['PF_Firstname']
     PF_Mobileno = request.args['PF_Mobileno']
@@ -64,7 +92,7 @@ def QueryProfileCreditcard():
 
     print(s)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+    #return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileAcitivitylog():
    
     Emp_Id = request.args['Emp_Id']
