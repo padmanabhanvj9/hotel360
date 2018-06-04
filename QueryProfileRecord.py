@@ -55,14 +55,6 @@ def QueryProfileCreditcard():
     sql_value = gensql('select','profile.pf_creditcard','*',d)
     sql_value = json.loads(sql_value)
     print(sql_value)
-    #print(type(sql_value))
-    #for i in sql_value:
-        #flag = {"editflag":False}
-        i['editflag'] = False
-    # print(i)
-    
-    #result = sql_value + flag
-    #print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileAcitivitylog():
    
