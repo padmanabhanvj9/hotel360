@@ -100,6 +100,9 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_A
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertcode
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Origin
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Source
+
+
+from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
@@ -429,6 +432,9 @@ def Hotel_RES_GET_SELECT_Originvalue():
 def Hotel_RES_GET_SELECT_Sourceva():
     return Hotel_RES_GET_SELECT_Source()
 
+@app.route("/ProfileFutureReservation",methods=['POST'])
+def futurereservation():
+    return ProfileFutureReservation(request)
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
