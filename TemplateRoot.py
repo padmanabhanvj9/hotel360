@@ -107,7 +107,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_P
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Market
 
 
-from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
+from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservationRecord
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
