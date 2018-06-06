@@ -407,7 +407,7 @@ def QueryReservationSearchVALY():
     return QueryReservationSearch()
  @app.route("/ProfileFutureReservationRecord",methods=['POST'])
 def ProfileFutureReservationRecordDFS():
-    return ProfileFutureReservationRecord()
+    return ProfileFutureReservationRecord(request)
 
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
