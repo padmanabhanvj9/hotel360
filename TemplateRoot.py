@@ -453,9 +453,7 @@ def Hotel_RES_GET_SELECT_Paymentvalur():
 def Hotel_RES_GET_SELECT_Marketgads():
    return Hotel_RES_GET_SELECT_Market()
 
-@app.route("/ProfileFutureReservation",methods=['POST'])
-def futurereservation():
-    return ProfileFutureReservation(request)
+
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
