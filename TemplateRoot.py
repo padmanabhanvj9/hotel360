@@ -88,6 +88,7 @@ from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Post_Update_Update
 from Hotel_RES_Post_Insert_UpdateGuestTraces import Hotel_RES_Get_Select_QueryGuestTraces
 from HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation import HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation
 from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryreservation
+from QueryReservationSearch import QueryReservationSearch
 
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Alertarea
@@ -401,7 +402,9 @@ def UpdateFixedChargesReservation():
 @app.route('/Hotel_Res_Post_Select_Queryreservation',methods=['POST'])
 def Queryreservation():
    return hotel_res_post_select_queryreservation(request)
-
+@app.route("/HOTEL_RES_GET_SELECT_QueryReservationSearch",methods=['GET'])
+def QueryReservationSearchVALY():
+    return QueryReservationSearch()
 
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
