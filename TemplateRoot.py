@@ -107,7 +107,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_P
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Market
 
 
-from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservationRecord
+from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
@@ -405,9 +405,6 @@ def Queryreservation():
 @app.route("/HOTEL_RES_GET_SELECT_QueryReservationSearch",methods=['GET'])
 def QueryReservationSearchVALY():
     return QueryReservationSearch()
- @app.route("/ProfileFutureReservationRecord",methods=['POST'])
-def ProfileFutureReservationRecordDFS():
-    return ProfileFutureReservationRecord(request)
 
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
@@ -453,7 +450,9 @@ def Hotel_RES_GET_SELECT_Paymentvalur():
 def Hotel_RES_GET_SELECT_Marketgads():
    return Hotel_RES_GET_SELECT_Market()
 
-
+@app.route("/ProfileFutureReservation",methods=['POST'])
+def futurereservation():
+    return ProfileFutureReservation(request)
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
@@ -568,5 +567,5 @@ def amazonlex():
 #<----------------------------------------------->
 if __name__ == "__main__":
     app.run(debug=True)
-   
+    #app.run(host="192.168.99.1",port=5000)
    
