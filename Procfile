@@ -58,3 +58,4 @@ worker: gunicorn Hotel_Rm_Post_Update_UpdateRoomCondition.py
 worker: gunicorn profilesearch.py
 worker: gunicorn RoomManagementDropdownInsert.py
 worker: gunicorn Hotel_RES_POST_SELECT_QueryFutureReservation.py
+worker: gunicorn QueryReservationSearch.py
