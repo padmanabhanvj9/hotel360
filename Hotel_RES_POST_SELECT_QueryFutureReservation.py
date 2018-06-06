@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from flask import Flask,request, jsonify
 app = Flask(__name__)
 #@app.route("/ProfileFutureReservationRecord",methods=['POST'])
-def ProfileFutureReservationRecord(request):
+def ProfileFutureReservation(request):
     #N = 365
     current_date = datetime.utcnow().date()
     current_date = str(current_date)
