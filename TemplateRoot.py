@@ -101,6 +101,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_A
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertcode
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Origin
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Source
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Payment
 
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
@@ -415,7 +416,9 @@ def Hotel_RES_POST_INSERT_Originva():
 @app.route("/Hotel_RES_POST_INSERT_Source",methods=['POST'])
 def Hotel_RES_POST_INSERT_Sourceva():
     return Hotel_RES_POST_INSERT_Source(request)
-   
+@app.route("/Hotel_RES_POST_INSERT_Payment",methods=['POST'])
+def Hotel_RES_POST_INSERT_Paymentvalue():
+   return Hotel_RES_POST_INSERT_Payment(request)
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
 def Hotel_RES_GET_SELECT_RestypeValue():
@@ -435,6 +438,7 @@ def Hotel_RES_GET_SELECT_Sourceva():
 @app.route("/Hotel_RES_GET_SELECT_Payment",methods=['GET'])
 def Hotel_RES_GET_SELECT_Paymentvalur():
    return Hotel_RES_GET_SELECT_Payment()
+
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
     return ProfileFutureReservation(request)
