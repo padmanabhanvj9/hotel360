@@ -23,6 +23,7 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     sql_value = gensql('insert','reservation.res_reservation',d)
     #print(d)
     data = d.get("PF_Firstname")
+    number = d.get("RES_Confnumber")
     print(data)
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
@@ -33,7 +34,7 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     Emp_Firstname = "Ranimangama"
     
     RES_Action_Type = "New Reservation"
-    RES_Description = "create new reservation for " + " "+data
+    RES_Description = "create new reservation for " + " "+data+" " + "Confirmation Number is" + " " + number
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
