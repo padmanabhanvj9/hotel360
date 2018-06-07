@@ -45,5 +45,5 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     
     sql_value = gensql('insert','reservation.res_activity_log',s)
 
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','Confirmation Number':RES_Confnumber,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ConfirmationNumber':RES_Confnumber,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
