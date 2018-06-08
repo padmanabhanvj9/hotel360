@@ -6,6 +6,15 @@ import json
 
 def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     d = request.json
+    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
+    print(RES_Log_Time)
+    RES_Log_Date = datetime.datetime.utcnow().date()
+    print(RES_Log_Date)
+    Emp_Id = '121'
+    Emp_Firstname = "Ranimangama"
+    d['created_on'] = RES_Log_Date
+    d['created_by'] = Emp_Firstname
     random_no = (random.randint(1000000000,9999999999))
    
     random_no = str(random_no)
@@ -20,18 +29,13 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     print(RES_Confnumber)
     #RES_Confnumber = int(RES_Confnumber)
     d['RES_Confnumber'] = RES_Confnumber
+    
     sql_value = gensql('insert','reservation.res_reservation',d)
     #print(d)
     data = d.get("PF_Firstname")
     number = d.get("RES_Confnumber")
     print(data)
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
-    print(RES_Log_Date)
-    Emp_Id = '121'
-    Emp_Firstname = "Ranimangama"
+    
     
     RES_Action_Type = "New Reservation"
     RES_Description = "create new reservation for " + " "+data+" " + "Confirmation Number is" + " " + number
