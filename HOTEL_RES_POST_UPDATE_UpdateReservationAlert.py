@@ -6,7 +6,7 @@ def HOTEL_RES_POST_UPDATE_UpdateReservationAlert(request):
     print(res)
     for name,val in res.items():
  
-       if  name == 'PF_Mobileno' or name == 'RES_Id':
+       if  name == 'Res_id':
           e[name] = ""+val+""
        else :
            d[name] = ""+val+""
