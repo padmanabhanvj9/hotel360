@@ -74,9 +74,9 @@ def QueryProfilePreference():
     print(s)
     
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
-def QueryProfileCreditcard():
-    PF_Firstname = request.args['PF_Firstname']
-    PF_Mobileno = request.args['PF_Mobileno']
+def QueryProfileCreditcard(request):
+    PF_Firstname = request.json['PF_Firstname']
+    PF_Mobileno = request.json['PF_Mobileno']
     d = {}
     d['PF_Firstname'] = PF_Firstname
     d['PF_Mobileno'] = PF_Mobileno
