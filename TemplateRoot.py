@@ -218,9 +218,9 @@ def updateprofilenotes():
 @app.route("/Profile/UpdateProfileNegotiatedRateRecord",methods=['POST'])
 def updatenegotiatedrate():
    return UpdateProfileNegotiatedRateRecord(request)
-@app.route("/Profile/QueryProfileCreditcard",methods=['GET'])
+@app.route("/Profile/QueryProfileCreditcard",methods=['POST'])
 def querycreditcard():
-   return QueryProfileCreditcard()
+   return QueryProfileCreditcard(request)
 @app.route("/Profile/UpdateProfileCreditcardRecord",methods=['POST'])
 def updatecreditcard():
    return UpdateProfileCreditcardRecord(request)
