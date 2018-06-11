@@ -95,14 +95,8 @@ def QueryProfileCreditcard(request):
     #return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileAcitivitylog():
    
-    Emp_Id = request.args['Emp_Id']
-    PF_Mobileno = request.args['PF_Mobileno']
-    d = {}
-    
-    d['Emp_Id'] = Emp_Id
-    d['PF_Mobileno'] = PF_Mobileno
-    sql_value = gensql('select','profile.pf_profile_activitylog','*',d)
-    sql_value = json.loads(sql_value)
-    print(sql_value)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+   d = request.json
+   sql_value = json.loads(gensql('select','profile.pf_profile_activitylog','*',d))
+   print(sql_value)
+   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4)))
     
