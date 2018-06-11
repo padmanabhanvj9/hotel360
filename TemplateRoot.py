@@ -450,6 +450,9 @@ def Hotel_RES_GET_SELECT_Paymentvalur():
 @app.route("/Hotel_RES_GET_SELECT_Market",methods=['GET'])
 def Hotel_RES_GET_SELECT_Marketgads():
    return Hotel_RES_GET_SELECT_Market()
+@app.route("/Hotel_RES_GET_SELECT_Department",methods=['GET'])
+def Hotel_RES_GET_SELECT_Departmentvalue():
+   return Hotel_RES_GET_SELECT_Department()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
