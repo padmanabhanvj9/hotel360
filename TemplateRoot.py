@@ -106,6 +106,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_O
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Source
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Payment
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Market
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Department
 
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
@@ -428,6 +429,10 @@ def Hotel_RES_POST_INSERT_Paymentvalue():
 @app.route("/Hotel_RES_POST_INSERT_Market",methods=['POST'])
 def Hotel_RES_POST_INSERT_Marketvalue():
    return Hotel_RES_POST_INSERT_Market(request)
+@app.route("/Hotel_RES_POST_INSERT_Department",methods=['POST'])
+def Hotel_RES_POST_INSERT_Departmentvalt():
+   return Hotel_RES_POST_INSERT_Department(request)
+
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
 def Hotel_RES_GET_SELECT_RestypeValue():
