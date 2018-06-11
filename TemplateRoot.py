@@ -412,6 +412,7 @@ def QueryReservationSearchVALY():
 def QueryHistoryReservationVALUE():
     return QueryHistoryReservation(request)
 
+   
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
     return Hotel_RES_POST_INSERT_RestypeInsert(request)
