@@ -97,5 +97,5 @@ def QueryProfileAcitivitylog(request):
    d = request.json
    sql_value = json.loads(gensql('select','profile.pf_profile_activitylog','*',d))
    print(sql_value)
-   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4)))
+   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
     
