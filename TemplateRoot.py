@@ -208,9 +208,9 @@ def querynotes():
 @app.route("/Profile/QueryProfilePreference",methods=['GET'])
 def profilepreference():
    return QueryProfilePreference()
-@app.route("/Profile/QueryProfileAcitivitylog",methods=['GET'])
+@app.route("/Profile/QueryProfileAcitivitylog",methods=['POST'])
 def queryprofilelog():
-   return QueryProfileAcitivitylog()
+   return QueryProfileAcitivitylog(request)
 
 @app.route("/Profile/UpdateProfilePreferencenew",methods=['POST'])
 def newprofilepreference():
