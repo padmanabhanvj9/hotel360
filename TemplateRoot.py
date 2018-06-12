@@ -28,6 +28,11 @@ from UpdateProfileNegotiatedRateRecord import UpdateProfileNegotiatedRateRecord
 from MergeProfile import MergeProfile
 from QueryProfileRecordAll import QueryProfileRecordAll
 from profilesearch import QueryProfileSearch
+#delete service
+from DeleteProfileRecordAll import DeleteProfileCreditCard
+from DeleteProfileRecordAll import DeleteProfileNegotiate
+from DeleteProfileRecordAll import DeleteProfileNotes
+from DeleteProfileRecordAll import DeleteProfilePreference
 #dropdown select
 from profilecity import profilecity
 from profilecity import profilelanguage
@@ -248,7 +253,22 @@ def queryallrecord():
 def ProfileSearch():
    return QueryProfileSearch(request)
 
+#delete
+@app.route("/Profile/DeleteProfileCreditcard",methods=['POST'])
+def DeleteProfileCreditcard():
+   return DeleteProfileCreditCard(request)
 
+@app.route("/Profile/DeleteProfileNegotiate",methods=['POST'])
+def DeleteProfileNegotiatedRate():
+   return DeleteProfileNegotiate(request)
+
+@app.route("/Profile/DeleteProfileNotes",methods=['POST'])
+def DeleteProfileNote():
+   return DeleteProfileNotes(request)
+
+@app.route("/Profile/DeleteProfilePreference",methods=['POST'])
+def DeleteProfilePreferences():
+   return DeleteProfilePreference(request)
 
 # select profile dropdown
 @app.route("/Profile/profilecity",methods=['GET'])
