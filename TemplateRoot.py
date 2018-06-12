@@ -244,9 +244,9 @@ def mergeprofilerecord():
 def queryallrecord():
    return QueryProfileRecordAll(request)
 
-@app.route("/profile/",methods=['GET'])
+@app.route("/profile/QueryProfileSearch",methods=['GET'])
 def ProfileSearch():
-   return HOTEL_PF_GET_SELECT_QueryProfileSearch(request)
+   return QueryProfileSearch(request)
 
 
 # select profile dropdown
