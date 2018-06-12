@@ -1,14 +1,11 @@
 from sqlwrapper import gensql
 import json
 from flask import Flask,request,jsonify
-def HOTEL_RES_GET_SELECT_QueryFixedChargesReservation():
+def HOTEL_RES_GET_SELECT_QueryFixedChargesReservation(request):
     
-    PF_Mobileno = request.args['PF_Mobileno']
- 
+    Res_id = request.json['Res_id']
     d = {}
-  
-    d['PF_Mobileno'] = PF_Mobileno
-    
+    d['Res_id'] = Res_id  
     sql_value = gensql('select','reservation.res_fixed_charges','*',d)
     sql_value = json.loads(sql_value)
     print(sql_value)
