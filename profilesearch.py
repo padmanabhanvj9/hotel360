@@ -2,7 +2,7 @@ from sqlwrapper import gensql
 
 import json
 
-def HOTEL_PF_GET_SELECT_QueryProfileSearch():
+def QueryProfileSearch():
     
   
     sql_value = gensql('select','profile.pf_company_profile','*')
