@@ -111,6 +111,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_P
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Market
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Department
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Transaction_code
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Depositrule
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
@@ -445,6 +446,10 @@ def Hotel_RES_POST_INSERT_Departmentvalt():
 @app.route("/Hotel_RES_POST_INSERT_Transaction_code",methods=['POST'])
 def Hotel_RES_POST_INSERT_Transaction_codevalue():
    return Hotel_RES_POST_INSERT_Transaction_code(request)
+@app.route("/Hotel_RES_POST_INSERT_Depositrule",methods=['POST'])
+def Hotel_RES_POST_INSERT_Depositruleva():
+   return Hotel_RES_POST_INSERT_Depositrule(request)
+
 
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
