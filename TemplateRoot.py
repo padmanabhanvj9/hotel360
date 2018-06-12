@@ -481,7 +481,7 @@ def Hotel_RES_GET_SELECT_Departmentvalue():
 def Hotel_RES_GET_SELECT_Transaction_codevalue():
    return Hotel_RES_GET_SELECT_Transaction_code()
 @app.route("/Hotel_RES_GET_SELECT_depositrule",methods=['GET'])
-def Hotel_RES_GET_SELECT_depositrule():
+def Hotel_RES_GET_SELECT_depositruledasd():
    return Hotel_RES_GET_SELECT_depositrule()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
