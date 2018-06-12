@@ -90,6 +90,7 @@ from HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation import HOTEL_RES_POST_U
 from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryreservation
 from QueryReservationSearch import QueryReservationSearch
 from HOTEL_RES_POST_SELECT_QueryHistoryReservation import QueryHistoryReservation
+from HOTEL_RES_GET_SELECT_QueryFixedRateReservation import HOTEL_RES_GET_SELECT_QueryFixedRateReservation
 
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Alertarea
@@ -340,6 +341,9 @@ def UpdateReservation():
 @app.route("/HOTEL_RES_POST_INSERT_UpdateFixedRateReservation",methods=['POST'])
 def insertfixedrate():
     return HOTEL_RES_POST_INSERT_UpdateFixedRateReservation(request)
+@app.route("/HOTEL_RES_GET_SELECT_QueryFixedRateReservation",methods=['POST'])
+def Queryfixedrate():
+    return HOTEL_RES_GET_SELECT_QueryFixedRateReservation(request)
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateFixedRateReservation",methods=['POST'])
 def updatefixedrate():
     return HOTEL_RES_POST_UPDATE_UpdateFixedRateReservation(request)
