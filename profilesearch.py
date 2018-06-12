@@ -2,7 +2,7 @@ from sqlwrapper import gensql
 
 import json
 
-def QueryProfileSearch():
+def QueryProfileSearch(request):
     
   
     sql_value = gensql('select','profile.pf_company_profile','*')
