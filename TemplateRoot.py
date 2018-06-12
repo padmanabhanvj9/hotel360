@@ -244,6 +244,11 @@ def mergeprofilerecord():
 def queryallrecord():
    return QueryProfileRecordAll(request)
 
+@app.route("/profile/",methods=['GET'])
+def ProfileSearch():
+   return HOTEL_PF_GET_SELECT_QueryProfileSearch(request)
+
+
 # select profile dropdown
 @app.route("/Profile/profilecity",methods=['GET'])
 def cityvalue():
