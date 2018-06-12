@@ -10,25 +10,25 @@ from flask import Flask,request, jsonify
 #</------profile webservice-----------/>
 from UpdateIndividualProfile import UpdateIndividualProfile
 from UpdateCompanyProfile import UpdateCompanyProfile
+from QueryProfileRecord import QueryProfileAcitivitylog
+from QueryProfileRecord import QueryNegotiatedRate
+from UpdateNegotiatedRate import UpdateNegotiatedRate
 from UpdateProfileNotes import UpdateProfileNotes
+from QueryProfileRecord import QueryProfileNotes
+from UpdateProfilePreferencenew import UpdateProfilePreferencenew
 from UpdateProfilePreference import UpdateProfilePreference
 from UpdateProfileCreditcard import UpdateProfileCreditcard
-from UpdateNegotiatedRate import UpdateNegotiatedRate
 from DeleteProfileRecord import DeleteProfileRecord
-from QueryNegotiatedRate import QueryNegotiatedRate
-from QueryProfileRecord import QueryNegotiatedRate
-from QueryProfileRecord import QueryProfileNotes
 from QueryProfileRecord import QueryProfilePreference
-from QueryProfileRecord import QueryProfileAcitivitylog
-from UpdateProfileRecord import UpdateProfileRecordIndividual
-from UpdateProfileRecord import UpdateProfileRecordCompany
-from MergeProfile import MergeProfile
-from UpdateProfilePreferencenew import UpdateProfilePreferencenew
+from UpdateProfileCreditcardRecord import UpdateProfileCreditcardRecord
+from UpdateProfileRecord import UpdateProfileRecord
+from QueryProfileRecord import QueryProfileCreditcard
 from UpdateProfileNotesRecord import UpdateProfileNotesRecord
 from UpdateProfileNegotiatedRateRecord import UpdateProfileNegotiatedRateRecord
-from QueryProfileRecord import QueryProfileCreditcard
-from UpdateProfileCreditcardRecord import UpdateProfileCreditcardRecord
+from MergeProfile import MergeProfile
 from QueryProfileRecordAll import QueryProfileRecordAll
+from profilesearch import HOTEL_PF_GET_SELECT_QueryProfileSearch
+#dropdown select
 from profilecity import profilecity
 from profilecity import profilelanguage
 from profilecity import profilecountry
@@ -43,7 +43,7 @@ from profilecity import profileratecode
 from profilecity import profilenotetype
 from profilecity import profilepreferencegroup
 from profilecity import profilepreferencevalue
-
+#dropdown insert
 from profileinsertvalue import profilecity_insert
 from profileinsertvalue import profilelanguage_insert
 from profileinsertvalue import profilecountry_insert
@@ -58,7 +58,7 @@ from profileinsertvalue import profileratecode_insert
 from profileinsertvalue import profilenotetype_insert
 from profileinsertvalue import profilepreferencegroup_insert
 from profileinsertvalue import profilepreferencevalue_insert
-from profilesearch import HOTEL_PF_GET_SELECT_QueryProfileSearch
+
 #</------profile webservice-------------------/>
 
 #</--------------reservation webservice---------/>
@@ -170,7 +170,6 @@ CORS(app)
 def index():
    return "welcome to smartmo"
 @app.route("/Profile/UpdateIndividualProfile",methods = ['POST'])
-
 def CreateProfile():
    return UpdateIndividualProfile(request)
 
@@ -178,9 +177,29 @@ def CreateProfile():
 def CreateCompanyProfile():
    return UpdateCompanyProfile(request)
 
+@app.route("/Profile/QueryProfileAcitivitylog",methods=['POST'])
+def queryprofilelog():
+   return QueryProfileAcitivitylog()
+
+@app.route("/Profile/QueryNegotiatedRate",methods=['POST'])
+def querynegotiatedrate():
+   return QueryNegotiatedRate(request)
+
+@app.route("/Profile/UpdateNegotiatedRate",methods=['POST'])
+def InsertNegotiatedRate():
+   return UpdateNegotiatedRate(request)
+
 @app.route("/Profile/UpdateProfileNotes", methods=['POST'])
 def ProfileNotes():
    return UpdateProfileNotes(request)
+
+@app.route("/Profile/QueryProfileNotes",methods=['POST'])
+def querynotes():
+   return QueryProfileNotes(request)
+
+@app.route("/Profile/UpdateProfilePreferencenew",methods=['POST'])
+def newprofilepreference():
+   return UpdateProfilePreferencenew(request)
 
 @app.route("/Profile/UpdateProfilePreference",methods=['POST'])
 def UpdateGuestPreference():
@@ -190,48 +209,33 @@ def UpdateGuestPreference():
 def Updateprofilecreditcard():
    return UpdateProfileCreditcard(request)
 
-@app.route("/Profile/UpdateNegotiatedRate",methods=['POST'])
-def CreateNegotiatedRate():
-   return UpdateNegotiatedRate(request)
-@app.route("/Profile/UpdateProfileRecordIndividual",methods=['POST'])
-def updateIndividual():
-   return UpdateProfileRecordIndividual()
-@app.route("/Profile/UpdateProfileRecordCompany",methods=['POST'])
-def updatecompany():
-   return UpdateProfileRecordCompany()
-
-@app.route("/Profile/DeleteProfileRecord",methods=['GET'])
+@app.route("/Profile/DeleteProfileRecord",methods=['POST'])
 def deleteprofile():
-   return DeleteProfileRecord()
-@app.route("/Profile/QueryNegotiatedRate",methods=['GET'])
-def querynegotiatedrate():
-   return QueryNegotiatedRate()
-@app.route("/Profile/QueryProfileNotes",methods=['GET'])
-def querynotes():
-   return QueryProfileNotes()
-@app.route("/Profile/QueryProfilePreference",methods=['GET'])
-def profilepreference():
-   return QueryProfilePreference()
-@app.route("/Profile/QueryProfileAcitivitylog",methods=['POST'])
-def queryprofilelog():
-   return QueryProfileAcitivitylog(request)
+   return DeleteProfileRecord(request)
 
-@app.route("/Profile/UpdateProfilePreferencenew",methods=['POST'])
-def newprofilepreference():
-   return UpdateProfilePreferencenew(request)
-@app.route("/Profile/UpdateProfileNotesRecord",methods=['POST'])
-def updateprofilenotes():
-   return UpdateProfileNotesRecord(request)
-@app.route("/Profile/UpdateProfileNegotiatedRateRecord",methods=['POST'])
-def updatenegotiatedrate():
-   return UpdateProfileNegotiatedRateRecord(request)
-@app.route("/Profile/QueryProfileCreditcard",methods=['POST'])
-def querycreditcard():
-   return QueryProfileCreditcard(request)
+@app.route("/Profile/QueryProfilePreference",methods=['POST'])
+def profilepreference():
+   return QueryProfilePreference(request)
+
 @app.route("/Profile/UpdateProfileCreditcardRecord",methods=['POST'])
 def updatecreditcard():
    return UpdateProfileCreditcardRecord(request)
 
+@app.route("/Profile/UpdateProfileRecord",methods=['POST'])
+def updateIndividual():
+   return UpdateProfileRecord(request)
+
+@app.route("/Profile/QueryProfileCreditcard",methods=['POST'])
+def querycreditcard():
+   return QueryProfileCreditcard(request)
+
+@app.route("/Profile/UpdateProfileNotesRecord",methods=['POST'])
+def updateprofilenotes():
+   return UpdateProfileNotesRecord(request)
+
+@app.route("/Profile/UpdateProfileNegotiatedRateRecord",methods=['POST'])
+def updatenegotiatedrate():
+   return UpdateProfileNegotiatedRateRecord(request)
 
 @app.route("/profile/MergeProfile",methods=['POST'])
 def mergeprofilerecord():
@@ -239,6 +243,8 @@ def mergeprofilerecord():
 @app.route("/profile/QueryProfileRecordAll",methods=['POST'])
 def queryallrecord():
    return QueryProfileRecordAll(request)
+
+# select profile dropdown
 @app.route("/Profile/profilecity",methods=['GET'])
 def cityvalue():
    return profilecity()
@@ -257,7 +263,6 @@ def postalcodevalue():
 @app.route("/Profile/profilevip",methods=['GET'])
 def profilevivalue():
    return profilevip()
-
 @app.route("/Profile/profilenationality",methods=['GET'])
 def profilenationalityvalue():
    return profilenationality()
@@ -282,53 +287,8 @@ def profilepreferencegroupvalue():
 @app.route("/Profile/profilepreferencevalue",methods=['GET'])
 def profilepreferencevalues():
    return profilepreferencevalue()
+#<----------------------------------------------------------->
 
-@app.route("/Profile/profilecity_insert",methods=['POST'])
-def profilecity_insertvalue():
-   return profilecity_insert(request)
-@app.route("/Profile/profilelanguage_insert",methods=['POST'])
-def profilelanguage_insertvalue():
-   return profilelanguage_insert(request)
-@app.route("/Profile/profilecountry_insert",methods=['POST'])
-def profilecountry_insertvalue():
-   return profilecountry_insert(request)
-@app.route("/Profile/profilestate_insert",methods=['POST'])
-def profilestate_insertvalue():
-   return profilestate_insert(request)
-@app.route("/Profile/profilepostalcode_insert",methods=['POST'])
-def profilepostalcode_insertvalue():
-   return profilepostalcode_insert(request)
-@app.route("/Profile/profilevip_insert",methods=['POST'])
-def profilevip_insertvalue():
-   return profilevip_insert(request)
-@app.route("/Profile/profilenationality_insert",methods=['POST'])
-def profilenationality_insertvalue():
-   return profilenationality_insert(request)
-@app.route("/Profile/profilecurrency_insert",methods=['POST'])
-def profilecurrency_insertvalue():
-   return profilecurrency_insert(request)
-@app.route("/Profile/profilecommunication_insert",methods=['POST'])
-def profilecommunication_insertvalue():
-   return profilepreferencevalue(request)
-@app.route("/Profile/profilepftype_insert",methods=['POST'])
-def profilepftype_insertvalue():
-   return profilepftype_insert(request)
-@app.route("/Profile/profileratecode_insert",methods=['POST'])
-def profileratecode_insertvalue():
-   return profileratecode_insert(request)
-@app.route("/Profile/profilenotetype_insert",methods=['POST'])
-def profilenotetype_insertvalue():
-   return profilenotetype_insert(request)
-@app.route("/Profile/profilepreferencegroup_insert",methods=['POST'])
-def profilepreferencegroup_insertvalue():
-   return profilepreferencegroup_insert(request)
-@app.route("/Profile/profilepreferencevalue_insert",methods=['POST'])
-def profilepreferencevalue_insertvalue():
-   return profilepreferencevalue_insert(request)
-@app.route("/Profile/HOTEL_PF_GET_SELECT_QueryProfileSearch",methods=['GET'])
-def HOTEL_PF_GET_SELECT_QueryProfileSearchVAlue():
-   return HOTEL_PF_GET_SELECT_QueryProfileSearch()
-#</----------------------/>
 #</----------------reservation route--------->
 @app.route("/Hotel_RES_Post_Insert_UpdateFixedChargesReservation",methods=['POST'])
 def insertfixedcharges():
