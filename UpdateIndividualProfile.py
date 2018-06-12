@@ -1,53 +1,42 @@
-#Input Param: business_id, business_mobile, business_first_name, business_last_name, doj
+#Input Param: 
 #OutputParam: Record Inserted Successfully
-#Purpose: It received input parameters from root file as JSON and passed those parameters to DB wrapper as dictionary/List,
-#DB wrapper execute the sql query and return values back to this function.
+#Purpose: This service used for crate individual profile
 #Date:13/03/2018
-#Author: Aravinth,Daisy
-# import packages are define top of the program
+#UpdateDate:11/06/2018
+#Author: Aravinth
+#import packages are define top of the program
 import datetime
-
-from sqlwrapper import gensql
-from flask import Flask,request, jsonify
+from sqlwrapper import gensql,dbget
 import json
-app = Flask(__name__)
 
 # Below function is called from the root file 
-def UpdateIndividualProfile(request):
-    # syntax for get and assign the value from business_id   
-  
-
+def UpdateIndividualProfile(request):   
     d = request.json
+    select = json.loads(dbget("select count(*) from profile.pf_individual_profile"))
+    print(select[0]['count'])
+    id1 = "ind"+str(select[0]['count']+1)
+    print(id1)
+    d['individualpf_id'] = id1
+    sql_value = gensql('insert','profile.pf_individual_profile',d) 
     
-    #Include buisness logic before calling Sql Query(Optional)
-    sql_value = gensql('insert','profile.pf_individual_profile',d) # eg: insert into test  (business_id)  values ('?') 
-    #gensql('select','table_name','*',d) # eg: select * from test  where  business_id='?'  
-    #gensql('update','table_name',d,e) # eg: update test  set  business_id='?'  where  b_id='?'
-
-    #Include buisness logic after Sql Query
-    data = d.get("PF_Mobileno")
     data1 = d.get("PF_Firstname")
-    print(data)
+    
     PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
     print(PF_Log_Time)
     PF_Log_Date = datetime.datetime.utcnow().date()
     print(PF_Log_Date)
-    Emp_Id = '121'
-    Emp_Firstname = "daisy"
-    Emp_Lastname = "veroni"
-    PF_Action_Type = "New Profile"
-    PF_Mobileno = data
+    
     PF_Log_Description = "Create Individual Profile" + " "+data1
     s = {}
-    s['Emp_Id'] = Emp_Id
-    s['Emp_Firstname'] = Emp_Firstname
-    s['Emp_Lastname'] = Emp_Lastname
+    s['Emp_Id'] = '121'
+    s['Emp_Firstname'] = "daisy"
+    s['Emp_Lastname'] = "veroni"
     s['PF_Log_Date'] = PF_Log_Date
     s['PF_Log_Time'] = PF_Log_Time
-    s['PF_Action_Type'] = PF_Action_Type
+    s['PF_Action_Type'] = "New Profile"
     s['PF_Log_Description'] = PF_Log_Description
-    s['PF_Mobileno'] = PF_Mobileno
+    s['pf_id'] = id1
     
     sql_value = gensql('insert','profile.pf_profile_activitylog',s)
     # finally return the value from DB_Wrapper   
