@@ -27,7 +27,7 @@ from UpdateProfileNotesRecord import UpdateProfileNotesRecord
 from UpdateProfileNegotiatedRateRecord import UpdateProfileNegotiatedRateRecord
 from MergeProfile import MergeProfile
 from QueryProfileRecordAll import QueryProfileRecordAll
-from profilesearch import HOTEL_PF_GET_SELECT_QueryProfileSearch
+from profilesearch import QueryProfileSearch
 #dropdown select
 from profilecity import profilecity
 from profilecity import profilelanguage
