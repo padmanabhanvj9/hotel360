@@ -101,6 +101,7 @@ from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Paym
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Market
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Department
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Transaction_code
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_depositrule
 
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
@@ -479,6 +480,9 @@ def Hotel_RES_GET_SELECT_Departmentvalue():
 @app.route("/Hotel_RES_GET_SELECT_Transaction_code",methods=['GET'])
 def Hotel_RES_GET_SELECT_Transaction_codevalue():
    return Hotel_RES_GET_SELECT_Transaction_code()
+@app.route("/Hotel_RES_GET_SELECT_depositrule",methods=['GET'])
+def Hotel_RES_GET_SELECT_depositrule():
+   return Hotel_RES_GET_SELECT_depositrule()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
