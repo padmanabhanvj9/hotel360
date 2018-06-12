@@ -16,7 +16,7 @@ def UpdateIndividualProfile(request):
     print(select[0]['count'])
     id1 = "ind"+str(select[0]['count']+1)
     print(id1)
-    d['individualpf_id'] = id1
+    d['pf_id'] = id1
     sql_value = gensql('insert','profile.pf_individual_profile',d) 
     
     data1 = d.get("PF_Firstname")
