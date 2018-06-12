@@ -367,9 +367,9 @@ def queryreservationactivitylog():
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation",methods=['POST'])
 def updatefixedcharges():
     return HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request)
-@app.route("/HOTEL_RES_GET_SELECT_QueryFixedChargesReservation",methods=['GET'])
+@app.route("/HOTEL_RES_GET_SELECT_QueryFixedChargesReservation",methods=['POST'])
 def queryfixedcharges():
-    return HOTEL_RES_GET_SELECT_QueryFixedChargesReservation()
+    return HOTEL_RES_GET_SELECT_QueryFixedChargesReservation(request)
 @app.route("/HOTEL_RES_POST_INSERT_UpdateDeposit",methods=['POST'])
 def insertdeposit():
     return HOTEL_RES_POST_INSERT_UpdateDeposit(request)
