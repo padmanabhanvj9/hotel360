@@ -6,8 +6,7 @@ def Hotel_RES_Post_Insert_UpdateFixedChargesReservation(request):
     
     d = request.json
     print(d)
-    #a = { k : v for k,v in d.items() if k != 'pf_mobileno'}
-    e = { k : v for k,v in d.items() if k == 'PF_Mobileno'}       
+    e = { k : v for k,v in d.items() if k in ('Res_id')}       
     print(e)
     s = ['RES_Arrival','RES_Depature','PF_Firstname','PF_Mobileno','RES_Nights']
     sql_value = gensql('select','reservation.res_reservation',s,e)
@@ -19,13 +18,14 @@ def Hotel_RES_Post_Insert_UpdateFixedChargesReservation(request):
     print(arrival,depature,type(arrival))
     arr_date = datetime.datetime.strptime(arrival, '%Y-%m-%d').date()
     dep_date = datetime.datetime.strptime(depature, '%Y-%m-%d').date()
-    print(arr_date,dep_date,type(arr_date))
+    print("str1", arr_date,dep_date,type(arr_date))
     data1 = d.get('Fixed_Charges_Begin_Date')
     data2 = d.get('Fixed_Charges_End_Date')
     charges_begin_date = datetime.datetime.strptime(data1, '%Y-%m-%d').date()
     charges_end_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
-    print(charges_begin_date,charges_end_date,type(charges_end_date))
-    if charges_begin_date >= arr_date and charges_end_date  <= dep_date :
+    print("str2",charges_begin_date,charges_end_date,type(charges_end_date))
+    
+    if charges_begin_date >= arr_date and charges_end_date  <= dep_date and arr_date <= charges_end_date:
        sql_value = gensql('insert','reservation.res_fixed_charges',d)
        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'please enter valid date','ReturnCode':'PEVD'}, sort_keys=True, indent=4))
