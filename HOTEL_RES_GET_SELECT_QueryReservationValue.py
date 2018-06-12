@@ -49,3 +49,8 @@ def Hotel_RES_GET_SELECT_Department():
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
+def Hotel_RES_GET_SELECT_Transaction_code():
+    sql_value = gensql('select','reservation.transaction_code','transaction_description')
+    result = json.loads(sql_value)
+    print(result)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
