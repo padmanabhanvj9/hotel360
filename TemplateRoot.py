@@ -244,9 +244,10 @@ def mergeprofilerecord():
 def queryallrecord():
    return QueryProfileRecordAll(request)
 
-@app.route("/profile/QueryProfileSearch",methods=['GET'])
+@app.route("/Profile/QueryProfileSearch",methods=['GET'])
 def ProfileSearch():
    return QueryProfileSearch(request)
+
 
 
 # select profile dropdown
