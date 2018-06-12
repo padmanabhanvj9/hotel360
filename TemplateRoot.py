@@ -99,6 +99,7 @@ from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Sour
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Payment
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Market
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Department
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Transaction_code
 
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
@@ -108,7 +109,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_S
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Payment
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Market
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Department
-from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_GET_SELECT_Transaction_code
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Transaction_code
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
@@ -437,6 +438,9 @@ def Hotel_RES_POST_INSERT_Marketvalue():
 @app.route("/Hotel_RES_POST_INSERT_Department",methods=['POST'])
 def Hotel_RES_POST_INSERT_Departmentvalt():
    return Hotel_RES_POST_INSERT_Department(request)
+@app.route("/Hotel_RES_POST_INSERT_Transaction_code",methods=['POST'])
+def Hotel_RES_POST_INSERT_Transaction_codevalue():
+   return Hotel_RES_POST_INSERT_Transaction_code(request)
 
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
