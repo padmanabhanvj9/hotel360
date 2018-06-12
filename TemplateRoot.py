@@ -108,7 +108,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_S
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Payment
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Market
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Department
-
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_GET_SELECT_Transaction_code
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
@@ -463,6 +463,9 @@ def Hotel_RES_GET_SELECT_Marketgads():
 @app.route("/Hotel_RES_GET_SELECT_Department",methods=['GET'])
 def Hotel_RES_GET_SELECT_Departmentvalue():
    return Hotel_RES_GET_SELECT_Department()
+@app.route("/Hotel_RES_GET_SELECT_Transaction_code",methods=['GET'])
+def Hotel_RES_GET_SELECT_Transaction_codevalue():
+   return Hotel_RES_GET_SELECT_Transaction_code()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
