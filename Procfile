@@ -18,7 +18,7 @@ worker: gunicorn UpdateProfilePreferencenew.py
 worker: gunicorn QueryProfileRecordAll.py
 worker: gunicorn MergeProfile.py
 worker: gunicorn HOTEL_RES_GET_SELECT_QueryAlertReservation.py
-worker: gunicorn HOTEL_RES_GET_SELECT_QueryDeposit.py
+worker: gunicorn HOTEL_RES_GET_SELECT_QueryDepositrule.py
 worker: gunicorn HOTEL_RES_GET_SELECT_QueryFixedChargesReservation.py
 worker: gunicorn Hotel_RES_Get_Select_QueryReservationActivitylog.py
 worker: gunicorn HOTEL_RES_GET_SELECT_QueryWaitlistReservation.py
