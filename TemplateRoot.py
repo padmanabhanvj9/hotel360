@@ -78,7 +78,7 @@ from HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation import HOTEL_RES_POST_U
 from HOTEL_RES_GET_SELECT_QueryFixedChargesReservation import HOTEL_RES_GET_SELECT_QueryFixedChargesReservation
 from HOTEL_RES_POST_INSERT_UpdateDeposit import HOTEL_RES_POST_INSERT_UpdateDeposit
 from HOTEL_RES_POST_UPDATE_UpdateDeposit import HOTEL_RES_POST_UPDATE_UpdateDeposit
-from HOTEL_RES_GET_SELECT_QueryDeposit import HOTEL_RES_GET_SELECT_QueryDeposit
+from HOTEL_RES_GET_SELECT_QueryDepositrule import HOTEL_RES_GET_SELECT_QueryDepositrule
 from HOTEL_RES_GET_SELECT_RoomUnassign import HOTEL_RES_GET_SELECT_RoomUnassign
 from Hotel_RES_Post_Insert_UpdateGuestPrivileges import Hotel_RES_Post_Insert_UpdateGuestPrivileges
 from Hotel_RES_Post_Insert_UpdateGuestPrivileges import Hotel_RES_Post_Update_UpdateGuestPrivileges
@@ -382,9 +382,9 @@ def insertdeposit():
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateDeposit",methods=['POST'])
 def updatedeposit():
     return HOTEL_RES_POST_UPDATE_UpdateDeposit(request)
-@app.route("/HOTEL_RES_GET_SELECT_QueryDeposit",methods=['GET'])
-def querydeposit():
-    return HOTEL_RES_GET_SELECT_QueryDeposit()
+@app.route("/HOTEL_RES_GET_SELECT_QueryDepositrule",methods=['POST'])
+def querydepositrule():
+    return HOTEL_RES_GET_SELECT_QueryDepositrule(request)
 @app.route("/HOTEL_RES_GET_SELECT_RoomUnassign",methods=['GET'])
 def roomunassign():
     return HOTEL_RES_GET_SELECT_RoomUnassign()
