@@ -48,3 +48,9 @@ def Hotel_RES_POST_INSERT_Department(request):
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))
 
+def Hotel_RES_POST_INSERT_Transaction_code(request):
+    d = request.json
+    sql_value = gensql('insert','reservation.transaction_code',d)
+    print(sql_value)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))
+
