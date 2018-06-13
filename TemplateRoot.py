@@ -110,6 +110,7 @@ from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Mark
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Department
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Transaction_code
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_depositrule
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_CancelReason
 
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
@@ -487,6 +488,9 @@ def Hotel_RES_GET_SELECT_Transaction_codevalue():
 @app.route("/Hotel_RES_GET_SELECT_depositrule",methods=['GET'])
 def Hotel_RES_GET_SELECT_depositruledasd():
    return Hotel_RES_GET_SELECT_depositrule()
+@app.route("/Hotel_RES_GET_SELECT_CancelReason",methods=['GET'])
+def Hotel_RES_GET_SELECT_CancelReasonvalue():
+   return Hotel_RES_GET_SELECT_CancelReason()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
