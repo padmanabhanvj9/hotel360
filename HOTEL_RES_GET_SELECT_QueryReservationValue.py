@@ -60,7 +60,7 @@ def Hotel_RES_GET_SELECT_depositrule():
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
-def Hotel_RES_GET_SELECT_cancel_reason():
+def Hotel_RES_GET_SELECT_CancelReason():
     sql_value = gensql('select','reservation.cancel_reason','reason')
     result = json.loads(sql_value)
     print(result)
