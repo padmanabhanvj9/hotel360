@@ -347,9 +347,9 @@ def updatewaitlistreservation():
 @app.route("/HOTEL_RES_POST_INSERT_UpdateAlertReservation",methods=['POST'])
 def alertreservation():
     return HOTEL_RES_POST_INSERT_UpdateAlertReservation(request)
-@app.route("/HOTEL_RES_GET_SELECT_QueryAlertReservation",methods=['GET'])
+@app.route("/HOTEL_RES_GET_SELECT_QueryAlertReservation",methods=['POST'])
 def queryalert():
-    return HOTEL_RES_GET_SELECT_QueryAlertReservation()
+    return HOTEL_RES_GET_SELECT_QueryAlertReservation(request)
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateReservationAlert",methods=['POST'])
 def updatealert():
     return HOTEL_RES_POST_UPDATE_UpdateReservationAlert(request)
