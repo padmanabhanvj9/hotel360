@@ -30,6 +30,7 @@ from QueryProfileRecordAll import QueryProfileRecordAll
 from profilesearch import QueryProfileSearch
 from QueryProfileHistory import QueryProfileHistoryRecord
 from QueryProfileHistory import QueryProfileStatistics
+from QueryProfileHistory import QueryProfileFutureRecord
 #delete service
 from DeleteProfileRecordAll import DeleteProfileCreditCard
 from DeleteProfileRecordAll import DeleteProfileNegotiate
@@ -263,6 +264,9 @@ def QueryProfileHistory():
 def QueryProfileStatisticsRecord():
    return QueryProfileStatistics(request)
 
+@app.route("/Profile/QueryFutureReservation",methods=['POST'])
+def QueryProfileFuture():
+   return QueryProfileFutureRecord(request)
 
 #delete
 @app.route("/Profile/DeleteProfileCreditcard",methods=['POST'])
