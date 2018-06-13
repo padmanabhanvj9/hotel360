@@ -184,7 +184,7 @@ def CreateCompanyProfile():
 
 @app.route("/Profile/QueryProfileAcitivitylog",methods=['POST'])
 def queryprofilelog():
-   return QueryProfileAcitivitylog(reqeust)
+   return QueryProfileAcitivitylog(request)
 
 @app.route("/Profile/QueryNegotiatedRate",methods=['POST'])
 def querynegotiatedrate():
