@@ -380,7 +380,7 @@ def GuestPrivileges():
 @app.route("/Hotel_RES_Post_Update_UpdateGuestPrivileges",methods=['POST'])
 def UpdateGuestPrivileges():
     return Hotel_RES_Post_Update_UpdateGuestPrivileges(request)
-@app.route("/Hotel_RES_Get_Select_QueryGuestPrivileges",methods=['GET'])
+@app.route("/Hotel_RES_Get_Select_QueryGuestPrivileges",methods=['POST'])
 def SelectGuestPrivileges():
     return Hotel_RES_Get_Select_QueryGuestPrivileges(request)
 @app.route("/Hotel_RES_Post_Insert_UpdateGuestTraces",methods=['POST'])
