@@ -99,6 +99,7 @@ from Hotel_RES_Post_Select_Queryreservation import hotel_res_post_select_queryre
 from QueryReservationSearch import QueryReservationSearch
 from HOTEL_RES_POST_SELECT_QueryHistoryReservation import QueryHistoryReservation
 from HOTEL_RES_GET_SELECT_QueryFixedRateReservation import HOTEL_RES_GET_SELECT_QueryFixedRateReservation
+from HOTEL_RES_POST_INSERT_CancelReservation import HOTEL_RES_POST_INSERT_CancelReservation
 
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Alertarea
@@ -421,7 +422,9 @@ def QueryReservationSearchVALY():
 @app.route("/HOTEL_RES_POST_SELECT_QueryHistoryReservation",methods=['POST'])
 def QueryHistoryReservationVALUE():
     return QueryHistoryReservation(request)
-
+@app.route("/HOTEL_RES_POST_INSERT_CancelReservation",methods=['POST'])
+def HOTEL_RES_POST_INSERT_CancelReservationvalue():
+    return HOTEL_RES_POST_INSERT_CancelReservation(request)
    
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
