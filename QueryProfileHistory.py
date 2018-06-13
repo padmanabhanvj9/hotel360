@@ -30,4 +30,13 @@ def QueryProfileStatistics(request):
     
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':e  ,'ReturnCode':'RRTS'},indent=4))
 
+def QueryProfileFutureRecord(request):
+    d = request.json['pf_id']
+    print(d)
+    today = datetime.datetime.utcnow().date()
+    print(today)
+    sql_value = json.loads(dbget("select * from reservation.res_reservation where pf_id = '"+d+"' and res_arrival > '"+str(today)+"' "))
+    print(sql_value)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+
     
