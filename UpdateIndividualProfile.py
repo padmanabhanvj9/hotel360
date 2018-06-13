@@ -12,10 +12,12 @@ import json
 # Below function is called from the root file 
 def UpdateIndividualProfile(request):   
     d = request.json
-    select = json.loads(dbget("select count(*) from profile.pf_individual_profile"))
-    print(select[0]['count'])
-    id1 = "ind"+str(select[0]['count']+1)
+    select = json.loads(dbget("select * from profile.profile_id"))
+    print(select,type(select),len(select))
+    print(select[0]['profile_id'])
+    id1 = "ind"+str(select[0]['profile_id']+1)
     print(id1)
+    update = dbput("update profile.profile_id set profile_id = '"+str(select[0]['profile_id']+1)+"'")
     d['pf_id'] = id1
     sql_value = gensql('insert','profile.pf_individual_profile',d) 
     
