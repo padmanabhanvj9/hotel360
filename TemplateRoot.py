@@ -455,7 +455,7 @@ def Hotel_RES_POST_INSERT_Depositruleva():
    return Hotel_RES_POST_INSERT_Depositrule(request)
 @app.route("/Hotel_RES_POST_INSERT_CancelReason",methods=['POST'])
 def Hotel_RES_POST_INSERT_CancelReasonval():
-   return Hotel_RES_POST_INSERT_CancelReason(request
+   return Hotel_RES_POST_INSERT_CancelReason(request)
 
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
