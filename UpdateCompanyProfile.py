@@ -5,15 +5,17 @@
 #UpdateDate:11/06/2018
 #Author: Aravinth
 
-from sqlwrapper import gensql,dbget
+from sqlwrapper import gensql,dbget,dbput
 import datetime
 import json
 def UpdateCompanyProfile(request):
     d = request.json
-    select = json.loads(dbget("select count(*) from profile.pf_company_profile"))
-    print(select[0]['count'])
-    id1 = "cpy"+str(select[0]['count']+1)
+    select = json.loads(dbget("select * from profile.profile_id"))
+    print(select,type(select),len(select))
+    print(select[0]['profile_id'])
+    id1 = "cpy"+str(select[0]['profile_id']+1)
     print(id1)
+    update = dbput("update profile.profile_id set profile_id = '"+str(select[0]['profile_id']+1)+"'")
     d['pf_id'] = id1
     sql_value = gensql('insert','profile.pf_company_profile',d) 
 
