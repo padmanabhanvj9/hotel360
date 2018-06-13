@@ -28,6 +28,8 @@ from UpdateProfileNegotiatedRateRecord import UpdateProfileNegotiatedRateRecord
 from MergeProfile import MergeProfile
 from QueryProfileRecordAll import QueryProfileRecordAll
 from profilesearch import QueryProfileSearch
+from QueryProfileHistory import QueryProfileHistoryRecord
+from QueryProfileHistory import QueryProfileStatistics
 #delete service
 from DeleteProfileRecordAll import DeleteProfileCreditCard
 from DeleteProfileRecordAll import DeleteProfileNegotiate
@@ -252,6 +254,15 @@ def queryallrecord():
 @app.route("/Profile/QueryProfileSearch",methods=['GET'])
 def ProfileSearch():
    return QueryProfileSearch(request)
+
+@app.route("/Profile/QueryProfileHistory",methods=['POST'])
+def QueryProfileHistory():
+   return QueryProfileHistoryRecord(request)
+
+@app.route("/Profile/QueryProfileStatistics",methods=['POST'])
+def QueryProfileStatisticsRecord():
+   return QueryProfileStatistics(request)
+
 
 #delete
 @app.route("/Profile/DeleteProfileCreditcard",methods=['POST'])
