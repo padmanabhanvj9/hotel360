@@ -5,8 +5,8 @@ def HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request):
 
     d = request.json
     print(d)
-    a = { k : v for k,v in d.items() if k == 'PF_Mobileno'}
-    e = { k : v for k,v in d.items() if v != '' if  k != 'PF_Mobileno'}
+    a = { k : v for k,v in d.items() if k in ('Res_id','fixed_charges_id')}
+    e = { k : v for k,v in d.items() if v != '' if  k not in  ('Res_id','fixed_charges_id')}
     f = { k : v for k,v in d.items() if  k == 'Fixed_Charges_Begin_Date' and v != '' if k == 'Fixed_Charges_End_Date' and v != ''}
     print(f)
     #Fixed_Charges_Begin_Date = d.get('Fixed_Charges_Begin_Date')
@@ -35,7 +35,7 @@ def HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request):
     charges_begin_date = datetime.datetime.strptime(data1, '%Y-%m-%d').date()
     charges_end_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
     print(charges_begin_date,charges_end_date,type(charges_end_date))
-    if charges_begin_date >= arr_date and charges_end_date  <= dep_date :
+    if charges_begin_date >= arr_date and charges_end_date  <= dep_date and arr_date <= charges_end_date:
        sql_value = gensql('update','reservation.res_fixed_charges',e,a)
        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'please enter valid date','ReturnCode':'PEVD'}, sort_keys=True, indent=4))
