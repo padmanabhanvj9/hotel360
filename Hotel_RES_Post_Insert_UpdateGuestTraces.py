@@ -8,16 +8,16 @@ def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
 def Hotel_RES_Post_Update_UpdateGuestTraces(request):
     d = request.json
     print(d)
-    a = { k : v for k,v in d.items() if v != '' if k != 'res_id'}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','fixed_charges_id')}
     print(a)
-    e = { k : v for k,v in d.items() if k != '' if k == 'res_id'}
+    e = { k : v for k,v in d.items() if k != '' if k in ('res_id','fixed_charges_id')}
     print(e)
     sql_value = gensql('update','reservation.res_traces',a,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
 def Hotel_RES_Get_Select_QueryGuestTraces(request):
     e = {}
-    e['res_id'] = request.args['res_id']
+    e['res_id'] = request.json['res_id']
     sql_value = gensql('select','reservation.res_traces','*',e)
     sql_value = json.loads(sql_value)
     print(sql_value)
