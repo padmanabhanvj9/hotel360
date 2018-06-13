@@ -1,6 +1,6 @@
 import datetime
 import time
-from sqlwrapper import gensql
+from sqlwrapper import gensql,dbget
 import json
 
 def QueryNegotiatedRate(request):
@@ -44,8 +44,8 @@ def QueryProfileCreditcard(request):
     print(s)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
 def QueryProfileAcitivitylog(request):
-    d = request.json
-    sql_value = json.loads(gensql('select','profile.pf_profile_activitylog','*',d))
+    pf_id = request.json['pf_id']
+    sql_value = json.loads(dbget("select * from profile.pf_profile_activitylog join reservation.employee on profile.pf_profile_activitylog.emp_id = reservation.employee.emp_id where pf_id='"+pf_id+"' "))
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
-    
+ 
