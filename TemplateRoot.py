@@ -459,7 +459,7 @@ def Hotel_RES_POST_INSERT_CancelReasonval():
 
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
-def Hotel_RES_GET_SELECT_RestypeVa():
+def Hotel_RES_GET_SELECT_Restype():
     return Hotel_RES_GET_SELECT_Restype()
 @app.route("/Hotel_RES_GET_SELECT_Alertarea",methods=['GET'])
 def Hotel_RES_GET_SELECT_Alertareavalue():
