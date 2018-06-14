@@ -446,7 +446,7 @@ def HOTEL_RES_POST_INSERT_WaitlistReasonval():
 @app.route("/HOTEL_RES_POST_INSERT_AcceptWaitlistReservation",methods=['POST'])
 def HOTEL_RES_POST_INSERT_AcceptWaitlistReservationval():
     return HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request)
- @app.route("/HOTEL_RES_POST_INSERT_ReservationCreditcard",methods=['POST'])
+@app.route("/HOTEL_RES_POST_INSERT_ReservationCreditcard",methods=['POST'])
 def HOTEL_RES_POST_INSERT_ReservationCreditcardval():
     return HOTEL_RES_POST_INSERT_ReservationCreditcard(request)
 @app.route("/Hotel_RES_Post_Update_UpdateReservationCreditcard",methods=['POST'])
