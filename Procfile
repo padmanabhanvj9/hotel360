@@ -64,3 +64,4 @@ worker: gunicorn QueryReservationSearch.py
 worker: gunicorn HOTEL_RES_POST_SELECT_QueryHistoryReservation.py
 worker: gunicorn HOTEL_RES_GET_SELECT_QueryFixedRateReservation.py
 worker: gunicorn HOTEL_RES_POST_INSERT_CancelReservation.py
+worker: gunicorn HOTEL_RES_POST_INSERT_ReinstateReservation.py
