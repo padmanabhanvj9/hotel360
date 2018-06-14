@@ -101,7 +101,7 @@ from HOTEL_RES_POST_SELECT_QueryHistoryReservation import QueryHistoryReservatio
 from HOTEL_RES_GET_SELECT_QueryFixedRateReservation import HOTEL_RES_GET_SELECT_QueryFixedRateReservation
 from HOTEL_RES_POST_INSERT_CancelReservation import HOTEL_RES_POST_INSERT_CancelReservation
 from HOTEL_RES_POST_INSERT_ReinstateReservation import HOTEL_RES_POST_INSERT_ReinstateReservation
-from HOTEL_RES_POST_INSERT_QueryArrivalFromToReservation import HOTEL_RES_POST_INSERT_QueryArrivalFromToReservation
+from HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation import HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation
 
 
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
@@ -431,9 +431,9 @@ def HOTEL_RES_POST_INSERT_CancelReservationvalue():
 @app.route("/HOTEL_RES_POST_INSERT_ReinstateReservation",methods=['POST'])
 def HOTEL_RES_POST_INSERT_ReinstateReservationvalue():
     return HOTEL_RES_POST_INSERT_ReinstateReservation(request)
-@app.route("/HOTEL_RES_POST_INSERT_QueryArrivalFromToReservation",methods=['POST'])
-def HOTEL_RES_POST_INSERT_QueryArrivalFromToReservationval():
-    return HOTEL_RES_POST_INSERT_QueryArrivalFromToReservation(request)
+@app.route("/HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation",methods=['POST'])
+def HOTEL_RES_POST_SELECT_QueryArrivalFromToReservationVAL():
+    return HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation(request)
    
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
