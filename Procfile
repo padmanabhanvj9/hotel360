@@ -66,3 +66,5 @@ worker: gunicorn HOTEL_RES_GET_SELECT_QueryFixedRateReservation.py
 worker: gunicorn HOTEL_RES_POST_INSERT_CancelReservation.py
 worker: gunicorn HOTEL_RES_POST_INSERT_ReinstateReservation.py
 worker: gunicorn HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation.py
+worker: gunicorn HOTEL_RES_POST_INSERT_WaitlistReason.py
+worker: gunicorn HOTEL_RES_POST_INSERT_AcceptWaitlistReservation.py
