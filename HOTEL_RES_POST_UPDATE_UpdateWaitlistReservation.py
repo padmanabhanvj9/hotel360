@@ -1,16 +1,14 @@
 from sqlwrapper import gensql
-from flask import Flask,request, jsonify
+
 import json
-app = Flask(__name__)
+
 def HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation(request):
-    d,e ={},{}
-    res = request.json
-    for key,val in res.items():
-        if key == 'PF_Mobileno' or key == 'RES_Id':
-            e[key] = ""+val+""
-        else:
-            d[key] = ""+val+""
-    print(e,d)
-    sql_value = gensql('update','reservation.res_waitlist',d,e)
+    d = request.json
+    a = { k : v for k,v in d.items() if v != '' if k not in ('RES_Id','pf_id')}
+    print(a)
+    e = { k : v for k,v in d.items() if k != '' if k in ('RES_Id','pf_id')}
+    print(e)
+    
+    sql_value = gensql('update','reservation.res_waitlist',a,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
