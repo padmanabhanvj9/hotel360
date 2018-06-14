@@ -2,7 +2,7 @@ from sqlwrapper import gensql,dbget
 
 import json
 
-def HOTEL_RES_POST_INSERT_QueryArrivalFromToReservation(request):
+def HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation(request):
     d = request.json
     if request.json.get('ArrivalFrom'):
         s = {}
