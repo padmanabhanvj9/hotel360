@@ -102,6 +102,9 @@ from HOTEL_RES_GET_SELECT_QueryFixedRateReservation import HOTEL_RES_GET_SELECT_
 from HOTEL_RES_POST_INSERT_CancelReservation import HOTEL_RES_POST_INSERT_CancelReservation
 from HOTEL_RES_POST_INSERT_ReinstateReservation import HOTEL_RES_POST_INSERT_ReinstateReservation
 from HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation import HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation
+from HOTEL_RES_POST_INSERT_WaitlistReason import HOTEL_RES_POST_INSERT_WaitlistReason
+from HOTEL_RES_POST_INSERT_AcceptWaitlistReservation import HOTEL_RES_POST_INSERT_AcceptWaitlistReservation
+
 
 
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
@@ -359,9 +362,9 @@ def updatefixedrate():
 @app.route("/HOTEL_RES_POST_INSERT_WaitlistReservation",methods=['POST'])
 def waitlistreservation():
     return HOTEL_RES_POST_INSERT_WaitlistReservation(request)
-@app.route("/HOTEL_RES_GET_SELECT_QueryWaitlistReservation",methods=['GET'])
+@app.route("/HOTEL_RES_GET_SELECT_QueryWaitlistReservation",methods=['POST'])
 def queryWaitlistReservation():
-    return HOTEL_RES_GET_SELECT_QueryWaitlistReservation()
+    return HOTEL_RES_GET_SELECT_QueryWaitlistReservation(request)
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation",methods=['POST'])
 def updatewaitlistreservation():
     return HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation(request)
@@ -434,6 +437,14 @@ def HOTEL_RES_POST_INSERT_ReinstateReservationvalue():
 @app.route("/HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation",methods=['POST'])
 def HOTEL_RES_POST_SELECT_QueryArrivalFromToReservationVAL():
     return HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation(request)
+@app.route("/HOTEL_RES_POST_INSERT_WaitlistReason",methods=['POST'])
+def HOTEL_RES_POST_INSERT_WaitlistReasonval():
+    return HOTEL_RES_POST_INSERT_WaitlistReason(request)
+@app.route("/HOTEL_RES_POST_INSERT_AcceptWaitlistReservation",methods=['POST'])
+def HOTEL_RES_POST_INSERT_AcceptWaitlistReservationval():
+    return HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request)
+   
+   
    
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
