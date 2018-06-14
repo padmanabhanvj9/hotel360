@@ -104,6 +104,9 @@ from HOTEL_RES_POST_INSERT_ReinstateReservation import HOTEL_RES_POST_INSERT_Rei
 from HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation import HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation
 from HOTEL_RES_POST_INSERT_WaitlistReason import HOTEL_RES_POST_INSERT_WaitlistReason
 from HOTEL_RES_POST_INSERT_AcceptWaitlistReservation import HOTEL_RES_POST_INSERT_AcceptWaitlistReservation
+from HOTEL_RES_POST_INSERT_ReservationCreditcard import HOTEL_RES_POST_INSERT_ReservationCreditcard
+from HOTEL_RES_POST_INSERT_ReservationCreditcard import Hotel_RES_Post_Update_UpdateReservationCreditcard
+from HOTEL_RES_POST_INSERT_ReservationCreditcard import Hotel_RES_Get_Select_QueryReservationCreditcard
 
 
 
@@ -443,7 +446,15 @@ def HOTEL_RES_POST_INSERT_WaitlistReasonval():
 @app.route("/HOTEL_RES_POST_INSERT_AcceptWaitlistReservation",methods=['POST'])
 def HOTEL_RES_POST_INSERT_AcceptWaitlistReservationval():
     return HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request)
-   
+ @app.route("/HOTEL_RES_POST_INSERT_ReservationCreditcard",methods=['POST'])
+def HOTEL_RES_POST_INSERT_ReservationCreditcardval():
+    return HOTEL_RES_POST_INSERT_ReservationCreditcard(request)
+@app.route("/Hotel_RES_Post_Update_UpdateReservationCreditcard",methods=['POST'])
+def Hotel_RES_Post_Update_UpdateReservationCreditcardval():
+    return Hotel_RES_Post_Update_UpdateReservationCreditcard(request)
+@app.route("/Hotel_RES_Get_Select_QueryReservationCreditcard",methods=['POST'])
+def Hotel_RES_Get_Select_QueryReservationCreditcardval():
+    return Hotel_RES_Get_Select_QueryReservationCreditcard(request)
    
    
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
