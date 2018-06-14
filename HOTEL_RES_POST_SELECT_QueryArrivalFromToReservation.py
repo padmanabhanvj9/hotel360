@@ -5,7 +5,7 @@ import json
 def HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation(request):
     d = request.json
     if request.json.get('ArrivalFrom'):
-        s = {}
+   
         ArrivalFrom = request.json['ArrivalFrom']
        
         sql_value = dbget("select * from reservation.res_reservation where  res_arrival >= '"+ArrivalFrom+"'")
@@ -20,7 +20,7 @@ def HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation(request):
         ArrivalFrom = request.json['ArrivalFrom']
         ArrivalTo = request.json['ArrivalTo']
         print(type(ArrivalFrom))
-        #e = { k : v for k,v in d.items() if k != '' if k in ('ArrivalFrom','ArrivalTo')}
+      
         sql_value = dbget("select * from reservation.res_reservation where res_arrival between '"+ArrivalFrom+"' and '"+ArrivalTo+"' ")
         
         sql_value = json.loads(sql_value)
