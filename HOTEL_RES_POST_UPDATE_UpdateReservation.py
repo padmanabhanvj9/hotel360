@@ -52,7 +52,7 @@ def updatereservation(d,e):
     print(values)
     RES_Description = ''
     for i in values:
-       if  RES_Description == ''
+       if  RES_Description == '':
            RES_Description +=  i 
        else:
            RES_Description +=  "|" + i
