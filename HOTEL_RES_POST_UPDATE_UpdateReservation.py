@@ -52,7 +52,10 @@ def updatereservation(d,e):
     print(values)
     RES_Description = ''
     for i in values:
-       RES_Description +=  i + "  "
+       if  RES_Description == ''
+           RES_Description +=  i 
+       else:
+           RES_Description +=  "|" + i
     print(RES_Description)
     
     #RES_Description = "Create New Profile for " + " "+data
