@@ -58,7 +58,7 @@ def updatereservation(d,e):
            RES_Description +=  "|" + i
     print(RES_Description)
     
-    #RES_Description = "Create New Profile for " + " "+data
+   
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
