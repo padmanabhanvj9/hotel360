@@ -6,7 +6,7 @@
 #Author: Aravinth
 #import packages are define top of the program
 import datetime
-from sqlwrapper import gensql,dbget
+from sqlwrapper import gensql,dbget,dbput
 import json
 
 # Below function is called from the root file 
