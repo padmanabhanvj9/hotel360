@@ -69,3 +69,4 @@ worker: gunicorn HOTEL_RES_POST_SELECT_QueryArrivalFromToReservation.py
 worker: gunicorn HOTEL_RES_POST_INSERT_WaitlistReason.py
 worker: gunicorn HOTEL_RES_POST_INSERT_AcceptWaitlistReservation.py
 worker: gunicorn HOTEL_RES_POST_INSERT_ReservationCreditcard.py
+worker: gunicorn HOTEL_RES_POST_DELETE_DeleteReservation.py
