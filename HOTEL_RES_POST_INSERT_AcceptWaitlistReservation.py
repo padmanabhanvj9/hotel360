@@ -26,7 +26,7 @@ def HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request):
     print(RES_Confnumber)
     t = {}
     t['RES_Confnumber'] = RES_Confnumber
-    t['RES_Guest_Status'] = "Reserved"
+    t['RES_Guest_Status'] = "reserved"
     e = {}
     e['Res_id'] = id
     e['pf_id'] = pf_id
