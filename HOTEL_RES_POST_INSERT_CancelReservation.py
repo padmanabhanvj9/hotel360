@@ -8,7 +8,7 @@ def HOTEL_RES_POST_INSERT_CancelReservation(request):
     Res_id = d.get("Res_id")
     e,a = {},{}
     e['Res_id'] = Res_id
-    a['Res_guest_status'] = "Cancel"
+    a['Res_guest_status'] = "cancel"
     sql_value = gensql('update','reservation.res_reservation',a,e)
     print(sql_value)
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
