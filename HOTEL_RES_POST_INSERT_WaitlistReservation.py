@@ -20,7 +20,7 @@ def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     print(Res_id)
     update = dbput("update reservation.res_id set id = '"+str(select[0]['id']+1)+"'")
     d['Res_id'] = Res_id
-    d['RES_Guest_Status'] = "Waitlist"
+    d['RES_Guest_Status'] = "waitlist"
     sql_value = gensql('insert','reservation.res_reservation',d)
     print(d)
  
