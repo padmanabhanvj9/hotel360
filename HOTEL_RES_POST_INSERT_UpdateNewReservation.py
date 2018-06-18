@@ -43,7 +43,7 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     RES_Confnumber = "PMS" + conf
     print(RES_Confnumber)
     d['RES_Confnumber'] = RES_Confnumber
-    d['RES_Guest_Status'] = "Reserved"
+    d['RES_Guest_Status'] = "reserved"
     select = json.loads(dbget("select * from reservation.res_id"))
     print(select,type(select),len(select))
     print(select[0]['id'])
