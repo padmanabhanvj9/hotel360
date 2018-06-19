@@ -140,6 +140,7 @@ from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservatio
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
 from HOTEL_FD_GET_SELECT_QueryQueueReservation import HOTEL_FD_GET_SELECT_QueryQueueReservation
 from HOTEL_FD_POST_INSERT_RoomAssign import HOTEL_FD_POST_UPDATE_RoomAssign
+from HOTEL_FD_POST_UPDATE_CheckinGuestArrivals import HOTEL_FD_POST_UPDATE_CheckinGuestArrivals
 #<--------------------------------------------------->
 #<---------------Room management------------------------->
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroomlist
@@ -544,6 +545,9 @@ def queryqueue():
 @app.route("/HOTEL_FD_POST_UPDATE_RoomAssign",methods=['POST'])
 def roomassignGUETS():
     return HOTEL_FD_POST_UPDATE_RoomAssign(request)
+@app.route("/HOTEL_FD_POST_UPDATE_CheckinGuestArrivals",methods=['POST'])
+def guestarrivals():
+    return HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request)
 #<--------------------------------------------->
 #<----------------------Room maangement route------------------->
 @app.route('/Hotel_Rm_Post_Insert_Updateroomlist',methods=['POST'])
