@@ -146,18 +146,21 @@ from HOTEL_FD_POST_UPDATE_CheckinGuestArrivals import HOTEL_FD_POST_UPDATE_Check
 #<--------------------------------------------------->
 #<---------------Room management------------------------->
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroomlist
-from Hotel_RM_Post_Update_Updateroomstatus import hotel_rm_post_update_updateroomstatus
-from Hotel_RM_Post_Select_Queryhousekeepinglist import hotel_rm_post_select_queryhousekeepinglist
+from Hotel_RM_Post_Update_Updateroomstatus import Hotel_Rm_Post_Update_Updateroomstatus
+from Hotel_Rm_Post_Select_QueryRoomList import hotel_rm_post_select_queryroomlist
+from Hotel_Rm_Post_Select_QueryroomStatistics import hotel_rm_post_select_queryroomstatistics
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroomcondition
+from Hotel_Rm_Post_Select_QueryRoomCondition import hotel_rm_post_select_queryroomcondition
+from Hotel_Rm_Post_Select_QueryRoomCondition import hotel_rm_post_delete_roomcondition
+from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
+from Hotel_Rm_Post_Select_QueryRoomDiscrepancies import hotel_rm_post_select_queryroomdiscrepancies
+from Hotel_Rm_Post_Insert_UpdateGuestServiceStatus import hotel_rm_post_insert_updateguestservicestatus
+from Hotel_Rm_Post_Insert_UpdateGuestServiceStatus import hotel_rm_post_select_queryguestservicestatus
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateoutoforderservice
 from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_select_queryoutoforderservice
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaintenance
+from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_update_updateroommaintenance
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
-from Hotel_RM_Post_Update_Updateroomdiscrepancies import hotel_rm_post_update_updateroomdiscrepancies
-from Hotel_Rm_Post_Select_QueryRoomList import hotel_rm_post_select_queryroomlist
-from Hotel_Rm_Post_Select_QueryRoomCondition import hotel_rm_post_select_queryroomcondition
-from Hotel_Rm_Post_Update_UpdateRoomCondition import hotel_rm_post_update_updateroomcondition
-
 
 from RoomManagementDropdown import select_roomstatus
 from RoomManagementDropdown import select_class
@@ -564,15 +567,36 @@ def HOTEL_FD_GET_SELECT_QueryTracesActivityLogva():
 @app.route('/Hotel_Rm_Post_Insert_Updateroomlist',methods=['POST'])
 def Updateroomlist():
    return hotel_rm_post_insert_updateroomlist(request)
-@app.route('/Hotel_Rm_Post_Update_Updateroomstatus',methods=['GET'])
+@app.route('/Hotel_Rm_Post_Update_Updateroomstatus',methods=['POST'])
 def Updateroomstatus():
-   return hotel_rm_post_update_updateroomstatus(request)
-@app.route('/Hotel_Rm_Post_Select_Queryhousekeepinglist',methods=['POST'])
-def Queryhousekeepinglist():
-   return hotel_rm_post_select_queryhousekeepinglist(request)
+   return Hotel_Rm_Post_Update_Updateroomstatus(request)
+@app.route("/Hotel_Rm_Post_Select_QueryRoomList",methods=['POST'])
+def QueryRoomList():
+   return hotel_rm_post_select_queryroomlist(request)
+@app.route("/Hotel_Rm_Post_Select_QueryRoomStatistics",methods=['POST'])
+def QueryRoomStatistics():
+   return hotel_rm_post_select_queryroomstatistics(request)
 @app.route('/Hotel_Rm_Post_Insert_Updateroomcondition',methods=['POST'])
 def Updateroomcondition():
    return hotel_rm_post_insert_updateroomcondition(request)
+@app.route("/Hotel_Rm_Post_Select_QueryRoomCondition",methods=['POST'])
+def QueryRoomCondition():
+   return hotel_rm_post_select_queryroomcondition(request)
+@app.route("/Hotel_Rm_Post_Delete_RoomCondition",methods=['POST'])
+def DeleteRoomCondition():
+   return hotel_rm_post_delete_roomcondition(request)
+@app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
+def updateroomdiscrepancies():
+   return hotel_rm_post_update_updateroomdiscrepancies(request)
+@app.route('/Hotel_Rm_Post_Select_QueryRoomDiscrepancies',methods=['POST'])
+def QueryRoomDiscrepancies ():
+   return hotel_rm_post_select_queryroomdiscrepancies(request)
+@app.route('/Hotel_Rm_Post_Insert_UpdateGuestServiceStatus',methods=['POST'])
+def UpdateGuestServiceStatus():
+   return hotel_rm_post_insert_updateguestservicestatus(request)
+@app.route('/Hotel_Rm_Post_Select_QueryGuestServiceStatus',methods=['POST'])
+def QueryGuestServiceStatus():
+   return hotel_rm_post_select_queryguestservicestatus(request)
 @app.route('/Hotel_Rm_Post_Insert_Updateoutoforderservice',methods=['POST'])
 def Updateoutoforderservice():
    return hotel_rm_post_insert_updateoutoforderservice(request)
@@ -580,25 +604,16 @@ def Updateoutoforderservice():
 def Queryoutoforderservice ():
    return hotel_rm_post_select_queryoutoforderservice(request)
 @app.route('/Hotel_Rm_Post_Insert_Updateroommaintenance',methods=['POST'])
-def Updateroommaintenance ():
+def Insertroommaintenance ():
    return hotel_rm_post_insert_updateroommaintenance(request)
-@app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['GET','POST'])
+@app.route('/Hotel_Rm_Post_Update_Updateroommaintenance',methods=['POST'])
+def Updateroommaintenance ():
+   return hotel_rm_post_update_updateroommaintenance(request)
+@app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['POST'])
 def Queryroommaintenance():
    return hotel_rm_post_select_queryroommaintenance(request)
-@app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
-def updateroomdiscrepancies():
-   return hotel_rm_post_update_updateroomdiscrepancies(request)
-@app.route("/Hotel_Rm_Post_Select_QueryRoomList",methods=['POST'])
-def QueryRoomList():
-   return hotel_rm_post_select_queryroomlist(request)
-@app.route("/Hotel_Rm_Post_Select_QueryRoomCondition",methods=['POST'])
-def QueryRoomCondition():
-   return hotel_rm_post_select_queryroomcondition(request)
-@app.route("/Hotel_Rm_Post_Update_UpdateRoomCondition",methods=['POST'])
-def UpdateRoomCondition():
-   return hotel_rm_post_update_updateroomcondition(request)
 
-
+#deopdown
 @app.route("/Select_RoomStatus",methods=['POST'])
 def Select_RoomStatus():
   return select_roomstatus()
