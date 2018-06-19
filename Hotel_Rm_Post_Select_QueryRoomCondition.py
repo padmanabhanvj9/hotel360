@@ -1,11 +1,13 @@
-from sqlwrapper import dbget
+from sqlwrapper import dbget,dbput
 import json
 
 def hotel_rm_post_select_queryroomcondition(request):
-    sql = 'select rm_room,rm_room_type,rm_room_status,rm_fo_status,rm_features,rm_room_condition,rm_reservation_status from room_management.rm_room_list order by rm_room'
-    print(sql)      
-    db_res = (dbget(sql))
-    print(db_res)
-    db_res = json.loads(db_res)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':db_res  ,'ReturnCode':'RRTS'},indent=4))
-
+    sql = json.loads(dbget('select * from  room_management.rm_room_list \
+           join room_management.rm_room_condition on \
+           room_management.rm_room_list.rm_room = room_management.rm_room_condition.rm_room'))
+    #print(sql)      
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'ReturnCode':'RRTS'},indent=4))
+def  hotel_rm_post_delete_roomcondition(request):
+    room = request.json['rm_room']
+    sql = dbput("delete from room_management.rm_room_condition where rm_room='"+room+"'")
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Deleted Successfully','ReturnCode':'RDS'}, sort_keys=True, indent=4))
