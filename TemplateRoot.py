@@ -109,7 +109,7 @@ from HOTEL_RES_POST_INSERT_ReservationCreditcard import Hotel_RES_Post_Update_Up
 from HOTEL_RES_POST_INSERT_ReservationCreditcard import Hotel_RES_Get_Select_QueryReservationCreditcard
 from HOTEL_RES_POST_DELETE_DeleteReservation import HOTEL_RES_POST_DELETE_DeleteReservation
 from Hotel_RES_Post_Update_TracesResloved import Hotel_RES_Post_Update_TracesResloved
-
+from HOTEL_RES_POST_UPDATE_RoomMove import HOTEL_RES_POST_UPDATE_RoomMove
 
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Restype
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Alertarea
@@ -465,6 +465,9 @@ def HOTEL_RES_POST_DELETE_DeleteReservationval():
 @app.route("/Hotel_RES_Post_Update_TracesResloved",methods=['POST'])
 def Hotel_RES_Post_Update_TracesReslovedvs():
     return Hotel_RES_Post_Update_TracesResloved(request)
+@app.route("/HOTEL_RES_POST_UPDATE_RoomMove",methods=['POST'])
+def HOTEL_RES_POST_UPDATE_RoomMoveval():
+    return HOTEL_RES_POST_UPDATE_RoomMove(request)
    
    
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
