@@ -77,3 +77,4 @@ worker: gunicorn HOTEL_FD_GET_SELECT_QueryTracesActivityLog.py
 worker: gunicorn HOTEL_RES_POST_UPDATE_RoomMove.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryRoomList.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryroomStatistics.py
+worker: gunicorn Hotel_Rm_Post_Select_QueryRoomDiscrepancies.py
