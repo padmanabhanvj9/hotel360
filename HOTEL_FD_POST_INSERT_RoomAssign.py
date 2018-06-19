@@ -18,7 +18,7 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
     arrival = json.loads(arrival)
     print(arrival)
     arrival_date = arrival[0]['res_arrival']
-    print(arrival_date,type(arrival_date))
+    #print(arrival_date,type(arrival_date))
 
     #print(arrival[0]['res_arrival'])
     if Today_date == arrival_date:
