@@ -72,3 +72,4 @@ worker: gunicorn HOTEL_RES_POST_INSERT_ReservationCreditcard.py
 worker: gunicorn HOTEL_RES_POST_DELETE_DeleteReservation.py
 worker: gunicorn HOTEL_FD_POST_INSERT_RoomAssign.py
 worker: gunicorn HOTEL_FD_POST_UPDATE_CheckinGuestArrivals.py
+worker: gunicorn Hotel_RES_Post_Update_TracesResloved.py
