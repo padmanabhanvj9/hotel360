@@ -399,9 +399,9 @@ def updatedeposit():
 @app.route("/HOTEL_RES_GET_SELECT_QueryDepositrule",methods=['POST'])
 def querydepositrule():
     return HOTEL_RES_GET_SELECT_QueryDepositrule(request)
-@app.route("/HOTEL_RES_GET_SELECT_RoomUnassign",methods=['GET'])
+@app.route("/HOTEL_RES_GET_SELECT_RoomUnassign",methods=['POST'])
 def roomunassign():
-    return HOTEL_RES_GET_SELECT_RoomUnassign()
+    return HOTEL_RES_GET_SELECT_RoomUnassign(request)
 @app.route("/Hotel_RES_Post_Insert_UpdateGuestPrivileges",methods=['POST'])
 def GuestPrivileges():
     return Hotel_RES_Post_Insert_UpdateGuestPrivileges(request)
