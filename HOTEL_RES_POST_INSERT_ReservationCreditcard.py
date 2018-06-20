@@ -17,6 +17,7 @@ def Hotel_RES_Post_Update_UpdateReservationCreditcard(request):
 def Hotel_RES_Get_Select_QueryReservationCreditcard(request):
     e = {}
     e['res_id'] = request.json['res_id']
+    e['pf_id'] = request.json['pf_id']
     sql_value = gensql('select','profile.pf_creditcard','*',e)
     sql_value = json.loads(sql_value)
     print(sql_value)
