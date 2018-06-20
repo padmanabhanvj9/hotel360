@@ -1,8 +1,8 @@
 from sqlwrapper import gensql
 from flask import Flask,request, jsonify
 import json
-def Hotel_RES_Get_Select_QueryReservationActivitylog():
-    Res_id = request.args['Res_id']
+def Hotel_RES_POST_Select_QueryReservationActivitylog(request):
+    Res_id = request.json['Res_id']
     d = {}
     
     d['Res_id'] = Res_id
