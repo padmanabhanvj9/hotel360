@@ -159,8 +159,10 @@ from Hotel_Rm_Post_Insert_UpdateGuestServiceStatus import hotel_rm_post_select_q
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateoutoforderservice
 from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_select_queryoutoforderservice
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaintenance
-from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_update_updateroommaintenance
+from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_update_resolveroommaintenance
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
+from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_delete_deleteoutoforderservice
+from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_delete_deleteroommaintenance
 
 from RoomManagementDropdown import select_roomstatus
 from RoomManagementDropdown import select_class
@@ -606,12 +608,19 @@ def Queryoutoforderservice ():
 @app.route('/Hotel_Rm_Post_Insert_Updateroommaintenance',methods=['POST'])
 def Insertroommaintenance ():
    return hotel_rm_post_insert_updateroommaintenance(request)
-@app.route('/Hotel_Rm_Post_Update_Updateroommaintenance',methods=['POST'])
-def Updateroommaintenance ():
-   return hotel_rm_post_update_updateroommaintenance(request)
+@app.route('/Hotel_Rm_Post_Update_ResolveRoomMaintenance',methods=['POST'])
+def ResolveRoomMaintenance ():
+   return hotel_rm_post_update_resolveroommaintenance(request)
 @app.route('/Hotel_Rm_Post_Select_Queryroommaintenance',methods=['POST'])
 def Queryroommaintenance():
    return hotel_rm_post_select_queryroommaintenance(request)
+@app.route('/Hotel_Rm_Post_Delete_Deleteoutoforderservice',methods=['POST'])
+def Deleteoutoforderservice():
+   return hotel_rm_post_delete_deleteoutoforderservice(request)
+@app.route('/Hotel_Rm_Post_Delete_DeleteRoomMaintenance',methods=['POST'])
+def DeleteRoomMaintenance():
+   return hotel_rm_post_delete_deleteroommaintenance(request)
+
 
 #deopdown
 @app.route("/Select_RoomStatus",methods=['POST'])
