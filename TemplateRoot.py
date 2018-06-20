@@ -177,7 +177,7 @@ from RoomManagementDropdown import select_room_no
 from RoomManagementDropdown import select_discription
 from RoomManagementDropdown import select_servicestatus_code
 from RoomManagementDropdown import select_turndownstatus
-
+from RoomManagementDropdown import select_room_service_status
 
 #insert
 
@@ -190,6 +190,7 @@ from RoomManagementDropdownInsert import insert_room_no
 from RoomManagementDropdownInsert import insert_room_discription
 from RoomManagementDropdownInsert import insert_servicestatus_code
 from RoomManagementDropdownInsert import insert_turndownstatus
+from RoomManagementDropdownInsert import insert_room_service_status
 #<------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -665,7 +666,9 @@ def Select_Servicestatus_Code():
 @app.route("/Select_Turndownstatus",methods=['POST'])
 def Select_Turndownstatus():
   return select_turndownstatus()
-
+@app.route("/select_room_service_status",methods=['POST'])
+def select_room_service_statusvalue():
+  return select_room_service_status()
 #insert
 @app.route("/Insert_Roomstatus",methods=['POST'])
 def Insert_Roomstatus():
@@ -694,6 +697,9 @@ def insert_servicestatus_codevalue():
 @app.route("/insert_turndownstatus",methods=['POST'])
 def insert_turndownstatus_value():
   return insert_turndownstatus(request)
+@app.route("/insert_room_service_status",methods=['POST'])
+def insert_room_service_statusva():
+  return insert_room_service_status(request)
 
 
 #<--------------------------------------------------------->
