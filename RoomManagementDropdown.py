@@ -27,9 +27,6 @@ def select_servicestatus_code():
 def select_turndownstatus():
    sql_value = json.loads(gensql('select','room_management.turndownstatus','turndownstatus'))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
-def select_():
-   sql_value = json.loads(gensql('select','room_management.room_discription','discription'))
-   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
-def select_():
-   sql_value = json.loads(gensql('select','room_management.room_discription','discription'))
+def select_room_service_status():
+   sql_value = json.loads(gensql('select','room_management.room_service_status','room_service_status'))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
