@@ -80,7 +80,7 @@ from HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation import HOTEL_RES_POST_UPDAT
 from HOTEL_RES_POST_INSERT_UpdateAlertReservation import HOTEL_RES_POST_INSERT_UpdateAlertReservation
 from HOTEL_RES_GET_SELECT_QueryAlertReservation import HOTEL_RES_GET_SELECT_QueryAlertReservation
 from HOTEL_RES_POST_UPDATE_UpdateReservationAlert import HOTEL_RES_POST_UPDATE_UpdateReservationAlert
-from Hotel_RES_Get_Select_QueryReservationActivitylog import Hotel_RES_Get_Select_QueryReservationActivitylog
+from Hotel_RES_Get_Select_QueryReservationActivitylog import Hotel_RES_POST_Select_QueryReservationActivitylog
 from Hotel_RES_Post_Insert_UpdateFixedChargesReservation import Hotel_RES_Post_Insert_UpdateFixedChargesReservation
 from HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation import HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation
 from HOTEL_RES_GET_SELECT_QueryFixedChargesReservation import HOTEL_RES_GET_SELECT_QueryFixedChargesReservation
@@ -391,9 +391,9 @@ def queryalert():
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateReservationAlert",methods=['POST'])
 def updatealert():
     return HOTEL_RES_POST_UPDATE_UpdateReservationAlert(request)
-@app.route("/Hotel_RES_Get_Select_QueryReservationActivitylog",methods=['GET'])
+@app.route("/Hotel_RES_POST_Select_QueryReservationActivitylog",methods=['POST'])
 def queryreservationactivitylog():
-    return Hotel_RES_Get_Select_QueryReservationActivitylog()
+    return Hotel_RES_POST_Select_QueryReservationActivitylog(request)
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation",methods=['POST'])
 def updatefixedcharges():
     return HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request)
