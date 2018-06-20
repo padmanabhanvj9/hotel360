@@ -15,7 +15,7 @@ def QueryHistoryReservation(request):
     #date_N_days_ago = str(date_N_days_ago)
     #print (date_N_days_ago)
     pf_id = request.json['pf_id']
-    sql_value = "select * from reservation.res_reservation where pf_id = "+pf_id+" and res_arrival <  '"+current_date+"' order by res_arrival desc"
+    sql_value = "select * from reservation.res_reservation where pf_id = '"+pf_id+"' and res_arrival <  '"+current_date+"' order by res_arrival desc"
     result = dbget(sql_value)
     #sql_value = gensql('select','reservation.res_reservation','*' 'ORDER BY res_arrival DESC')
     result = json.loads(result)
