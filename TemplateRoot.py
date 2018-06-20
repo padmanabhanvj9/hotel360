@@ -123,6 +123,7 @@ from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Tran
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_depositrule
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_CancelReason
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Cardtype
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Waitlist_reason
 
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
@@ -136,6 +137,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_T
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Depositrule
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_CancelReason
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Cardtype
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Waitlist_reason
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
@@ -513,7 +515,9 @@ def Hotel_RES_POST_INSERT_CancelReasonval():
 @app.route("/Hotel_RES_POST_INSERT_Cardtype",methods=['POST'])
 def Hotel_RES_POST_INSERT_Cardtypeva():
    return Hotel_RES_POST_INSERT_Cardtype(request)
-
+@app.route("/Hotel_RES_POST_INSERT_Waitlist_reason",methods=['POST'])
+def Hotel_RES_POST_INSERT_Waitlist_reasonva():
+   return Hotel_RES_POST_INSERT_Waitlist_reason(request)
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
 def Hotel_RES_GET_SELECT_Restypesfs():
@@ -551,6 +555,9 @@ def Hotel_RES_GET_SELECT_CancelReasonvalue():
 @app.route("/Hotel_RES_GET_SELECT_Cardtype",methods=['GET'])
 def Hotel_RES_GET_SELECT_Cardtypeva():
    return Hotel_RES_GET_SELECT_Cardtype()
+@app.route("/Hotel_RES_GET_SELECT_Waitlist_reason",methods=['GET'])
+def Hotel_RES_GET_SELECT_Waitlist_reasonva():
+   return Hotel_RES_GET_SELECT_Waitlist_reason()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
