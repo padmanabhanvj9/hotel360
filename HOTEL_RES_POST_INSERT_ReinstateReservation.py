@@ -14,7 +14,7 @@ def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     #print(res_status[0]['res_guest_status'],type(res_status[0]['res_guest_status']))
     e['res_id'] = res_id
  
-    s['res_guest_status'] = "Reserved"
+    s['res_guest_status'] = "reserved"
     
     #s['res_confnumber'] = res_confnumber[0]['res_confnumber']
     sql_value = gensql('update','reservation.res_reservation',s,e)
