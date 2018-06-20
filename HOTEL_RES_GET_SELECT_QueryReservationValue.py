@@ -66,3 +66,8 @@ def Hotel_RES_GET_SELECT_CancelReason():
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
+def Hotel_RES_GET_SELECT_Cardtype():
+    sql_value = gensql('select','reservation.cardtype','creditcard_description')
+    result = json.loads(sql_value)
+    print(result)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
