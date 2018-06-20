@@ -46,3 +46,9 @@ def insert_turndownstatus(request):
     sql_value = gensql('insert','room_management.turndownstatus',d)
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))
+def insert_room_service_status(request):
+    d = request.json
+    sql_value = gensql('insert','room_management.room_service_status',d)
+    print(sql_value)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))
+
