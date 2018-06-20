@@ -61,6 +61,6 @@ def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
        sql_value = dbput("update room_management.rm_room_list set rm_fo_status = '"+fo_status+"',rm_reservation_status = '"+res_status+"',rm_fo_person = "+str(adult)+" where rm_room in ("+room+")")
        
        print(sql_value)
-       return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+       return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation Checkin Successfully','ReturnCode':'RCIS'}, sort_keys=True, indent=4))
    else:
       return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Checkin a Today Guest arrivals only','ReturnCode':'CTG'}, sort_keys=True, indent=4))
