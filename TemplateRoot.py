@@ -178,7 +178,7 @@ from RoomManagementDropdown import select_discription
 from RoomManagementDropdown import select_servicestatus_code
 from RoomManagementDropdown import select_turndownstatus
 from RoomManagementDropdown import select_room_service_status
-
+from RoomManagementDropdown import select_mainteanance_reason
 #insert
 
 from RoomManagementDropdownInsert import insert_roomstatus
@@ -191,6 +191,7 @@ from RoomManagementDropdownInsert import insert_room_discription
 from RoomManagementDropdownInsert import insert_servicestatus_code
 from RoomManagementDropdownInsert import insert_turndownstatus
 from RoomManagementDropdownInsert import insert_room_service_status
+from RoomManagementDropdownInsert import insert_mainteanance_reason
 #<------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -669,6 +670,10 @@ def Select_Turndownstatus():
 @app.route("/select_room_service_status",methods=['POST'])
 def select_room_service_statusvalue():
   return select_room_service_status()
+@app.route("/select_mainteanance_reason",methods=['POST'])
+def select_mainteanance_reasonva():
+  return select_mainteanance_reason()
+
 #insert
 @app.route("/Insert_Roomstatus",methods=['POST'])
 def Insert_Roomstatus():
@@ -700,7 +705,9 @@ def insert_turndownstatus_value():
 @app.route("/insert_room_service_status",methods=['POST'])
 def insert_room_service_statusva():
   return insert_room_service_status(request)
-
+@app.route("/insert_mainteanance_reason",methods=['POST'])
+def insert_mainteanance_reasonva():
+  return insert_mainteanance_reason(request)
 
 #<--------------------------------------------------------->
 #<--------------amazonlex-------------------------->
