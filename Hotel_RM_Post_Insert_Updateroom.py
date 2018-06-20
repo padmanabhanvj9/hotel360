@@ -53,7 +53,7 @@ def hotel_rm_post_insert_updateroommaintenance(request):
         print(gensql('insert','room_management.RM_Room_Mainteanance_Acitivity_Log',d))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
 
-def hotel_rm_post_update_updateroommaintenance(request):
+def hotel_rm_post_update_resolveroommaintenance(request):
     e = request.json
     print(e)
     d = {}
@@ -63,6 +63,3 @@ def hotel_rm_post_update_updateroommaintenance(request):
     print(sql,type(sql))
     print(gensql('update','room_management.rm_room_mainteanance_acitivity_log',d,e))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
-
-
-
