@@ -122,6 +122,7 @@ from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Depa
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Transaction_code
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_depositrule
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_CancelReason
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Cardtype
 
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
@@ -134,6 +135,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_D
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Transaction_code
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Depositrule
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_CancelReason
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Cardtype
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #</--------------reservation webservice---------/>
@@ -508,6 +510,9 @@ def Hotel_RES_POST_INSERT_Depositruleva():
 @app.route("/Hotel_RES_POST_INSERT_CancelReason",methods=['POST'])
 def Hotel_RES_POST_INSERT_CancelReasonval():
    return Hotel_RES_POST_INSERT_CancelReason(request)
+@app.route("/Hotel_RES_POST_INSERT_Cardtype",methods=['POST'])
+def Hotel_RES_POST_INSERT_Cardtypeva():
+   return Hotel_RES_POST_INSERT_Cardtype(request)
 
 
 @app.route("/Hotel_RES_GET_SELECT_Restype",methods=['GET'])
@@ -543,6 +548,9 @@ def Hotel_RES_GET_SELECT_depositruledasd():
 @app.route("/Hotel_RES_GET_SELECT_CancelReason",methods=['GET'])
 def Hotel_RES_GET_SELECT_CancelReasonvalue():
    return Hotel_RES_GET_SELECT_CancelReason()
+@app.route("/Hotel_RES_GET_SELECT_Cardtype",methods=['GET'])
+def Hotel_RES_GET_SELECT_Cardtypeva():
+   return Hotel_RES_GET_SELECT_Cardtype()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
