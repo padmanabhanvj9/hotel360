@@ -52,3 +52,9 @@ def insert_room_service_status(request):
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))
 
+def insert_mainteanance_reason(request):
+    d = request.json
+    sql_value = gensql('insert','room_management.mainteanance_reason',d)
+    print(sql_value)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))
+
