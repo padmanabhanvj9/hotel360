@@ -35,7 +35,8 @@ def Hotel_RES_Post_Update_UpdateGuestTraces(request):
 
 def Hotel_RES_Get_Select_QueryGuestTraces():
 
-    sql_value = gensql('select','reservation.res_traces','*')
-    sql_value = json.loads(sql_value)
+    sql_value = json.loads(dbget("select * from reservation.res_reservation join reservation.res_traces on \
+                           reservation.res_reservation.res_id = reservation.res_traces.res_id") )
+    #sql_value = json.loads(sql_value)
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
