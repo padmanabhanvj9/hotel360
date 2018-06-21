@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
     d = request.json
     e = { k:v for k,v in  d.items() if k not in ('traces_from_date','traces_to_date') }
-    e['traces_status'] = "requested"
+    #e['traces_status'] = "requested"
     from_date = request.json['traces_from_date']
     to_date = request.json['traces_to_date']
     print(from_date,type(from_date))
