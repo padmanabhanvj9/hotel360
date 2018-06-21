@@ -24,7 +24,7 @@ def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
 
 def Hotel_RES_Post_Update_UpdateGuestTraces(request):
-    d = request.json
+    e = request.json
     todaydate = datetime.datetime.utcnow().date()
     print(todaydate)
     d['resloved_on'] = todaydate
@@ -32,8 +32,8 @@ def Hotel_RES_Post_Update_UpdateGuestTraces(request):
     print(d)
     #a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','traces_id')}
     #print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('res_id','traces_id')}
-    print(e)
+    #e = { k : v for k,v in d.items() if k != '' if k in ('res_id','traces_id')}
+    #print(e)
     sql_value = gensql('update','reservation.res_traces',d,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
