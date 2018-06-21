@@ -433,7 +433,7 @@ def UpdateGuestTraces():
     return Hotel_RES_Post_Update_UpdateGuestTraces(request)
 @app.route("/Hotel_RES_Get_Select_QueryGuestTraces",methods=['POST'])
 def SelectGuestTraces():
-    return Hotel_RES_Get_Select_QueryGuestTraces(request)
+    return Hotel_RES_Get_Select_QueryGuestTraces()
 @app.route("/HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation",methods=['POST'])
 def UpdateFixedChargesReservation():
     return HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request)
