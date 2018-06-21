@@ -27,14 +27,14 @@ def Hotel_RES_Post_Update_UpdateGuestTraces(request):
     d = request.json
     todaydate = datetime.datetime.utcnow().date()
     print(todaydate)
-    a['resloved_on'] = todaydate
-    a['resloved_by'] = "Daisy"
+    d['resloved_on'] = todaydate
+    d['resloved_by'] = "Daisy"
     print(d)
-    a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','traces_id')}
-    print(a)
+    #a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','traces_id')}
+    #print(a)
     e = { k : v for k,v in d.items() if k != '' if k in ('res_id','traces_id')}
     print(e)
-    sql_value = gensql('update','reservation.res_traces',a,e)
+    sql_value = gensql('update','reservation.res_traces',d,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
 def Hotel_RES_Get_Select_QueryGuestTraces():
