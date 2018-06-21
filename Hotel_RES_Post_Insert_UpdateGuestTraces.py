@@ -25,9 +25,9 @@ def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
 
 def Hotel_RES_Post_Update_UpdateGuestTraces(request):
     e = request.json
-    todaydate = datetime.datetime.utcnow().date()
-    print(todaydate)
-    d['resloved_on'] = todaydate
+    #todaydate = datetime.datetime.utcnow().date()
+    #print(todaydate)
+    d['resloved_on'] = datetime.datetime.utcnow().date()
     d['resloved_by'] = "Daisy"
     print(d)
     #a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','traces_id')}
