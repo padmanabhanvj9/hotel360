@@ -1,3 +1,4 @@
+
 from datetime import datetime
 from sqlwrapper import gensql, dbget
 import json
@@ -27,7 +28,10 @@ def Hotel_RES_Post_Update_UpdateGuestTraces(request):
     e = request.json
     #todaydate = datetime.datetime.utcnow().date()
     #print(todaydate)
-    d['resloved_on'] = datetime.datetime.utcnow().date()
+    RES_Log_Date = datetime.utcnow().date()
+    print(RES_Log_Date)
+    d = {}
+    d['resloved_on'] = RES_Log_Date
     d['resloved_by'] = "Daisy"
     print(d)
     #a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','traces_id')}
