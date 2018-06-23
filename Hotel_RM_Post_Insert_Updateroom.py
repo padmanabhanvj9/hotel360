@@ -49,6 +49,8 @@ def hotel_rm_post_insert_updateroommaintenance(request):
         d['rm_resolvedon'] =  ''
         d['rm_resolvedby'] = ''        
         print(gensql('update','room_management.rm_room_mainteanance_acitivity_log',d,e))
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
     else:    
         print(gensql('insert','room_management.RM_Room_Mainteanance_Acitivity_Log',d))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
