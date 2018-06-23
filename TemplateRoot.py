@@ -5,10 +5,7 @@
 #Date: 13/03/18
 #Author: Daisy
 
-from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
-from flask_cors import CORS
-app = Flask(__name__)
-CORS(app)
+
 
 from flask import Flask,request, jsonify
 
@@ -199,7 +196,10 @@ from RoomManagementDropdownInsert import insert_room_service_status
 from RoomManagementDropdownInsert import insert_mainteanance_reason
 #<------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
-
+from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)
 #Review , include comment
 #Post Method to invoke JSON POST Request
 #<------profile route ---->
