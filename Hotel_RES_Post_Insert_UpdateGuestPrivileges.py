@@ -11,7 +11,7 @@ def Hotel_RES_Post_Update_UpdateGuestPrivileges(request):
     e = { k : v for k,v in d.items() if k != '' if k in ('Res_id','privileges_id')}
 
     print(e)
-    sql_value = gensql('update','reservation.res_guest_privileges',d,e)
+    sql_value = gensql('update','reservation.res_guest_privileges',a,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 def Hotel_RES_Get_Select_QueryGuestPrivileges(request):
     e = {}
