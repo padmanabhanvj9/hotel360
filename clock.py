@@ -4,7 +4,7 @@ import datetime
 import json
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', hours=2)
+@sched.scheduled_job('interval', seconds=10)
 def timed_job():
     tomorrow = datetime.datetime.utcnow()+datetime.timedelta(days=1)
     tomorrow = str(tomorrow)
