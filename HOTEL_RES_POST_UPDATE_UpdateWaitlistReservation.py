@@ -4,9 +4,9 @@ import json
 
 def HOTEL_RES_POST_UPDATE_UpdateWaitlistReservation(request):
     d = request.json
-    a = { k : v for k,v in d.items() if v != '' if k not in ('RES_Id','pf_id')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('RES_Id','waitllist')}
     print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('RES_Id','pf_id')}
+    e = { k : v for k,v in d.items() if k != '' if k in ('RES_Id','waitllist')}
     print(e)
     
     sql_value = gensql('update','reservation.res_waitlist',a,e)
