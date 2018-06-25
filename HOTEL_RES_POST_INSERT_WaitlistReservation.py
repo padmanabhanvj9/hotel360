@@ -37,5 +37,5 @@ def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     s['Res_id'] = res_id
     
     sql_value = gensql('insert','reservation.res_activity_log',s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation should be Waitlist','ReturnCode':'RW'}, sort_keys=True, indent=4))
     
