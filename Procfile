@@ -79,3 +79,4 @@ worker: gunicorn Hotel_Rm_Post_Select_QueryRoomList.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryroomStatistics.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryRoomDiscrepancies.py
 worker: gunicorn Hotel_Rm_Post_Insert_UpdateGuestServiceStatus.py
+clock: python clock.py
