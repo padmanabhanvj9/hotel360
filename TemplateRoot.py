@@ -641,6 +641,9 @@ def Deleteoutoforderservice():
 @app.route('/Hotel_Rm_Post_Delete_DeleteRoomMaintenance',methods=['POST'])
 def DeleteRoomMaintenance():
    return hotel_rm_post_delete_deleteroommaintenance(request)
+@app.route('/hotel_rm_post_update_updateroomcondition',methods=['POST'])
+def hotel_rm_post_update_updateroomconditiond():
+   return hotel_rm_post_update_updateroomcondition(request)
 
 
 #deopdown
