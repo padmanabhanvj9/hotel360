@@ -33,3 +33,6 @@ def select_room_service_status():
 def select_mainteanance_reason():
    sql_value = json.loads(gensql('select','room_management.mainteanance_reason','*'))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
+def select_floor():
+   sql_value = json.loads(gensql('select','room_management.floor','*'))
+   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
