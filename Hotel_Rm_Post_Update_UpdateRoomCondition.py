@@ -8,7 +8,7 @@ def hotel_rm_post_update_updateroomcondition(request):
    print(e)
    d = { k : v for k,v in dict1.items() if k not in ('rm_room')}
    print(d)
-   print(gensql('update','room_management.RM_Room_List',d,e))
+   print(gensql('update','room_management.rm_room_condition',d,e))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
     
