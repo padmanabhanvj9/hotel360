@@ -170,6 +170,7 @@ from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_query
 from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_delete_deleteoutoforderservice
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_delete_deleteroommaintenance
 from Hotel_Rm_Post_Update_UpdateRoomCondition import hotel_rm_post_update_updateroomcondition
+from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_update_updateoutoforderservice
 
 from RoomManagementDropdown import select_roomstatus
 from RoomManagementDropdown import select_class
@@ -622,7 +623,7 @@ def UpdateGuestServiceStatus():
 def QueryGuestServiceStatus():
    return hotel_rm_post_select_queryguestservicestatus(request)
 @app.route('/Hotel_Rm_Post_Insert_Updateoutoforderservice',methods=['POST'])
-def Updateoutoforderservice():
+def Insertoutoforderservice():
    return hotel_rm_post_insert_updateoutoforderservice(request)
 @app.route('/Hotel_Rm_Post_Select_Queryoutoforderservice',methods=['POST'])
 def Queryoutoforderservice ():
@@ -645,6 +646,10 @@ def DeleteRoomMaintenance():
 @app.route('/hotel_rm_post_update_updateroomcondition',methods=['POST'])
 def hotel_rm_post_update_updateroomconditiond():
    return hotel_rm_post_update_updateroomcondition(request)
+@app.route('/Hotel_Rm_Post_Update_Updateoutoforderservices',methods=['POST'])
+def Updateoutoforderservice():
+   return hotel_rm_post_update_updateoutoforderservice(request)
+
 
 
 #deopdown
