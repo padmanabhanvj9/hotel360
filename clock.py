@@ -4,7 +4,7 @@ import datetime
 import json
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', seconds=10)
+@sched.scheduled_job('interval', hours=10)
 def timed_job():
     tomorrow = datetime.datetime.utcnow()+datetime.timedelta(days=1)
     tomorrow = str(tomorrow)
@@ -17,14 +17,14 @@ def timed_job():
         res_id = ''
         for  i in sqlvalue:
             if len(res_id) == 0:
-                res_id += "'"+i['res_id']+"'"
+                res_id += "'"+str(i['res_id'])+"'"
             else:
-                res_id += ","+"'"+i['res_id']+"'"
+                res_id += ","+"'"+str(i['res_id'])+"'"
         print(res_id) 
 
         status = "due out"
        
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
 
         print('This job is run every three minutes.')
     else:
@@ -47,7 +47,7 @@ def timed_job():
 
         status = "due in"
         
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
         print(sql_value)
     else:
         pass
@@ -63,18 +63,18 @@ def timed_job():
         res_id = ''
         for  i in sqlvalue:
             if len(res_id) == 0:
-                res_id += "'"+i['res_id']+"'"
+                res_id += "'"+str(i['res_id'])+"'"
             else:
-                res_id += ","+"'"+i['res_id']+"'"
+                res_id += ","+"'"+str(i['res_id'])+"'"
         print(res_id) 
 
         status = "arrival"
         
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
         print(sql_value)
     else:
         pass
-@sched.scheduled_job('interval', hours=24)
+@sched.scheduled_job('interval', hours=10)
 def yesterday_job():
     yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
     yesterday = str(yesterday)
@@ -86,14 +86,14 @@ def yesterday_job():
         res_id = ''
         for  i in sqlvalue:
             if len(res_id) == 0:
-                res_id += "'"+i['res_id']+"'"
+                res_id += "'"+str(i['res_id'])+"'"
             else:
-                res_id += ","+"'"+i['res_id']+"'"
+                res_id += ","+"'"+str(i['res_id'])+"'"
         print(res_id) 
 
         status = "no show"
         
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
         print(sql_value)
     else:
         pass
