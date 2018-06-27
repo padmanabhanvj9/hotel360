@@ -2,9 +2,9 @@ from sqlwrapper import dbget,dbput
 import json
 
 def hotel_rm_post_select_queryroomcondition(request):
-    sql = json.loads(dbget('select * from  room_management.rm_room_list \
-           join room_management.rm_room_condition on \
-           room_management.rm_room_list.rm_room = room_management.rm_room_condition.rm_room'))
+    sql = json.loads(dbget('select * from  room_management.rm_room_list  left join \
+                            room_management.rm_room_condition on room_management.rm_room_list.rm_room = \
+                            room_management.rm_room_condition.rm_room'))
     #print(sql)      
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'ReturnCode':'RRTS'},indent=4))
 def  hotel_rm_post_delete_roomcondition(request):
