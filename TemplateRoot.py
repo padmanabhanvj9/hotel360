@@ -595,7 +595,7 @@ def Updateroomlist():
 @app.route('/Hotel_Rm_Post_Update_Updateroomstatus',methods=['POST'])
 def Updateroomstatus():
    return Hotel_Rm_Post_Update_Updateroomstatus(request)
-@app.route("/Hotel_Rm_Post_Select_QueryRoomList",methods=['POST'])
+@app.route("/Hotel_Rm_Post_Select_QueryRoomList",methods=['POST','GET'])
 def QueryRoomList():
    return hotel_rm_post_select_queryroomlist(request)
 @app.route("/Hotel_Rm_Post_Select_QueryRoomStatistics",methods=['POST'])
