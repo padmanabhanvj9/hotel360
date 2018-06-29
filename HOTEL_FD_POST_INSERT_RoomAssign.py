@@ -1,4 +1,4 @@
-from sqlwrapper import gensql, dbget
+from sqlwrapper import gensql, dbget, dbput
 import json
 import datetime
 def HOTEL_FD_POST_UPDATE_RoomAssign(request):
@@ -25,7 +25,8 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         e['res_guest_status'] = "arrival"
         
         sql_value = gensql('update','reservation.res_reservation',e,a)
-        room = e.get("res_room")
+        room = e.get("Res_room")
+        print(room)
         res_status = "reserved"
         sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
        
@@ -33,7 +34,7 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         e['res_guest_status'] = "due in"
     
         sql_value = gensql('update','reservation.res_reservation',e,a)
-        room = e.get("res_room")
+        room = e.get("Res_room")
         res_status = "reserved"
         sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
        
