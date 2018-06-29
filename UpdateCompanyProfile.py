@@ -28,7 +28,7 @@ def UpdateCompanyProfile(request):
     PF_Log_Date = datetime.datetime.utcnow().date()
     print(PF_Log_Date)
     
-    PF_Log_Description = "Create "+pf_type+" Profile" + " "+data1
+    PF_Log_Description = "Create "+str(pf_type)+" Profile" + " "+str(data1)
     s = {}
     s['Emp_Id'] = '121'
     s['Emp_Firstname'] = "daisy"
