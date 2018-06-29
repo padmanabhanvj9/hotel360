@@ -213,7 +213,7 @@ CORS(app)
 def index():
    return "welcome to smartmo"
 @app.route("/Profile/UpdateIndividualProfile",methods = ['POST'])
-def CreateProfile():
+def CreateIndividualProfile():
    return UpdateIndividualProfile(request)
 
 @app.route("/Profile/UpdateCompanyProfile",methods = ['POST'])
