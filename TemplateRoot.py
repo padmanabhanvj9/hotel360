@@ -308,7 +308,7 @@ def UpdateCompanyProfile():
    return UpdateCompanyProfileRecord(request)
 
 @app.route("/Profile/UpdateIndividualProfileRecord",methods=['POST'])
-def UpdateIndividualProfile():
+def UpdateProfile():
    return UpdateIndividualProfileRecord(request)
 
 #delete
