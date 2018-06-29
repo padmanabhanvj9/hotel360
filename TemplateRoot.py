@@ -304,7 +304,7 @@ def QueryProfileFuture():
    return QueryProfileFutureRecord(request)
 
 @app.route("/Profile/UpdateCompanyProfileRecord",methods=['POST'])
-def UpdateCompanyProfile():
+def CompanyProfile():
    return UpdateCompanyProfileRecord(request)
 
 @app.route("/Profile/UpdateIndividualProfileRecord",methods=['POST'])
