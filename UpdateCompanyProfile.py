@@ -2,7 +2,7 @@
 #OutputParam: Record Inserted Successfully
 #Purpose: This service used for crate company profile
 #Date:13/03/2018
-#UpdateDate:11/06/2018
+#UpdateDate:29/06/2018
 #Author: Aravinth
 
 from sqlwrapper import gensql,dbget,dbput
@@ -42,3 +42,18 @@ def UpdateCompanyProfile(request):
     sql_value = gensql('insert','profile.pf_profile_activitylog',s)
     # finally return the value from DB_Wrapper   
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+def UpdateCompanyProfileRecord(request):
+    d = request.json
+    #print(d)
+    e = { k : v for k,v in d.items() if k in ('PF_Id')}
+    f = { k : v for k,v in d.items() if k not in ('PF_Id') if v != ''}
+    gensql('update','profile.pf_company_profile',f,e)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))    
+
+def UpdateIndividualProfileRecord(request):
+    d = request.json
+    #print(d)
+    e = { k : v for k,v in d.items() if k in ('PF_Id')}
+    f = { k : v for k,v in d.items() if k not in ('PF_Id') if v != ''}
+    gensql('update','profile.pf_individual_profile',f,e)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))    
