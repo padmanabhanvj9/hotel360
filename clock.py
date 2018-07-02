@@ -40,9 +40,9 @@ def timed_job():
         res_id = ''
         for  i in sqlvalue:
             if len(res_id) == 0:
-                res_id += "'"+i['res_id']+"'"
+                res_id += "'"+str(i['res_id'])+"'"
             else:
-                res_id += ","+"'"+i['res_id']+"'"
+                res_id += ","+"'"+str(i['res_id'])+"'"
         print(res_id) 
 
         status = "due in"
