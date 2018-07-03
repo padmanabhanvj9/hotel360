@@ -3,9 +3,9 @@ import json
 def HOTEL_RES_POST_UPDATE_UpdateReservationAlert(request):
    
     d = request.json
-    a = { k : v for k,v in d.items() if v != '' if k not in ('Res_id','Alert_id')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('Res_id','Alert_id','Res_unique_id')}
     print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('Res_id','Alert_id')}
+    e = { k : v for k,v in d.items() if k != '' if k in ('Res_id','Alert_id','Res_unique_id')}
 
 
     print(e,d)
