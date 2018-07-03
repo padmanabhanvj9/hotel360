@@ -6,8 +6,10 @@ def HOTEL_RES_POST_INSERT_CancelReservation(request):
     d = request.json
     sql_value = gensql('insert','reservation.cancel_reservation',d)
     Res_id = d.get("Res_id")
+    Res_unique_id = d.get("Res_unique_id")
     e,a = {},{}
     e['Res_id'] = Res_id
+    e['Res_unique_id'] = Res_unique_id
     a['Res_guest_status'] = "cancel"
     sql_value = gensql('update','reservation.res_reservation',a,e)
     print(sql_value)
@@ -18,7 +20,7 @@ def HOTEL_RES_POST_INSERT_CancelReservation(request):
     print(RES_Log_Date)
     res_id = e.get("Res_id")
     Emp_Id = '121'
-    Emp_Firstname = "daisy"
+    Emp_Firstname = "Daisy"
 
     select = json.loads(dbget("select * from reservation.cancel_id"))
     print(select,type(select),len(select))
@@ -40,5 +42,5 @@ def HOTEL_RES_POST_INSERT_CancelReservation(request):
     s['Res_id'] = res_id
     
     sql_value = gensql('insert','reservation.res_activity_log',s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Cancelled Successfully','cancellationNumber':cancel_id,'ReturnCode':'RCS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','cancellationNumber':cancel_id,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
