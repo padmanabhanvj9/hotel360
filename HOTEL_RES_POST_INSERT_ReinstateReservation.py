@@ -7,13 +7,12 @@ def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     s,e = {},{}
     
     res_id = d.get("res_id")
-    sql_value = dbget("select res_guest_status from reservation.res_reservation \
-                       where res_id='"+res_id+"' and res_guest_status in('cancel') ")
-    res_status = json.loads(sql_value)
+    res_unique_id = d.get("res_unique_id")
+
     #print(res_status)
     #print(res_status[0]['res_guest_status'],type(res_status[0]['res_guest_status']))
     e['res_id'] = res_id
- 
+    e['res_unique_id'] = res_unique_id
     s['res_guest_status'] = "reserved"
     
     #s['res_confnumber'] = res_confnumber[0]['res_confnumber']
@@ -26,7 +25,7 @@ def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     print(RES_Log_Date)
     res_id = e.get("res_id")
     Emp_Id = '121'
-    Emp_Firstname = "daisy"
+    Emp_Firstname = "Daisy"
     conf_number = gensql('select','reservation.res_reservation','res_confnumber',e)
     conf_number = json.loads(conf_number)
     print(type(conf_number))
@@ -44,6 +43,6 @@ def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     s['Res_id'] = res_id
     
     sql_value = gensql('insert','reservation.res_activity_log',s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation Reinstate Successfully','ConfirmationNumber':confirmation_number,'ReturnCode':'RRS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ConfirmationNumber':confirmation_number,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
 
