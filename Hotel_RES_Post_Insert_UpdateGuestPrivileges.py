@@ -6,9 +6,9 @@ def Hotel_RES_Post_Insert_UpdateGuestPrivileges(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
 def Hotel_RES_Post_Update_UpdateGuestPrivileges(request):
     d = request.json
-    a = { k : v for k,v in d.items() if v != '' if k not in ('Res_id','privileges_id')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','privileges_id','res_unique_id')}
     print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('Res_id','privileges_id')}
+    e = { k : v for k,v in d.items() if k != '' if k in ('res_id','privileges_id','res_unique_id')}
 
     print(e)
     sql_value = gensql('update','reservation.res_guest_privileges',a,e)
@@ -16,6 +16,7 @@ def Hotel_RES_Post_Update_UpdateGuestPrivileges(request):
 def Hotel_RES_Get_Select_QueryGuestPrivileges(request):
     e = {}
     e['res_id'] = request.json['res_id']
+    e['res_unique_id'] = request.json['res_unique_id']
     sql_value = gensql('select','reservation.res_guest_privileges','*',e)
     sql_value = json.loads(sql_value)
     print(sql_value)
