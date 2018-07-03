@@ -12,9 +12,9 @@ def HOTEL_RES_POST_UPDATE_UpdateReservation(request):
     a = request.json
     print(a)
     
-    d = { k : v for k,v in a.items() if v != '' if k not in ('res_id','pf_id')}
+    d = { k : v for k,v in a.items() if v != '' if k not in ('res_id','pf_id','res_unique_id')}
     print(a)
-    e = { k : v for k,v in a.items() if k != '' if k in ('res_id','pf_id')}
+    e = { k : v for k,v in a.items() if k != '' if k in ('res_id','pf_id','res_unique_id')}
     print(e)
     
     '''data = e.get('PF_Mobileno')
@@ -45,9 +45,9 @@ def updatereservation(d,e):
     RES_Log_Date = datetime.datetime.utcnow().date()
     print(RES_Log_Date)
     Emp_Id = '121'
-    Emp_Firstname = "daisy"
+    Emp_Firstname = "Daisy"
     res_id = e.get("res_id")
-    RES_Action_Type = "update reservation"
+    RES_Action_Type = "Update Reservation"
     values = d.values()
     print(values)
     RES_Description = ''
