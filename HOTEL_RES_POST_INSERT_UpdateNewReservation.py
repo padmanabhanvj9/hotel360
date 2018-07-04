@@ -51,8 +51,13 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     print(Res_id)
     update = dbput("update reservation.res_id set id = '"+str(select[0]['id']+1)+"'")
     d['Res_id'] = Res_id
-  
-    sql_value = gensql('insert','reservation.res_reservation',d)
+
+    number_of_rooms = d.get("RES_Number_Of_Rooms")
+    number_of_rooms = int(number_of_rooms)
+    print(number_of_rooms,type(number_of_rooms))
+    for number in range(number_of_rooms):
+        d['RES_Number_Of_Rooms'] = str(1)
+        sql_value = gensql('insert','reservation.res_reservation',d)
     print(d)
     data = d.get("PF_Firstname")
     number = d.get("RES_Confnumber")
@@ -62,12 +67,11 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     reservation_id = json.loads(reservation_id)
     print(reservation_id[0]['res_id'],type(reservation_id[0]['res_id']))
     reservation_id = reservation_id[0]['res_id']
-
-    print(data)
-    
+    print(reservation_id,type(reservation_id))
+    booking_count = len(str(reservation_id))
     
     RES_Action_Type = "New Reservation"
-    RES_Description = "create new reservation for " + " "+data+" " + "Confirmation Number is" + " " + number
+    RES_Description = "Reservation created successfully for" + " "+data+" "+"with Number of rooms reserved is "+" "+ str(number_of_rooms) + " "+"And the Confirmation Number is" + " " + number
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
