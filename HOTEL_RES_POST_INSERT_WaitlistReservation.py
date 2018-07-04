@@ -21,7 +21,13 @@ def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     update = dbput("update reservation.res_id set id = '"+str(select[0]['id']+1)+"'")
     d['Res_id'] = Res_id
     d['RES_Guest_Status'] = "waitlist"
-    sql_value = gensql('insert','reservation.res_reservation',d)
+    number_of_rooms = d.get("RES_Number_Of_Rooms")
+    number_of_rooms = int(number_of_rooms)
+    print(number_of_rooms,type(number_of_rooms))
+    for number in range(number_of_rooms):
+        d['RES_Number_Of_Rooms'] = str(1)
+        sql_value = gensql('insert','reservation.res_reservation',d)
+        print(sql_value)
     print(d)
  
     name = d.get("PF_Firstname")
@@ -33,9 +39,9 @@ def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     s['RES_Log_Date'] = RES_Log_Date
     s['RES_Log_Time'] = RES_Log_Time
     s['RES_Action_Type'] = "Waitlist Reservation"
-    s['RES_Description'] = "Waitlist Reservation for" +" "+ name
+    s['RES_Description'] = "Reservation for" +" "+ name+" "+"with number of rooms"+" "+str(number_of_rooms)+" "+" is in waitlist"
     s['Res_id'] = res_id
     
     sql_value = gensql('insert','reservation.res_activity_log',s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation should be Waitlist','ReturnCode':'RW'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Resord Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
