@@ -594,7 +594,7 @@ def futurereservation():
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
 def insertqueue():
     return HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request)
-@app.route("/HOTEL_FD_GET_SELECT_QueryQueueReservation",methods=['GET'])
+@app.route("/HOTEL_FD_GET_SELECT_QueryQueueReservation",methods=['POST'])
 def queryqueue():
     return HOTEL_FD_GET_SELECT_QueryQueueReservation()
 @app.route("/HOTEL_FD_POST_UPDATE_RoomAssign",methods=['POST'])
