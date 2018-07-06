@@ -10,21 +10,21 @@ def timed_job():
     tomorrow = str(tomorrow)
     print(tomorrow)
     
-    sql_value = dbget("select res_id from reservation.res_reservation where res_depature='"+tomorrow+"'")
+    sql_value = dbget("select res_unique_id from reservation.res_reservation where res_depature='"+tomorrow+"'")
     sqlvalue = json.loads(sql_value)
     print("sqlval",sqlvalue)
     if len(sqlvalue) != 0:
-        res_id = ''
+        res_unique_id = ''
         for  i in sqlvalue:
-            if len(res_id) == 0:
-                res_id += "'"+str(i['res_id'])+"'"
+            if len(res_unique_id) == 0:
+                res_unique_id += "'"+str(i['res_unique_id'])+"'"
             else:
-                res_id += ","+"'"+str(i['res_id'])+"'"
-        print(res_id) 
+                res_unique_id += ","+"'"+str(i['res_unique_id'])+"'"
+        print(res_unique_id) 
 
         status = "due out"
        
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_unique_id)+")")
 
         print('This job is run every three minutes.')
     else:
@@ -33,21 +33,21 @@ def timed_job():
     tomorrow = str(tomorrow)
     print(tomorrow)
     
-    sql_value = dbget("select res_id from reservation.res_reservation where res_arrival='"+tomorrow+"'")
+    sql_value = dbget("select res_unique_id from reservation.res_reservation where res_arrival='"+tomorrow+"'")
     sqlvalue = json.loads(sql_value)
     print("sqlval1",sqlvalue)
     if (len(sqlvalue) != 0):
         res_id = ''
         for  i in sqlvalue:
-            if len(res_id) == 0:
-                res_id += "'"+str(i['res_id'])+"'"
+            if len(res_unique_id) == 0:
+                res_unique_id += "'"+str(i['res_unique_id'])+"'"
             else:
-                res_id += ","+"'"+str(i['res_id'])+"'"
-        print(res_id) 
+                res_unique_id += ","+"'"+str(i['res_unique_id'])+"'"
+        print(res_unique_id) 
 
         status = "due in"
         
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_unique_id)+")")
         print(sql_value)
     else:
         pass
@@ -56,21 +56,21 @@ def timed_job():
     today = str(today)
     print(today)
     
-    sql_value = dbget("select res_id from reservation.res_reservation where res_arrival='"+today+"'")
+    sql_value = dbget("select res_unique_id from reservation.res_reservation where res_arrival='"+today+"'")
     sqlvalue = json.loads(sql_value)
     print("sqlval2",sqlvalue)
     if (len(sqlvalue) != 0):
         res_id = ''
         for  i in sqlvalue:
-            if len(res_id) == 0:
-                res_id += "'"+str(i['res_id'])+"'"
+            if len(res_unique_id) == 0:
+                res_unique_id += "'"+str(i['res_unique_id'])+"'"
             else:
-                res_id += ","+"'"+str(i['res_id'])+"'"
-        print(res_id) 
+                res_unique_id += ","+"'"+str(i['res_unique_id'])+"'"
+        print(res_unique_id) 
 
         status = "arrival"
         
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_unique_id)+")")
         print(sql_value)
     else:
         pass
@@ -79,21 +79,21 @@ def yesterday_job():
     yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
     yesterday = str(yesterday)
     print(yesterday)
-    sql_value = dbget("select res_id from reservation.res_reservation where res_arrival='"+yesterday+"' and res_guest_status in ('arrival')")
+    sql_value = dbget("select res_unique_id from reservation.res_reservation where res_arrival='"+yesterday+"' and res_guest_status in ('arrival')")
     sqlvalue = json.loads(sql_value)
     print("sqlval3",sqlvalue)
     if (len(sqlvalue) != 0):
         res_id = ''
         for  i in sqlvalue:
-            if len(res_id) == 0:
-                res_id += "'"+str(i['res_id'])+"'"
+            if len(res_unique_id) == 0:
+                res_unique_id += "'"+str(i['res_unique_id'])+"'"
             else:
-                res_id += ","+"'"+str(i['res_id'])+"'"
-        print(res_id) 
+                res_unique_id += ","+"'"+str(i['res_unique_id'])+"'"
+        print(res_unique_id) 
 
         status = "no show"
         
-        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_id)+")")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id in ("+str(res_unique_id)+")")
         print(sql_value)
     else:
         pass
