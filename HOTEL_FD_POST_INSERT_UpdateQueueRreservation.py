@@ -6,6 +6,7 @@ def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
     d = request.json
     res_id = d.get("Res_id")
     rm_room = d.get("rm_room")
+    unique_id = d.get("Res_unique_id")
     print(rm_room,type(rm_room))
     rm_room  = rm_room.split(',')
     print(rm_room,type(rm_room))
@@ -48,7 +49,8 @@ def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
     s['rm_room_class'] = room_class
     s['rm_fo_status'] = fo_status
     s['rm_room_status'] = room_status
+    s['res_unique_id'] = unique_id
     sql = gensql('insert','room_management.rm_queue_room',s)
     print(sql)
 
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation on Queue Successfully','QueueNumber':number,'ReturnCode':'RQS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','QueueNumber':number,'ReturnCode':'RUS'}, sort_keys=True, indent=4))
