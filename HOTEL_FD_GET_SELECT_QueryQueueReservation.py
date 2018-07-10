@@ -1,6 +1,6 @@
 from sqlwrapper import gensql, dbget
 import json
-def HOTEL_FD_GET_SELECT_QueryQueueReservation(request):
+def HOTEL_FD_POST_SELECT_QueryQueueReservation(request):
     sql = json.loads(dbget("select * from reservation.res_reservation join   room_management.rm_queue_room on \
                             reservation.res_reservation.res_id = room_management.rm_queue_room.res_id"))
     #print(sql,type(sql),len(sql))
@@ -34,5 +34,5 @@ def HOTEL_FD_GET_SELECT_QueryQueueReservation(request):
         #print(j.values())
     #print("total",b)    
       
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'TotalRoomsinQueue':k,'ReturnCode':'RRTS'},indent=4))  
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'TotalRoomsinQueue':b,'overview':k,'ReturnCode':'RRTS'},indent=4))  
     #return("hi")
