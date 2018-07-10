@@ -149,7 +149,7 @@ from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservatio
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
-from HOTEL_FD_GET_SELECT_QueryQueueReservation import HOTEL_FD_GET_SELECT_QueryQueueReservation
+from HOTEL_FD_GET_SELECT_QueryQueueReservation import HOTEL_FD_POST_SELECT_QueryQueueReservation
 from HOTEL_FD_POST_INSERT_RoomAssign import HOTEL_FD_POST_UPDATE_RoomAssign
 from HOTEL_FD_GET_SELECT_QueryTracesActivityLog import HOTEL_FD_GET_SELECT_QueryTracesActivityLog
 from HOTEL_FD_POST_UPDATE_CheckinGuestArrivals import HOTEL_FD_POST_UPDATE_CheckinGuestArrivals
@@ -594,9 +594,9 @@ def futurereservation():
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
 def insertqueue():
     return HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request)
-@app.route("/HOTEL_FD_GET_SELECT_QueryQueueReservation",methods=['POST'])
+@app.route("/HOTEL_FD_POST_SELECT_QueryQueueReservation",methods=['POST'])
 def queryqueue():
-    return HOTEL_FD_GET_SELECT_QueryQueueReservation(request)
+    return HOTEL_FD_POST_SELECT_QueryQueueReservation(request)
 @app.route("/HOTEL_FD_POST_UPDATE_RoomAssign",methods=['POST'])
 def roomassignGUETS():
     return HOTEL_FD_POST_UPDATE_RoomAssign(request)
