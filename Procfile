@@ -79,5 +79,9 @@ worker: gunicorn Hotel_Rm_Post_Select_QueryRoomList.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryroomStatistics.py
 worker: gunicorn Hotel_Rm_Post_Select_QueryRoomDiscrepancies.py
 worker: gunicorn Hotel_Rm_Post_Insert_UpdateGuestServiceStatus.py
-worker: HOTEL_FD_POST_SELECT_QueryRoomAssignment.py
+worker: gunicorn HOTEL_FD_POST_SELECT_QueryRoomAssignment.py
+worker: gunicorn HOTEL_REVENUE_MANAGEMENT_POST_SELECT.py
+worker: gunicorn HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY.py
+worker: gunicorn HOTEL_REM_POST_SELECT_QueryRatecode.py
+worker: gunicorn HOTEL_REM_POST_INSERT_UpdateRatecodeSetup.py
 clock: python clock.py
