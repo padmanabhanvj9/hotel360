@@ -204,6 +204,21 @@ from RoomManagementDropdownInsert import insert_room_service_status
 from RoomManagementDropdownInsert import insert_mainteanance_reason
 from RoomManagementDropdownInsert import insert_floor
 #<------------------------------------------------------------------->
+#<----------------------REVENUE MANAGEMENT--------------------------->
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratecategory
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratecode
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import market
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import sourcetab
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import crrencytab
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import rateselect 
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import ratecodeselect 
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import marketselect 
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import sourceselect 
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import currencyselect
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import negotiated
+from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratedetailss
+from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_INSERT_UpdateRatecodeSetup
+from HOTEL_REM_POST_SELECT_QueryRatecode import HOTEL_REM_POST_SELECT_QueryRatecode
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
@@ -754,6 +769,64 @@ def insert_floordd():
 def amazonlex():
    return AMAZON_RESERVATION_LAMBDA_LEX(request)
 #<----------------------------------------------->
+#<----------------------Revenue management------------------>
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY",methods=['POST'])
+def revenuerate():
+    return ratecategory(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECODE",methods=['POST'])
+def ratecodee():
+    return ratecode(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_MARKET",methods=['POST'])
+def markete():
+    return market(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_SOURCE",methods=['POST'])
+def source():
+    return sourcetab(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_CURRENCY",methods=['POST'])
+def currency():
+    return crrencytab(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_SELECT_RATECATEGORY",methods=['POST'])
+def revenuerateselect():
+    return rateselect(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_SELECT_RATECODE",methods=['POST'])
+def ratecodesel():
+    return ratecodeselect(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_SELECT_MARKET_SELECT",methods=['POST'])
+def marksel():
+    return marketselect(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_SELECT_MARKET_SOURCE_SELECT",methods=['POST'])
+def sourcesel():
+    return sourceselect(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_SELECT_MARKET_CURRENCY_SELECT",methods=['POST'])
+def currencysource():
+    return currencyselect(request)
+  
+@app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_NEGOTIATED",methods=['POST'])
+def negotiatedd():
+    return negotiated(request)
+
+@app.route("/HOTEL_CAH_POST_INSERT_UPDATERATECODESETUP",methods=['POST'])
+def ratecodesetupcash():
+    return HOTEL_CAH_POST_INSERT_UPDATERATECODESETUP(request)
+
+@app.route("/HOTEL_REM_POST_INSERT_RATE_DETAILS",methods=['POST'])
+def ratedet():
+    return ratedetailss(request)
+@app.route("/HOTEL_REM_POST_INSERT_UpdateRatecodeSetup",methods=['POST'])
+def HOTEL_REM_POST_INSERT_UpdateRatecodeSetupsas():
+    return HOTEL_REM_POST_INSERT_UpdateRatecodeSetup(request)
+@app.route("/HOTEL_REM_POST_SELECT_QueryRatecode",methods=['POST'])
+def HOTEL_REM_POST_SELECT_QueryRatecodeds():
+  return HOTEL_REM_POST_SELECT_QueryRatecode(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
