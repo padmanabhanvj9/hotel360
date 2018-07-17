@@ -219,6 +219,26 @@ from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import negotiated
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratedetailss
 from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_INSERT_UpdateRatecodeSetup
 from HOTEL_REM_POST_SELECT_QueryRatecode import HOTEL_REM_POST_SELECT_QueryRatecode
+#<----------------------------------------Cashiering-------------------------->
+from HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING import HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING
+from HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING import HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING
+from HOTEL_CAH_GET_SELECT_QUERYGUESTBILLING import HOTEL_CAH_GET_SELECT_QUERYGUESTBILLING
+from HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT import HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT
+from HOTEL_CAH_POST_POSTING_HISTORY_LOG import HOTEL_CAH_POST_POSTING_HISTORY_LOG
+from HOTEL_CAH_POST_FOLIO_HISTORY import HOTEL_CAH_POST_FOLIO_HISTORY
+from HOTEL_CAH_POST_UPDATE_TransfertoAnotherWindow import HOTEL_CAH_POST_UPDATE_TransfertoAnotherWindow
+from HOTEL_CASH_BILLING_CODE_INSERT import HOTEL_CASH_BILLING_CODE_INSERT
+from HOTEL_CASH_BILLING_CODE_SELECT import HOTEL_CASH_BILLING_CODE_SELECT
+from HOTEL_CASH_INSERT_BILLING_CURRENCY import HOTEL_CASH_INSERT_BILLING_CURRENCY
+from HOTEL_CASH_SELECT_POSTING_WINDOW import HOTEL_CASH_SELECT_POSTING_WINDOW
+from HOTEL_CASH_RESERVATION_BALANCE import HOTEL_CASH_RESERVATION_BALANCE
+from HOTEL_CASH_RESERVATION_STATUS import HOTEL_CASH_RESERVATION_STATUS
+from HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom import HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom
+
+from HOTEL_CAH_POST_CASH_CHECK_OUT import HOTEL_CAH_POST_CASH_CHECK_OUT
+from HOTEL_CAH_POST_POSTING_PAYMENT import HOTEL_CAH_POST_POSTING_PAYMENT
+from HOTEL_CAH_POST_POSTING_PAYMENT_INSERT import HOTEL_CAH_POST_POSTING_PAYMENT_INSERT
+#<-------------------------------------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
@@ -827,6 +847,85 @@ def HOTEL_REM_POST_INSERT_UpdateRatecodeSetupsas():
 @app.route("/HOTEL_REM_POST_SELECT_QueryRatecode",methods=['POST'])
 def HOTEL_REM_POST_SELECT_QueryRatecodeds():
   return HOTEL_REM_POST_SELECT_QueryRatecode(request)
+#<---------------------------------------CASHIER-------------------------------------------------->
+
+@app.route("/HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING",methods=['POST'])
+def insertguestbillingcash():
+  return HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request)
+
+@app.route("/HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING",methods=['POST'])
+def updateguestbillingcharges():
+   return HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING(request)
+
+@app.route("/HOTEL_CAH_GET_SELECT_QUERYGUESTBILLING",methods=['POST'])
+def querybilling():
+  return HOTEL_CAH_GET_SELECT_QUERYGUESTBILLING(request)
+
+@app.route("/HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT",methods=['POST'])
+def updatepostingcash():
+    return HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request)
+   
+@app.route("/HOTEL_CAH_POST_POSTING_HISTORY_LOG",methods=['POST'])
+def historylog():
+    return HOTEL_CAH_POST_POSTING_HISTORY_LOG(request)
+
+@app.route("/HOTEL_CAH_POST_FOLIO_HISTORY",methods=['POST'])
+def folio():
+    return HOTEL_CAH_POST_FOLIO_HISTORY(request)
+
+@app.route("/HOTEL_CAH_POST_UPDATE_TransfertoAnotherWindow",methods=['POST'])
+def transfer():
+    return HOTEL_CAH_POST_UPDATE_TransfertoAnotherWindow(request)
+
+@app.route("/HOTEL_CASH_BILLING_CODE_INSERT",methods=['POST'])
+def billing():
+    return HOTEL_CASH_BILLING_CODE_INSERT(request)
+
+@app.route("/HOTEL_CASH_BILLING_CODE_SELECT",methods=['POST'])
+def billingcode():
+    return HOTEL_CASH_BILLING_CODE_SELECT(request)
+
+@app.route("/HOTEL_CASH_INSERT_BILLING_CURRENCY",methods=['POST'])
+def billingcurrency():
+    return HOTEL_CASH_INSERT_BILLING_CURRENCY(request)
+
+@app.route("/HOTEL_CASH_SELECT_POSTING_WINDOW",methods=['POST'])
+def postingwindow():
+    return HOTEL_CASH_SELECT_POSTING_WINDOW(request)
+
+@app.route("/HOTEL_CASH_RESERVATION_BALANCE",methods=['POST'])
+def reservation_balance():
+     return HOTEL_CASH_RESERVATION_BALANCE(request)
+
+@app.route("/HOTEL_CASH_RESERVATION_STATUS",methods=['POST'])
+def reservationstatus():
+    return HOTEL_CASH_RESERVATION_STATUS(request)
+
+@app.route("/HOTEL_CAH_POST_CASH_CHECK_OUT",methods=['POST'])
+def cashcheckout():
+    return HOTEL_CAH_POST_CASH_CHECK_OUT(request)
+
+@app.route("/HOTEL_CAH_POST_POSTING_PAYMENT",methods=['POST'])
+def posting():
+    return HOTEL_CAH_POST_POSTING_PAYMENT(request)
+
+@app.route("/HOTEL_CAH_POST_POSTING_PAYMENT_INSERT",methods=['POST'])
+def paymentinsert():
+    return HOTEL_CAH_POST_POSTING_PAYMENT_INSERT(request)
+
+@app.route("/HOTEL_CAH_POST_POSTING_CHANGES_HISTORY_LOG",methods=['POST'])
+def changeshistory():
+    return HOTEL_CAH_POST_POSTING_CHANGES_HISTORY_LOG(request)
+
+@app.route("/HOTEL_CAH_POST_POSTING_ORIGINAL_HISTOR_LOG",methods=['POST'])
+def originalhistory():
+    return HOTEL_CAH_POST_POSTING_ORIGINAL_HISTOR_LOG(request)
+
+@app.route("/HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom",methods=['POST'])
+def anotherroom():
+    return HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom(request)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
