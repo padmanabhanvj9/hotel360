@@ -661,7 +661,7 @@ def QueryRoomStatistics():
 @app.route('/Hotel_Rm_Post_Insert_Updateroomcondition',methods=['POST'])
 def Updateroomcondition():
    return hotel_rm_post_insert_updateroomcondition(request)
-@app.route("/Hotel_Rm_Post_Select_QueryRoomCondition",methods=['POST'])
+@app.route("/Hotel_Rm_Post_Select_QueryRoomCondition",methods=['POST','GET'])
 def QueryRoomCondition():
    return hotel_rm_post_select_queryroomcondition(request)
 @app.route("/Hotel_Rm_Post_Delete_RoomCondition",methods=['POST'])
