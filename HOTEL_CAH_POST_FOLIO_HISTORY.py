@@ -6,7 +6,10 @@ import datetime
 
 def HOTEL_CAH_POST_FOLIO_HISTORY(request):
     
-    s = json.loads(dbget("SELECT  cashiering.billing_post.res_id,post_id, posting_amount, posting_date, post_code_id, arrangement_code, checkno, posting_supplement, posting_reference, posting_quantity, total_posting,pf_firstname,cashiering.posting_window.posting_window_number FROM cashiering.billing_post inner join reservation.res_reservation  on cashiering.billing_post.res_id = reservation.res_reservation.res_id inner join cashiering.posting_window on cashiering.billing_post.post_window_id = cashiering.posting_window.posting_window_id"))
+    s = json.loads(dbget("select cashiering.billing_post.*, cashiering.reservation_folio.*,reservation.res_reservation.pf_firstname \
+                          from cashiering.reservation_folio join cashiering.billing_post \
+                          on billing_post.folio_no = reservation_folio.folio_no join reservation.res_reservation on \
+                          reservation.res_reservation.res_id = reservation_folio.res_id"))
     
     print(s)
 
