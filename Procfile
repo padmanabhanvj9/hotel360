@@ -104,4 +104,13 @@ worker: gunicorn HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING.py
 worker: gunicorn HOTEL_CAH_POST_FOLIO_HISTORY.py
 worker: gunicorn HOTEL_CAH_POST_CASH_CHECK_OUT.py
 worker: gunicorn HOTEL_CAH_GET_SELECT_QUERYGUESTBILLING.py
+worker: gunicorn HOTEL_BBL_GET_SELECT_BusinessBlockSearch.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_Business_Block_Notes.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_BusinessBlock.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_BusinessBlockDefinite.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_GroupCancel.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_GroupReservation.py
+worker: gunicorn HOTEL_BBL_POST_SELECT_Business_Block_activitylog.py
+worker: gunicorn HOTEL_BBL_POST_SELECT_QueryGroupCancel.py
+worker: gunicorn HOTEL_BBL_POST_UPDATE_Business_Block_Update.py
 clock: python clock.py
