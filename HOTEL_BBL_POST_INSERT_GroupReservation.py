@@ -28,7 +28,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
                     on reservation.origin.id = business_block.business_block_definite.origin_id where business_block.business_block_definite.block_id = '"+block_id+"'"))
     print(sql,int(len(sql[0])/2))
     sqlva = json.loads(dbget("select revenue_management.ratecode.rate_code from business_block.block_room\
-                              join revenue_management.ratecode on revenue_management.ratecode.ratecode_id  = block_room.ratecode_id where business_block.block_room block_id = '"+block_id+"'"))
+                              join revenue_management.ratecode on revenue_management.ratecode.ratecode_id  = block_room.ratecode_id where business_block.block_room.block_id = '"+block_id+"'"))
     ratecode = sqlva[0]['rate_code']
     market = psql[0]['marketgroup_description']
     source = psql[0]['sourcedescription']
