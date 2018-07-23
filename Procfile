@@ -113,4 +113,5 @@ worker: gunicorn HOTEL_BBL_POST_INSERT_GroupReservation.py
 worker: gunicorn HOTEL_BBL_POST_SELECT_Business_Block_activitylog.py
 worker: gunicorn HOTEL_BBL_POST_SELECT_QueryGroupCancel.py
 worker: gunicorn HOTEL_BBL_POST_UPDATE_Business_Block_Update.py
+worker: gunicorn HOTEL_CAH_GET_SELECT_QUERYINSHOUSERECORD.py
 clock: python clock.py
