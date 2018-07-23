@@ -6,6 +6,7 @@ import json
 
 def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     d = request.json
+    d = { k : v for k,v in d.items() if  v != ''}
     PF_Mobileno = str(d.get("PF_Mobileno"))
     print(PF_Mobileno)
     RES_Arrival = str(d.get("RES_Arrival"))
