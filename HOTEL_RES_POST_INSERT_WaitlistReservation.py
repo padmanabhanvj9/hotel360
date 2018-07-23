@@ -4,6 +4,7 @@ import json
 
 def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     d = request.json
+    d = { k : v for k,v in d.items() if  v != ''}
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
     print(RES_Log_Time)
