@@ -239,6 +239,17 @@ from HOTEL_CAH_POST_CASH_CHECK_OUT import HOTEL_CAH_POST_CASH_CHECK_OUT
 from HOTEL_CAH_POST_POSTING_PAYMENT import HOTEL_CAH_POST_POSTING_PAYMENT
 from HOTEL_CAH_POST_POSTING_PAYMENT_INSERT import HOTEL_CAH_POST_POSTING_PAYMENT_INSERT
 #<-------------------------------------------------------------------------------------------------->
+#<-----------------------Business Block---------------------------------------------------------->
+from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_INSERT_BusinessBlock
+from HOTEL_BBL_POST_UPDATE_Business_Block_Update import HOTEL_BBL_POST_UPDATE_Business_Block_Update
+from HOTEL_BBL_POST_INSERT_Business_Block_Notes import HOTEL_BBL_POST_INSERT_Business_Block_Notes
+from HOTEL_BBL_POST_INSERT_GroupCancel import HOTEL_BBL_POST_INSERT_GroupCancel
+from HOTEL_BBL_GET_SELECT_BusinessBlockSearch import HOTEL_BBL_GET_SELECT_BusinessBlockSearch
+from HOTEL_BBL_POST_SELECT_Business_Block_activitylog import HOTEL_BBL_POST_SELECT_Business_Block_activitylog
+from HOTEL_BBL_POST_SELECT_QueryGroupCancel import HOTEL_BBL_POST_SELECT_QueryGroupCancel
+from HOTEL_BBL_POST_INSERT_BusinessBlockDefinite import HOTEL_BBL_POST_INSERT_BusinessBlockDefinite
+from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_INSERT_GroupReservation
+#<--------------------------------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
@@ -925,7 +936,48 @@ def originalhistory():
 @app.route("/HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom",methods=['POST'])
 def anotherroom():
     return HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom(request)
+#<-------------------------Business Block------------------------------->
+  
+@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['POST'])
+def inquiryprocess():
+    return HOTEL_BBL_POST_INSERT_BusinessBlock(request)
+  
 
+@app.route("/HOTEL_BBL_POST_UPDATE_Business_Block_Update",methods=['POST'])
+def businessupdate():
+    return HOTEL_BBL_POST_UPDATE_Business_Block_Update(request)
+
+
+@app.route("/HOTEL_BBL_POST_INSERT_Business_Block_Notes",methods=['POST'])
+def blocknotes():
+    return HOTEL_BBL_POST_INSERT_Business_Block_Notes(request)
+
+
+@app.route("/HOTEL_BBL_POST_INSERT_GroupCancel",methods=['POST'])
+def groupcancel():
+    return HOTEL_BBL_POST_INSERT_GroupCancel(request)
+
+
+@app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockSearch",methods=['POST'])
+def blocksearch():
+    return HOTEL_BBL_GET_SELECT_BusinessBlockSearch(request)
+
+
+@app.route("/HOTEL_BBL_POST_SELECT_Business_Block_activitylog",methods=['POST'])
+def activitylog():
+    return HOTEL_BBL_POST_SELECT_Business_Block_activitylog(request)
+
+@app.route("/HOTEL_BBL_POST_SELECT_QueryGroupCancel",methods=['POST'])
+def querygroupcancel():
+    return HOTEL_BBL_POST_SELECT_QueryGroupCancel(request)
+
+
+@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlockDefinite",methods = ['POST'])
+def businessblockdefinite():
+    return HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request)
+@app.route("/HOTEL_BBL_POST_INSERT_GroupReservations",methods = ['POST'])
+def groupreservation():
+    return HOTEL_BBL_POST_INSERT_GroupReservation(request)
 
 if __name__ == "__main__":
     app.run(debug=True)
