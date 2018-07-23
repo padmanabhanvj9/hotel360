@@ -234,10 +234,10 @@ from HOTEL_CASH_SELECT_POSTING_WINDOW import HOTEL_CASH_SELECT_POSTING_WINDOW
 from HOTEL_CASH_RESERVATION_BALANCE import HOTEL_CASH_RESERVATION_BALANCE
 from HOTEL_CASH_RESERVATION_STATUS import HOTEL_CASH_RESERVATION_STATUS
 from HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom import HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom
-
 from HOTEL_CAH_POST_CASH_CHECK_OUT import HOTEL_CAH_POST_CASH_CHECK_OUT
 from HOTEL_CAH_POST_POSTING_PAYMENT import HOTEL_CAH_POST_POSTING_PAYMENT
 from HOTEL_CAH_POST_POSTING_PAYMENT_INSERT import HOTEL_CAH_POST_POSTING_PAYMENT_INSERT
+from HOTEL_CAH_GET_SELECT_QUERYINSHOUSERECORD import HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD
 #<-------------------------------------------------------------------------------------------------->
 #<-----------------------Business Block---------------------------------------------------------->
 from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_INSERT_BusinessBlock
@@ -936,6 +936,11 @@ def originalhistory():
 @app.route("/HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom",methods=['POST'])
 def anotherroom():
     return HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom(request)
+   
+@app.route("/HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD",methods=['POST'])
+def QUERYINHOUSERECORD():
+    return HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request)
+  
 #<-------------------------Business Block------------------------------->
   
 @app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['POST'])
