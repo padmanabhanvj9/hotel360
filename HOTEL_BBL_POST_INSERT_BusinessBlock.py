@@ -19,6 +19,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlock(request):
     print(psql)
     d = request.json
     E = d['Inquiry']
+    E = { k : v for k,v in E.items() if  v != ''} 
     print(E)
     E['block_id'] = count
     random_no = (random.randint(1000000000,9999999999))
