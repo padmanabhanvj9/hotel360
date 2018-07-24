@@ -102,5 +102,11 @@ def profilepreferencevalue():
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
+def Title():
+
+    sql_value = gensql('select','profile.title','*')
+    result = json.loads(sql_value)
+    print(result)
+    return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
 
