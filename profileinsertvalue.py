@@ -104,4 +104,11 @@ def profilepreferencevalue_insert(request):
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
+def Title_insert(request):
+    d = request.json
+    sql_value = gensql('insert','profile.title',d)
+    
+    print(sql_value)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    
 
