@@ -22,7 +22,7 @@ def HOTEL_BBL_POST_INSERT_Business_Block_Notes(request):
     s['time'] = RES_Log_Time
     s['block_id'] = block_id
     s['action_type_id'] = "Business Block notes"
-    s['description'] = "Business Block notes for"+" "+str(sqlvalue[0]['block_name'])
+    s['description'] = "Business Block notes for"+" "+str(block_id)
     gensql('insert','business_block.business_block_activity_log',s)
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
 
