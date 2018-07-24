@@ -937,7 +937,7 @@ def originalhistory():
 def anotherroom():
     return HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom(request)
    
-@app.route("/HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD",methods=['POST'])
+@app.route("/HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD",methods=['POST','GET'])
 def QUERYINHOUSERECORD():
     return HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request)
   
