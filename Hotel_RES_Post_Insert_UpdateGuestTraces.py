@@ -25,26 +25,24 @@ def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
 
 def Hotel_RES_Post_Update_UpdateGuestTraces(request):
-    e = request.json
+    d = request.json
     #todaydate = datetime.datetime.utcnow().date()
     #print(todaydate)
-    RES_Log_Date = datetime.utcnow().date()
-    print(RES_Log_Date)
-    d = {}
-    d['resloved_on'] = RES_Log_Date
-    d['resloved_by'] = "Daisy"
+
     print(d)
-    #a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','traces_id')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','res_unique_id','traces_id')}
     #print(a)
-    #e = { k : v for k,v in d.items() if k != '' if k in ('res_id','traces_id')}
+    e = { k : v for k,v in d.items() if k != '' if k in ('res_id','res_unique_id','traces_id')}
     #print(e)
-    sql_value = gensql('update','reservation.res_traces',d,e)
+    sql_value = gensql('update','reservation.res_traces',a,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
 def Hotel_RES_Get_Select_QueryGuestTraces():
 
     sql_value = json.loads(dbget("select * from reservation.res_reservation join reservation.res_traces on \
-                           reservation.res_reservation.res_id = reservation.res_traces.res_id") )
+                           reservation.res_reservation.res_unique_id = reservation.res_traces.res_unique_id") )
     #sql_value = json.loads(sql_value)
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+
+
