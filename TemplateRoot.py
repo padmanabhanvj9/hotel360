@@ -428,7 +428,7 @@ def tiltledf():
 
 @app.route("/Profile/Title_insert",methods=['POST'])
 def tiltledSDFDf():
-   return Title_insert()
+   return Title_insert(request)
 #<----------------------------------------------------------->
 
 #</----------------reservation route--------->
