@@ -55,6 +55,7 @@ from profilecity import profileratecode
 from profilecity import profilenotetype
 from profilecity import profilepreferencegroup
 from profilecity import profilepreferencevalue
+from profilecity import Title
 #dropdown insert
 from profileinsertvalue import profilecity_insert
 from profileinsertvalue import profilelanguage_insert
@@ -70,6 +71,7 @@ from profileinsertvalue import profileratecode_insert
 from profileinsertvalue import profilenotetype_insert
 from profileinsertvalue import profilepreferencegroup_insert
 from profileinsertvalue import profilepreferencevalue_insert
+from profileinsertvalue import Title_insert
 
 #</------profile webservice-------------------/>
 
@@ -420,6 +422,13 @@ def profilepreferencegroupvalue():
 @app.route("/Profile/profilepreferencevalue",methods=['GET'])
 def profilepreferencevalues():
    return profilepreferencevalue()
+@app.route("/Profile/Title",methods=['GET'])
+def tiltledf():
+   return Title()
+
+@app.route("/Profile/Title_insert",methods=['POST'])
+def tiltledSDFDf():
+   return Title_insert()
 #<----------------------------------------------------------->
 
 #</----------------reservation route--------->
