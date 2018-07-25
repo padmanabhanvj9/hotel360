@@ -14,7 +14,7 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
         profile_data = json.loads(dbget("select pf_account from profile.pf_company_profile where pf_id='cpy101'"))
         res_data[0]['company'] = profile_data[0]['pf_account']
     #print(res_data)    
-    billing_data = json.loads(dbget("select billing_post.* \
+    billing_data = json.loads(dbget("select billing_post.*,billing_code.* \
                           from cashiering.billing_post  join cashiering.billing_code on cashiering.billing_post.post_code_id = \
                           cashiering.billing_code.posting_code_id \
                           where cashiering.billing_post.res_id='"+d['res_id']+"' and \
