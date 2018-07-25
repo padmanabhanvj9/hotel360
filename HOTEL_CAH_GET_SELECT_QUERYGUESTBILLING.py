@@ -10,9 +10,13 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
                           res_adults, res_room_type,pf_id,res_guest_balance',d))
     #print(res_data)
     if res_data[0]['pf_id'][0:3] == 'cpy':
-        #print(res_data[0]['pf_id'])
-        profile_data = json.loads(dbget("select pf_account from profile.pf_company_profile where pf_id='cpy101'"))
+        #print("if")
+        profile_data = json.loads(dbget("select pf_account from profile.pf_company_profile where pf_id='"+res_data[0]['pf_id']+"'"))
+        #print(profile_data)
         res_data[0]['company'] = profile_data[0]['pf_account']
+    else:
+        #print("else")
+        res_data[0]['company'] = ''
     #print(res_data)    
     billing_data = json.loads(dbget("select billing_post.*,billing_code.* \
                           from cashiering.billing_post  join cashiering.billing_code on cashiering.billing_post.post_code_id = \
