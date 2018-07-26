@@ -63,3 +63,8 @@ def HOTEL_BBL_POST_INSERT_BusinessBlock(request):
     gensql('insert','business_block.business_block_activity_log',s)
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
 
+def HOTEL_BBL_POST_SELECT_QueryInquiryGrid(request):
+    d = request.json
+    sql = json.loads(gensql('select','business_block.inquiry_grid','*',d))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql  ,'ReturnCode':'RRTS'},indent=4))
+   
