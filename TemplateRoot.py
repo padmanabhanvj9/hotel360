@@ -953,9 +953,9 @@ def QUERYINHOUSERECORD():
   
 #<-------------------------Business Block------------------------------->
   
-@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['GET'])
+@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['POST'])
 def inquiryprocess():
-    return HOTEL_BBL_POST_INSERT_BusinessBlock()
+    return HOTEL_BBL_POST_INSERT_BusinessBlock(request)
   
 
 @app.route("/HOTEL_BBL_POST_UPDATE_Business_Block_Update",methods=['POST'])
@@ -973,9 +973,9 @@ def groupcancel():
     return HOTEL_BBL_POST_INSERT_GroupCancel(request)
 
 
-@app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockSearch",methods=['POST'])
+@app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockSearch",methods=['GET'])
 def blocksearch():
-    return HOTEL_BBL_GET_SELECT_BusinessBlockSearch(request)
+    return HOTEL_BBL_GET_SELECT_BusinessBlockSearch()
 
 
 @app.route("/HOTEL_BBL_POST_SELECT_Business_Block_activitylog",methods=['POST'])
