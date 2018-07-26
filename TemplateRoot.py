@@ -973,9 +973,9 @@ def groupcancel():
     return HOTEL_BBL_POST_INSERT_GroupCancel(request)
 
 
-@app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockSearch",methods=['GET'])
+@app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockSearch",methods=['POST'])
 def blocksearch():
-    return HOTEL_BBL_GET_SELECT_BusinessBlockSearch()
+    return HOTEL_BBL_GET_SELECT_BusinessBlockSearch(request)
 
 
 @app.route("/HOTEL_BBL_POST_SELECT_Business_Block_activitylog",methods=['POST'])
