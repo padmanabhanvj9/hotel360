@@ -4,7 +4,7 @@ import datetime
 
 def HOTEL_BBL_GET_SELECT_BusinessBlockSearch(request):
 
-    s = json.loads(dbget("select business_block.*,business_block_definite.*, inquiry_grid.*, block_room.*, \
+    s = json.loads(dbget("select business_block.*,business_block_definite.*,  block_room.*, \
                  block_business_details.*, block_catering.*,block_cancel_catering.*, \
                  roomtype_one,room_management.room_type.type typeone ,roomtype_two ,(select room_management.room_type.type from room_management.room_type where room_management.room_type.id = business_block.business_block.roomtype_two) as typetwo,roomtype_three,(select room_management.room_type.type from room_management.room_type where room_management.room_type.id = business_block.business_block.roomtype_three) as typethree ,\
                 reservation.market.marketgroup_description,\
@@ -16,7 +16,6 @@ def HOTEL_BBL_GET_SELECT_BusinessBlockSearch(request):
                 catering_reason_id, reservation.cancel_reason.reason reason_one, room_cancel_reason,(select reservation.cancel_reason.reason from reservation.cancel_reason where reservation.cancel_reason.id = business_block.block_cancel_catering.room_cancel_reason) as reason_two \
                 from business_block.business_block \
                 join business_block.business_block_definite on business_block_definite.block_id = business_block.block_id \
-                join business_block.inquiry_grid on inquiry_grid.block_id = business_block.block_id \
                 join business_block.block_room on block_room.block_id = business_block.block_id \
                 join business_block.block_business_details on block_business_details.block_id = business_block.block_id \
                 left join business_block.block_catering on block_catering.block_id = business_block.block_id \
