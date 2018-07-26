@@ -251,6 +251,7 @@ from HOTEL_BBL_POST_SELECT_Business_Block_activitylog import HOTEL_BBL_POST_SELE
 from HOTEL_BBL_POST_SELECT_QueryGroupCancel import HOTEL_BBL_POST_SELECT_QueryGroupCancel
 from HOTEL_BBL_POST_INSERT_BusinessBlockDefinite import HOTEL_BBL_POST_INSERT_BusinessBlockDefinite
 from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_INSERT_GroupReservation
+from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_SELECT_QueryInquiryGrid
 #<--------------------------------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -992,6 +993,10 @@ def businessblockdefinite():
 @app.route("/HOTEL_BBL_POST_INSERT_GroupReservations",methods = ['POST'])
 def groupreservation():
     return HOTEL_BBL_POST_INSERT_GroupReservation(request)
+@app.route("/HOTEL_BBL_POST_SELECT_QueryInquiryGrid",methods = ['POST'])
+def inquirygrid():
+    return HOTEL_BBL_POST_SELECT_QueryInquiryGrid(request)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
