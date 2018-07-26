@@ -41,7 +41,7 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
     window['w4_total'] = w4
     #billing_data.append(window)
     #print(billing_data)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':res_data,"ReturnValue1":billing_data,"ReturnValue1":window,'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':res_data,"ReturnValue1":billing_data,"ReturnValue2":window,'ReturnCode':'RRTS'},indent=4))
 
 
 
