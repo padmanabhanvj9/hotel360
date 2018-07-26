@@ -2,7 +2,7 @@ import json
 from sqlwrapper import gensql,dbget
 import datetime
 
-def HOTEL_BBL_GET_SELECT_BusinessBlockSearch(request):
+def HOTEL_BBL_GET_SELECT_BusinessBlockSearch():
 
     s = json.loads(dbget("select business_block.*,business_block_definite.*,  block_room.*, \
                         block_business_details.*, block_catering.*,block_cancel_catering.*, \
