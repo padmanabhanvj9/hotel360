@@ -1,4 +1,4 @@
-import json
+    import json
 from sqlwrapper import gensql,dbget,dbput
 import datetime
 
@@ -39,9 +39,9 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
     window['w2_total'] = w2
     window['w3_total'] = w3
     window['w4_total'] = w4
-    billing_data.append(window)
+    #billing_data.append(window)
     #print(billing_data)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':res_data,"ReturnValue1":billing_data  ,'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':res_data,"ReturnValue1":billing_data,"ReturnValue1":window,'ReturnCode':'RRTS'},indent=4))
 
 
 
