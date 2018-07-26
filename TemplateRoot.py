@@ -953,9 +953,9 @@ def QUERYINHOUSERECORD():
   
 #<-------------------------Business Block------------------------------->
   
-@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['POST'])
+@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['GET'])
 def inquiryprocess():
-    return HOTEL_BBL_POST_INSERT_BusinessBlock(request)
+    return HOTEL_BBL_POST_INSERT_BusinessBlock()
   
 
 @app.route("/HOTEL_BBL_POST_UPDATE_Business_Block_Update",methods=['POST'])
