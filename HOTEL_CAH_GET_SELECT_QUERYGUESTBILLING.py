@@ -1,4 +1,4 @@
-    import json
+import json
 from sqlwrapper import gensql,dbget,dbput
 import datetime
 
