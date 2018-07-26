@@ -100,6 +100,9 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
     #q = { k : v for k,v in d.items()if v != ''  if  k  in ('Cancel')}
     q = d['Catering Cancel']
     q = { k : v for k,v in q.items() if  v != ''}
+    r = d['Room Cancel']
+    r = { k : v for k,v in r.items() if  v != ''}
+    print("Room Cancel",r,type(r),len(r))
     print("Catering Cancel",q,type(q),len(q))
     if len(q) != 0:
         sql_value = json.loads(dbget("select catering_cancel_no from business_block.catering_cancel_no"))
@@ -120,33 +123,27 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
         s['action_type_id'] = "Catering cancel"
         s['description'] = "Catering  cancelled for"+" "+str(blockid)
         gensql('insert','business_block.business_block_activity_log',s)
-    else:
-        pass
-    r = d['Room Cancel']
-    r = { k : v for k,v in r.items() if  v != ''}
-    print("Room Cancel",r,type(r),len(r))
-    if len(r) !=  0:
-        sql_value = json.loads(dbget("select room_cancel_no from business_block.room_cancel_no"))
-        sql_value1 = sql_value[0]['room_cancel_no']
-        room_cancel_no = sql_value1 + 1 
-        psql = dbput("update business_block.room_cancel_no set room_cancel_no = '"+str(sql_value[0]['room_cancel_no']+1)+"'")
-   
-        q['room_cancel_no'] = room_cancel_no
-        result_dic['RoomCancellation'] = room_cancel_no
-        sql5 =  gensql('insert','business_block.block_cancel_catering',q)
-      
-        s = {}
-        s['user_role'] = "Supervisor"
-        blockid = q.get("block_id")
+    elif len(r) !=  0:
+            sql_value = json.loads(dbget("select room_cancel_no from business_block.room_cancel_no"))
+            sql_value1 = sql_value[0]['room_cancel_no']
+            room_cancel_no = sql_value1 + 1 
+            psql = dbput("update business_block.room_cancel_no set room_cancel_no = '"+str(sql_value[0]['room_cancel_no']+1)+"'")
+       
+            q['room_cancel_no'] = room_cancel_no
+            result_dic['RoomCancellation'] = room_cancel_no
+            sql5 =  gensql('insert','business_block.block_cancel_catering',q)
+          
+            s = {}
+            s['user_role'] = "Supervisor"
+            blockid = q.get("block_id")
 
-        s['date'] = RES_Log_Date
-        s['time'] = RES_Log_Time
-        s['block_id'] = blockid
-        s['action_type_id'] = "Room cancel"
-        s['description'] = "Room cancelled for"+" "+str(blockid)
-        gensql('insert','business_block.business_block_activity_log',s)
-    else:
-        pass
+            s['date'] = RES_Log_Date
+            s['time'] = RES_Log_Time
+            s['block_id'] = blockid
+            s['action_type_id'] = "Room cancel"
+            s['description'] = "Room cancelled for"+" "+str(blockid)
+            gensql('insert','business_block.business_block_activity_log',s)
+  
     #return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ConfirmationNumber':confirmation_no,'RoomCancellation':room_cancel_no,'CateringCancellation':cancel_no,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     print(result_dic)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','Number':result_dic,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
