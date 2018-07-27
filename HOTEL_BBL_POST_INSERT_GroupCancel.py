@@ -30,4 +30,4 @@ def HOTEL_BBL_POST_INSERT_GroupCancel(request):
     s['action_type_id'] = "Group Cancelled"
     s['description'] = d.get("cancel_description")
     gensql('insert','business_block.business_block_activity_log',s)
-    return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
+    return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200",'CancellationNumber':count},indent=4))
