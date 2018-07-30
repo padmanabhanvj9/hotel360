@@ -1,61 +1,61 @@
 from sqlwrapper import gensql
 import json
 def Hotel_RES_GET_SELECT_Restype():
-    s = ['restype','restype_description']
-    sql_value = gensql('select','reservation.restype',s)
+    #s = ['restype','restype_description']
+    sql_value = gensql('select','reservation.restype','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_RES_GET_SELECT_Alertarea():
  
-    sql_value = gensql('select','reservation.alertarea','alertarea')
+    sql_value = gensql('select','reservation.alertarea','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_RES_GET_SELECT_Alertcode():
  
-    sql_value = gensql('select','reservation.alertcode','alertcode')
+    sql_value = gensql('select','reservation.alertcode','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_RES_GET_SELECT_Origin():
  
-    sql_value = gensql('select','reservation.origin','origincode,origindescription')
+    sql_value = gensql('select','reservation.origin','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_RES_GET_SELECT_Source():
  
-    sql_value = gensql('select','reservation.res_source','sourcecode,sourcedescription')
+    sql_value = gensql('select','reservation.res_source','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 def Hotel_RES_GET_SELECT_Payment():
-    sql_value = gensql('select','reservation.payment','paymenttype,transactioncode,payment_description')
+    sql_value = gensql('select','reservation.payment','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 def Hotel_RES_GET_SELECT_Market():
-    sql_value = gensql('select','reservation.market','marketgroup,marketgroup_description')
+    sql_value = gensql('select','reservation.market','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 def Hotel_RES_GET_SELECT_Department():
-    sql_value = gensql('select','reservation.department','department')
+    sql_value = gensql('select','reservation.department','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 def Hotel_RES_GET_SELECT_Transaction_code():
-    sql_value = gensql('select','reservation.transaction_code','transaction_description')
+    sql_value = gensql('select','reservation.transaction_code','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 def Hotel_RES_GET_SELECT_depositrule():
-    sql_value = gensql('select','reservation.depositrule','deposit_rule')
+    sql_value = gensql('select','reservation.depositrule','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
@@ -67,14 +67,19 @@ def Hotel_RES_GET_SELECT_CancelReason():
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_RES_GET_SELECT_Cardtype():
-    sql_value = gensql('select','reservation.cardtype','creditcard_description')
+    sql_value = gensql('select','reservation.cardtype','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_RES_GET_SELECT_Waitlist_reason():
-    sql_value = gensql('select','reservation.waitlist_reason','waitlist_reason')
+    sql_value = gensql('select','reservation.waitlist_reason','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
+def Hotel_RES_GET_SELECT_Block_status():
+    sql_value = gensql('select','business_block.block_status','*')
+    result = json.loads(sql_value)
+    print(result)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
