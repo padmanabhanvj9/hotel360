@@ -148,6 +148,9 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_C
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Waitlist_reason
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
+#<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
+
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
 from HOTEL_FD_POST_INSERT_UpdateQueueRreservation import HOTEL_FD_POST_INSERT_UpdateQueueRreservation
@@ -1001,6 +1004,11 @@ def inquirygrid():
 @app.route("/HOTEL_BBL_POST_UPDATE_BusinessBlockStatus",methods= ['POST'])
 def blockstatus():
    return HOTEL_BBL_POST_UPDATE_BusinessBlockStatus(request)
+#<------------------Buiness Block dropdown---------->
+@app.route("/Hotel_RES_GET_SELECT_Block_status",methods= ['GET'])
+def blockstatuschanges():
+   return Hotel_RES_GET_SELECT_Block_status()
+
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
