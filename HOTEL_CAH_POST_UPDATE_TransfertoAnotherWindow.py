@@ -14,7 +14,7 @@ def HOTEL_CAH_POST_UPDATE_TransfertoAnotherWindow(request):
     
     print(sql_value)
     res_id = e.get("Res_id")
-    window = str(a.get("Post_window_id"))
+    window = str(a.get("Post_window"))
     Posting_date = datetime.datetime.utcnow().date()
     Revenue_date = datetime.datetime.utcnow().date()
 
