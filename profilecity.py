@@ -32,7 +32,7 @@ def profilestate():
     
 def profilepostalcode():
 
-    sql_value = gensql('select','profile.postalcode','postalcode')
+    sql_value = gensql('select','profile.postalcode','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
@@ -40,14 +40,14 @@ def profilepostalcode():
     
 def profilevip():
 
-    sql_value = gensql('select','profile.vip','vipguest')
+    sql_value = gensql('select','profile.vip','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
 def profilenationality():
 
-    sql_value = gensql('select','profile.nationality','nationality')
+    sql_value = gensql('select','profile.nationality','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
@@ -55,21 +55,21 @@ def profilenationality():
     
 def profilecurrency():
 
-    sql_value = gensql('select','profile.currency','currency,currency_description')
+    sql_value = gensql('select','profile.currency','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
 def profilecommunication():
 
-    sql_value = gensql('select','profile.communication','commtype,commtype_description')
+    sql_value = gensql('select','profile.communication','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
 def profilepftype():
 
-    sql_value = gensql('select','profile.profiletype','profiletype')
+    sql_value = gensql('select','profile.profiletype','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
@@ -77,28 +77,28 @@ def profilepftype():
     
 def profileratecode():
 
-    sql_value = gensql('select','profile.ratecode','ratecode')
+    sql_value = gensql('select','profile.ratecode','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
 def profilenotetype():
 
-    sql_value = gensql('select','profile.notetype','notetype')
+    sql_value = gensql('select','profile.notetype','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
 def profilepreferencegroup():
  
-    sql_value = gensql('select','profile.preferencegroup','prefernecegroup,preferencegroup_desc')
+    sql_value = gensql('select','profile.preferencegroup','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
 
 def profilepreferencevalue():
 
-    sql_value = gensql('select','profile.preference','preference,preference_description')
+    sql_value = gensql('select','profile.preference','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
