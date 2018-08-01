@@ -126,7 +126,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
         sql_value1 = sql_value[0]['catering_cancel_no']
         cancel_no = sql_value1 + 1
         psql = dbput("update business_block.catering_cancel_no set catering_cancel_no = '"+str(sql_value[0]['catering_cancel_no']+1)+"'")
-        q['catering_cancel_no'] = cancel_no
+        cat_can1['catering_cancel_no'] = cancel_no
         result_dic['CateringCancellation'] = cancel_no
         sql5 =  gensql('insert','business_block.block_cancel_catering',cat_can1)
       
@@ -146,7 +146,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
             room_cancel_no = sql_value1 + 1 
             psql = dbput("update business_block.room_cancel_no set room_cancel_no = '"+str(sql_value[0]['room_cancel_no']+1)+"'")
        
-            q['room_cancel_no'] = room_cancel_no
+            rm_can1['room_cancel_no'] = room_cancel_no
             result_dic['RoomCancellation'] = room_cancel_no
             sql5 =  gensql('insert','business_block.block_cancel_catering',rm_can1)
           
