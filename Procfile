@@ -115,4 +115,10 @@ worker: gunicorn HOTEL_BBL_POST_SELECT_QueryGroupCancel.py
 worker: gunicorn HOTEL_BBL_POST_UPDATE_Business_Block_Update.py
 worker: gunicorn HOTEL_CAH_GET_SELECT_QUERYINSHOUSERECORD.py
 worker: gunicorn HOTEL_BBL_POST_UPDATE_BusinessBlockStatus.py
+worker: gunicorn HOTEL_BBL_POST_UPDATE_UpdateGrid.py
+worker: gunicorn HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite.py
+worker: gunicorn HOTEL_BBL_POST_SELECT_QueryRoomRevenue.py
+worker: gunicorn HOTEL_BBL_POST_SELECT_QueryGrid.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_Grid.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_CalculateRoomRevenue.py
 clock: python clock.py
