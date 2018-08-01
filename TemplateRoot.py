@@ -245,6 +245,7 @@ from HOTEL_CAH_POST_POSTING_PAYMENT_INSERT import HOTEL_CAH_POST_POSTING_PAYMENT
 from HOTEL_CAH_GET_SELECT_QUERYINSHOUSERECORD import HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD
 
 from HOTEL_CASH_BILLING_CODE_SELECT import HOTEL_CASH_PAYMENT_CODE_SELECT
+from HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT import HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT
 #<-------------------------------------------------------------------------------------------------->
 #<-----------------------Business Block---------------------------------------------------------->
 from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_INSERT_BusinessBlock
@@ -960,6 +961,11 @@ def QUERYINHOUSERECORD():
 @app.route("/HOTEL_CASH_PAYMENT_CODE_SELECT",methods=['POST','GET'])
 def PAYMENT_CODE_SELECT():
     return HOTEL_CASH_PAYMENT_CODE_SELECT(request)
+   
+@app.route("/HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT",methods=['POST'])
+def UPDATEPOSTINGPAYMENTCHECKOUT():
+    return HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request)
+   
 
   
 #<-------------------------Business Block------------------------------->
