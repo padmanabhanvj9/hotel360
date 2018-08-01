@@ -104,7 +104,6 @@ worker: gunicorn HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING.py
 worker: gunicorn HOTEL_CAH_POST_FOLIO_HISTORY.py
 worker: gunicorn HOTEL_CAH_POST_CASH_CHECK_OUT.py
 worker: gunicorn HOTEL_CAH_GET_SELECT_QUERYGUESTBILLING.py
-worker: gunicorn HOTEL_CASH_BILLING_CODE_SELECT.py
 worker: gunicorn HOTEL_BBL_GET_SELECT_BusinessBlockSearch.py
 worker: gunicorn HOTEL_BBL_POST_INSERT_Business_Block_Notes.py
 worker: gunicorn HOTEL_BBL_POST_INSERT_BusinessBlock.py
