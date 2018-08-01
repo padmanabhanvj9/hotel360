@@ -259,6 +259,12 @@ from HOTEL_BBL_POST_INSERT_BusinessBlockDefinite import HOTEL_BBL_POST_INSERT_Bu
 from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_INSERT_GroupReservation
 from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_SELECT_QueryInquiryGrid
 from HOTEL_BBL_POST_UPDATE_BusinessBlockStatus import HOTEL_BBL_POST_UPDATE_BusinessBlockStatus
+from HOTEL_BBL_POST_INSERT_Grid import HOTEL_BBL_POST_INSERT_Grid
+from HOTEL_BBL_POST_SELECT_QueryGrid import HOTEL_BBL_POST_SELECT_QueryGrid
+from HOTEL_BBL_POST_UPDATE_UpdateGrid import HOTEL_BBL_POST_UPDATE_UpdateGrid
+from HOTEL_BBL_POST_INSERT_CalculateRoomRevenue import HOTEL_BBL_POST_INSERT_CalculateRoomRevenue
+from HOTEL_BBL_POST_SELECT_QueryRoomRevenue import HOTEL_BBL_POST_SELECT_QueryRoomRevenue
+from HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite import HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite
 #<--------------------------------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -1017,6 +1023,28 @@ def inquirygrid():
 @app.route("/HOTEL_BBL_POST_UPDATE_BusinessBlockStatus",methods= ['POST'])
 def blockstatus():
    return HOTEL_BBL_POST_UPDATE_BusinessBlockStatus(request)
+@app.route("/HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite",methods = ['POST'])
+def UpdateBusinessBlockDefinite():
+   return HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request)
+
+@app.route("/HOTEL_BBL_POST_INSERT_Grid",methods=['POST'])
+def grid():
+   return HOTEL_BBL_POST_INSERT_Grid(request)
+@app.route("/HOTEL_BBL_POST_UPDATE_UpdateGrid",methods=['POST'])
+def Updategrid():
+   return HOTEL_BBL_POST_UPDATE_UpdateGrid(request)
+
+@app.route("/HOTEL_BBL_POST_SELECT_QueryGrid",methods=['POST'])
+def querygrid():
+   return HOTEL_BBL_POST_SELECT_QueryGrid(request)
+
+@app.route("/HOTEL_BBL_POST_INSERT_CalculateRoomRevenue",methods=['POST'])
+def Revenue():
+   return HOTEL_BBL_POST_INSERT_CalculateRoomRevenue(request)
+
+@app.route("/HOTEL_BBL_POST_SELECT_QueryRoomRevenue",methods=['POST'])
+def QueryRevenue():
+   return HOTEL_BBL_POST_SELECT_QueryRoomRevenue(request)
 #<------------------Buiness Block dropdown---------->
 @app.route("/Hotel_RES_GET_SELECT_Block_status",methods= ['GET'])
 def blockstatuschanges():
