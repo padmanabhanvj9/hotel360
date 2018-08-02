@@ -266,8 +266,10 @@ from HOTEL_BBL_POST_INSERT_CalculateRoomRevenue import HOTEL_BBL_POST_INSERT_Cal
 from HOTEL_BBL_POST_SELECT_QueryRoomRevenue import HOTEL_BBL_POST_SELECT_QueryRoomRevenue
 from HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite import HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite
 from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_SELECT_QueryPayMasterReservation
-from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_INSERT_GroupReservation
+from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_SELECT_QueryGroupReservation
+#from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_INSERT_GroupReservation
 from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_INSERT_PayMasterReservation
+from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_SELECT_QueryPayMasterReservation
 #<--------------------------------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -1055,6 +1057,10 @@ def paymaster():
 @app.route("/HOTEL_BBL_POST_SELECT_QueryGroupReservation",methods=['POST'])
 def HOTEL_BBL_POST_SELECT_QueryGroupReservationdff():
    return HOTEL_BBL_POST_SELECT_QueryGroupReservation(request)
+@app.route("/HOTEL_BBL_POST_SELECT_QueryPayMasterReservation",methods=['POST'])
+def HOTEL_BBL_POST_SELECT_QueryPayMasterReservationder():
+   return HOTEL_BBL_POST_SELECT_QueryPayMasterReservation(request)
+
 
 #<------------------Buiness Block dropdown---------->
 @app.route("/Hotel_RES_GET_SELECT_Block_status",methods= ['GET'])
