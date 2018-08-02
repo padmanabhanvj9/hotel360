@@ -271,6 +271,10 @@ from HOTEL_BBL_POST_INSERT_GroupReservation import HOTEL_BBL_POST_SELECT_QueryGr
 from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_INSERT_PayMasterReservation
 from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_SELECT_QueryPayMasterReservation
 #<--------------------------------------------------------------------------------------------->
+#<---------------------business block dropdown--------------------------------------->
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_BusinessBlockStatus
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_InventoryContrtol
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_MeetingSpaceType
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
@@ -1063,9 +1067,18 @@ def HOTEL_BBL_POST_SELECT_QueryPayMasterReservationder():
 
 
 #<------------------Buiness Block dropdown---------->
-@app.route("/Hotel_RES_GET_SELECT_Block_status",methods= ['GET'])
-def blockstatuschanges():
-   return Hotel_RES_GET_SELECT_Block_status()
+@app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockStatus",methods=['GET'])
+def blockstatus():
+   return HOTEL_BBL_GET_SELECT_BusinessBlockStatus()
+
+@app.route("/HOTEL_BBL_GET_SELECT_InventoryContrtol",methods=['GET'])
+def INVENTORY():
+   return HOTEL_BBL_GET_SELECT_InventoryContrtol()
+
+
+@app.route("/HOTEL_BBL_GET_SELECT_MeetingSpaceType",methods=['GET'])
+def meeting_space():
+   return HOTEL_BBL_GET_SELECT_MeetingSpaceType()
 
 if __name__ == "__main__":
     app.run(debug=True)
