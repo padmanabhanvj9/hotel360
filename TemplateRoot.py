@@ -1068,7 +1068,7 @@ def HOTEL_BBL_POST_SELECT_QueryPayMasterReservationder():
 
 #<------------------Buiness Block dropdown---------->
 @app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockStatus",methods=['GET'])
-def blockstatus():
+def blockstatusert():
    return HOTEL_BBL_GET_SELECT_BusinessBlockStatus()
 
 @app.route("/HOTEL_BBL_GET_SELECT_InventoryContrtol",methods=['GET'])
