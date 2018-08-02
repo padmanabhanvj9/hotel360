@@ -149,7 +149,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_W
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 #<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
-from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
+#from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
 
 #</--------------reservation webservice---------/>
 #<-------------------Frontdesk------------------>
