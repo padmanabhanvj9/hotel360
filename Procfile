@@ -121,4 +121,5 @@ worker: gunicorn HOTEL_BBL_POST_SELECT_QueryRoomRevenue.py
 worker: gunicorn HOTEL_BBL_POST_SELECT_QueryGrid.py
 worker: gunicorn HOTEL_BBL_POST_INSERT_Grid.py
 worker: gunicorn HOTEL_BBL_POST_INSERT_CalculateRoomRevenue.py
+worker: gunicorn HOTEL_BBL_POST_INSERT_PayMasterReservation.py
 clock: python clock.py
