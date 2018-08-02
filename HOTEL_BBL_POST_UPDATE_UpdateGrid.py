@@ -3,9 +3,9 @@ import json
 def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
     d = request.json
     a,e = {},{}
-    a = { k : v for k,v in d.items() if v != '' if k not in ('block_id')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('block_id','grid_id')}
     print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('block_id')}
+    e = { k : v for k,v in d.items() if k != '' if k in ('block_id','grid_id')}
     print(e)
      
     sql = gensql('update','business_block.grid',a,e)
