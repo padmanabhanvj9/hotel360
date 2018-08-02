@@ -5,7 +5,9 @@ import datetime
 def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
     d = request.json
     print(d)
-    sql = gensql('insert','cashiering.posting_payment',d)
+    e = { k : v for k,v in d.items() if v != "" }
+    print(e)
+    sql = gensql('insert','cashiering.posting_payment',e)
     print(sql)
     #d['Posting_date'] = Posting_date
     res_id = d.get("res_id")
@@ -29,7 +31,9 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
 def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     d = request.json
     print(d)
-    sql = gensql('insert','cashiering.posting_payment',d)
+    e = { k : v for k,v in d.items() if v != "" }
+    print(e)
+    sql = gensql('insert','cashiering.posting_payment',e)
     print(sql)
     #d['Posting_date'] = Posting_date
     res_id = d.get("res_id")
