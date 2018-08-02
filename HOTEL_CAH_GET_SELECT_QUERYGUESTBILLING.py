@@ -24,7 +24,7 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
                           where cashiering.billing_post.res_id='"+d['res_id']+"' and \
                           cashiering.billing_post.res_room='"+d['res_room']+"' "))
     #print("billing",billing_data,type(billing_data))
-    w1,w2,w3,w4,window = 0,0,0,0,{}
+    w1,w2,w3,w4,window1,window = 0,0,0,0,{},[]
     for i in billing_data:
         if int(i['post_window']) == 1:
             w1 += int(i['posting_amount'])
@@ -35,10 +35,11 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
         else:
             w4 += int(i['posting_amount'])
     #print(w1,w2,w3,w4,type(w1))        
-    window['w1_total'] = w1
-    window['w2_total'] = w2
-    window['w3_total'] = w3
-    window['w4_total'] = w4
+    window1['w1_total'] = w1
+    window1['w2_total'] = w2
+    window1['w3_total'] = w3
+    window1['w4_total'] = w4
+    window.append(window1)
     #billing_data.append(window)
     #print(billing_data)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':res_data,"ReturnValue1":billing_data,"ReturnValue2":window,'ReturnCode':'RRTS'},indent=4))
