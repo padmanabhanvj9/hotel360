@@ -4,41 +4,34 @@ def HOTEL_BBL_POST_INSERT_CalculateRoomRevenue(request):
     
     d = request.json
     s = {}
+    q = 0
+    rate1,rate2 = 0,0
     block_id = d.get("block_id")
-    psql = dbget("select count_one,count_two,count_three from business_block.grid where block_id = '"+block_id+"'")
+    psql = dbget("select total_rooms,rate_one,rate_two,rate_three,rate_four,occupancy_one,occupancy_two,occupancy_three,occupancy_four from business_block.grid where block_id = '"+block_id+"'")
     sqlvalue = json.loads(psql)
     print(sqlvalue)
     #<-----------count ------>
-    count1 = sqlvalue[0]['count_one']
-    print(type(count1),count1)
-    count2 = sqlvalue[0]['count_two']
-    print(type(count2),count2)
-    count3 = sqlvalue[0]['count_three']
-    print(type(count3),count3)
-    #<------------rate------------>
-    '''rate1 = sqlvalue[0]['rate_one']
-    print(type(rate1),rate1)
-    rate2 = sqlvalue[0]['rate_two']
-    print(type(rate2),rate2)
-    rate3 = sqlvalue[0]['rate_three']
-    print(type(rate3),rate3)'''
-    rate1 = int("223")
-    rate2 = int("234")
-    rate3 = int("236")
-
-    room_nights = count1 + (count2+count3)
-    print(room_nights,type(room_nights))
-
-    total_rooms_rate = (count1 * rate1) + (count2 * rate2) + (count3 * rate3)
-    print(total_rooms_rate,type(total_rooms_rate))
-
-    Average_Rate = (total_rooms_rate/room_nights)
+    for i in sqlvalue:
+        q = q + i['total_rooms']
+        #print("summa",i['total_rooms'])
+        #print("plus",q)
+    totalrooms = q
+    print("totalrooms",totalrooms,type(totalrooms))
+    
+    for i in sqlvalue:
+       
+          rate1 = ((i['occupancy_one'] * i['rate_one']) + (i['occupancy_two'] * i['rate_two']) + (i['occupancy_three']*i['rate_three']) + (i['occupancy_four']*i['rate_four']))
+          print("rate1",rate1)
+          rate2 += rate1
+          print("firstrate",rate2)
+    print("net_revenue",rate2)
+    Average_Rate = (rate2/totalrooms)
     print(Average_Rate,type(Average_Rate))
     s['block_id'] = block_id
-    s['room_nights'] = room_nights
-    s['net_revenue'] = total_rooms_rate
+    s['room_nights'] = totalrooms
+    s['net_revenue'] = rate2
     s['net_rate'] = Average_Rate
-    s['room_nights_available'] = room_nights
+    s['room_nights_available'] = totalrooms
     sql2 = gensql('insert','business_block.room_revenue',s)
     print(sql2)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
