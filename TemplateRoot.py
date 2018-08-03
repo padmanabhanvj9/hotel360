@@ -275,6 +275,7 @@ from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_SELECT_Que
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_BusinessBlockStatus
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_InventoryContrtol
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_MeetingSpaceType
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_Block_Type
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
@@ -1079,7 +1080,9 @@ def INVENTORY():
 @app.route("/HOTEL_BBL_GET_SELECT_MeetingSpaceType",methods=['GET'])
 def meeting_space():
    return HOTEL_BBL_GET_SELECT_MeetingSpaceType()
-
+@app.route("/HOTEL_BBL_GET_SELECT_Block_Type",methods=['GET'])
+def HOTEL_BBL_GET_SELECT_Block_Typebgg():
+   return HOTEL_BBL_GET_SELECT_Block_Type()
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
