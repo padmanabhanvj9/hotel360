@@ -44,6 +44,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
        sql1 = gensql('insert','business_block.business_block_definite',x)
        print(sql1)
        s = {}
+       blockcode = x.get("block_code")
        blockid = x.get("block_id")
        s['user_role'] = "Supervisor"
        s['date'] = RES_Log_Date
@@ -116,6 +117,6 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
         r['block_id'] = count
         sql5 = gensql('insert','business_block.block_meeting',r)
         print(sql5)
-
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS','Blockid':blockid,'Blockname':PF_ACCOUNT,'blockcode':blockcode}, sort_keys=True, indent=4))
    
