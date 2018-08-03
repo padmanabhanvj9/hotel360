@@ -4,7 +4,7 @@ import datetime
 
 def HOTEL_BBL_GET_SELECT_BusinessBlockSearch():
 
-    s = json.loads(dbget("select   block_room.block_room_id,block_room.res_type_id,block_room.cutoff_date,block_room.cutoff_days, \
+    s = json.loads(dbget("select   pf_company_profile.pf_account,block_room.block_room_id,block_room.res_type_id,block_room.cutoff_date,block_room.cutoff_days, \
 			  block_room.inventory_control_id,block_room.ratecode_id,block_room.print_rate,block_room.suppress_rate,\
 			  block_room.packages,block_room.trace_code,block_room.follow_date\
 			  business_block_definite.*,\
@@ -37,6 +37,7 @@ def HOTEL_BBL_GET_SELECT_BusinessBlockSearch():
 			  left join business_block.block_type on business_block.block_type.id = business_block_definite.block_type \
                           left join business_block.block_room on block_room.block_id = business_block_definite.block_id \
 			  left join reservation.restype on restype.id = block_room.res_type_id\
+			  left join profile.pf_company_profile on pf_company_profile.pf_id = business_block_definite.pf_id \
 			  left join business_block.inventory_control on inventory_control.inventory_control_id = block_room.inventory_control_id \
                           left join revenue_management.ratecode on revenue_management.ratecode.ratecode_id = block_room.ratecode_id \
 			  left join business_block.block_business_details on block_business_details.block_id = business_block_definite.block_id \
