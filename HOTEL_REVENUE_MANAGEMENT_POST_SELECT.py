@@ -27,3 +27,12 @@ def currencyselect(request):
     print(s)
     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
 
+def room_types(request):
+    s = json.loads(dbget("select * from revenue_management.room_type"))
+    print(s)
+    return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
+
+def packages_revenue(request):
+    s = json.loads(dbget("SELECT * FROM revenue_management.packages_codes"))
+    print(s)
+    return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
