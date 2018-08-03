@@ -224,6 +224,9 @@ from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import negotiated
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratedetailss
 from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_INSERT_UpdateRatecodeSetup
 from HOTEL_REM_POST_SELECT_QueryRatecode import HOTEL_REM_POST_SELECT_QueryRatecode
+
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import room_types
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import packages_revenue
 #<----------------------------------------Cashiering-------------------------->
 from HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING import HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING
 from HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING import HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING
@@ -891,6 +894,14 @@ def HOTEL_REM_POST_INSERT_UpdateRatecodeSetupsas():
 @app.route("/HOTEL_REM_POST_SELECT_QueryRatecode",methods=['POST'])
 def HOTEL_REM_POST_SELECT_QueryRatecodeds():
   return HOTEL_REM_POST_SELECT_QueryRatecode(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Roomtype",methods=['POST'])
+def select_roomtype_reveneue():
+  return room_types(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Packages",methods=['POST'])
+def select_packages_reveneue():
+  return packages_revenue(request)
 #<---------------------------------------CASHIER-------------------------------------------------->
 
 @app.route("/HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING",methods=['POST'])
