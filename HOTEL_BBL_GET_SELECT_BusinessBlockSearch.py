@@ -12,7 +12,7 @@ def HOTEL_BBL_GET_SELECT_BusinessBlockSearch():
 			  block_business_details.rooming_list_duedate,block_business_details.arrivaltime,block_business_details.depaturetime,\
 			  block_business_details.commission,\
 			  block_catering.attendess_id,block_catering.guranteed,block_catering.item_discount_perc,block_catering.attendess,\
-			  block_catering.info_board,block_catering.contract_no,block_catering.onsite_name,block_catering.followup_date\
+			  block_catering.info_board,block_catering.contract_no,block_catering.onsite_name,block_catering.followup_date,\
 			  block_cancel_catering.catering_cancel_id,block_cancel_catering.catering_cancel_no,block_cancel_catering.catering_reason_id,\
 			  block_cancel_catering.catering_comments,block_cancel_catering.room_cancel_no,block_cancel_catering.room_cancel_reason,\
 			  block_cancel_catering.room_cancel_comments,block_cancel_catering.room_cancel_destination,\
