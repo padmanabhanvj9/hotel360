@@ -19,9 +19,10 @@ def HOTEL_REM_POST_INSERT_UpdateRatecodeSetup(request):
     #package = d['package']
     #print("package",package,type(package))
     gensql('insert','revenue_management.ratecode',d['rate_code_details'])
-    ratecode_id = json.loads(gensql('select','revenue_management.ratecode','ratecode_id ',d['rate_code_details']))
-    print(ratecode_id[0]['ratecode_id'])
-    e['ratecode_id'] = ratecode_id[0]['ratecode_id']
+    #chang to max
+    ratecode_id = json.loads(gensql('select','revenue_management.ratecode','max(ratecode_id) as id1',d['rate_code_details']))
+    print(ratecode_id[0]['id1'])
+    e['ratecode_id'] = ratecode_id[0]['id1']
     print("1111",e)
     room_types = d['room_types']
     room_id = json.loads(dbget("select max(rooms_id) as number1 from revenue_management.rooms_selected"))
@@ -41,19 +42,22 @@ def HOTEL_REM_POST_INSERT_UpdateRatecodeSetup(request):
     e['packages_id'] =  int(package_id[0]['number2']+1)
     print("3333",e)
     gensql('insert','revenue_management.sell_control',d['sell_controls'])
-    sell_id = json.loads(gensql('select','revenue_management.sell_control','sell_id',d['sell_controls']))
-    print("sell_id",sell_id[0]['sell_id'])
-    e['sell_control_id'] = int(sell_id[0]['sell_id'])
+    # change to max
+    sell_id = json.loads(gensql('select','revenue_management.sell_control','max(sell_id) as id2',d['sell_controls']))
+    print("sell_id",sell_id[0]['id2'])
+    e['sell_control_id'] = int(sell_id[0]['id2'])
     print("4444",e)
     gensql('insert','revenue_management.tranction_details',d['transaction_details'])
-    transaction_detail_id = json.loads(gensql('select','revenue_management.tranction_details','tranction_detail_id',d['transaction_details']))
-    print("transaction_detail_id",transaction_detail_id[0]['tranction_detail_id'])
-    e['transaction_details_id'] = int(transaction_detail_id[0]['tranction_detail_id'])
+    # change to max
+    transaction_detail_id = json.loads(gensql('select','revenue_management.tranction_details','max(tranction_detail_id) as id3',d['transaction_details']))
+    print("transaction_detail_id",transaction_detail_id[0]['id3'])
+    e['transaction_details_id'] = int(transaction_detail_id[0]['id3'])
     print("5555",e)
     gensql('insert','revenue_management.rate_components',d['components'])
-    components_id = json.loads(gensql('select','revenue_management.rate_components','components_id',d['components']))
-    print("components_id",components_id[0]['components_id'])
-    e['rate_components_id'] = int(components_id[0]['components_id'])
+    # change to max
+    components_id = json.loads(gensql('select','revenue_management.rate_components','max(components_id) as id4',d['components']))
+    print("components_id",components_id[0]['id4'])
+    e['rate_components_id'] = int(components_id[0]['id4'])
     print("6666",e)
     gensql('insert','revenue_management.ratecode_setup',e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
