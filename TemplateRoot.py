@@ -227,6 +227,7 @@ from HOTEL_REM_POST_SELECT_QueryRatecode import HOTEL_REM_POST_SELECT_QueryRatec
 
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import room_types
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import packages_revenue
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import season_code_revenue
 #<----------------------------------------Cashiering-------------------------->
 from HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING import HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING
 from HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING import HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING
@@ -902,6 +903,10 @@ def select_roomtype_reveneue():
 @app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Packages",methods=['POST'])
 def select_packages_reveneue():
   return packages_revenue(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Seasoncode",methods=['POST'])
+def select_season_reveneue():
+  return season_code_revenue(request)
 #<---------------------------------------CASHIER-------------------------------------------------->
 
 @app.route("/HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING",methods=['POST'])
