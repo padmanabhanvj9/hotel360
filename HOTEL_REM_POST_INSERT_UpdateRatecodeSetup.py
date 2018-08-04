@@ -61,3 +61,19 @@ def HOTEL_REM_POST_INSERT_UpdateRatecodeSetup(request):
     print("6666",e)
     gensql('insert','revenue_management.ratecode_setup',e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+
+
+def HOTEL_REM_POST_SELECT_Ratecode(request):
+    s = json.loads(dbget("SELECT rateheader_id, begin_sell_date, end_sell_date,\
+                                 ratecode_setup.ratecode_id, rate_code, rate_description,rate_category, rate_category_decription  \
+                                 FROM revenue_management.ratecode_setup join revenue_management.ratecode \
+                                 on ratecode_setup.ratecode_id = ratecode.ratecode_id \
+                                 join revenue_management.ratecategory on ratecode.rate_category_id \
+                                 = revenue_management.ratecategory.ratecategory_id ")) 
+    print(s)
+    return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
+    
+def HOTEL_REM_POST_SELECT_Negotiated_Rate(request):
+    s = json.loads(dbget("SELECT * FROM revenue_management.negotiated_rate"))
+    print(s)
+    return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
