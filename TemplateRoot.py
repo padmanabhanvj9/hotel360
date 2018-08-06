@@ -233,6 +233,8 @@ from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Nego
 from HOTEL_REM_POST_DELETE import Delete_Negotiated_Rate
 from HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup import HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup
 from HOTEL_REM_POST_SELECT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_UpdateRatecodeSetup
+from HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup import HOTEL_REM_POST_UPDATE_Negotiated_Rate
+
 #<----------------------------------------Cashiering-------------------------->
 from HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING import HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING
 from HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING import HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING
@@ -932,6 +934,10 @@ def UPDATE_UpdateRatecodeSetup():
 @app.route("/HOTEL_REM_POST_SELECT_UpdateRatecodeSetup",methods=['POST'])
 def SELECT_UpdateRatecodeSetup():
   return HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request)
+
+@app.route("/HOTEL_REM_POST_UPDATE_Negotiated_Rate",methods=['POST'])
+def UPDATE_Negotiated_Rate():
+  return HOTEL_REM_POST_UPDATE_Negotiated_Rate(request)
 
 #<---------------------------------------CASHIER-------------------------------------------------->
 
