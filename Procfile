@@ -84,6 +84,9 @@ worker: gunicorn HOTEL_REVENUE_MANAGEMENT_POST_SELECT.py
 worker: gunicorn HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY.py
 worker: gunicorn HOTEL_REM_POST_SELECT_QueryRatecode.py
 worker: gunicorn HOTEL_REM_POST_INSERT_UpdateRatecodeSetup.py
+worker: gunicorn HOTEL_REM_POST_DELETE.py
+worker: gunicorn HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup.py
+worker: gunicorn HOTEL_REM_POST_SELECT_UpdateRatecodeSetup.py
 worker: gunicorn HOTEL_CASH_SELECT_POSTING_WINDOW.py
 worker: gunicorn HOTEL_CASH_SELECT_BILLING_CURRENCY.py
 worker: gunicorn HOTEL_CASH_RESERVATION_STATUS.py
