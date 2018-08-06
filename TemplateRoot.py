@@ -230,6 +230,9 @@ from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import packages_revenue
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import season_code_revenue
 from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Ratecode
 from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Negotiated_Rate
+from HOTEL_REM_POST_DELETE import Delete_Negotiated_Rate
+from HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup import HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup
+from HOTEL_REM_POST_SELECT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_UpdateRatecodeSetup
 #<----------------------------------------Cashiering-------------------------->
 from HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING import HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING
 from HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING import HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING
@@ -914,9 +917,22 @@ def select_season_reveneue():
 def select_ratecodes_reveneue():
   return HOTEL_REM_POST_SELECT_Ratecode(request)
 
-@app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Negotiated_Rate",methods=['POST'])
+@app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Negotiated_Rate",methods=['POST','GET'])
 def select_negotiated_rate_reveneue():
   return HOTEL_REM_POST_SELECT_Negotiated_Rate(request)
+
+@app.route("/HOTEL_REVENUE_MANAGEMENT_DELETE_Negotiated_Rate",methods=['POST'])
+def delete_negotiated_rate_reveneue():
+  return Delete_Negotiated_Rate(request)
+
+@app.route("/HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup",methods=['POST'])
+def UPDATE_UpdateRatecodeSetup():
+  return HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup(request)
+
+@app.route("/HOTEL_REM_POST_SELECT_UpdateRatecodeSetup",methods=['POST'])
+def SELECT_UpdateRatecodeSetup():
+  return HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request)
+
 #<---------------------------------------CASHIER-------------------------------------------------->
 
 @app.route("/HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING",methods=['POST'])
