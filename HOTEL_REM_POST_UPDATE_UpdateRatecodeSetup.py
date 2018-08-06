@@ -25,3 +25,12 @@ def HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup(request):
     e = { k : v for k,v in d.items() if k != '' if k in ('block_id')}
     return(json.dumps({"Status": "Success","StatusCode": "200"},indent=4))
  
+def HOTEL_REM_POST_UPDATE_Negotiated_Rate(request):
+    d = request.json
+    print(d)
+    a = { k : v for k,v in d.items() if v != '' if k not in ('rate_code_id')}
+    b = { k : v for k,v in d.items() if v != '' if k in ('rate_code_id')}    
+    gensql('update','revenue_management.negotiated_rate',a,b)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
+    
