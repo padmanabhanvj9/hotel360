@@ -73,7 +73,12 @@ def HOTEL_REM_POST_SELECT_Ratecode(request):
     print(s)
     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
     
+    
 def HOTEL_REM_POST_SELECT_Negotiated_Rate(request):
-    s = json.loads(dbget("SELECT * FROM revenue_management.negotiated_rate"))
+    s = json.loads(dbget("SELECT  rate_code,negotiate_begin_sell_date, negotiate_end_sell_date, negotiate_commision_code_id,\
+                          rate_description,negotiated_code_id \
+                          FROM revenue_management.negotiated_rate join revenue_management.ratecode\
+                          on negotiated_rate.rate_code_id = ratecode.ratecode_id"))
     print(s)
     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
+
