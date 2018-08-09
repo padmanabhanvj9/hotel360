@@ -64,4 +64,38 @@ def HOTEL_REM_POST_UPDATE_Negotiated_Rate(request):
     gensql('update','revenue_management.negotiated_rate',a,b)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
+def HOTEL_REM_POST_UPDATE_RATE_DETAILS(request):
+    d = request.json
+    #print(d)
+    x = { k : v for k,v in d.items() if k in ('days')}
+    #print("x",x)
+    a = x['days']
+    #print("a",a)
+    b = { k : v for k,v in d.items() if k in ('rate_days_id') if k not in ('days')}
+    #print("b",b)
+    gensql('update','revenue_management.rate_days',a,b)
+
+    dbput("delete from revenue_management.rooms_selected where rooms_id='"+str(d['rooms_id'])+"' ")
+    
+    for i in d['room_types']:
+        #pass
+        dbput("insert into revenue_management.rooms_selected (rooms_id,room_type_id) \
+               values ('"+str(d['rooms_id'])+"','"+str(i)+"') ")
+
+    dbput("delete from revenue_management.packages_selected where packages_id='"+str(d['packages_id'])+"' ")
+    
+    for j in d['package']:
+        #pass
+        dbput("insert into revenue_management.packages_selected (packages_id,package_code_id) \
+               values ('"+str(d['packages_id'])+"','"+str(j)+"')")
+
+    b = { k : v for k,v in d.items() if k in ('rate_details_id')}
+    a = { k : v for k,v in d.items() if k not in ('rate_details_id','days','room_types','package')}
+    gensql('update','revenue_management.rate_details',a,b)
+    
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
+
+
+
     
