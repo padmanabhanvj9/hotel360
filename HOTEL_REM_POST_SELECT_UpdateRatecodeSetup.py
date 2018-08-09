@@ -19,7 +19,8 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                 join revenue_management.sell_control on ratecode_setup.sell_control_id = sell_control.sell_id\
                                 join revenue_management.rate_components on ratecode_setup.rate_components_id = \
                                 rate_components.components_id where ratecode_setup.ratecode_id="+str(d['ratecode_id'])+" "))
-    print(records[0]['rooms_id'])
+    #print(records[0]['rooms_id'])
+    print(records)
     rec1 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
                              from revenue_management.rooms_selected join revenue_management.room_type on \
                              rooms_selected.room_type_id = room_type.room_type_id \
@@ -67,15 +68,15 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                 ratecode_setup.begin_sell_date,ratecode_setup.end_sell_date,market.market_id,\
                                 market.market_code,source.source_id,\
                                 source.source_code_description,ratecode_setup.display_sequence,sell_control.*,rate_components.*,\
-                                ratecode_setup.rooms_id,ratecode_setup.packages_id \
-                                from revenue_management.ratecode_setup \
+                                ratecode_setup.rooms_id,ratecode_setup.packages_id,tranction_details.*\
+                                from revenue_management.ratecode_setup\
                                 join revenue_management.ratecode on ratecode_setup.ratecode_id = ratecode.ratecode_id \
                                 join revenue_management.ratecategory on ratecode.rate_category_id = ratecategory.ratecategory_id\
                                 join revenue_management.market on ratecode_setup.market_id = market.market_id\
                                 join revenue_management.source on ratecode_setup.source_id = source.source_id\
                                 join revenue_management.sell_control on ratecode_setup.sell_control_id = sell_control.sell_id\
-                                join revenue_management.rate_components on ratecode_setup.rate_components_id = \
-                                rate_components.components_id "))
+                                join revenue_management.rate_components on ratecode_setup.rate_components_id = rate_components.components_id\
+				join revenue_management.tranction_details on ratecode_setup.transaction_details_id = tranction_details.tranction_detail_id "))
     #print(records[0]['rooms_id'])
     rec1 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
                              from revenue_management.rooms_selected join revenue_management.room_type on \
