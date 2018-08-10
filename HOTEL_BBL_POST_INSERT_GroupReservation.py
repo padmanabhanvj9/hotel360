@@ -37,10 +37,10 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         x['pf_id'] = id1
         x['pf_mobileno']="NA"
         x['pf_lastname']="NA"
-        x['pf_mobileno']="NA"
+        x['pf_mobileno']="0"
         x['pf_type']="Individual"
         x['pf_city']="NA"
-        x['pf_postalcode']="NA"
+        x['pf_postalcode']="0"
         gensql('insert','profile.pf_individual_profile',x)
         w['pf_id'] = id1
         w['res_guest_status'] = "reserved" 
