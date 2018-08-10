@@ -35,7 +35,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         print(id1)
         update = dbput("update profile.profile_id set profile_id = '"+str(select[0]['profile_id']+1)+"'")
         x['pf_id'] = id1
-        gensql('insert','profile.individual_profile',x)
+        gensql('insert','profile.pf_individual_profile',x)
         w['pf_id'] = id1
         w['res_guest_status'] = "reserved" 
         w['created_by'] = "Ranimanagama"
