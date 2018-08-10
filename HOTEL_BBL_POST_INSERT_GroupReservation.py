@@ -8,7 +8,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
     
     d = request.json
     print(d)
-   
+    x = {}
     res_block_code = d[0]["res_block_code"]
     print("hello",res_block_code,type(res_block_code))
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
