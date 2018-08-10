@@ -35,6 +35,7 @@ from QueryProfileHistory import QueryProfileStatistics
 from QueryProfileHistory import QueryProfileFutureRecord
 from UpdateCompanyProfile import UpdateCompanyProfileRecord
 from UpdateCompanyProfile import UpdateIndividualProfileRecord
+from UpdateProfileCreditcard import UpdateProfileCreditcardnew
 #delete service
 from DeleteProfileRecordAll import DeleteProfileCreditCard
 from DeleteProfileRecordAll import DeleteProfileNegotiate
@@ -400,6 +401,11 @@ def CompanyProfile():
 @app.route("/Profile/UpdateIndividualProfileRecord",methods=['POST'])
 def UpdateProfile():
    return UpdateIndividualProfileRecord(request)
+
+@app.route("/Profile/UpdateProfileCreditcardnew",methods=['POST'])
+def ProfileCreditcardnew():
+   return UpdateProfileCreditcardnew(request)
+
 
 #delete
 @app.route("/Profile/DeleteProfileCreditcard",methods=['POST'])
