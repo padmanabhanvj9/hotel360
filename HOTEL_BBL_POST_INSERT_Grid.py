@@ -28,6 +28,13 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
 
     block_id = l.get("block_id")
     print(block_id)
+
+
+    queryvalue = json.loads(dbget("select grid.*, room_management.room_type.type \
+                from business_block.grid \
+                join room_management.room_type on room_management.room_type.id = business_block.grid.roomtype_id \
+                where grid.block_id = '"+block_id+"'"))
+    print(queryvalue)
     psql = dbget("select total_rooms,rate_one,rate_two,rate_three,rate_four,occupancy_one,occupancy_two,occupancy_three,occupancy_four from business_block.grid where block_id = '"+block_id+"'")
     sqlvalue = json.loads(psql)
     print(sqlvalue)
@@ -55,5 +62,5 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
     s['room_nights_available'] = totalrooms
     sql2 = gensql('insert','business_block.room_revenue',s)
     print(sql2)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnValue':queryvalue,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
