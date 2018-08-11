@@ -10,6 +10,13 @@ def HOTEL_BBL_POST_INSERT_PayMasterReservation(request):
     print(RES_Log_Time)
     RES_Log_Date = datetime.datetime.utcnow().date()
     print(RES_Log_Date)
+
+    psql = json.loads(dbget("select count (*) from reservation.res_reservation where res_block_code='"+block_id+"' and res_guest_status in('PM')"))
+    count = psql[0]['count']
+    
+    if psql[0]['count'] >0:
+         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation Already Exist','ReturnCode':'RAE'}, sort_keys=True, indent=4)) 
+
     sql = json.loads(dbget("select start_date,end_date,block_name,nights,pf_id from business_block.business_block_definite where block_id = '"+block_id+"'"))
 
     startdate = sql[0]['start_date']
