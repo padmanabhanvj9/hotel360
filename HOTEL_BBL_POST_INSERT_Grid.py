@@ -30,10 +30,10 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
         end_date = datetime.datetime.strptime(l['grid_enddate'], "%Y-%m-%d").date()
         print("for loop")
         while st_date <= end_date:
-              print("hi di 1")
+              
               type_id = 1
               while type_id <= 3:
-                 print("hi di 2")
+                 
                  current_grid['block_id'] = l['block_id']
                  current_grid['curnt_date'] = st_date
                  current_grid['grid_type'] = type_id
