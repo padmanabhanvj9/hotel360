@@ -11,7 +11,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  business_block_definite.*,\
 			  block_business_details.business_details_id,block_business_details.res_method_id,block_business_details.payments_id,\
 			  block_business_details.rooming_list_duedate,block_business_details.arrivaltime,block_business_details.depaturetime,\
-			  block_business_details.commission,\
+			  block_business_details.commission,block_business_details.total_rooms_perday,\
 			  block_catering.attendess_id,block_catering.guranteed,block_catering.item_discount_perc,block_catering.attenders,\
 			  block_catering.info_board,block_catering.contract_no,block_catering.onsite_name,block_catering.followup_date,\
 			  block_cancel_catering.catering_cancel_id,block_cancel_catering.catering_cancel_no,block_cancel_catering.catering_reason_id,\
