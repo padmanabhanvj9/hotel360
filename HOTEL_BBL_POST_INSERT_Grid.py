@@ -1,48 +1,78 @@
 from sqlwrapper import gensql,dbget
 import json
+import datetime
+#from datetime import timedelta  
+
 def HOTEL_BBL_POST_INSERT_Grid(request):
-    d = request.json
-    #print(d)
+    d = request.json['grid']
+    print(d)
+
     i,l,s = {},{},{}
-    q = 0
+    q,type_id = 0,1
     rate1,rate2 = 0,0
-    gridapp = []
+    gridapp,current_grid = [],{}
     
     for i in d:
-     print(i)
      for k,v in i.items():
-      #print(k,v)
       if v is '':
-          #print("vall vall",v)
-          i[k] =  0
-       #   print(i)
-        
+          i[k] =  0        
       else:
-          pass
+          pass     
      gridapp.append(i)
-    print("append",gridapp)
-    #y = { k : v for k,v in gridapp.items()}
+    #print("append",gridapp)
+    
     for l in gridapp:
-        sql2 = gensql('insert','business_block.grid',l)
-        print(sql2)
+        e = { k : v for k,v in l.items() if k not in ('roomtype')}
+        b_id = { k : v for k,v in l.items() if k  in ('block_id')}
+        
+        gensql('insert','business_block.grid',e)
+        st_date = datetime.datetime.strptime(l['grid_startdate'],"%Y-%m-%d").date()
+        end_date = datetime.datetime.strptime(l['grid_enddate'], "%Y-%m-%d").date()
+        print("for loop")
+        while st_date <= end_date:
+              print("hi di 1")
+              type_id = 1
+              while type_id <= 3:
+                 print("hi di 2")
+                 current_grid['block_id'] = l['block_id']
+                 current_grid['curnt_date'] = st_date
+                 current_grid['grid_type'] = type_id
+                 if type_id == 3:
+                     current_grid[''+l['roomtype']+''] = 0
+                 else:    
+                    current_grid[''+l['roomtype']+''] = l['total_rooms']
+                 
+                 gensql('insert','business_block.current_grid',current_grid)
+                 current_grid = {}
+                 type_id += 1
+              st_date = st_date + datetime.timedelta(days=1)
+              
+    grid_data = json.loads(gensql('select','business_block.current_grid','*',b_id))
+    #print("grid_data",grid_data)
+    grid_data1 = []
+    for data in grid_data:
+      for k,v in data.items():
+         if v is None:
+           data[k] =  0        
+         else:
+           pass
+      grid_data1.append(data)
+    print("---------------------------------------------------------------")
+    #print("grid_data1",grid_data1)
+    block_id = d[0]['block_id']
+    #print(block_id)
+    
 
-    block_id = l.get("block_id")
-    print(block_id)
+    
+    
+    sqlvalue = json.loads(dbget("select total_rooms,rate_one,rate_two,rate_three,rate_four,occupancy_one,\
+                                 occupancy_two,occupancy_three,occupancy_four from business_block.grid where \
+                                 block_id = '"+block_id+"'"))
 
-
-    queryvalue = json.loads(dbget("select grid.*, room_management.room_type.type \
-                from business_block.grid \
-                join room_management.room_type on room_management.room_type.id = business_block.grid.roomtype_id \
-                where grid.block_id = '"+block_id+"'"))
-    print(queryvalue)
-    psql = dbget("select total_rooms,rate_one,rate_two,rate_three,rate_four,occupancy_one,occupancy_two,occupancy_three,occupancy_four from business_block.grid where block_id = '"+block_id+"'")
-    sqlvalue = json.loads(psql)
     print(sqlvalue)
     #<-----------count ------>
     for i in sqlvalue:
         q = q + i['total_rooms']
-        #print("summa",i['total_rooms'])
-        #print("plus",q)
     totalrooms = q
     print("totalrooms",totalrooms,type(totalrooms))
     
@@ -62,5 +92,6 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
     s['room_nights_available'] = totalrooms
     sql2 = gensql('insert','business_block.room_revenue',s)
     print(sql2)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnValue':queryvalue,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnValue':grid_data1,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    #return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
