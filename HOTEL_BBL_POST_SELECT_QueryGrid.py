@@ -13,7 +13,7 @@ def HOTEL_BBL_POST_SELECT_QueryGrid(request):
            data[k] =  0        
          else:
            pass
-    grid_data1.append(data)
+      grid_data1.append(data)
     print(sql)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':grid_data1,'ReturnCode':'RRTS'},indent=4))
    
