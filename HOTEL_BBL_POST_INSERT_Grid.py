@@ -5,6 +5,7 @@ import datetime
 
 def HOTEL_BBL_POST_INSERT_Grid(request):
     d = request.json['grid']
+    #print(d['block_id'],type(d['block_id']))
     print(d)
 
     i,l,s = {},{},{}
@@ -23,17 +24,17 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
     
     for l in gridapp:
         e = { k : v for k,v in l.items() if k not in ('roomtype')}
-        b_id = { k : v for k,v in l.items() if k  in ('block_id')}
+        #b_id = { k : v for k,v in l.items() if k  in ('block_id')}
         
         gensql('insert','business_block.grid',e)
         st_date = datetime.datetime.strptime(l['grid_startdate'],"%Y-%m-%d").date()
         end_date = datetime.datetime.strptime(l['grid_enddate'], "%Y-%m-%d").date()
         print("for loop")
         while st_date <= end_date:
-              
+              print("hi di 1")
               type_id = 1
               while type_id <= 3:
-                 
+                 print("hi di 2")
                  current_grid['block_id'] = l['block_id']
                  current_grid['curnt_date'] = st_date
                  current_grid['grid_type'] = type_id
@@ -47,7 +48,9 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
                  type_id += 1
               st_date = st_date + datetime.timedelta(days=1)
               
-    grid_data = json.loads(gensql('select','business_block.current_grid','*',b_id))
+    grid_data = json.loads(dbget("SELECT current_grid.*,grid_type_desc FROM business_block.current_grid join\
+                                   business_block.grid_type on current_grid.grid_type = grid_type.grid_type_id \
+                                   where block_id="+str(l['block_id'])+" "))
     #print("grid_data",grid_data)
     grid_data1 = []
     for data in grid_data:
