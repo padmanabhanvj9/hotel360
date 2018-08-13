@@ -13,3 +13,9 @@ def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
 
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
    
+def HOTEL_BBL_POST_SELECT_SelectRoomingList_Roomtype(request):
+    d = request.json['block_id']
+
+    data1 = json.loads(dbget("select roomtype_id,total_rooms,room_type.type from business_block.grid join \
+                             room_management.room_type on grid.roomtype_id = room_type.id where block_id="+d+" "))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return_value':data1,'Return': 'Record Retrieved Successfully','ReturnCode':'RRS'}, sort_keys=True, indent=4))
