@@ -288,6 +288,8 @@ from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_INSERT_Pay
 from HOTEL_BBL_POST_INSERT_PayMasterReservation import HOTEL_BBL_POST_SELECT_QueryPayMasterReservation
 from HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch import HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch
 from HOTEL_BBL_POST_UPDATE_UpdateGrid import HOTEL_BBL_POST_SELECT_SelectRoomingList_Roomtype
+from HOTEL_BBL_POST_UPDATE_UpdateGrid import HOTEL_BBL_POST_UPDATE_UpdateRoomingList_Roomtype
+
 #<--------------------------------------------------------------------------------------------->
 #<---------------------business block dropdown--------------------------------------->
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_BusinessBlockStatus
@@ -1149,7 +1151,9 @@ def EditBusinessBlockSearch():
 def SelectRoomingList_Roomtype():
    return HOTEL_BBL_POST_SELECT_SelectRoomingList_Roomtype(request)
 
-
+@app.route("/HOTEL_BBL_POST_UPDATE_UpdateRoomingList_Roomtype",methods=['POST'])
+def UpdateRoomingList_Roomtype():
+   return HOTEL_BBL_POST_UPDATE_UpdateRoomingList_Roomtype(request)
 
 #<------------------Buiness Block dropdown---------->
 @app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockStatus",methods=['GET'])
