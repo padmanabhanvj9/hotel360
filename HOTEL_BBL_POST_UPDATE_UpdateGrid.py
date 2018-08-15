@@ -21,9 +21,19 @@ def HOTEL_BBL_POST_SELECT_SelectRoomingList_Roomtype(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return_value':data1,'Return': 'Record Retrieved Successfully','ReturnCode':'RRS'}, sort_keys=True, indent=4))
 
 def HOTEL_BBL_POST_UPDATE_UpdateRoomingList_Roomtype(request):
-    block_id = request.json['block_id']
-    ava_rooms = request.json['available_rooms']
-
-    sql = dbput("update business_block.grid set available_rooms='"+ava_rooms+"' where block_id='"+block_id+"'")
-    print(sql)
+     #block_id = request.json['block_id']
+    d = request.json
+    x,a,e,y = {},{},{},{}
+    x = d['data']
+    for i in x:
+        y = { k : v for k,v in i.items() if v != '' if k not in ('type')}
+        
+        a = { k : v for k,v in y.items() if v != '' if k not in ('block_id','roomtype_id')}
+        print(a)
+        e = { k : v for k,v in y.items() if k != '' if k in ('block_id','roomtype_id')}
+        print(e)
+            
+        
+        sql = gensql('update','business_block.grid',a,e)
+        print(sql)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
