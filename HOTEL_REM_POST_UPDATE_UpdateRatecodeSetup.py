@@ -81,13 +81,13 @@ def HOTEL_REM_POST_UPDATE_RATE_DETAILS(request):
         #pass
         dbput("insert into revenue_management.rooms_selected (rooms_id,room_type_id) \
                values ('"+str(d['rooms_id'])+"','"+str(i)+"') ")
-
-    dbput("delete from revenue_management.packages_selected where packages_id='"+str(d['packages_id'])+"' ")
+    if d['rate_tier_id'] != 0:
+       dbput("delete from revenue_management.packages_selected where packages_id='"+str(d['packages_id'])+"' ")
     
-    for j in d['package']:
+       for j in d['package']:
         #pass
-        dbput("insert into revenue_management.packages_selected (packages_id,package_code_id) \
-               values ('"+str(d['packages_id'])+"','"+str(j)+"')")
+          dbput("insert into revenue_management.packages_selected (packages_id,package_code_id) \
+                values ('"+str(d['packages_id'])+"','"+str(j)+"')")
 
     b = { k : v for k,v in d.items() if k in ('rate_details_id')}
     a = { k : v for k,v in d.items() if k not in ('rate_details_id','days','room_types','package')}
