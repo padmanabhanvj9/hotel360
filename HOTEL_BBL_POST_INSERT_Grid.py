@@ -53,7 +53,7 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
 #                                   where block_id="+str(l['block_id'])+" "))
     grid_data =  json.loads(dbget("SELECT current_grid.*,grid_type_desc FROM business_block.current_grid join\
                                    business_block.grid_type on current_grid.grid_type = grid_type.grid_type_id \
-                                   where block_id="+str(l['block_id'])+" "))
+                                   where block_id="+str(l['block_id'])+" order by current_grid_id "))
     #print("grid_data",grid_data)
     grid_data1 = []
     for data in grid_data:
