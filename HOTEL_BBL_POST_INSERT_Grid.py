@@ -34,12 +34,12 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
               
               type_id = 1
               while type_id <= 3:
-                 count = json.loads(dbget(" select count(*) from business_block.current_grid \
-                                            where block_id="+l['block_id']+" and curnt_date='"+l['grid_startdate']+"' and \
+                 count = json.loads(dbget(" select count(grid_type) from business_block.current_grid \
+                                            where block_id="+l['block_id']+" and curnt_date='"+str(st_date)+"' and \
                                             grid_type="+str(type_id)+""))
                  
                  print(count)
-                 if count[0]['count'] <= 3:
+                 if count[0]['count'] == 0:
                      current_grid['block_id'] = l['block_id']
                      current_grid['curnt_date'] = st_date
                      current_grid['grid_type'] = type_id
@@ -50,7 +50,7 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
 
                      gensql('insert','business_block.current_grid',current_grid)
                  else:
-                     
+                     a,b = {},{}
                      b['block_id'] = l['block_id']
                      b['curnt_date'] = st_date
                      b['grid_type'] = type_id
