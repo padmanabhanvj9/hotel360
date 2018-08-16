@@ -110,7 +110,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
         sql5 = gensql('update','business_block.block_meeting',m,n)
         print(sql5)
     #<---------------------room cancel or catering cancel------------------------------------>
-        
+    '''   
     u = d['Catering Cancel']
     cat_can1 = { k : v for k,v in u.items() if v != '' }
     print(cat_can1)
@@ -161,6 +161,6 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
             s['description'] = "Room cancelled for"+" "+str(blockid)
             gensql('insert','business_block.business_block_activity_log',s)
   
-
+    '''
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','Number':result_dic,'ReturnCode':'RUS'}, sort_keys=True, indent=4))
    
