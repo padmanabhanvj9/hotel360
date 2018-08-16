@@ -67,8 +67,9 @@ def HOTEL_BBL_POST_INSERT_PayMasterReservation(request):
 def HOTEL_BBL_POST_SELECT_QueryPayMasterReservation(request):
     d = request.json
     block_id = d.get("block_id")
-    psql = json.loads(dbget("select * from reservation.res_reservation where res_block_code = '"+block_id+"' and res_room_type in ('PM')"))
-    print(psql)
+    #psql = json.loads(dbget("select * from reservation.res_reservation where res_block_code = '"+block_id+"' and res_room_type in ('PM')"))
+    #print(psql)
+    psql = json.loads(dbget("select * from reservation.res_reservation where res_block_code = '"+block_id+"' "))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':psql  ,'ReturnCode':'RRTS'},indent=4))
    
     
