@@ -34,16 +34,31 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
               
               type_id = 1
               while type_id <= 3:
+                 count = json.loads(dbget(" select count(*) from business_block.current_grid \
+                                            where block_id="+l['block_id']+" and curnt_date='"+l['grid_startdate']+"' and \
+                                            grid_type="+str(type_id)+""))
                  
-                 current_grid['block_id'] = l['block_id']
-                 current_grid['curnt_date'] = st_date
-                 current_grid['grid_type'] = type_id
-                 if type_id == 3:
-                     current_grid[''+l['roomtype']+''] = 0
-                 else:    
-                    current_grid[''+l['roomtype']+''] = l['total_rooms']
-                 
-                 gensql('insert','business_block.current_grid',current_grid)
+                 print(count)
+                 if count[0]['count'] <= 3:
+                     current_grid['block_id'] = l['block_id']
+                     current_grid['curnt_date'] = st_date
+                     current_grid['grid_type'] = type_id
+                     if type_id == 3:
+                         current_grid[''+l['roomtype']+''] = 0
+                     else:    
+                        current_grid[''+l['roomtype']+''] = l['total_rooms']
+
+                     gensql('insert','business_block.current_grid',current_grid)
+                 else:
+                     
+                     b['block_id'] = l['block_id']
+                     b['curnt_date'] = st_date
+                     b['grid_type'] = type_id
+                     if type_id == 3:
+                         a[''+l['roomtype']+''] = 0
+                     else:    
+                        a[''+l['roomtype']+''] = l['total_rooms']
+                     gensql('update','business_block.current_grid',a,b)
                  current_grid = {}
                  type_id += 1
               st_date = st_date + datetime.timedelta(days=1)
