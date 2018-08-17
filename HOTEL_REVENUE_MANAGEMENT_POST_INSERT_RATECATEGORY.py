@@ -57,17 +57,17 @@ def ratedetailss(request):
        package_id = json.loads(dbget("select max(packages_id) as number2 from revenue_management.packages_selected"))
        print("package_id",package_id[0]['number2'],type(package_id[0]['number2']))
        for j in d['package']:
-        #pass
+         print(j)
          dbput("insert into revenue_management.packages_selected (packages_id,package_code_id) \
                values ('"+str(package_id[0]['number2']+1)+"','"+str(j)+"')")
        e['packages_id'] =  int(package_id[0]['number2']+1)
-    #print("3333",e)
+    print("3333",e)
     gensql('insert','revenue_management.rate_days',d['days'])
     #days_id = json.loads(gensql('select','revenue_management.rate_days','rate_days_id',d['days']))
     days_id = json.loads(dbget("select max(rate_days_id) as number3 from revenue_management.rate_days"))
     print("days",days_id[0]['number3'])
     e['rate_days_id'] = int(days_id[0]['number3'])
-    #print("4444",e)
+    print("4444",e)
     gensql('insert','revenue_management.rate_details',e)
     
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
