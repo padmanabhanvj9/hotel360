@@ -52,7 +52,7 @@ def ratedetailss(request):
                values ('"+str(room_id[0]['number1']+1)+"','"+str(i)+"') ")
     e['rooms_id'] = int(room_id[0]['number1']+1)
     #print("2222",e)
-    if d['rate_tier_id'] != 0:
+    if d['rate_tier_id'] == 0:
             
        package_id = json.loads(dbget("select max(packages_id) as number2 from revenue_management.packages_selected"))
        print("package_id",package_id[0]['number2'],type(package_id[0]['number2']))
