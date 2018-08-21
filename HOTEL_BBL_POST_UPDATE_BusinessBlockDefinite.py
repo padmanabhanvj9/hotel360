@@ -47,14 +47,21 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     #<---------------------------rooms tab-------------------------->   
     #y = { k : v for k,v in d.items()if v != ''  if  k  in ('Rooms')}
     y = d['Rooms']
-    
+    block_id = y.get("block_id")
+    y = { k : v for k,v in r.items() if v != '' }
+    sqlcount = json.loads(dbget("select count(*) from business_block.block_room where block_id ='"+block_id+"'"))
+    #print(sqlcount)
     b = { k : v for k,v in y.items() if v != '' if k not in ('block_id')}
     print(b)
     c = { k : v for k,v in y.items() if k != '' if k in ('block_id')}
     print(c)
     
-    print("Rooms",b,type(b),len(b))
-    if len(b) != 0:
+    print("Rooms",b,type(b),len(b))  
+    print("block_meeting",m,type(m),len(m))
+    if sqlcount[0]['count'] == 0:
+            gensql('insert','business_block.block_room',y)
+
+    elif len(b) != 0:
         
         sql2 = gensql('update','business_block.block_room',b,c)
         print(sql2)
@@ -64,16 +71,25 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     #<------------------------details tab----------------------------->    
     #z = { k : v for k,v in d.items()if v != ''  if  k  in ('Block_details')}
     z = d['Block_details']
-   
+    block_id = z.get("block_id")
+    z = { k : v for k,v in p.items() if v != ''}
+    print("sfdasf",z)
+    sqlcount = json.loads(dbget("select count(*) from business_block.block_business_details where block_id ='"+block_id+"'"))
+    print(sqlcount)
     f = { k : v for k,v in z.items() if v != '' if k not in ('block_id')}
     print(f)
     g = { k : v for k,v in z.items() if k != '' if k in ('block_id')}
     print(g)
     print("Block_details",f,type(f),len(f))
-    if len(f) != 0:
+
+    if sqlcount[0]['count'] == 0:
+           # print("if block")
+            gensql('insert','business_block.block_business_details',z)
+         
+    elif len(f) != 0:
         
         sql3 = gensql('update','business_block.block_business_details',f,g)
-        print(sql3)
+        #print(sql3)
 
     else:
         pass
@@ -81,34 +97,56 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     #p = { k : v for k,v in d.items()if v != ''  if  k  in ('Catering')}
     #print(p)
     p = d['Catering']
-   
+    block_id = p.get("block_id")
+    p = { k : v for k,v in p.items() if v != ''}
+    print("sfdasf",p)
+    sqlcount = json.loads(dbget("select count(*) from business_block.block_catering where block_id ='"+block_id+"'"))
+    print(sqlcount)
     h = { k : v for k,v in p.items() if v != '' if k not in ('block_id')}
-    print(h)
-    i = { k : v for k,v in p.items() if k != '' if k in ('block_id')}
+    print("hhhhhhhhhhhhhhhhhhhh",h)
+    i = { k : v for k,v in p.items() if k in ('block_id')}
     print(i)
     print("Catering",h,type(h),len(h))
-    if len(h) != 0:
-        
-        sql4 = gensql('update','business_block.block_catering',h,i)
-        print(sql4)
+    
+    if sqlcount[0]['count'] == 0:
+            print("if block")
+            gensql('insert','business_block.block_catering',p)
+            
+
+    elif len(h) != 0:
+       print("else block") 
+       #i = { k : v for k,v in d.items()if v != ''} 
+       sql4 = gensql('update','business_block.block_catering',h,i)
+       print(sql4)
         
     else:
-        pass
+       pass
 
 
 
     #<--------------------------------concurrent meeting tab-------------------------------->
     r = d['block_meeting']
-    
+    block_id = r.get("block_id")
+    r = { k : v for k,v in r.items() if v != '' }
+    sqlcount = json.loads(dbget("select count(*) from business_block.block_meeting where block_id ='"+block_id+"'"))
+    #print(sqlcount)
+        
     m = { k : v for k,v in r.items() if v != '' if k not in ('block_id')}
     print(m)
     n = { k : v for k,v in r.items() if k != '' if k in ('block_id')}
     print(n)
+   
     print("block_meeting",m,type(m),len(m))
-    if len(m) != 0:
-        
-        sql5 = gensql('update','business_block.block_meeting',m,n)
-        print(sql5)
+    if sqlcount[0]['count'] == 0:
+            gensql('insert','business_block.block_meeting',r)
+    
+    elif len(m) != 0:
+        print("dsd")
+        gensql('update','business_block.block_meeting',m,n)
+      
+    else:
+        pass
+    
     #<---------------------room cancel or catering cancel------------------------------------>
     '''   
     u = d['Catering Cancel']
