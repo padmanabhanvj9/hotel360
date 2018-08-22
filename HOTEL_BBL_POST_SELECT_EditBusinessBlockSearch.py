@@ -48,7 +48,12 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  left join reservation.cancel_reason on reservation.cancel_reason.id = business_block.block_cancel_catering.catering_reason_id  \
 			  left join business_block.block_meeting on block_meeting.block_id = business_block_definite.block_id \
 			  left join business_block.meeting_space_type on meeting_space_type.id = block_meeting.meeting_space_type_id where business_block_definite.block_id = '"+block_id+"' "))
+    profiletype = json.loads(dbget("select pf_id from business_block.business_block_definite where block_id='"+block_id+"' "))
+    profile_id = profiletype[0]['pf_id']
+
+    pftype = json.loads(dbget("select pf_type from profile.pf_company_profile where pf_id = '"+profile_id+"'"))
+    
     print(s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s  ,'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s,'profiletype':pftype[0]['pf_type'],'ReturnCode':'RRTS'},indent=4))
    
 
