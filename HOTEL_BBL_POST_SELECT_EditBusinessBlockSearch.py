@@ -26,7 +26,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  business_block.block_status.status,\
 			  business_block.block_type.block_type,\
 			  business_block.inventory_control.inventory_control,\
-			  revenue_management.ratecode.rate_description,\
+			  profile.ratecode.ratecode,\
 			  reservation.payment.payment_description,\
 			  catering_reason_id, reservation.cancel_reason.reason reason_one, room_cancel_reason,(select reservation.cancel_reason.reason from reservation.cancel_reason where reservation.cancel_reason.id = business_block.block_cancel_catering.room_cancel_reason) as reason_two,\
                           business_block.meeting_space_type.size_type\
@@ -40,7 +40,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  left join reservation.restype on restype.id = block_room.res_type_id\
 			  left join profile.pf_company_profile on pf_company_profile.pf_id = business_block_definite.pf_id \
 			  left join business_block.inventory_control on inventory_control.inventory_control_id = block_room.inventory_control_id \
-                          left join revenue_management.ratecode on revenue_management.ratecode.ratecode_id = block_room.ratecode_id \
+                          left join profile.ratecode on rprofile.ratecode.id = block_room.ratecode_id \
 			  left join business_block.block_business_details on block_business_details.block_id = business_block_definite.block_id \
 			  left join reservation.payment on reservation.payment.id = block_business_details.payments_id  \
 			  left join business_block.block_catering on business_block.block_catering.block_id = business_block_definite.block_id \
