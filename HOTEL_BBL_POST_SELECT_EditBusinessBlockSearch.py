@@ -51,9 +51,9 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
     profiletype = json.loads(dbget("select pf_id from business_block.business_block_definite where block_id='"+block_id+"' "))
     profile_id = profiletype[0]['pf_id']
 
-    pftype = json.loads(dbget("select pf_type from profile.pf_company_profile where pf_id = '"+profile_id+"'"))
+    pftype = json.loads(dbget("select pf_type,pf_account from profile.pf_company_profile where pf_id = '"+profile_id+"'"))
     
     print(s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s,'profiletype':pftype[0]['pf_type'],'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
    
 
