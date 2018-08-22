@@ -40,7 +40,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  left join reservation.restype on restype.id = block_room.res_type_id\
 			  left join profile.pf_company_profile on pf_company_profile.pf_id = business_block_definite.pf_id \
 			  left join business_block.inventory_control on inventory_control.inventory_control_id = block_room.inventory_control_id \
-                          left join profile.ratecode on rprofile.ratecode.id = block_room.ratecode_id \
+                          left join profile.ratecode on profile.ratecode.id = block_room.ratecode_id \
 			  left join business_block.block_business_details on block_business_details.block_id = business_block_definite.block_id \
 			  left join reservation.payment on reservation.payment.id = block_business_details.payments_id  \
 			  left join business_block.block_catering on business_block.block_catering.block_id = business_block_definite.block_id \
@@ -56,4 +56,3 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
     print(s)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
    
-
