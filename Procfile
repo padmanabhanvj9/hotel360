@@ -127,4 +127,8 @@ worker: gunicorn HOTEL_BBL_POST_INSERT_CalculateRoomRevenue.py
 worker: gunicorn HOTEL_BBL_POST_INSERT_PayMasterReservation.py
 worker: gunicorn HOTEL_BBL_GET_SELECT_QueryDrodown.py
 worker: gunicorn HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch.py
+worker: gunicorn HOTEL_PAC_POST_INSERT_Package_dropdowns.py
+worker: gunicorn HOTEL_PAC_POST_SELECT_Package_dropdowns.py
+worker: gunicorn HOTEL_PAC_POST_INSERT_Package_Code.py
+worker: gunicorn HOTEL_PAC_POST_UPDATE_Package_Code.py
 clock: python clock.py
