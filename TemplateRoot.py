@@ -296,6 +296,23 @@ from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_BusinessBlock
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_InventoryContrtol
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_MeetingSpaceType
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_Block_Type
+
+#<---------------------Packages------------------------------->
+from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Forecastgroup
+from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Transactioncode
+from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Attributes
+from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Postingrhythm
+from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Calculaterule
+from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Iteminventory
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Forecastgroup
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Transactioncode
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Postingrhythm
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Calculaterule
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Iteminventory
+from HOTEL_PAC_POST_INSERT_Package_Code import HOTEL_PAC_POST_INSERT_Packages
+from HOTEL_PAC_POST_INSERT_Package_Code import HOTEL_PAC_POST_INSERT_Packagesdetails
+from HOTEL_PAC_POST_UPDATE_Package_Code import HOTEL_PAC_POST_UPDATE_Packages
+#<--------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from flask_cors import CORS
@@ -1171,6 +1188,64 @@ def meeting_space():
 @app.route("/HOTEL_BBL_GET_SELECT_Block_Type",methods=['GET'])
 def HOTEL_BBL_GET_SELECT_Block_Typebgg():
    return HOTEL_BBL_GET_SELECT_Block_Type()
+#<-------------------Packages--------------------------------------->
+
+@app.route("/HOTEL_PAC_POST_INSERT_Forecastgroup",methods=['POST'])
+def INSERT_Forecastgroup():
+   return HOTEL_PAC_POST_INSERT_Forecastgroup(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Transactioncode",methods=['POST'])
+def INSERT_Transactioncode():
+   return HOTEL_PAC_POST_INSERT_Transactioncode(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Attributes",methods=['POST'])
+def INSERT_Attributes():
+   return HOTEL_PAC_POST_INSERT_Attributes(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Postingrhythm",methods=['POST'])
+def INSERT_Postingrhythm():
+   return HOTEL_PAC_POST_INSERT_Postingrhythm(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Calculaterule",methods=['POST'])
+def INSERT_Calculaterule():
+   return HOTEL_PAC_POST_INSERT_Calculaterule(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Iteminventory",methods=['POST'])
+def INSERT_Iteminventory():
+   return HOTEL_PAC_POST_INSERT_Iteminventory(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Forecastgroup",methods=['POST'])
+def SELECT_Forecastgroup():
+   return HOTEL_PAC_POST_SELECT_Forecastgroup(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Transactioncode",methods=['POST'])
+def SELECT_Transactioncode():
+   return HOTEL_PAC_POST_SELECT_Transactioncode(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Postingrhythm",methods=['POST'])
+def SELECT_Postingrhythm():
+   return HOTEL_PAC_POST_SELECT_Postingrhythm(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Calculaterule",methods=['POST'])
+def SELECT_Calculaterule():
+   return HOTEL_PAC_POST_SELECT_Calculaterule(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Iteminventory",methods=['POST'])
+def SELECT_Iteminventory():
+   return HOTEL_PAC_POST_SELECT_Iteminventory(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Packages",methods=['POST'])
+def INSERT_Packages():
+   return HOTEL_PAC_POST_INSERT_Packages(request)
+
+@app.route("/HOTEL_PAC_POST_INSERT_Packagesdetails",methods=['POST'])
+def INSERT_Packagesdetails():
+   return HOTEL_PAC_POST_INSERT_Packagesdetails(request)
+
+@app.route("/HOTEL_PAC_POST_UPDATE_Packages",methods=['POST'])
+def UPDATE_Packages():
+   return HOTEL_PAC_POST_UPDATE_Packages(request)
+#<------------------------------------------------------------------>
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
