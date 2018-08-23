@@ -312,6 +312,10 @@ from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Itemin
 from HOTEL_PAC_POST_INSERT_Package_Code import HOTEL_PAC_POST_INSERT_Packages
 from HOTEL_PAC_POST_INSERT_Package_Code import HOTEL_PAC_POST_INSERT_Packagesdetails
 from HOTEL_PAC_POST_UPDATE_Package_Code import HOTEL_PAC_POST_UPDATE_Packages
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Packages
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Packages_All
+from HOTEL_PAC_POST_DELETE_Package_Code import HOTEL_PAC_POST_DELETE_Package
+from HOTEL_PAC_POST_DELETE_Package_Code import HOTEL_PAC_POST_DELETE_Packagedetails
 #<--------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -1245,6 +1249,23 @@ def INSERT_Packagesdetails():
 @app.route("/HOTEL_PAC_POST_UPDATE_Packages",methods=['POST'])
 def UPDATE_Packages():
    return HOTEL_PAC_POST_UPDATE_Packages(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Packages",methods=['POST'])
+def SELECT_Packages():
+   return HOTEL_PAC_POST_SELECT_Packages(request)
+
+@app.route("/HOTEL_PAC_POST_SELECT_Packages_All",methods=['POST'])
+def SELECT_Packages_All():
+   return HOTEL_PAC_POST_SELECT_Packages_All(request)
+
+@app.route("/HOTEL_PAC_POST_DELETE_Package",methods=['POST'])
+def DELETE_Package():
+   return HOTEL_PAC_POST_DELETE_Package(request)
+
+@app.route("/HOTEL_PAC_POST_DELETE_Packagedetails",methods=['POST'])
+def DELETE_Packagedetails():
+   return HOTEL_PAC_POST_DELETE_Packagedetails(request)
+
 #<------------------------------------------------------------------>
 if __name__ == "__main__":
     app.run(debug=True)
