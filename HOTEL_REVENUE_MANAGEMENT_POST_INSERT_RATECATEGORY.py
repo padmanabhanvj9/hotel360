@@ -32,6 +32,13 @@ def crrencytab(request):
 def negotiated(request):
     d = request.json
     print(d)
+    i = json.loads(dbget("select count(*) from revenue_management.negotiated_rate where rate_code_id="+str(d['rate_code_id'])+""))
+    print(i)
+    if int(i[0]['count']) == 0 :
+       gensql('insert','revenue_management.currency',d)
+       return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
+    else:
+       return(json.dumps({"Return": "Record Already Exist","ReturnCode": "RAE","Status": "Success","StatusCode": "200"},indent=4)) 
     gensql('insert','revenue_management.negotiated_rate',d)
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
 
