@@ -75,7 +75,7 @@ def HOTEL_REM_POST_SELECT_Ratecode(request):
     
     
 def HOTEL_REM_POST_SELECT_Negotiated_Rate(request):
-    s = json.loads(dbget("SELECT  rate_code,negotiate_begin_sell_date, negotiate_end_sell_date, negotiate_commision_code_id,\
+    s = json.loads(dbget("SELECT  rate_code,ratecode_id,negotiate_begin_sell_date, negotiate_end_sell_date, negotiate_commision_code_id,\
                           rate_description,negotiated_code_id \
                           FROM revenue_management.negotiated_rate join revenue_management.ratecode\
                           on negotiated_rate.rate_code_id = ratecode.ratecode_id"))
