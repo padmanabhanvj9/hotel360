@@ -25,17 +25,19 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                 where ratecode_setup.ratecode_id="+str(d['ratecode_id'])+" "))
     #print(records[0]['rooms_id'])
     #print(records)
-    #if len(records) != 0:
-    if rec3[0]['rooms_id'] is not None:
-       rec1 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
+    if len(records) != 0:
+      #if rec3[0]['rooms_id'] is not None:
+        print("rooms") 
+        rec1 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
                              from revenue_management.rooms_selected join revenue_management.room_type on \
                              rooms_selected.room_type_id = room_type.room_type_id \
                              where rooms_id ="+str(records[0]['rooms_id'])+""))
     
     #records.append({"room_types":rec1})
     #print(records[0]['packages_id'])
-    if rec3[0]['packages_id'] is not None:   
-       rec2 = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
+        #if rec3[0]['packages_id'] is not None:
+        print("packages") 
+        rec2 = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
                              packages_codes.package_code,packages_codes.package_code_id\
                              from revenue_management.packages_selected\
                              join revenue_management.packages_codes on packages_selected.package_code_id =  \
@@ -53,18 +55,19 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                              on rate_details.rate_tier_id = rate_tier.rate_tier_id where \
                              rate_details.ratecode_id="+str(d['ratecode_id'])+" "))
     print("rec3",rec3)
-    #if len(rec3) != 0:and
-    if rec3[0]['rooms_id'] is not None:
+    if len(rec3) != 0:
+      #if rec3[0]['rooms_id'] is not None:
     
-        
-      rec4 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
+       print("rooms")  
+       rec4 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
                              from revenue_management.rooms_selected join revenue_management.room_type on \
                              rooms_selected.room_type_id = room_type.room_type_id \
                              where rooms_id ="+str(rec3[0]['rooms_id'])+""))
     #rec3.append({"room_types":rec4})
     #print(records[0]['packages_id'])
-    if rec3[0]['packages_id'] is not None:  
-      rec5 = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
+       if rec3[0]['packages_id'] is not None:
+         print("packages")  
+         rec5 = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
                              packages_codes.package_code,packages_codes.package_code_id\
                              from revenue_management.packages_selected\
                              join revenue_management.packages_codes on packages_selected.package_code_id =  \
