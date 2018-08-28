@@ -2,6 +2,10 @@ from sqlwrapper import gensql,dbget
 import json
 def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
     d = request.json
+    print("input ..................",d)
+    
+    
+    '''
     a,e = {},{}
     a = { k : v for k,v in d.items() if v != '' if k not in ('block_id','grid_id')}
     print(a)
@@ -10,7 +14,7 @@ def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
      
     sql = gensql('update','business_block.grid',a,e)
     print(sql)
-
+    '''
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
    
 def HOTEL_BBL_POST_SELECT_SelectRoomingList_Roomtype(request):
@@ -56,7 +60,9 @@ def HOTEL_BBL_POST_SELECT_SelectRoomtype(request):
 def HOTEL_BBL_POST_SELECT_gridservice(request):
     block_id =request.json['block_id']
     roomtype_id = request.json['roomtype_id']
-    sql = json.loads(dbget("select * from business_block.grid where block_id = '"+block_id+"' and roomtype_id = '"+roomtype_id+"'"))
+    sql = json.loads(dbget("select room_type.type, business_block.grid.* \
+                           from business_block.grid \
+                           left join room_management.room_type on room_management.room_type.id = business_block.grid.roomtype_id where grid.block_id = '"+block_id+"' and grid.roomtype_id = '"+roomtype_id+"'"))
 
     print(sql)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Retrieved Successfully','ReturnCode':'RRS','ReturnValue':sql}, sort_keys=True, indent=4))
