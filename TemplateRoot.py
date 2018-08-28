@@ -1274,7 +1274,7 @@ def DELETE_Package():
 @app.route("/HOTEL_PAC_POST_DELETE_Packagedetails",methods=['POST'])
 def DELETE_Packagedetails():
    return HOTEL_PAC_POST_DELETE_Packagedetails(request)
-
+#dddddddd
 #<------------------------------------------------------------------>
 if __name__ == "__main__":
     app.run(debug=True)
