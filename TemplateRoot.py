@@ -1013,7 +1013,7 @@ def updatepostingcash():
 def historylog():
     return HOTEL_CAH_POST_POSTING_HISTORY_LOG(request)
 
-@app.route("/HOTEL_CAH_POST_FOLIO_HISTORY",methods=['POST'])
+@app.route("/HOTEL_CAH_POST_FOLIO_HISTORY",methods=['POST','GET'])
 def folio():
     return HOTEL_CAH_POST_FOLIO_HISTORY(request)
 
