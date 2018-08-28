@@ -37,3 +37,26 @@ def HOTEL_BBL_POST_UPDATE_UpdateRoomingList_Roomtype(request):
         sql = gensql('update','business_block.grid',a,e)
         print(sql)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
+def HOTEL_BBL_POST_SELECT_SelectRoomtype(request):
+    block_id =request.json['block_id']
+    s = []
+    p = 0
+    sql = json.loads(dbget("select roomtype_id from business_block.grid where block_id='"+block_id+"'"))
+    print(sql)
+    for i in sql:
+        print(i['roomtype_id'])
+        psql = json.loads(dbget("select * from room_management.room_type where  room_type.id = '"+str(i['roomtype_id'])+"'"))
+        print(psql)
+        #room_type = psql
+        s.append(psql[0])
+       # print(room_type)
+    print(s)   
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Retrieved Successfully','ReturnCode':'RRS','ReturnValue':s}, sort_keys=True, indent=4))
+def HOTEL_BBL_POST_SELECT_gridservice(request):
+    block_id =request.json['block_id']
+    roomtype_id = request.json['roomtype_id']
+    sql = json.loads(dbget("select * from business_block.grid where block_id = '"+block_id+"' and roomtype_id = '"+roomtype_id+"'"))
+
+    print(sql)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Retrieved Successfully','ReturnCode':'RRS','ReturnValue':sql}, sort_keys=True, indent=4))
