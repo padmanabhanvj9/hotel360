@@ -56,7 +56,8 @@ def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
         q = q + i['total_rooms']
     totalrooms = q
     print("totalrooms",totalrooms,type(totalrooms))
-    updateval = dbput("update business_block.block_business_details set total_rooms_perday='"+totalrooms+"' where block_id ='"+block_id+"'")
+    updateval = dbput("update business_block.block_business_details set total_rooms_perday='"+str(totalrooms)+"' where block_id ='"+str(block_id)+"'")
+    print(updateval)
     for i in sqlvalue:
        
           rate1 = ((i['occupancy_one'] * i['rate_one']) + (i['occupancy_two'] * i['rate_two']) + (i['occupancy_three']*i['rate_three']) + (i['occupancy_four']*i['rate_four']))
