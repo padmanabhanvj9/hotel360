@@ -22,7 +22,7 @@ def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
         print("working",psql1)
         #room_type = a.get('type')
         total_count = a.get('total_rooms')
-        
+        print("type",psql1[0]['type'],type(psql1[0]['type']))
         if psql1[0]['type']== 'Kngn':
            sql = dbput("update business_block.current_grid set kngn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
            print(sql)
@@ -32,26 +32,27 @@ def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
         elif psql1[0]['type'] =='Ksbn':
              sql = dbput("update business_block.current_grid set Ksbn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
              print(sql) 
-        elif psql1[0]['type'] =='ksbs':
+        elif psql1[0]['type'] == 'Ksbs':
+             print("workingits fine")
              sql = dbput("update business_block.current_grid set ksbs = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
              print(sql)
-        elif psql1[0]['type'] =='sjsn' :
+        elif psql1[0]['type'] =='Sjsn' :
              sql = dbput("update business_block.current_grid set sjsn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
              print(sql)
-        elif psql1[0]['type'] =='sdbn':
+        elif psql1[0]['type'] =='Sdbn':
              sql = dbput("update business_block.current_grid set sdbn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
              print(sql)
-        elif psql1[0]['type'] =='sjss':
+        elif psql1[0]['type'] =='Sjss':
              sql = dbput("update business_block.current_grid set sjss = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
              print(sql)
-        elif psql1[0]['type'] =='comp':
+        elif psql1[0]['type'] =='Comp':
              sql = dbput("update business_block.current_grid set comp = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
              print(sql)
     sqlvalue = json.loads(dbget("select total_rooms,rate_one,rate_two,rate_three,rate_four,occupancy_one,\
                                  occupancy_two,occupancy_three,occupancy_four from business_block.grid where \
                                  block_id = '"+block_id+"'"))
 
-    print(sqlvalue)
+    #print(sqlvalue)
     for i in sqlvalue:
         q = q + i['total_rooms']
     totalrooms = q
