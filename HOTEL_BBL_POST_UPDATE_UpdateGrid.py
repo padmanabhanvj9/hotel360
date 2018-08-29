@@ -1,20 +1,79 @@
-from sqlwrapper import gensql,dbget
+from sqlwrapper import gensql,dbget,dbput
 import json
 def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
-    d = request.json
-    print("input ..................",d)
-    
-    
-    '''
+    c = request.json
     a,e = {},{}
-    a = { k : v for k,v in d.items() if v != '' if k not in ('block_id','grid_id')}
-    print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('block_id','grid_id')}
-    print(e)
-     
-    sql = gensql('update','business_block.grid',a,e)
-    print(sql)
-    '''
+    q = 0
+    rate1,rate2 = 0,0
+    grid_list = c['grid']
+    #print("input ..................",d)
+    for d in grid_list:
+        
+        a = { k : v for k,v in d.items() if v != '' if k not in ('block_id','roomtype_id')}
+        print(a)
+        e = { k : v for k,v in d.items() if k != '' if k in ('block_id','roomtype_id')}
+        print(e)
+         
+        sql = gensql('update','business_block.grid',a,e)
+        print(sql)
+        block_id = e.get('block_id')
+        roomtype_id = e.get('roomtype_id')
+        psql1 = json.loads(dbget("select type from room_management.room_type where id = '"+roomtype_id+"'"))
+        print("working",psql1)
+        #room_type = a.get('type')
+        total_count = a.get('total_rooms')
+        
+        if psql1[0]['type']== 'Kngn':
+           sql = dbput("update business_block.current_grid set kngn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+           print(sql)
+        elif psql1[0]['type'] =='Kngs':
+             sql = dbput("update business_block.current_grid set kngs = '"+total_count+"' where block_id='"+block_id+"'  and grid_type in (1,2)")
+             print(sql)
+        elif psql1[0]['type'] =='Ksbn':
+             sql = dbput("update business_block.current_grid set Ksbn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+             print(sql) 
+        elif psql1[0]['type'] =='ksbs':
+             sql = dbput("update business_block.current_grid set ksbs = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+             print(sql)
+        elif psql1[0]['type'] =='sjsn' :
+             sql = dbput("update business_block.current_grid set sjsn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+             print(sql)
+        elif psql1[0]['type'] =='sdbn':
+             sql = dbput("update business_block.current_grid set sdbn = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+             print(sql)
+        elif psql1[0]['type'] =='sjss':
+             sql = dbput("update business_block.current_grid set sjss = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+             print(sql)
+        elif psql1[0]['type'] =='comp':
+             sql = dbput("update business_block.current_grid set comp = '"+total_count+"' where block_id='"+block_id+"' and grid_type in (1,2)")
+             print(sql)
+    sqlvalue = json.loads(dbget("select total_rooms,rate_one,rate_two,rate_three,rate_four,occupancy_one,\
+                                 occupancy_two,occupancy_three,occupancy_four from business_block.grid where \
+                                 block_id = '"+block_id+"'"))
+
+    print(sqlvalue)
+    for i in sqlvalue:
+        q = q + i['total_rooms']
+    totalrooms = q
+    print("totalrooms",totalrooms,type(totalrooms))
+    
+    for i in sqlvalue:
+       
+          rate1 = ((i['occupancy_one'] * i['rate_one']) + (i['occupancy_two'] * i['rate_two']) + (i['occupancy_three']*i['rate_three']) + (i['occupancy_four']*i['rate_four']))
+          print("rate1",rate1)
+          rate2 += rate1
+          print("firstrate",rate2)
+    print("net_revenue",rate2)
+    Average_Rate = (rate2/totalrooms)
+    print(Average_Rate,type(Average_Rate))
+   # s['block_id'] = block_id
+   # s['room_nights'] = totalrooms
+    #s['net_revenue'] = rate2
+    #s['net_rate'] = Average_Rate
+    #s['room_nights_available'] = totalrooms
+    sql2 = dbput("update business_block.room_revenue set room_nights='"+str(totalrooms)+"',net_revenue='"+str(rate2)+"',net_rate='"+str(Average_Rate)+"',room_nights_available='"+str(totalrooms)+"' where block_id='"+block_id+"'")
+    print(sql2)
+    
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
    
 def HOTEL_BBL_POST_SELECT_SelectRoomingList_Roomtype(request):
