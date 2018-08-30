@@ -26,8 +26,12 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
     update = dbput("update reservation.res_id set id = '"+str(select[0]['id']+1)+"'")
     
     for w in d:
-        print(w)
-        #del w['editFlag']
+        print(w,type(w))
+        #editkey = w.get("editFlag")
+        #if (editkey == 'false'):
+        if 'editFlag' in w:
+            
+            del w['editFlag']
         x['pf_firstname'] = w.get("pf_firstname")
         select = json.loads(dbget("select * from profile.profile_id"))
         #print(select,type(select),len(select))
