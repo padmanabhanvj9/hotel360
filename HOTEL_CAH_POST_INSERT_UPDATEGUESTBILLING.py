@@ -25,7 +25,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
  
     
     for i in range(len(d)):
-        e = { k : v for k,v in d[i].items() if k in ('editFlag')}
+        e = { k : v for k,v in d[i].items() if k not in ('editFlag')}
         #print(i)
         #print(d,type(d),len(d))
         e['Posting_date'] = Posting_date
