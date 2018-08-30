@@ -25,15 +25,15 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
  
     
     for i in range(len(d)):
-        
+        e = { k : v for k,v in d[i].items() if k in ('editFlag')}
         #print(i)
         #print(d,type(d),len(d))
-        d[i]['Posting_date'] = Posting_date
-        d[i]['Res_id'] = res_id
-        d[i]['res_room'] = res_room
-        d[i]['folio_no'] = fo_count[0]['folio_no']+1
+        e['Posting_date'] = Posting_date
+        e['Res_id'] = res_id
+        e['res_room'] = res_room
+        e['folio_no'] = fo_count[0]['folio_no']+1
         #print(d)
-        gensql('insert','cashiering.billing_post',d[i])
+        gensql('insert','cashiering.billing_post',e)
 
    
     #dbput("update reservation.res_reservation set res_guest_balance = res_guest_balance + "+str(int(Total_amount))+" \
