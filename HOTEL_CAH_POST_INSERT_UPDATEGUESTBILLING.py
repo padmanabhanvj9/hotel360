@@ -7,6 +7,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
     result = request.json
     #print(result)
     d = result['bills']
+    d = { k : v for k,v in d.items() if k not in ('editFlag')}
+
     #print(d)
     res_id = result['Res_id']
     res_room = result['res_room']
