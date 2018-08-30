@@ -7,9 +7,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
     result = request.json
     #print(result)
     d = result['bills']
-    d = { k : v for k,v in d.items() if k not in ('editFlag')}
-
-    #print(d)
+    #print(d,type(d))
     res_id = result['Res_id']
     res_room = result['res_room']
     Total_amount = result['Total_amount']
@@ -27,6 +25,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
  
     
     for i in range(len(d)):
+        
         #print(i)
         #print(d,type(d),len(d))
         d[i]['Posting_date'] = Posting_date
