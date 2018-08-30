@@ -27,6 +27,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
     
     for w in d:
         print(w)
+        del w['editFlag']
         x['pf_firstname'] = w.get("pf_firstname")
         select = json.loads(dbget("select * from profile.profile_id"))
         #print(select,type(select),len(select))
