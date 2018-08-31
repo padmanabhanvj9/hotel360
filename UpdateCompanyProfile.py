@@ -41,7 +41,7 @@ def UpdateCompanyProfile(request):
     
     sql_value = gensql('insert','profile.pf_profile_activitylog',s)
     # finally return the value from DB_Wrapper   
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','profileid':id1,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','profileid':id1,'profiletype':pf_type,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
 def UpdateCompanyProfileRecord(request):
     d = request.json
     #print(d)
