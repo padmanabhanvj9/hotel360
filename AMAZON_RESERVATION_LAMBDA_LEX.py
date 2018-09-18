@@ -2,8 +2,10 @@ from sqlwrapper import gensql
 import json
 from flask import Flask,request, jsonify
 def AMAZON_RESERVATION_LAMBDA_LEX(request):
-    d['arrival'] = request.args('arrival')
-    d['depature'] = request.args('depature')
+    arrivalsdate = request.args('arrival')
+    depaturedate = request.args('depature')
+    d['arrival']  = arrivalsdate
+    d['depature']  = depaturedate
     d['roomtype'] = 'KNGN'
     d['adults'] = 2
     d['child'] = 4
