@@ -876,7 +876,7 @@ def insert_floordd():
   return insert_floor(request)
 #<--------------------------------------------------------->
 #<--------------amazonlex-------------------------->
-@app.route('/AMAZON_RESERVATION_LAMBDA_LEX',methods=['POST'])
+@app.route('/AMAZON_RESERVATION_LAMBDA_LEX',methods=['GET'])
 def amazonlex():
    return AMAZON_RESERVATION_LAMBDA_LEX(request)
 #<----------------------------------------------->
