@@ -14,5 +14,5 @@ def AMAZON_RESERVATION_LAMBDA_LEX(request):
     d['phone'] = '9698689999'
     d['email'] = 'veroni@gmail.com'
     sql_value = gensql('insert','amazonlex.reservation',d)
-    reservation = {'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RUS'}
-    return(json.dumps({"Reservation":reservation}, sort_keys=True, indent=4))
+    #reservation = {'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RUS'}
+    return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RUS'}], sort_keys=True, indent=4))
