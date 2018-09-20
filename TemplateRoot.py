@@ -149,6 +149,8 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_C
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Waitlist_reason
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
+from HOTEL_RES_POST_INSERT_UpdateNewReservation import Reservationdonutchart
+
 #<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
 #from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
 
@@ -716,6 +718,9 @@ def Hotel_RES_GET_SELECT_Waitlist_reasonva():
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
     return ProfileFutureReservation(request)
+@app.route("/Reservationdonutchart",methods=['GET'])
+def Reservationdonutchart_all():
+    return Reservationdonutchart()
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
