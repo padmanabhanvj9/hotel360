@@ -87,3 +87,24 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
 
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ConfirmationNumber':RES_Confnumber,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
+def Reservationdonutchart():
+    RES_Log_Date = datetime.datetime.utcnow().date()
+    print(RES_Log_Date)
+    checkincount = json.loads(dbget("select count(*) from reservation.res_reservation where res_arrival = '"+str(RES_Log_Date)+"' and res_guest_status in ('checkin')"))
+    print(checkincount)
+    checkout = json.loads(dbget("select count(*) from reservation.res_reservation where res_arrival = '"+str(RES_Log_Date)+"' and res_guest_status in ('Check out')"))
+    print(checkout)
+    reservation = json.loads(dbget("select count(*) from reservation.res_reservation where created_on = '"+str(RES_Log_Date)+"' and res_guest_status in ('reserved')"))
+    print(reservation)
+    json_input = [
+                   {"title":"checkin","value":checkincount[0]['count'] },
+                   {"title":"checkout","value":checkout[0]['count']},
+                   {"title":"reservation","value":reservation[0]['count']}
+                   ]
+  
+  
+        
+
+        
+    return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":json_input},indent=2))
+    
