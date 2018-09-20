@@ -320,6 +320,7 @@ from HOTEL_PAC_POST_DELETE_Package_Code import HOTEL_PAC_POST_DELETE_Packagedeta
 #<--------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
+from AMAZON_RESERVATION_LAMBDA_LEX import amazon_insert
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -876,9 +877,12 @@ def insert_floordd():
   return insert_floor(request)
 #<--------------------------------------------------------->
 #<--------------amazonlex-------------------------->
-@app.route('/AMAZON_RESERVATION_LAMBDA_LEX',methods=['GET','POST'])
+@app.route('/AMAZON_RESERVATION_LAMBDA_LEX',methods=['GET'])
 def amazonlex():
    return AMAZON_RESERVATION_LAMBDA_LEX(request)
+@app.route('/amazon_insert',methods=['POST'])
+def amazon_insert_all():
+   return amazon_insert(request)
 #<----------------------------------------------->
 #<----------------------Revenue management------------------>
 @app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY",methods=['POST'])
