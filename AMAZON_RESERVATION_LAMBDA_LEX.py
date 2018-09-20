@@ -3,8 +3,10 @@ import json
 from flask import Flask,request, jsonify
 def AMAZON_RESERVATION_LAMBDA_LEX(request):
     d = {}
-    arrivalsdate = request.args.get('arrival')
-    depaturedate = request.args.get('depature')
+   # arrivalsdate = request.args.get('arrival')
+    #depaturedate = request.args.get('depature')
+    arrivalsdate = request.json['arrival']
+    depaturedate = request.json['depature']
     d['arrival']  = arrivalsdate
     d['depature']  = depaturedate
     d['roomtype'] = 'KNGN'
