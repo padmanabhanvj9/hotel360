@@ -36,6 +36,7 @@ def amazon_insert(request):
 def CheckConfirmation(request):
     no = request.json['confirmation_number']
     print(no)
+    no = no.upper()
     c_no = b_id = json.loads(dbget("select count(*) from reservation.res_reservation where \
                                     res_confnumber= '"+no+"' "))
     print(c_no[0]['count'],type(c_no[0]['count']))
