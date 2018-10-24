@@ -47,6 +47,7 @@ def CheckConfirmation(request):
 def checkinguest(request):
     
         confir = request.json['confirmation_number']
+        confir = confir.upper()
         mobile = request.json['mobile']
         #phone = request.json['mobile']
         RES_Log_Date = datetime.datetime.utcnow().date()
