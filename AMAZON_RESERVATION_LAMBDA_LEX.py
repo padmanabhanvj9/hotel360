@@ -1,4 +1,4 @@
-from sqlwrapper import gensql
+from sqlwrapper import gensql,dbget,dbput
 import json
 from flask import Flask,request, jsonify
 def AMAZON_RESERVATION_LAMBDA_LEX(request):
@@ -33,3 +33,33 @@ def amazon_insert(request):
     sql_value = gensql('insert','amazonlex.reservation',d)
     #reservation = {'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}
     return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RUS'}], sort_keys=True, indent=4))
+def CheckConfirmation(request):
+    no = request.json['confirmation_number']
+    print(no)
+    c_no = b_id = json.loads(dbget("select count(*) from reservation.res_reservation where \
+                                    res_confnumber= '"+no+"' "))
+    print(c_no[0]['count'],type(c_no[0]['count']))
+    if c_no[0]['count'] != 0 : 
+       return(json.dumps({"ServiceStatus":"Success","Return_code":"Valid"}))
+    else:
+       return(json.dumps({"ServiceStatus":"Success","Return_code":"Invalid"}))
+def checkinguest(request):
+    
+        confir = request.json['confirmation_number']
+        mobile = request.json['mobile']
+        #phone = request.json['mobile']
+        RES_Log_Date = datetime.datetime.utcnow().date()
+        print(RES_Log_Date)
+        RES_Log_Date = str(RES_Log_Date)
+        psql = json.loads(dbget("select res_arrival from reservation.res_reservation where res_confnumber = '"+confir+"' and pf_mobileno = '"+mobile+"'"))
+        print(psql)
+        #today_arrival = psql[0]['res_arrival']
+        if RES_Log_Date == psql[0]['res_arrival']:
+            sql = dbput("update reservation.res_reservation set res_guest_status = 'checkin' where res_confnumber = '"+confir+"'")
+            return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'checkin success','ReturnCode':'Valid'}, sort_keys=True, indent=4))
+   
+        else:
+              return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Checkin a Today Guest arrivals only','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+
+        #return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Please say valid mobile number','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+   
