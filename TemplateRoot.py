@@ -324,7 +324,8 @@ from HOTEL_PAC_POST_DELETE_Package_Code import HOTEL_PAC_POST_DELETE_Packagedeta
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
 from AMAZON_RESERVATION_LAMBDA_LEX import amazon_insert
 from AMAZON_RESERVATION_LAMBDA_LEX import CheckConfirmation
-from AMAZON_RESERVATION_LAMBDA_LEX import checkinguest
+from AMAZON_RESERVATION_LAMBDA_LEX import checkinguest\
+from AMAZON_RESERVATION_LAMBDA_LEX import Checkroom
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -896,6 +897,9 @@ def CheckConfirmation_all():
 @app.route('/checkinguest',methods=['POST'])
 def checkinguest_all():
    return checkinguest(request)
+@app.route('/Checkroom',methods=['POST'])
+def Checkroom_all():
+   return Checkroom(request)
 #<----------------------------------------------->
 #<----------------------Revenue management------------------>
 @app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY",methods=['POST'])
