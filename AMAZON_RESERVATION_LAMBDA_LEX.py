@@ -66,3 +66,13 @@ def checkinguest(request):
 
         #return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Please say valid mobile number','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
    
+def Checkroom(request):
+        confir = request.json['confirmation_number']
+        confir = confir.upper()
+        room = request.json['Room']
+        c_no = b_id = json.loads(dbget("select count(*) from reservation.res_reservation where \
+                                    res_confnumber= '"+confir+"' and res_room = '"+room+"' "))
+        if c_no[0]['count'] != 0 : 
+          return(json.dumps({"StatusCode":"Success","Return_code":"Valid"}))
+        else:
+          return(json.dumps({"StatusCode":"Failure","Return_code":"Invalid"}))
