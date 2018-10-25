@@ -1,6 +1,7 @@
 from sqlwrapper import gensql,dbget,dbput
 import json
 from flask import Flask,request, jsonify
+import datetime
 def AMAZON_RESERVATION_LAMBDA_LEX(request):
     d = {}
     arrivalsdate = request.args.get('arrival')
