@@ -326,6 +326,7 @@ from AMAZON_RESERVATION_LAMBDA_LEX import amazon_insert
 from AMAZON_RESERVATION_LAMBDA_LEX import CheckConfirmation
 from AMAZON_RESERVATION_LAMBDA_LEX import checkinguest
 from AMAZON_RESERVATION_LAMBDA_LEX import Checkroom
+from AMAZON_RESERVATION_LAMBDA_LEX import callexternalapi
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -900,6 +901,9 @@ def checkinguest_all():
 @app.route('/Checkroom',methods=['POST'])
 def Checkroom_all():
    return Checkroom(request)
+@app.route('/sendemailkeyfault',methods=['POST'])
+def sendemailkeyfault_all():
+   return callexternalapi(request)
 #<----------------------------------------------->
 #<----------------------Revenue management------------------>
 @app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY",methods=['POST'])
