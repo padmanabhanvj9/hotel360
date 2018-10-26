@@ -5,6 +5,7 @@ import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
 def AMAZON_RESERVATION_LAMBDA_LEX(request):
     d = {}
     arrivalsdate = request.args.get('arrival')
