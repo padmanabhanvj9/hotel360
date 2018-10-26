@@ -81,7 +81,7 @@ def Checkroom(request):
           return(json.dumps({"StatusCode":"Failure","Return_code":"Invalid"}))
 def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room):
      print(name,email,message,conf_no,arrival,depature,room_type,room)
-     sender = "infocuit.testing@gmail.com"
+     sender = "infocuitechsolution@gmail.com"
      RES_Log_Date = datetime.datetime.utcnow().date()
      print(RES_Log_Date)
      
@@ -141,7 +141,7 @@ def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room):
 
           msg.attach(MIMEText(html,'html'))
           
-          gmailuser = 'infocuit.testing@gmail.com'
+          gmailuser = 'infocuitechsolution@gmail.com'
           password = 'infocuit@123'
           server = smtplib.SMTP('smtp.gmail.com',587)
           server.starttls()
