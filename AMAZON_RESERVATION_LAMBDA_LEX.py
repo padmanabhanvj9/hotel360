@@ -80,8 +80,9 @@ def Checkroom(request):
           return(json.dumps({"StatusCode":"Success","Return_code":"Valid"}))
         else:
           return(json.dumps({"StatusCode":"Failure","Return_code":"Invalid"}))
-def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg):
-     print(name,email,message,conf_no,arrival,depature,room_type,room)
+
+def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg_sub):
+     print(name,email,message,conf_no,arrival,depature,room_type,room,msg_sub)
      sender = "infocuit.daisy@gmail.com"
      RES_Log_Date = datetime.datetime.utcnow().date()
      print(RES_Log_Date)
@@ -118,7 +119,7 @@ def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg)
           
           
           <font size="4" color="black">Dear """+name+""",</font>
-          <font size="4" color="black">    Echodot received a request from the customer on """+str(RES_Log_Date)+""" regarding """+msg+""".
+          <font size="4" color="black">    Echodot received a request from the customer on """+str(RES_Log_Date)+""" regarding """+msg_sub+""".
           Please send someone to resolve the issue.</font>
           
          
@@ -171,7 +172,7 @@ def callexternalapi(request):
      arrival = re['res_arrival']
      depature = re['res_depature']
      room_type = re['res_room_type']
-     msg = request.json['msg']
+     msg_sub = request.json['msg']
      room = request.json['Room']
-     return sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg)
+     return sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg_sub)
 
