@@ -2,6 +2,9 @@ from sqlwrapper import gensql,dbget,dbput
 import json
 from flask import Flask,request, jsonify
 import datetime
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 def AMAZON_RESERVATION_LAMBDA_LEX(request):
     d = {}
     arrivalsdate = request.args.get('arrival')
@@ -76,3 +79,98 @@ def Checkroom(request):
           return(json.dumps({"StatusCode":"Success","Return_code":"Valid"}))
         else:
           return(json.dumps({"StatusCode":"Failure","Return_code":"Invalid"}))
+def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room):
+     print(name,email,message,conf_no,arrival,depature,room_type,room)
+     sender = "infocuit.testing@gmail.com"
+     RES_Log_Date = datetime.datetime.utcnow().date()
+     print(RES_Log_Date)
+     
+     for i in email:
+
+          receiver = i
+          #print(sender,type(sender),receiver,type(receiver))
+          subject = "Room Key Issue"
+          msg = MIMEMultipart()
+          msg['from'] = sender
+          msg['to'] = receiver
+          msg['subject'] = subject
+        
+   
+          hotel_name = "smartmo"
+          Address = "21,first street,chennai"
+          mobile_no = "9988776655"
+          email_no = "hotelsmart@gmail.com"
+          html = """\
+          <!DOCTYPE html>
+          <html>
+          <head>
+          <meta charset="utf-8">
+          </head>
+          <body>
+          <dl>
+          <dt>
+          <pre>
+          <font size="4" color="black">"""+hotel_name+""",</font>
+          <font size="4" color="black">"""+Address+""",</font>
+          <font size="4" color="black">"""+mobile_no+""",</font>
+          <font size="4" color="black">"""+email_no+""".</font>
+          
+          
+          <font size="4" color="black">Dear """+name+""",</font>
+          <font size="4" color="black">    Echodot received a request from the customer on """+str(RES_Log_Date)+""" regarding Key is not working
+     properly. Please send someone to resolve the issue.</font>
+          
+         
+           </pre>
+     <pre>
+          <font size="4" color="blue">Room Number: """+room+"""</font>
+          <font size="4" color="blue">Room Type: """+room_type+"""</font>
+          <font size="4" color="blue">Confirmation Number: """+conf_no+"""</font>
+          <font size="4" color="blue">Arrival Date: """+arrival+"""</font>
+          <font size="4" color="blue">Depature Date: """+depature+"""</font>
+         
+          
+
+          <font size="4" color="black">With best regards / Yours sincerely,</font>
+          <font size="4" color="black">Echodot Assistant</font></pre>
+            
+          </dl>        
+          </body>
+          </html>
+          """
+
+          msg.attach(MIMEText(html,'html'))
+          
+          gmailuser = 'infocuit.testing@gmail.com'
+          password = 'infocuit@123'
+          server = smtplib.SMTP('smtp.gmail.com',587)
+          server.starttls()
+          server.login(gmailuser,password)
+          text = msg.as_string()
+          server.sendmail(sender,receiver,text)
+          print ("the message has been sent successfully")
+          server.quit()
+     return(json.dumps({'Return': 'Message Send Successfully',"Return_Code":"MSS","Status": "Success","Status_Code": "200"}, sort_keys=True, indent=4))
+
+
+
+def callexternalapi(request):
+     phone = request.json['confirmation_number']
+     d = {}
+     d['res_confnumber'] = phone.upper()
+     result = json.loads(gensql('select','reservation.res_reservation','*',d))
+     re = result[0]
+     print(re,type(re))     
+     name = "Hotelier"
+     #email = ['r.ahamed@konnect247.com','i.sidhanee@konnect247.com','jazizahmed@gmail.com','infocuit.daisy@gmail.com']
+     email = ['infocuit.daisy@gmail.com','infocuit.banupriya@gmail.com']
+     message = "Kconnect24/7"
+     conf_no = phone
+     #hotel_name = "SMARTMO"
+     arrival = re['res_arrival']
+     depature = re['res_depature']
+     room_type = re['res_room_type']
+     
+     room = request.json['Room']
+     return sendemailani(name,email,message,conf_no,arrival,depature,room_type,room)
+
