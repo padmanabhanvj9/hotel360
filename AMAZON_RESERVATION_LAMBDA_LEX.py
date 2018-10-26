@@ -91,7 +91,7 @@ def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg_
 
           receiver = i
           #print(sender,type(sender),receiver,type(receiver))
-          subject = "Room Key Issue"
+          subject = "Kconnect24/7 service"
           msg = MIMEMultipart()
           msg['from'] = sender
           msg['to'] = receiver
