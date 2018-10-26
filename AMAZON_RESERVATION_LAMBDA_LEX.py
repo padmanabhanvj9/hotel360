@@ -171,7 +171,7 @@ def callexternalapi(request):
      arrival = re['res_arrival']
      depature = re['res_depature']
      room_type = re['res_room_type']
-     msg = request.json['message']
+     msg = request.json['msg']
      room = request.json['Room']
      return sendemailani(name,email,message,conf_no,arrival,depature,room_type,room,msg)
 
