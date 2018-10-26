@@ -158,7 +158,7 @@ def sendemailani(name,email,message,conf_no,arrival,depature,room_type,room):
 def callexternalapi(request):
      phone = request.json['confirmation_number']
      d = {}
-     d['res_confnumber'] = phone.upper()
+     d['res_confnumber'] = "PMS"+phone
      result = json.loads(gensql('select','reservation.res_reservation','*',d))
      re = result[0]
      print(re,type(re))     
