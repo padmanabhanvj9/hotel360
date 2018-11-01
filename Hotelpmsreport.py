@@ -11,7 +11,23 @@ def GetReservationReport(request):
         COUNT(CASE WHEN res_guest_status LIKE 'checkin' THEN 1 END) AS Checkin,\
         COUNT(CASE WHEN res_guest_status LIKE 'reserved' THEN 1 END) AS Reserved, \
         COUNT(CASE WHEN res_guest_status LIKE 'waitlist' THEN 1 END) AS Waitlist, \
-        COUNT(CASE WHEN res_guest_status LIKE 'Check out' THEN 1 END) AS CheckOut, \
+        COUNT(CASE WHEN res_guest_status LIKE 'Check out' THEN 1 END) AS CheckOut \
+        FROM reservation.res_reservation where  res_arrival between '"+from_date+"' and '"+to_date+"'"))
+   print(sql)
+   psql = sql[0]
+   print(psql)
+   for k,v in psql.items():
+     json_input.append({'title':k,'value':v})
+   print(json_input)
+        
+   return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":json_input},indent=2))
+def GetReservationNoshowreport(request):
+   
+   from_date = request.json['from_date']
+   to_date = request.json['to_date']
+   json_input = []
+   fin_dict = {}
+   sql = json.loads(dbget("SELECT \
 	COUNT(CASE WHEN res_guest_status LIKE 'no show' THEN 1 END) AS NoShow, \
 	COUNT(CASE WHEN res_guest_status LIKE 'cancel' THEN 1 END) AS Cancel, \
 	COUNT(CASE WHEN res_guest_status LIKE 'due in' THEN 1 END) AS DueIn, \
@@ -25,7 +41,8 @@ def GetReservationReport(request):
    print(json_input)
         
    return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":json_input},indent=2))
-         
+ 
+
        
 def GetFrontDeskReport(request):
    from_date = request.json['from_date']
