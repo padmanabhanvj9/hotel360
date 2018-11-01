@@ -327,6 +327,18 @@ from AMAZON_RESERVATION_LAMBDA_LEX import CheckConfirmation
 from AMAZON_RESERVATION_LAMBDA_LEX import checkinguest
 from AMAZON_RESERVATION_LAMBDA_LEX import Checkroom
 from AMAZON_RESERVATION_LAMBDA_LEX import callexternalapi
+
+#<-----------------------------PMS Report------------------------------>
+from Hotelpmsreport import GetReservationReport
+from Hotelpmsreport import GetFrontDeskReport
+from Hotelpmsreport import GetBusinessBlock
+from Hotelpmsreport import GetProfileReport
+from Hotelpmsreport import GetRoomHousekeeping
+from Hotelpmsreport import GetFrontofficestatus
+from Hotelpmsreport import GetRoomconditionall
+from Hotelpmsreport import GetRoomDiscrepencies
+from Hotelpmsreport import GetGuestServiceStatus
+from Hotelpmsreport import GetZerobalanceaccount
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -1301,6 +1313,37 @@ def DELETE_Packagedetails():
    return HOTEL_PAC_POST_DELETE_Packagedetails(request)
 #dddddddd
 #<------------------------------------------------------------------>
+#PMS Report*************************************************
+@app.route("/GetReservationReport",methods=['POST'])
+def GetReservationReport_all():
+   return GetReservationReport(request)
+@app.route("/GetFrontDeskReport",methods=['POST'])
+def GetFrontDeskReport_all():
+   return GetFrontDeskReport(request)
+@app.route("/GetBusinessBlock",methods=['POST'])
+def GetBusinessBlock_all():
+   return GetBusinessBlock(request)
+@app.route("/GetProfileReport",methods=['POST'])
+def GetProfileReport_all():
+   return GetProfileReport(request)
+@app.route("/GetRoomHousekeeping",methods=['POST'])
+def GetRoomHousekeeping_all():
+   return GetRoomHousekeeping(request)
+@app.route("/GetFrontofficestatus",methods=['POST'])
+def GetFrontofficestatus_all():
+   return GetFrontofficestatus(request)
+@app.route("/GetRoomcondition",methods=['POST'])
+def conditionroom_all():
+   return GetRoomconditionall(request)
+@app.route("/GetRoomDiscrepencies",methods=['POST'])
+def RoomDiscrepencies_all():
+   return GetRoomDiscrepencies(request)
+@app.route("/GetGuestServiceStatus",methods=['POST'])
+def GetGuestServiceStatus_all():
+   return GetGuestServiceStatus(request)
+@app.route("/GetZerobalanceaccount",methods=['POST'])
+def GetZerobalanceaccount_all():
+   return GetZerobalanceaccount(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
