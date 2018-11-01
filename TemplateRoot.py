@@ -339,6 +339,7 @@ from Hotelpmsreport import GetRoomconditionall
 from Hotelpmsreport import GetRoomDiscrepencies
 from Hotelpmsreport import GetGuestServiceStatus
 from Hotelpmsreport import GetZerobalanceaccount
+from Hotelpmsreport import GetReservationNoshowreport
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -1344,6 +1345,9 @@ def GetGuestServiceStatus_all():
 @app.route("/GetZerobalanceaccount",methods=['POST'])
 def GetZerobalanceaccount_all():
    return GetZerobalanceaccount(request)
+@app.route("/GetReservationNoshowreport",methods=['POST'])
+def GetReservationNoshowreport_all():
+   return GetReservationNoshowreport(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
