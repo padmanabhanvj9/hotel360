@@ -215,3 +215,82 @@ def GetZerobalanceaccount(request):
       {'title':'Payable Amount','value':psql[0]['count']}   
      ]
    return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":json_input},indent=2))
+def futurebooking():
+    current_date = datetime.datetime.utcnow()
+    current_date = current_date.date()
+    #current_date = str(current_date)
+    print(current_date)
+    dividendlist, dividendlist_add, count_of_year,fin_list = [],[],{},[]
+    
+    
+    Year1 = json.loads(dbget("select res_arrival from reservation.res_reservation  where  res_arrival > '"+str(current_date)+"' and res_guest_status in ('reserved','due in','arrival') order by res_arrival"))
+    
+    
+
+    print(Year1)
+    for dividend_dict in Year1:
+     for key, value in dividend_dict.items():
+        dividendlist.append(value)
+        
+    year_count = 0
+    for i in dividendlist:
+        year_count = year_count+1
+        j = datetime.datetime.strptime(i,'%Y-%m-%d').date()
+        month_j = j
+        sample = "'{}'".format(month_j)
+        if sample in dividendlist_add:
+            pass
+        else: 
+           dividendlist_add.append(sample)
+           year_count = 1
+        count_of_year[""+str(month_j)+""] = year_count
+
+        
+    print(count_of_year)
+    for k,v in count_of_year.items():
+        fin_list.append({'date':k,'value':v})
+        #fin_list.append(fin_res['value'] = v)
+    print(fin_list)
+        
+    return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":fin_list},indent=2))
+
+def HistoryBooking():
+    current_date = datetime.datetime.utcnow()
+    current_date = current_date.date()
+    #current_date = str(current_date)
+    print(current_date)
+    dividendlist, dividendlist_add, count_of_year,fin_list = [],[],{},[]
+    
+    roomtype = {}
+    Year1 = json.loads(dbget("select res_arrival from reservation.res_reservation  where  res_arrival < '"+str(current_date)+"' and res_guest_status ='Check out' order by res_arrival"))
+    
+   
+    print(Year1)
+    for dividend_dict in Year1:
+     for key, value in dividend_dict.items():
+        dividendlist.append(value)
+        
+    year_count = 0
+    for i in dividendlist:
+        year_count = year_count+1
+        j = datetime.datetime.strptime(i,'%Y-%m-%d').date()
+        month_j = j
+        sample = "'{}'".format(month_j)
+        if sample in dividendlist_add:
+            pass
+        else: 
+           dividendlist_add.append(sample)
+           year_count = 1
+        count_of_year[""+str(month_j)+""] = year_count
+
+        
+    print(count_of_year)
+    
+    for k,v in count_of_year.items():
+        fin_list.append({'date':k,'value':v})
+        #fin_list.append(fin_res['value'] = v)
+    print(fin_list)
+        
+    return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":fin_list},indent=2))
+
+
