@@ -342,6 +342,7 @@ from Hotelpmsreport import GetZerobalanceaccount
 from Hotelpmsreport import GetReservationNoshowreport
 from Hotelpmsreport import futurebooking
 from Hotelpmsreport import HistoryBooking
+from Hotelpmsreport import Cashiergettotalamount
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -1356,6 +1357,9 @@ def HistoryBooking_all():
 @app.route("/futurebooking",methods=['POST'])
 def futurebooking_all():
    return futurebooking()
+@app.route("/Cashiergettotalamount",methods=['POST'])
+def Cashiergettotalamount_all():
+   return Cashiergettotalamount(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
