@@ -293,4 +293,45 @@ def HistoryBooking():
         
     return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":fin_list},indent=2))
 
+def Cashiergettotalamount(request):
+        from_date = request.json['from_date']
+        to_date = request.json['to_date']
+
+        dividendlist, dividendlist_add, count_of_year,fin_list = [],[],{},[]
+    
+        roomtype = {}
+        ivr_room = json.loads(dbget("select res_arrival,posting_payment.postig_amount from reservation.res_reservation \
+                              left join cashiering.posting_payment on posting_payment.res_id = res_reservation.res_id \
+                             where  res_reservation.res_arrival between '"+from_date+"' and '"+to_date+"'order by res_arrival"))
+    
+    
+        print(ivr_room)
+
+       
+        room_name = []
+        new_ivr_room = []
+        res = []
+        for room in ivr_room:
+            if room['res_arrival']  in room_name:
+                i = room_name.index(room['res_arrival'])
+            else:
+                room_name.append(room['res_arrival'])
+                print("name",room_name)
+                new_ivr_room.append([])
+                i = room_name.index(room['res_arrival'])
+                
+                
+            new_ivr_room[i].append(room)
+        print("newivr room",new_ivr_room)
+        for rooms in new_ivr_room:
+
+            res.append({"title":rooms[0]['res_arrival'],
+                       "value":sum(room['postig_amount'] for room in rooms)})
+            print(res)
+                       
+        #print(new_ivr_room)
+        print(res)
+        #print(room_name)
+        return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":res},indent=2))
+  
 
