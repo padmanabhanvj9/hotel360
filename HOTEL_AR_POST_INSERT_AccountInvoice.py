@@ -32,18 +32,25 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
              psql = dbput("update account_receivable.accout_inivoice  \
                            set invoice_amount = '"+str(sql[0]['sum'])+"', open_amount = '"+str(sql[0]['sum'])+"' \
                            where invoice_no='"+str(i['invoice_no'])+"'")
+             
     folio_num = folio_no[0]['folio_num']+1
     dbput("update account_receivable.folio_no set folio_num = '"+str(folio_num)+"' ")
     print(i['account_no'])
+    acc = json.loads(dbget("select open_amount from account_receivable.accout_inivoice where account_number = '"+str(i['account_no'])+"'"))
+
+    print(acc)
+ 
+    sumof =sum(item['open_amount'] for item in acc)
+    acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sumof)+"' \
+                              where account_number = '"+str(i['account_no'])+"'")
+    print(acc_bala)
     s['invoice_id'] = i['invoice_no']
     s['acc_action'] = "posting charges"
     s['acc_post_date'] = Posting_date
     s['acc_posting_time'] = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     s['acc_user_id']  = i['emp_id']
     history = gensql('insert','account_receivable.account_posting_history',s)
-
-    acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sql[0]['sum'])+"' \
-                      where account_number = '"+str(i['account_no'])+"'")
+    
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
                        "Status": "Success","StatusCode": "200"},indent=4))
 def HOTEL_AR_POST_SELECT_Billingpost(request):
