@@ -28,6 +28,10 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
              i['Posting_date'] = Posting_date
              i['folio_no'] = folio_no[0]['folio_num']+1
              gensql('insert','account_receivable.account_billing_post',i)
+             sql = json.loads(dbget("select sum(posting_amount) from account_receivable.account_billing_post where account_no = '"+str(i['account_no'])+"' and invoice_no='"+str(i['invoice_no'])+"'"))
+             psql = dbput("update account_receivable.accout_inivoice  \
+                           set invoice_amount = '"+str(sql[0]['sum'])+"', open_amount = '"+str(sql[0]['sum'])+"' \
+                           where invoice_no='"+str(i['invoice_no'])+"'")
     folio_num = folio_no[0]['folio_num']+1
     dbput("update account_receivable.folio_no set folio_num = '"+str(folio_num)+"' ")
     print(i['account_no'])
@@ -37,15 +41,11 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
     s['acc_posting_time'] = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     s['acc_user_id']  = i['emp_id']
     history = gensql('insert','account_receivable.account_posting_history',s)
-    sql = json.loads(dbget("select sum(posting_amount) from account_receivable.account_billing_post where account_no = '"+str(i['account_no'])+"'"))
-    psql = dbput("update account_receivable.accout_inivoice  \
-                   set invoice_amount = '"+str(sql[0]['sum'])+"', open_amount = '"+str(sql[0]['sum'])+"' \
-                    where invoice_no='"+str(i['invoice_no'])+"'")
+
     acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sql[0]['sum'])+"' \
                       where account_number = '"+str(i['account_no'])+"'")
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
                        "Status": "Success","StatusCode": "200"},indent=4))
-
 def HOTEL_AR_POST_SELECT_Billingpost(request):
     acc_no = request.json['account_no']
     result = json.loads(dbget("select * from account_receivable.account_billing_post where account_no = '"+str(acc_no)+"' "))
