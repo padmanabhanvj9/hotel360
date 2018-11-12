@@ -114,6 +114,7 @@ def HOTEL_AR_POST_INSERT_Billingpayment(request):
     account_invoie = json.loads(dbget("select open_amount from account_receivable.accout_inivoice where account_number = '"+d['account_no']+"'"))
     acc_inv = account_invoie[0]['open_amount'] - d['posting_amount']
     print(acc_inv)
+    d['posting_date'] = Posting_date
     gensql('insert','account_receivable.invoice_payment',d)
     sql = dbput("update account_receivable.account_setup set account_balance = '"+str(setupamount)+"' where account_number = '"+d['account_no']+"'")
     psql = dbput("update account_receivable.accout_inivoice set open_amount = '"+str(acc_inv)+"' where account_number = '"+d['account_no']+"'")
