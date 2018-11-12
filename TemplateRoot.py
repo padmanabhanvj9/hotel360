@@ -327,7 +327,31 @@ from AMAZON_RESERVATION_LAMBDA_LEX import CheckConfirmation
 from AMAZON_RESERVATION_LAMBDA_LEX import checkinguest
 from AMAZON_RESERVATION_LAMBDA_LEX import Checkroom
 from AMAZON_RESERVATION_LAMBDA_LEX import callexternalapi
-
+#<----------------------------Acccount Receivable--------------------------------->
+from HOTEL_AR_POST_INSERT_AccountSetup import HOTEL_AR_POST_INSERT_AccountSetup
+from HOTEL_AR_POST_INSERT_AccountSetup import HOTEL_AR_POST_UPDATE_AccountSetup
+from HOTEL_AR_POST_INSERT_AccountSetup import HOTEL_AR_POST_SELECT_AccountSetup
+from HOTEL_AR_POST_INSERT_AccountSetup import HOTEL_AR_POST_DELETE_AccountSetup
+from HOTEL_AR_POST_INSERT_ArNotes import HOTEL_AR_POST_INSERT_ArNotes
+from HOTEL_AR_POST_INSERT_ArNotes import HOTEL_AR_POST_UPDATE_ArNotes
+from HOTEL_AR_POST_INSERT_ArNotes import HOTEL_AR_POST_SELECT_ArNotes
+from HOTEL_AR_POST_INSERT_ArNotes import HOTEL_AR_POST_DELETE_ArNotes
+#from HOTEL_AR_POST_SELECT_ArPostHistory import HOTEL_AR_POST_SELECT_ArPostHistory
+from HOTEL_AR_POST_INSERT_Account_Traces import HOTEL_AR_POST_INSERT_AccountTraces
+from HOTEL_AR_POST_INSERT_Account_Traces import HOTEL_AR_POST_UPDATE_AccountTraces
+from HOTEL_AR_POST_INSERT_Account_Traces import HOTEL_AR_POST_SELECT_AccountTraces
+from HOTEL_AR_POST_INSERT_Account_Traces import HOTEL_AR_POST_DELETE_AccountTraces
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_INSERT_AccountInvoice
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_SELECT_AccountInvoice
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_DELETE_AccountInvoice
+#from Night_audit_posting import Night_audit_posting
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_INSERT_Billingpost
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_SELECT_Billingpost
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_UPDATE_AdjustBillingpost
+from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_INSERT_Billingpayment
+from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_AccountPostHistory
+from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_AccountPayHistory
+#<--------------------------------------------------------------------------------->
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
 from Hotelpmsreport import GetFrontDeskReport
@@ -1360,6 +1384,90 @@ def futurebooking_all():
 @app.route("/Cashiergettotalamount",methods=['POST'])
 def Cashiergettotalamount_all():
    return Cashiergettotalamount(request)
+
+#<------------------------account receviable----------------------------->
+#<--------------------Account Receivable------------------------------>
+@app.route("/HOTEL_AR_POST_INSERT_AccountSetup",methods=['POST'])
+def INSERT_AccountSetup():
+   return HOTEL_AR_POST_INSERT_AccountSetup(request)
+
+@app.route("/HOTEL_AR_POST_UPDATE_AccountSetup",methods=['POST'])
+def UPDATE_AccountSetup():
+   return HOTEL_AR_POST_UPDATE_AccountSetup(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_AccountSetup",methods=['POST'])
+def SELECT_AccountSetup():
+   return HOTEL_AR_POST_SELECT_AccountSetup(request)
+
+@app.route("/HOTEL_AR_POST_DELETE_AccountSetup",methods=['POST'])
+def DELETE_AccountSetup():
+   return HOTEL_AR_POST_DELETE_AccountSetup(request)
+
+@app.route("/HOTEL_AR_POST_INSERT_ArNotes",methods=['POST'])
+def INSERT_ArNotes():
+   return HOTEL_AR_POST_INSERT_ArNotes(request)
+
+@app.route("/HOTEL_AR_POST_UPDATE_ArNotes",methods=['POST'])
+def UPDATE_ArNotes():
+   return HOTEL_AR_POST_UPDATE_ArNotes(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_ArNotes",methods=['POST'])
+def SELECT_ArNotes():
+   return HOTEL_AR_POST_SELECT_ArNotes(request)
+
+@app.route("/HOTEL_AR_POST_DELETE_ArNotes",methods=['POST'])
+def DELETE_ArNotes():
+   return HOTEL_AR_POST_DELETE_ArNotes(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_ArPostHistory",methods=['POST'])
+def SELECT_ArPostHistory():
+   return HOTEL_AR_POST_SELECT_ArPostHistory(request)
+
+@app.route("/HOTEL_AR_POST_INSERT_AccountTraces",methods=['POST'])
+def INSERT_AccountTraces():
+   return HOTEL_AR_POST_INSERT_AccountTraces(request)
+
+@app.route("/HOTEL_AR_POST_UPDATE_AccountTraces",methods=['POST'])
+def UPDATE_AccountTraces():
+   return HOTEL_AR_POST_UPDATE_AccountTraces(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_AccountTraces",methods=['POST'])
+def SELECT_AccountTraces():
+   return HOTEL_AR_POST_SELECT_AccountTraces(request)
+
+@app.route("/HOTEL_AR_POST_DELETE_AccountTraces",methods=['POST'])
+def DELETE_AccountTraces():
+   return HOTEL_AR_POST_DELETE_AccountTraces(request)
+
+@app.route("/HOTEL_AR_POST_INSERT_AccountInvoice",methods=['POST'])
+def INSERT_AccountInvoice():
+   return HOTEL_AR_POST_INSERT_AccountInvoice(request)
+@app.route("/HOTEL_AR_POST_SELECT_AccountInvoice",methods=['POST'])
+def SELECT_AccountInvoice():
+   return HOTEL_AR_POST_SELECT_AccountInvoice(request)
+@app.route("/HOTEL_AR_POST_DELETE_AccountInvoice",methods=['POST'])
+def DELETE_AccountInvoice():
+   return HOTEL_AR_POST_DELETE_AccountInvoice(request)
+
+@app.route("/HOTEL_AR_POST_INSERT_Billingpost",methods=['POST'])
+def HOTEL_AR_POST_INSERT_Billingpost_all():
+   return HOTEL_AR_POST_INSERT_Billingpost(request)
+@app.route("/HOTEL_AR_POST_SELECT_Billingpost",methods=['POST'])
+def HOTEL_AR_POST_SELECT_Billingpost_ALL():
+   return HOTEL_AR_POST_SELECT_Billingpost(request)
+@app.route("/HOTEL_AR_POST_UPDATE_AdjustBillingpost",methods=['POST'])
+def HOTEL_AR_POST_UPDATE_AdjustBillingpost_all():
+   return HOTEL_AR_POST_UPDATE_AdjustBillingpost(request)
+@app.route("/HOTEL_AR_POST_INSERT_Billingpayment",methods=['POST'])
+def HOTEL_AR_POST_INSERT_Billingpayment_all():
+   return HOTEL_AR_POST_INSERT_Billingpayment(request)
+@app.route("/HOTEL_AR_POST_SELECT_AccountPostHistory",methods=['POST'])
+def HOTEL_AR_POST_SELECT_AccountPostHistory_all():
+   return HOTEL_AR_POST_SELECT_AccountPostHistory(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_AccountPayHistory",methods=['POST'])
+def HOTEL_AR_POST_SELECT_AccountPayHistory_all():
+   return HOTEL_AR_POST_SELECT_AccountPayHistory(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
