@@ -61,11 +61,14 @@ def HOTEL_AR_POST_SELECT_Billingpost(request):
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def HOTEL_AR_POST_SELECT_AccountInvoice(request):
+    acc_no = request.json['account_no']
     result = json.loads(dbget("select account_setup.account_balance,market.marketgroup_description,res_source.sourcedescription,room_class.class,accout_inivoice.* from account_receivable.accout_inivoice \
                                 left join reservation.market on market.id = accout_inivoice.market_id \
                                 left join reservation.res_source on res_source.id = accout_inivoice.source_id \
                                 left join room_management.room_class on room_class.id = accout_inivoice.room_class_id \
-                                left join account_receivable.account_setup on account_setup.account_number  = accout_inivoice.account_number"))
+                                left join account_receivable.account_setup on account_setup.account_number  = accout_inivoice.account_number \
+                                where accout_inivoice.account_number ='"+str(acc_no)+"'" ))
+
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
