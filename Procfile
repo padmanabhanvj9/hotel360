@@ -133,4 +133,9 @@ worker: gunicorn HOTEL_PAC_POST_INSERT_Package_Code.py
 worker: gunicorn HOTEL_PAC_POST_UPDATE_Package_Code.py
 worker: gunicorn HOTEL_PAC_POST_DELETE_Package_Code.py
 worker: gunicorn Hotelpmsreport.py
+worker: gunicorn HOTEL_AR_POST_INSERT_AccountSetup.py
+worker: gunicorn HOTEL_AR_POST_INSERT_ArNotes.py
+worker: gunicorn HOTEL_AR_POST_INSERT_Account_Traces.py
+worker: gunicorn HOTEL_AR_POST_INSERT_AccountInvoice.py
+worker: gunicorn HOTEL_AR_POST_SELECT_Activitylog.py
 clock: python clock.py
