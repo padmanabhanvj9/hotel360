@@ -49,8 +49,9 @@ def HOTEL_AR_POST_UPDATE_AccountSetup(request):
 
 def HOTEL_AR_POST_SELECT_AccountSetup(request):
 
-    result = json.loads(dbget('select employee.emp_firstname, account_setup.* from account_receivable.account_setup \
-                              left join reservation.employee on employee.emp_id = account_setup.created_by'))
+    result = json.loads(dbget('select account_type.account_type_id,account_type.account_type,account_type.account_type_description,employee.emp_firstname, account_setup.* from account_receivable.account_setup \
+                              left join reservation.employee on employee.emp_id = account_setup.created_by \
+                              left join account_receivable.account_type on account_type.account_type_id = account_setup.account_type_id'))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
