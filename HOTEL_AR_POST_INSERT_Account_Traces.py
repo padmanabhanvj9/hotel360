@@ -24,8 +24,10 @@ def HOTEL_AR_POST_UPDATE_AccountTraces(request):
                        "Status": "Success","StatusCode": "200"},indent=4))
 
 def HOTEL_AR_POST_SELECT_AccountTraces(request):
-    result = json.loads(dbget('select employee.emp_firstname, account_traces.* from account_receivable.account_traces \
-                            left join reservation.employee on employee.emp_id = account_traces.created_by'))
+    account_number = request.json['account_number']
+    result = json.loads(dbget("select employee.emp_firstname, account_traces.* from account_receivable.account_traces \
+                            left join reservation.employee on employee.emp_id = account_traces.created_by \
+                            where account_traces.account_number = '"+str(account_number)+"'"))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
