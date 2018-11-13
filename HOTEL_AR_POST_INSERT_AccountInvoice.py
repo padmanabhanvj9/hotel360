@@ -4,6 +4,7 @@ import json
 
 def HOTEL_AR_POST_INSERT_AccountInvoice(request):
     d = request.json
+    Posting_date = datetime.datetime.utcnow().date()
     select = json.loads(dbget("select * from account_receivable.invoice_no"))
     print(select,type(select),len(select))
 
@@ -11,6 +12,7 @@ def HOTEL_AR_POST_INSERT_AccountInvoice(request):
     print(invoice_id)
     update = dbput("update account_receivable.invoice_no set invoice_num = '"+str(select[0]['invoice_num']+1)+"'")
     d['invoice_no'] = invoice_id
+    d['invoice_date'] = Posting_date
     gensql('insert','account_receivable.accout_inivoice',d)
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
                        "Status": "Success","StatusCode": "200","invoice_num":invoice_id},indent=4))
