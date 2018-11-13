@@ -27,8 +27,10 @@ def HOTEL_AR_POST_UPDATE_ArNotes(request):
                        "Status": "Success","StatusCode": "200"},indent=4))
 
 def HOTEL_AR_POST_SELECT_ArNotes(request):
-    result = json.loads(dbget('select employee.emp_firstname, ar_notes.* from account_receivable.ar_notes \
-                                left join reservation.employee on employee.emp_id = ar_notes.modified_by'))
+    account_number = request.json['account_number']
+    result = json.loads(dbget("select employee.emp_firstname, ar_notes.* from account_receivable.ar_notes \
+                                left join reservation.employee on employee.emp_id = ar_notes.modified_by \
+                                where ar_notes.account_number = '"+str(account_number)+"'"))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
