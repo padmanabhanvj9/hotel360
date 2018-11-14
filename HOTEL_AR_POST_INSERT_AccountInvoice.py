@@ -58,8 +58,9 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
 def HOTEL_AR_POST_SELECT_Billingpost(request):
     acc_no = request.json['account_no']
     invoice_no = request.json['invoice_no']
-    result = json.loads(dbget("select * from account_receivable.account_billing_post \
-                                where account_no = '"+str(acc_no)+"' and invoice_no = '"+str(invoice_no)+"' "))
+    result = json.loads(dbget("select billing_code.posting_code,billing_code.posting_code_description,account_billing_post.* from account_receivable.account_billing_post \
+                                 left join cashiering.billing_code on billing_code.posting_code_id = account_billing_post.post_code_id \
+                                 where account_billing_post.account_no = '"+str(acc_no)+"' and account_billing_post.invoice_no = '"+str(invoice_no)+"' "))
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
