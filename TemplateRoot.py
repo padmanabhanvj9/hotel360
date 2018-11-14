@@ -351,6 +351,15 @@ from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_UPDATE_AdjustBilli
 from HOTEL_AR_POST_INSERT_AccountInvoice import HOTEL_AR_POST_INSERT_Billingpayment
 from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_AccountPostHistory
 from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_AccountPayHistory
+
+
+from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely
+from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_INSERT_UNApplyPayment
+from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_ReversePayment
+from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_UnappyPayment
+from HOTEL_AR_POST_INSERT_CompressInvoice import HOTEL_AR_POST_INSERT_CompressInvoice
+from HOTEL_AR_POST_INSERT_CompressInvoice import HOTEL_AR_POST_DELETE_UnCompressInvoice
+from HOTEL_AR_POST_INSERT_CompressInvoice import HOTEL_AR_POST_SELECT_YearViewAmount
 #<--------------------------------------------------------------------------------->
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
@@ -1468,6 +1477,30 @@ def HOTEL_AR_POST_SELECT_AccountPostHistory_all():
 @app.route("/HOTEL_AR_POST_SELECT_AccountPayHistory",methods=['POST'])
 def HOTEL_AR_POST_SELECT_AccountPayHistory_all():
    return HOTEL_AR_POST_SELECT_AccountPayHistory(request)
+
+
+@app.route("/HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely",methods=['POST'])
+def HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely_all():
+   return HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely(request)
+@app.route("/HOTEL_AR_POST_INSERT_UNApplyPayment",methods=['POST'])
+def HOTEL_AR_POST_SELECT_UNApplyPayment_all():
+   return HOTEL_AR_POST_INSERT_UNApplyPayment(request)
+@app.route("/HOTEL_AR_POST_SELECT_ReversePayment",methods=['POST'])
+def HOTEL_AR_POST_SELECT_ReversePayment_all():
+   return HOTEL_AR_POST_SELECT_ReversePayment(request)
+@app.route("/HOTEL_AR_POST_SELECT_UnappyPayment",methods=['POST'])
+def HOTEL_AR_POST_SELECT_UnappyPayment_all():
+   return HOTEL_AR_POST_SELECT_UnappyPayment(request)
+@app.route("/HOTEL_AR_POST_INSERT_CompressInvoice",methods=['POST'])
+def HOTEL_AR_POST_INSERT_CompressInvoice_all():
+   return HOTEL_AR_POST_INSERT_CompressInvoice(request)
+@app.route("/HOTEL_AR_POST_DELETE_UnCompressInvoice",methods=['POST'])
+def HOTEL_AR_POST_DELETE_UnCompressInvoice_all():
+   return HOTEL_AR_POST_DELETE_UnCompressInvoice(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_YearViewAmount",methods=['POST'])
+def HOTEL_AR_POST_SELECT_YearViewAmount_all():
+   return HOTEL_AR_POST_SELECT_YearViewAmount(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
