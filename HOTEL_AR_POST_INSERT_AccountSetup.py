@@ -49,11 +49,14 @@ def HOTEL_AR_POST_UPDATE_AccountSetup(request):
 
 def HOTEL_AR_POST_SELECT_AccountSetup(request):
 
-     result = json.loads(dbget('select pf_company_profile.pf_account,account_type.account_type_id,account_type.account_type,account_type.account_type_description,employee.emp_firstname, account_setup.* from account_receivable.account_setup \
+     result = json.loads(dbget('select currency.*, country.*,state.*,pf_company_profile.pf_account,account_type.account_type_id,account_type.account_type,account_type.account_type_description,employee.emp_firstname, account_setup.* from account_receivable.account_setup \
                               left join reservation.employee on employee.emp_id = account_setup.created_by \
+                              left join profile.country on country.id = account_setup.country_id \
+                              left join profile.state on state.id = account_setup.state_id \
+                              left join profile.currency on currency.id = account_setup.currency_id \
                               left join account_receivable.account_type on account_type.account_type_id = account_setup.account_type_id \
                               left join profile.pf_company_profile on pf_company_profile.pf_id = account_setup.profile_id'))
-     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def HOTEL_AR_POST_DELETE_AccountSetup(request):    
