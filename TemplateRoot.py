@@ -360,6 +360,10 @@ from HOTEL_AR_POST_SELECT_Activitylog import HOTEL_AR_POST_SELECT_UnappyPayment
 from HOTEL_AR_POST_INSERT_CompressInvoice import HOTEL_AR_POST_INSERT_CompressInvoice
 from HOTEL_AR_POST_INSERT_CompressInvoice import HOTEL_AR_POST_DELETE_UnCompressInvoice
 from HOTEL_AR_POST_INSERT_CompressInvoice import HOTEL_AR_POST_SELECT_YearViewAmount
+from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_INSERT_Account_typeDropdown
+from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_Account_typeDropdown
+from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_INSERT_REASONDropdown
+from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_REASONDropdown
 #<--------------------------------------------------------------------------------->
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
@@ -1501,6 +1505,22 @@ def HOTEL_AR_POST_DELETE_UnCompressInvoice_all():
 @app.route("/HOTEL_AR_POST_SELECT_YearViewAmount",methods=['POST'])
 def HOTEL_AR_POST_SELECT_YearViewAmount_all():
    return HOTEL_AR_POST_SELECT_YearViewAmount(request)
+
+@app.route("/HOTEL_AR_POST_INSERT_Account_typeDropdown",methods=['POST'])
+def HOTEL_AR_POST_INSERT_Account_typeDropdown_all():
+   return HOTEL_AR_POST_INSERT_Account_typeDropdown(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_Account_typeDropdown",methods=['POST'])
+def HOTEL_AR_POST_SELECT_Account_typeDropdown_all():
+   return HOTEL_AR_POST_SELECT_Account_typeDropdown(request)
+
+@app.route("/HOTEL_AR_POST_INSERT_REASONDropdown",methods=['POST'])
+def HOTEL_AR_POST_INSERT_REASONDropdown_all():
+   return HOTEL_AR_POST_INSERT_REASONDropdown(request)
+
+@app.route("/HOTEL_AR_POST_SELECT_REASONDropdown",methods=['POST'])
+def HOTEL_AR_POST_SELECT_REASONDropdown_all():
+   return HOTEL_AR_POST_SELECT_REASONDropdown(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
