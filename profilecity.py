@@ -1,30 +1,30 @@
 from sqlwrapper import gensql
 import json
 def profilecity():
-    s = ['city']
-    sql_value = gensql('select','profile.city',s)
+
+    sql_value = gensql('select','profile.city','*')
     result = json.loads(sql_value)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 def profilelanguage():
-    s = ['language']
-    sql_value = gensql('select','profile.language',s)
+    
+    sql_value = gensql('select','profile.language','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
     
 def profilecountry():
-    s = ['country']
-    sql_value = gensql('select','profile.country',s)
+  
+    sql_value = gensql('select','profile.country','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
     
     
 def profilestate():
-    s = ['state']
-    sql_value = gensql('select','profile.state',s)
+ 
+    sql_value = gensql('select','profile.state','*')
     result = json.loads(sql_value)
     print(result)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200', 'ReturnValue': result , 'ReturnCode': 'RRTS'}, indent=4))
