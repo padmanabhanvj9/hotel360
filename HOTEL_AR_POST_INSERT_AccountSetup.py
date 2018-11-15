@@ -56,8 +56,7 @@ def HOTEL_AR_POST_SELECT_AccountSetup(request):
                               left join profile.currency on currency.id = account_setup.currency_id \
                               left join account_receivable.account_type on account_type.account_type_id = account_setup.account_type_id \
                               left join profile.pf_company_profile on pf_company_profile.pf_id = account_setup.profile_id'))
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200',
-                       'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
+     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': result,'ReturnCode':'RRTS'},indent=4))
 
 def HOTEL_AR_POST_DELETE_AccountSetup(request):    
    pf_id = request.json['profile_id']
