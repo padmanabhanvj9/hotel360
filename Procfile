@@ -139,4 +139,5 @@ worker: gunicorn HOTEL_AR_POST_INSERT_Account_Traces.py
 worker: gunicorn HOTEL_AR_POST_INSERT_AccountInvoice.py
 worker: gunicorn HOTEL_AR_POST_SELECT_Activitylog.py
 worker: gunicorn HOTEL_AR_POST_INSERT_CompressInvoice.py
+worker: gunicorn HOTEL_AR_POST_INSERT_ReasonDropdown.py
 clock: python clock.py
