@@ -18,9 +18,9 @@ def HOTEL_AR_POST_INSERT_ArNotes(request):
 def HOTEL_AR_POST_UPDATE_ArNotes(request):
     d = request.json
     print(d)
-    a = { k : v for k,v in d.items() if v != '' if k not in ('account_number')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('account_number','ar_notes_id')}
     print(a)
-    e = { k : v for k,v in d.items() if k != '' if k in ('account_number')}
+    e = { k : v for k,v in d.items() if k != '' if k in ('account_number','ar_notes_id')}
     print(e)
     gensql('update','account_receivable.ar_notes',a,e)
     return(json.dumps({"Return": "Record Updated Successfully","ReturnCode": "RUS",
@@ -36,7 +36,8 @@ def HOTEL_AR_POST_SELECT_ArNotes(request):
 
 def HOTEL_AR_POST_DELETE_ArNotes(request):    
    account_number = request.json['account_number']
+   ar_notes_id = request.json['ar_notes_id']
    print(account_number)
-   dbput(("delete from account_receivable.ar_notes where account_number = '"+account_number+"' "))
+   dbput(("delete from account_receivable.ar_notes where account_number = '"+account_number+"' and ar_notes_id = '"+str(ar_notes_id)+"' "))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                       'Return': 'Record Deleted Successfully','ReturnCode':'RDS'}, sort_keys=True, indent=4))
