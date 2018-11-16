@@ -21,9 +21,9 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
     result = request.json
     s = {}
     d = result['bills']
-    print(d)
+    #print(d)
     folio_no = json.loads(dbget('select * from account_receivable.folio_no'))
-    print(folio_no)
+    #print(folio_no)
     
     for i in d:
     
@@ -31,21 +31,27 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
              i['folio_no'] = folio_no[0]['folio_num']+1
              gensql('insert','account_receivable.account_billing_post',i)
              sql = json.loads(dbget("select sum(posting_amount) from account_receivable.account_billing_post where account_no = '"+str(i['account_no'])+"' and invoice_no='"+str(i['invoice_no'])+"'"))
+             print(sql)
              psql = dbput("update account_receivable.accout_inivoice  \
                            set invoice_amount = '"+str(sql[0]['sum'])+"', open_amount = '"+str(sql[0]['sum'])+"' \
                            where invoice_no='"+str(i['invoice_no'])+"'")
+             print(psql)
              
     folio_num = folio_no[0]['folio_num']+1
     dbput("update account_receivable.folio_no set folio_num = '"+str(folio_num)+"' ")
-    print(i['account_no'])
+    #print(i['account_no'])
     acc = json.loads(dbget("select open_amount from account_receivable.accout_inivoice where account_number = '"+str(i['account_no'])+"'"))
 
     print(acc)
+    if acc[0]['open_amount'] != None:
+        
  
-    sumof =sum(item['open_amount'] for item in acc)
-    acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sumof)+"' \
-                              where account_number = '"+str(i['account_no'])+"'")
-    print(acc_bala)
+        sumof =sum(item['open_amount'] for item in acc)
+        acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sumof)+"' \
+                                  where account_number = '"+str(i['account_no'])+"'")
+        print(acc_bala)
+    acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(acc[0]['open_amount'])+"' \
+                                  where account_number = '"+str(i['account_no'])+"'")
     s['invoice_id'] = i['invoice_no']
     s['acc_action'] = "posting charges"
     s['acc_post_date'] = Posting_date
