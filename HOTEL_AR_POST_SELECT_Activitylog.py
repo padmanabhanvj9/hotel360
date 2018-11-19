@@ -75,7 +75,7 @@ def HOTEL_AR_POST_INSERT_UNApplyPayment(request):
     print(e)
     a['posting_date'] = Posting_date
     a['posting_status'] = "UnApply"
-    a['posting_amount'] = '-'+d['posting_amount']
+    a['posting_amount'] = '-'+str(d['posting_amount'])
     gensql('update','account_receivable.invoice_payment',a,e)
 
     sql = dbput("update account_receivable.account_setup set account_balance = '"+str(setupamount)+"' \
