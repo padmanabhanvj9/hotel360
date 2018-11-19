@@ -35,3 +35,19 @@ def HOTEL_AR_POST_SELECT_REASONDropdown(request):
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 
+def HOTEL_AR_POST_SELECT_InvoicePaymentDropdown(request):
+     
+     result = json.loads(dbget("select * from account_receivable.invoice_payment_type"))
+
+     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
+                       'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
+
+
+def HOTEL_AR_POST_INSERT_InvoicePaymentDropdown(request):
+     d = request.json
+    
+     gensql('insert','account_receivable.invoice_payment_type',d)
+     
+     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
+                       "Status": "Success","StatusCode": "200"},indent=4))
+
