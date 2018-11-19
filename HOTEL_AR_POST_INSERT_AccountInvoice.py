@@ -50,7 +50,8 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
         acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sumof)+"' \
                                   where account_number = '"+str(i['account_no'])+"'")
         print(acc_bala)
-    acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(acc[0]['open_amount'])+"' \
+    else:
+        acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(acc[0]['open_amount'])+"' \
                                   where account_number = '"+str(i['account_no'])+"'")
     s['invoice_id'] = i['invoice_no']
     s['acc_action'] = "posting charges"
