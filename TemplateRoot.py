@@ -367,6 +367,7 @@ from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_REASONDropd
 from HOTEL_AR_POST_INSERT_ARTransfer import HOTEL_AR_POST_INSERT_ARTransfer
 from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_InvoicePaymentDropdown
 from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_INSERT_InvoicePaymentDropdown
+from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_AccountTypeDropdown
 #<--------------------------------------------------------------------------------->
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
@@ -1534,6 +1535,9 @@ def HOTEL_AR_POST_SELECT_InvoicePaymentDropdown_all():
 @app.route("/HOTEL_AR_POST_INSERT_InvoicePaymentDropdown",methods=['POST'])
 def HOTEL_AR_POST_INSERT_InvoicePaymentDropdown_all():
    return HOTEL_AR_POST_INSERT_InvoicePaymentDropdown(request)
+@app.route("/HOTEL_AR_POST_SELECT_AccountTypeDropdown",methods=['POST'])
+def HOTEL_AR_POST_SELECT_AccountTypeDropdown_all():
+   return HOTEL_AR_POST_SELECT_AccountTypeDropdown(request)
 if __name__ == "__main__":
     app.run(debug=True)
     #app.run(host="192.168.99.1",port=5000)
