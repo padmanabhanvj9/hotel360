@@ -41,7 +41,13 @@ def HOTEL_AR_POST_SELECT_InvoicePaymentDropdown(request):
 
      return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
+    
+def HOTEL_AR_POST_SELECT_AccountTypeDropdown(request):
+     
+     result = json.loads(dbget("select * from account_receivable.account_type"))
 
+     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
+                       'ReturnValue': result  ,'ReturnCode':'RRTS'},indent=4))
 
 def HOTEL_AR_POST_INSERT_InvoicePaymentDropdown(request):
      d = request.json
