@@ -150,7 +150,9 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_W
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 from HOTEL_RES_POST_INSERT_UpdateNewReservation import Reservationdonutchart
+#pending webservice
 
+from HOTEL_RES_POST_SELECT_QueryHistoryReservation import HOTEL_RES_POST_SELECT_RateQuery
 #<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
 #from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
 
@@ -782,6 +784,9 @@ def futurereservation():
 @app.route("/Reservationdonutchart",methods=['GET'])
 def Reservationdonutchart_all():
     return Reservationdonutchart()
+@app.route("/HOTEL_RES_POST_SELECT_RateQuery",methods=['POST'])
+def HOTEL_RES_POST_SELECT_RateQuery_all():
+    return HOTEL_RES_POST_SELECT_RateQuery(request)
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
