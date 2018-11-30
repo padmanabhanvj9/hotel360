@@ -1,5 +1,6 @@
 from sqlwrapper import dbget
 import json
+from HOTEL_REM_POST_SELECT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_SelectRatesetupAll
 from datetime import datetime, timedelta
 import requests
 #@app.route("/ProfileFutureReservationRecord",methods=['POST'])
@@ -23,8 +24,8 @@ def QueryHistoryReservation(request):
 def HOTEL_RES_POST_SELECT_RateQuery(request):
      s = request.json
      rate_code = []
-     query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
-     data = query.json()
+     #query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
+     data = HOTEL_REM_POST_SELECT_SelectRatesetupAll()
      print(data)
      #print(type(data['Rate_header']))
      value = data['Rate_header']
