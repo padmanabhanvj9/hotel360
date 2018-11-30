@@ -64,6 +64,16 @@ def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
        sql_value = dbput("update room_management.rm_room_list set rm_fo_status = '"+fo_status+"',rm_reservation_status = '"+res_status+"',rm_fo_person = "+str(adult)+" where rm_room in ("+str(room)+")")
        
        print(sql_value)
+       alertcount = json.loads(dbget("select count(*) from reservation.res_alert where res_id = '"+str(res_id)+"' \
+                                      and res_unique_id = '"+str(unique_id)+"'"))
+       if len(alertcount) !=0:
+          alertvalue = json.loads(dbget("select * from reservation.res_alert where res_id = '"+str(res_id)+"' \
+                                      and res_unique_id = '"+str(unique_id)+"'"))
+          return(json.dumps({'Status': 'Success', 'StatusCode': '200', 'alertvalue':alertvalue,'Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+       else:
+          
+         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
    else:
       return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Checkin a Today Guest arrivals only','ReturnCode':'CTG'}, sort_keys=True, indent=4))
