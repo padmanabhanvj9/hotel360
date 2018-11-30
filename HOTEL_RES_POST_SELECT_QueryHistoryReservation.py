@@ -1,8 +1,7 @@
 from sqlwrapper import dbget
 import json
 from datetime import datetime, timedelta
-from flask import Flask,request, jsonify
-app = Flask(__name__)
+import requests
 #@app.route("/ProfileFutureReservationRecord",methods=['POST'])
 def QueryHistoryReservation(request):
     #N = 365
@@ -21,3 +20,32 @@ def QueryHistoryReservation(request):
     result = json.loads(result)
     print(result)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result  ,'ReturnCode':'RRTS'},indent=4))
+def HOTEL_RES_POST_SELECT_RateQuery(request):
+     s = request.json
+     rate_code = []
+     query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
+     keyValList = ['begin_sell_date']
+     data = query.json()
+     #print(type(data['Rate_header']))
+     value = data['Rate_header']
+     result = [d for d in value if d['begin_sell_date'] >= s['arrival_date'] and d['end_sell_date'] <= s['departure_date']]
+     #print(type(result))
+     #print(result)
+     for results in result:
+       #print("results['rooms_id']",results['rooms_id'])
+       a, b = [],[]  
+       for roomtype in data['Rate_details_room_types']:
+           for package in data['Rate_header_packages']:
+         
+             if roomtype['rooms_id'] == results['rooms_id']:
+             
+               a.append(roomtype)
+             if package['packages_id'] == results['packages_id']:
+                b.append(package)
+           results['packages_id'] = b
+       results['rooms_id'] = a
+       
+       
+ 
+     return(json.dumps({"Return": result,"Status": "Success","StatusCode": "200"},indent=4))
+    
