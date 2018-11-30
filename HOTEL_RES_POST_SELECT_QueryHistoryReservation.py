@@ -24,8 +24,8 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      s = request.json
      rate_code = []
      query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
-     keyValList = ['begin_sell_date']
      data = query.json()
+     print(data)
      #print(type(data['Rate_header']))
      value = data['Rate_header']
      result = [d for d in value if d['begin_sell_date'] >= s['arrival_date'] and d['end_sell_date'] <= s['departure_date']]
