@@ -25,7 +25,7 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      s = request.json
      rate_code = []
      #query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
-     data = HOTEL_REM_POST_SELECT_SelectRatesetupAll()
+     data = HOTEL_REM_POST_SELECT_SelectRatesetupAll(request)
      print(data)
      #print(type(data['Rate_header']))
      value = data['Rate_header']
