@@ -5,6 +5,7 @@ import json
 def HOTEL_AR_POST_INSERT_CompressInvoice(request):
     d = request.json
     s ,z,f= {},[],{}
+    print("hello world")
     select = json.loads(dbget("select * from account_receivable.invoice_no"))
     print(select,type(select),len(select))
 
