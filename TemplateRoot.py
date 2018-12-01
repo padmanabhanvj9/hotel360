@@ -153,6 +153,10 @@ from HOTEL_RES_POST_INSERT_UpdateNewReservation import Reservationdonutchart
 #pending webservice
 
 from HOTEL_RES_POST_SELECT_QueryHistoryReservation import HOTEL_RES_POST_SELECT_RateQuery
+from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_INSERT_AttachAcompanyingGuest
+from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_INSERT_DetachAcompanyingGuest
+from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_SELECT_QueryAccompanyingGuest
+from Hotel_RES_Post_Insert_UpdateGuestPrivileges import Hotel_RES_Get_Select_privileges
 #<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
 #from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
 
@@ -787,6 +791,19 @@ def Reservationdonutchart_all():
 @app.route("/HOTEL_RES_POST_SELECT_RateQuery",methods=['POST'])
 def HOTEL_RES_POST_SELECT_RateQuery_all():
     return HOTEL_RES_POST_SELECT_RateQuery(request)
+@app.route("/HOTEL_RES_POST_INSERT_AttachAcompanyingGuest",methods=['POST'])
+def HOTEL_RES_POST_INSERT_AttachAcompanyingGuest_all():
+    return HOTEL_RES_POST_INSERT_AttachAcompanyingGuest(request)
+@app.route("/HOTEL_RES_POST_INSERT_DetachAcompanyingGuest",methods=['POST'])
+def HOTEL_RES_POST_INSERT_DetachAcompanyingGuest_all():
+    return HOTEL_RES_POST_INSERT_DetachAcompanyingGuest(request)
+@app.route("/HOTEL_RES_POST_SELECT_QueryAccompanyingGuest",methods=['POST'])
+def HOTEL_RES_POST_SELECT_QueryAccompanyingGuest_all():
+    return HOTEL_RES_POST_SELECT_QueryAccompanyingGuest(request)
+
+@app.route("/Hotel_RES_Get_Select_privileges",methods=['POST'])
+def Hotel_RES_Get_Select_privileges_all():
+    return Hotel_RES_Get_Select_privileges(request)
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
