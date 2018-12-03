@@ -6,7 +6,7 @@ def HOTEL_RES_POST_UPDATE_UpdateFixedChargesReservation(request):
     d = request.json
     print(d)
     a = { k : v for k,v in d.items() if k in ('Res_id')}
-    e = { k : v for k,v in d.items() if v != '' if  k not in  ('Res_id','fixed_charges_id','Res_unique_id')}
+    e = { k : v for k,v in d.items() if v != '' if  k not in  ('Res_id','fixed_charges_id')}
     f = { k : v for k,v in d.items() if  k == 'Fixed_Charges_Begin_Date' and v != '' if k == 'Fixed_Charges_End_Date' and v != ''}
     print(f)
     #Fixed_Charges_Begin_Date = d.get('Fixed_Charges_Begin_Date')

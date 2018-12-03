@@ -157,6 +157,10 @@ from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_INSERT_A
 from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_INSERT_DetachAcompanyingGuest
 from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_SELECT_QueryAccompanyingGuest
 from Hotel_RES_Post_Insert_UpdateGuestPrivileges import Hotel_RES_Get_Select_privileges
+
+from Hotel_RES_Post_Insert_UpdateFixedChargesReservation import Hotel_RES_Post_SELECT_QueryTransactioncodeCode
+from Hotel_RES_Post_Insert_UpdateFixedChargesReservation import Hotel_RES_Post_SELECT_SelectFixedCharges
+from HOTEL_RES_POST_INSERT_UpdateFixedRateReservation import HOTEL_RES_POST_SELECT_QueryFixedRateReservation
 #<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
 #from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
 
@@ -804,6 +808,16 @@ def HOTEL_RES_POST_SELECT_QueryAccompanyingGuest_all():
 @app.route("/Hotel_RES_Get_Select_privileges",methods=['POST'])
 def Hotel_RES_Get_Select_privileges_all():
     return Hotel_RES_Get_Select_privileges(request)
+@app.route("/Hotel_RES_Post_SELECT_QueryTransactioncodeCode",methods=['POST'])
+def Hotel_RES_Post_SELECT_QueryTransactioncodeCode_all():
+    return Hotel_RES_Post_SELECT_QueryTransactioncodeCode(request)
+@app.route("/Hotel_RES_Post_SELECT_SelectFixedCharges",methods=['POST'])
+def Hotel_RES_Post_SELECT_SelectFixedCharges_all():
+    return Hotel_RES_Post_SELECT_SelectFixedCharges(request)
+@app.route("/HOTEL_RES_POST_SELECT_QueryFixedRateReservation",methods=['POST'])
+def HOTEL_RES_POST_SELECT_QueryFixedRateReservation_all():
+    return HOTEL_RES_POST_SELECT_QueryFixedRateReservation(request)
+   
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
@@ -1561,6 +1575,6 @@ def HOTEL_AR_POST_INSERT_InvoicePaymentDropdown_all():
 def HOTEL_AR_POST_SELECT_AccountTypeDropdown_all():
    return HOTEL_AR_POST_SELECT_AccountTypeDropdown(request)
 if __name__ == "__main__":
-    app.run(debug=True)
-    #app.run(host="192.168.99.1",port=5000)
+    #app.run(debug=True)
+    app.run(host="192.168.99.1",port=5000)
    

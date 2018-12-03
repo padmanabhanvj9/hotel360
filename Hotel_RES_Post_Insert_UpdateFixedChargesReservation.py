@@ -1,4 +1,4 @@
-from sqlwrapper import gensql
+from sqlwrapper import gensql,dbget
 import datetime
 from flask import Flask,request, jsonify
 import json
@@ -30,3 +30,23 @@ def Hotel_RES_Post_Insert_UpdateFixedChargesReservation(request):
        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'please enter valid date','ReturnCode':'PEVD'}, sort_keys=True, indent=4))
 
+def Hotel_RES_Post_SELECT_QueryTransactioncodeCode(request):
+
+    package_from = request.json['package_from']
+    package_to = request.json['package_to']
+
+    sql_value = json.loads(dbget("select package_code.package_code, package_details.package_code_id,package_details.season_code_id, \
+                                package_details.packages_details_id,package_details.start_date,package_details.end_date,package_details.price \
+                                from packages.package_details \
+                                left join packages.package_code on package_code.package_code_id = package_details.package_code_id \
+                                where package_details.start_date <='"+package_from+"' and package_details.end_date >= '"+package_to+"'"))
+
+
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+
+def Hotel_RES_Post_SELECT_SelectFixedCharges(request):
+    d = request.json
+    sql_value = json.loads(dbget("select * from reservation.res_fixed_charges where res_id = '"+str(d['res_id'])+"'"))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
+
+    
