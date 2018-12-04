@@ -1,7 +1,8 @@
 import datetime
 #from datetime import datetime,timedelta
-from sqlwrapper import gensql, dbget
+from sqlwrapper import gensql, dbget,dbput
 import json
+from collections import Counter
 def Hotel_RES_Post_Update_TracesResloved(request):
     d = request.json
     a = { k : v for k,v in d.items() if v != '' if k not in ('res_id','res_unique_id','traces_id')}
@@ -16,3 +17,27 @@ def Hotel_RES_Post_Update_TracesResloved(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
    
+def Hotel_RES_Post_Delete_RemoveTraces(request):
+    d = request.json
+    sql_value = dbput("delete from reservation.res_traces \
+                      where traces_id = '"+str(d['traces_id'])+"' and res_id = '"+str(d['res_id'])+"'")
+    return(json.dumps({'Status':'Success','Statuscode':'200','Return':'Record Deleted Successfully','Returncode':'RDS'},indent=4))
+
+def Hotel_RES_Post_Select_PropertyCalendar(request):
+    
+    d = request.json
+    e ,list1,list2,final_value= {},[],[],[]
+    
+    sql_value = json.loads(dbget("select res_arrival from reservation.res_reservation "))
+    for i in sql_value:
+        list1.append(i['res_arrival'])
+
+    #print(Counter(list1))
+    #listofvalue = Counter(list1)
+    #print(Counter(list1).keys())
+    #print(Counter(list1).values())
+    for K,V in Counter(list1).items():
+        print(K)
+        list2.append({'date':K,'value':V})
+    final_value = sorted(list2,key=lambda i :i['date'])
+    return(json.dumps({'Return':final_value},indent=4))
