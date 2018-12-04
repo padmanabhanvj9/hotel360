@@ -6,7 +6,7 @@ from datetime import datetime,timedelta
 def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
     d = request.json
     e = { k:v for k,v in  d.items() if k not in ('traces_from_date','traces_to_date') }
-    #e['traces_status'] = "requested"
+   
     from_date = request.json['traces_from_date']
     to_date = request.json['traces_to_date']
     print(from_date,type(from_date))
@@ -20,6 +20,7 @@ def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
     print(trace_date)
     for i in trace_date:
         e['traces_date'] = i
+        e['res_traces_status'] = 'Unresloved'
         sql_value = gensql('insert','reservation.res_traces',e)
         
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
