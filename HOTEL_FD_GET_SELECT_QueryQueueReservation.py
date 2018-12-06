@@ -1,8 +1,11 @@
 from sqlwrapper import gensql, dbget
 import json
 def HOTEL_FD_POST_SELECT_QueryQueueReservation(request):
-    sql = json.loads(dbget("select * from reservation.res_reservation join   room_management.rm_queue_room on \
-                            reservation.res_reservation.res_id = room_management.rm_queue_room.res_id"))
+    sql = json.loads(dbget("select  rm_room_list.rm_room_status as roomstatus,rm_room_list.rm_fo_status as frontoffice, \
+                            rm_room_list.rm_room_class as roomclass,res_reservation.* from reservation.res_reservation \
+	                    join   room_management.rm_queue_room on \
+                            reservation.res_reservation.res_unique_id = room_management.rm_queue_room.res_unique_id \
+			    join  room_management.rm_room_list on rm_room_list.rm_room = reservation.res_reservation.res_room"))
     
     a,b,c = {},0,0
     
