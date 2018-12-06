@@ -163,6 +163,8 @@ from Hotel_RES_Post_Insert_UpdateFixedChargesReservation import Hotel_RES_Post_S
 from HOTEL_RES_POST_INSERT_UpdateFixedRateReservation import HOTEL_RES_POST_SELECT_QueryFixedRateReservation
 from Hotel_RES_Post_Update_TracesResloved import Hotel_RES_Post_Delete_RemoveTraces
 from Hotel_RES_Post_Update_TracesResloved import Hotel_RES_Post_Select_PropertyCalendar
+from HOTEL_RES_POST_INSERT_UpdateFixedRateReservation import HOTEL_RES_POST_SELECT_QueryRateInfo
+from HOTEL_RES_POST_SELECT_QueryPackageOptions import HOTEL_RES_POST_SELECT_QueryPackageOptions
 #<--------------------------BUSINESS BLOCK DROPDOWN---------------------------->
 #from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Block_status
 
@@ -824,7 +826,13 @@ def Hotel_RES_Post_Delete_RemoveTraces_all():
     return Hotel_RES_Post_Delete_RemoveTraces(request)   
 @app.route("/Hotel_RES_Post_Select_PropertyCalendar",methods=['POST'])
 def Hotel_RES_Post_Select_PropertyCalendar_all():
-    return Hotel_RES_Post_Select_PropertyCalendar(request)  
+    return Hotel_RES_Post_Select_PropertyCalendar(request)
+@app.route("/HOTEL_RES_POST_SELECT_QueryRateInfo",methods=['POST'])
+def HOTEL_RES_POST_SELECT_QueryRateInfo_all():
+    return HOTEL_RES_POST_SELECT_QueryRateInfo(request)
+@app.route("/HOTEL_RES_POST_SELECT_QueryPackageOptions",methods=['POST'])
+def HOTEL_RES_POST_SELECT_QueryPackageOptions_all():
+    return HOTEL_RES_POST_SELECT_QueryPackageOptions(request)  
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])

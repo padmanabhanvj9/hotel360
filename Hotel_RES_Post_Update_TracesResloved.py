@@ -26,18 +26,24 @@ def Hotel_RES_Post_Delete_RemoveTraces(request):
 def Hotel_RES_Post_Select_PropertyCalendar(request):
     
     d = request.json
-    e ,list1,list2,final_value= {},[],[],[]
+    e ,list1,list2,final_value,list3= {},[],[],[],[]
     
     sql_value = json.loads(dbget("select res_arrival from reservation.res_reservation "))
     for i in sql_value:
         list1.append(i['res_arrival'])
-
+    
+    #psql = json.loads(dbget("select res_room_type from reservation.res_reservation \
+     #                           where res_arrival between '2018-07-01' and '2018-08-09'"))
+    #list3.append(psql)
+    #print(list3)
     #print(Counter(list1))
     #listofvalue = Counter(list1)
     #print(Counter(list1).keys())
     #print(Counter(list1).values())
     for K,V in Counter(list1).items():
-        print(K)
+        #print(K)
         list2.append({'date':K,'value':V})
     final_value = sorted(list2,key=lambda i :i['date'])
-    return(json.dumps({'Return':final_value},indent=4))
+    psql = json.loads(dbget("select count(res_room_type) from reservation.res_reservation"))
+    print(psql)
+    return(json.dumps({'Status':'Success','Statuscode':'200','Return':'Record Retrieved successfully','Returnvalue':final_value},indent=4))
