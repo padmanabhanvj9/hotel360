@@ -25,12 +25,11 @@ def HOTEL_FD_POST_SELECT_QueryQueueReservation(request):
 
     k={}
     l=[]
-    for j in a.items():
-        k['room_type'] = j[0]
-        #l.append(k)
-        #print(l)
-        k['room_type_totel'] = j[1]
-        l.append(k)
+    print(a)
+    for keys,values in a.items():
+        print(keys,values)
+
+        l.append({'room_type':keys,'room_type_totel':values})
         #print(l)
         #c+=1
     #print(k,type(k))

@@ -58,10 +58,12 @@ def hotel_rm_post_insert_updateroommaintenance(request):
 def hotel_rm_post_update_resolveroommaintenance(request):
     e = request.json
     print(e)
-    d = {}
+    d ,s= {},{}
     d['rm_resolvedon'] =  datetime.datetime.utcnow().date()
     d['rm_resolvedby'] = 'SUPERVISOR'
+
     sql = json.loads(dbget("select * from room_management.rm_room_mainteanance_acitivity_log where rm_room = '"+e['rm_room']+"' "))
     print(sql,type(sql))
+
     print(gensql('update','room_management.rm_room_mainteanance_acitivity_log',d,e))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
