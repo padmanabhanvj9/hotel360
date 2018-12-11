@@ -196,7 +196,7 @@ from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_select_que
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroommaintenance
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_update_resolveroommaintenance
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_queryroommaintenance
-from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_delete_deleteoutoforderservice
+
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_delete_deleteroommaintenance
 from Hotel_Rm_Post_Update_UpdateRoomCondition import hotel_rm_post_update_updateroomcondition
 from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_update_updateoutoforderservice
@@ -1613,6 +1613,7 @@ def HOTEL_AR_POST_INSERT_InvoicePaymentDropdown_all():
 @app.route("/HOTEL_AR_POST_SELECT_AccountTypeDropdown",methods=['POST'])
 def HOTEL_AR_POST_SELECT_AccountTypeDropdown_all():
    return HOTEL_AR_POST_SELECT_AccountTypeDropdown(request)
+
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="192.168.99.1",port=5000)

@@ -2,23 +2,23 @@ from sqlwrapper import dbget,dbput,gensql
 import json
 
 def hotel_rm_post_select_queryoutoforderservice(request):
-    sql = json.loads(dbget("select * from room_management.rm_room_oo"))
+    sql = json.loads(dbget("select rm_room_list.rm_room_class ,rm_room_mainteanance_acitivity_log.* from \
+                            room_management.rm_room_mainteanance_acitivity_log \
+                          left join room_management.rm_room_list on rm_room_list.rm_room = rm_room_mainteanance_acitivity_log.rm_room "))
     print(sql)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql  ,'ReturnCode':'RRTS'},indent=4))
 
-def hotel_rm_post_delete_deleteoutoforderservice(request):
-    room = request.json['rm_room']
-    sql = dbput("delete from room_management.rm_room_oo where rm_room='"+room+"'")
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Deleted Successfully','ReturnCode':'RDS'}, sort_keys=True, indent=4))
 
-def  hotel_rm_post_update_updateoutoforderservice(request):
+def hotel_rm_post_update_updateoutoforderservice(request):
    dict1 = request.json
-   print(dict1)
-   e = { k : v for k,v in dict1.items() if k in ('RM_Room')}
+  
+   e = { k : v for k,v in dict1.items() if k in ('rm_room')}
    print(e)
-   d = { k : v for k,v in dict1.items() if k not in ('RM_Room')}
-   print(d)
-   print(gensql('update','room_management.rm_room_oo',d,e))
+   d = { k : v for k,v in dict1.items() if k not in ('rm_room')}
+  
+   print(gensql('update','room_management.rm_room_mainteanance_acitivity_log',d,e))
+   sql= dbput("update room_management.rm_room_list set rm_room_status = '"+d['rm_status']+"' \
+                   where rm_room = '"+d['rm_room']+"'")
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
 
