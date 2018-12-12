@@ -35,3 +35,42 @@ def Hotel_RM_Post_SELECT_OccupancyGraph(request):
     final_value = sorted(list2,key=lambda i :i['date'])
 
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':final_value  ,'ReturnCode':'RRTS'},indent=4))
+
+
+def Hotel_RM_Post_SELECT_FacilityForecast(request):
+    d = request.json
+    list1,list2,checklist ,checklist1= [],[],[],[]
+    day = datetime.timedelta(days=1)
+    plusdate = datetime.timedelta(days=6)
+    date1 = datetime.datetime.strptime(d['start_date'], '%Y-%m-%d').date() 
+    date2 = datetime.datetime.strptime(d['start_date'], '%Y-%m-%d').date()
+    date2 = date2 + plusdate
+         
+   
+    sql_value = json.loads(dbget("select res_depature from reservation.res_reservation \
+                                      where res_depature  between '"+str(date1)+"' and '"+str(date2)+"' "))
+    
+    for i in sql_value:
+        list1.append(i['res_depature'])
+    for K,V in Counter(list1).items():
+        #print(K)
+        checklist.append(K)
+        list2.append({'date':K,'value':V})
+    print(checklist)
+   
+        
+    while  date1 <= date2:
+            #days = date1.strftime("%A")
+            #dbdate = datetime.datetime.strptime(s['date'], '%Y-%m-%d').date()
+            
+            if str(date1) not in checklist:
+                checklist1.append(date1)
+            #print(date1.strftime('%Y-%m-%d'))
+            date1 = date1 + day
+            #days = date1.strftime("%A")
+    print(checklist1)
+    for s in checklist1:
+        list2.append({'date':str(s),'value':0})
+    final_value = sorted(list2,key = lambda x: x['date'] )
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':final_value  ,'ReturnCode':'RRTS'},indent=4))
+
