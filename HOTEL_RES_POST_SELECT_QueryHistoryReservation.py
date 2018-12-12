@@ -4,6 +4,11 @@ from HOTEL_REM_POST_SELECT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Sele
 from datetime import datetime, timedelta
 import requests
 #@app.route("/ProfileFutureReservationRecord",methods=['POST'])
+def HOTEL_RES_POST_select_Paticularreservation(request):
+    d = request.json
+    result = json.loads(dbget("select * from reservation.res_reservation \
+         where res_id = '"+str(d['res_id'])+"' and res_unique_id = '"+str(d['res_unique_id'])+"' "))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result  ,'ReturnCode':'RRTS'},indent=4))
 def QueryHistoryReservation(request):
     #N = 365
     current_date = datetime.utcnow().date()
