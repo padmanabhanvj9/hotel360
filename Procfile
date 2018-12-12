@@ -143,4 +143,6 @@ worker: gunicorn HOTEL_AR_POST_INSERT_ReasonDropdown.py
 worker: gunicorn HOTEL_AR_POST_INSERT_ARTransfer.py
 worker: gunicorn HOTEL_RES_POST_INSERT_AttachAcompanyingGuest.py
 worker: gunicorn HOTEL_RES_POST_Insert_RoomRouting.py
+worker: gunicorn Hotel_RM_Post_SELECT_OccupancyGraph.py
+worker: gunicorn hotel_rm_post_Select_Turndown_management.py
 clock: python clock.py

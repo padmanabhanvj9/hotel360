@@ -208,6 +208,8 @@ from Hotel_Rm_Post_Insert_UpdateGuestServiceStatus import hotel_rm_post_Update_g
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_OutoforderRoomsonly
 from hotel_rm_post_Select_Turndown_management import hotel_rm_post_Select_Turndown_management
 from Hotel_RM_Post_SELECT_OccupancyGraph import Hotel_RM_Post_SELECT_FacilityForecast
+from hotel_rm_post_Select_Turndown_management import hotel_rm_post_update_Turndown_management
+from hotel_rm_post_Select_Turndown_management import hotel_rm_post_select_Dropdown_Turndown_management
 
 from RoomManagementDropdown import select_roomstatus
 from RoomManagementDropdown import select_class
@@ -953,6 +955,14 @@ def hotel_rm_post_Select_Turndown_management_all():
 @app.route('/Hotel_RM_Post_SELECT_FacilityForecast',methods=['POST'])
 def Hotel_RM_Post_SELECT_FacilityForecast_all():
    return Hotel_RM_Post_SELECT_FacilityForecast(request)
+@app.route('/hotel_rm_post_update_Turndown_management',methods=['POST'])
+def hotel_rm_post_update_Turndown_management_all():
+   return hotel_rm_post_update_Turndown_management(request)
+@app.route('/hotel_rm_post_select_Dropdown_Turndown_management',methods=['POST'])
+def hotel_rm_post_select_Dropdown_Turndown_management_all():
+   return hotel_rm_post_select_Dropdown_Turndown_management(request)
+
+
 #deopdown
 @app.route("/Select_RoomStatus",methods=['POST'])
 def Select_RoomStatus():

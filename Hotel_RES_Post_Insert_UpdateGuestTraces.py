@@ -21,6 +21,7 @@ def Hotel_RES_Post_Insert_UpdateGuestTraces(request):
     for i in trace_date:
         e['traces_date'] = i
         e['res_traces_status'] = 'Unresloved'
+        e['turndown_status'] = 'Requested'
         sql_value = gensql('insert','reservation.res_traces',e)
         
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
