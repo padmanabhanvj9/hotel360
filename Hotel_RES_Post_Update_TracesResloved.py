@@ -13,6 +13,7 @@ def Hotel_RES_Post_Update_TracesResloved(request):
     a['resloved_by'] = "Daisy"
     a['resloved_on'] = RES_Log_Date
     a['res_traces_status'] = 'Resloved'
+    a['turndown_status'] = 'Completed'
     sql_value = gensql('update','reservation.res_traces',a,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 

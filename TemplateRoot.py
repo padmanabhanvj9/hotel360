@@ -399,6 +399,9 @@ from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_AccountType
 
 #<--------------------------------End of day-------------------------------------------->
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_countrycheck
+from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Departure_Not_Checkedout
+from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Roll_Business_date
+from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Posting_Rooms_charges
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
 from Hotelpmsreport import GetFrontDeskReport
@@ -899,7 +902,7 @@ def Updateroomcondition():
 def QueryRoomCondition():
    return hotel_rm_post_select_queryroomcondition(request)
 @app.route("/Hotel_Rm_Post_Delete_RoomCondition",methods=['POST'])
-def DeleteRoomCondition():
+def deleteRoomCondition():
    return hotel_rm_post_delete_roomcondition(request)
 @app.route("/hotel_rm_post_update_updateroomdiscrepancies",methods=['POST'])
 def updateroomdiscrepancies():
@@ -1645,7 +1648,16 @@ def HOTEL_AR_POST_SELECT_AccountTypeDropdown_all():
 @app.route("/Hotel_END_OF_Day_POST_countrycheck",methods=['POST'])
 def Hotel_END_OF_Day_POST_countrycheck_all():
    return Hotel_END_OF_Day_POST_countrycheck(request)
+@app.route("/Hotel_END_OF_Day_POST_Departure_Not_Checkedout",methods=['POST'])
+def Hotel_END_OF_Day_POST_Departure_Not_Checkedout_all():
+   return Hotel_END_OF_Day_POST_Departure_Not_Checkedout(request)
+@app.route("/Hotel_END_OF_Day_POST_Roll_Business_date",methods=['POST'])
+def Hotel_END_OF_Day_POST_Roll_Business_date_all():
+   return Hotel_END_OF_Day_POST_Roll_Business_date(request)
 
+@app.route("/Hotel_END_OF_Day_POST_Posting_Rooms_charges",methods=['POST'])
+def Hotel_END_OF_Day_POST_Posting_Rooms_charges_all():
+   return Hotel_END_OF_Day_POST_Posting_Rooms_charges(request)
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="192.168.99.1",port=5000)
