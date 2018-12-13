@@ -395,6 +395,10 @@ from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_InvoicePaym
 from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_INSERT_InvoicePaymentDropdown
 from HOTEL_AR_POST_INSERT_ReasonDropdown import HOTEL_AR_POST_SELECT_AccountTypeDropdown
 #<--------------------------------------------------------------------------------->
+
+
+#<--------------------------------End of day-------------------------------------------->
+from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_countrycheck
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
 from Hotelpmsreport import GetFrontDeskReport
@@ -1634,6 +1638,13 @@ def HOTEL_AR_POST_INSERT_InvoicePaymentDropdown_all():
 @app.route("/HOTEL_AR_POST_SELECT_AccountTypeDropdown",methods=['POST'])
 def HOTEL_AR_POST_SELECT_AccountTypeDropdown_all():
    return HOTEL_AR_POST_SELECT_AccountTypeDropdown(request)
+
+
+
+#<---------------------------------End of day route-------------------->
+@app.route("/Hotel_END_OF_Day_POST_countrycheck",methods=['POST'])
+def Hotel_END_OF_Day_POST_countrycheck_all():
+   return Hotel_END_OF_Day_POST_countrycheck(request)
 
 if __name__ == "__main__":
     #app.run(debug=True)
