@@ -125,7 +125,8 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
         list1.append(due_in_report['res_unique_id'])
         due_in_update = dbput("update reservation.res_reservation set res_guest_status = 'due in' \
                                where res_id = '"+str(due_in_report['res_id'])+"' \
-                               and res_unique_id = '"+str(due_in_report['res_unique_id'])+"'")
+                               and res_unique_id = '"+str(due_in_report['res_unique_id'])+"' \
+                               and res_guest_status not in ('cancel')")
 
     run_additional.append({"Run_additional_procedure":"Reservation Due In","Iteration": len(list1)})
 
@@ -137,7 +138,8 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
         list2.append(due_out_report['res_unique_id'])
         due_out_update = dbput("update reservation.res_reservation set res_guest_status = 'due out' \
                                where res_id = '"+str(due_out_report['res_id'])+"' \
-                               and res_unique_id = '"+str(due_out_report['res_unique_id'])+"'")
+                               and res_unique_id = '"+str(due_out_report['res_unique_id'])+"' \
+                               and res_guest_status not in ('cancel,no show')")
     print(list2)
     run_additional.append({"Run_additional_procedure":"Reservation Due Out","Iteration": len(list2)})
 
@@ -149,7 +151,8 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
         list3.append(arrivals_report['res_unique_id'])
         arrivals_report_update = dbput("update reservation.res_reservation set res_guest_status = 'arrival' \
                                where res_id = '"+str(arrivals_report['res_id'])+"' \
-                               and res_unique_id = '"+str(arrivals_report['res_unique_id'])+"'")
+                               and res_unique_id = '"+str(arrivals_report['res_unique_id'])+"' \
+                               and res_guest_status not in ('cancel,no show') ")
     #print(list3)
     run_additional.append({"Run_additional_procedure":"Reservation Arrival","Iteration": len(list3)})
 
