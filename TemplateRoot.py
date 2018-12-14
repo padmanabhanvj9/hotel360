@@ -1,7 +1,7 @@
 
 #Input Param: Null
 #OutputParam: Null
-#Purpose: This root file pass the parameters value to another file  
+#Purpose: This root file pass the parameters value to another file
 #Date: 13/03/18
 #Author: Daisy
 
@@ -47,7 +47,7 @@ from profilecity import profilelanguage
 from profilecity import profilecountry
 from profilecity import profilestate
 from profilecity import profilepostalcode
-from profilecity import profilevip 
+from profilecity import profilevip
 from profilecity import profilenationality
 from profilecity import profilecurrency
 from profilecity import profilecommunication
@@ -244,10 +244,10 @@ from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratecode
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import market
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import sourcetab
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import crrencytab
-from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import rateselect 
-from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import ratecodeselect 
-from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import marketselect 
-from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import sourceselect 
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import rateselect
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import ratecodeselect
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import marketselect
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import sourceselect
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import currencyselect
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import negotiated
 from HOTEL_REVENUE_MANAGEMENT_POST_INSERT_RATECATEGORY import ratedetailss
@@ -402,6 +402,7 @@ from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_countrychec
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Departure_Not_Checkedout
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Roll_Business_date
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Posting_Rooms_charges
+from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Run_Additional_procedures
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
 from Hotelpmsreport import GetFrontDeskReport
@@ -727,8 +728,8 @@ def Hotel_RES_POST_Delete_DeleteReservationCreditcardva():
 @app.route("/HOTEL_RES_POST_SELECT_QueryDeposit",methods=['POST'])
 def HOTEL_RES_POST_SELECT_QueryDepositva():
     return HOTEL_RES_POST_SELECT_QueryDeposit(request)
-   
-   
+
+
 @app.route("/Hotel_RES_POST_INSERT_RestypeInsert",methods=['POST'])
 def Hotel_RES_POST_INSERT_RestypeInsertvalue():
     return Hotel_RES_POST_INSERT_RestypeInsert(request)
@@ -842,7 +843,7 @@ def HOTEL_RES_POST_SELECT_QueryFixedRateReservation_all():
     return HOTEL_RES_POST_SELECT_QueryFixedRateReservation(request)
 @app.route("/Hotel_RES_Post_Delete_RemoveTraces",methods=['POST'])
 def Hotel_RES_Post_Delete_RemoveTraces_all():
-    return Hotel_RES_Post_Delete_RemoveTraces(request)   
+    return Hotel_RES_Post_Delete_RemoveTraces(request)
 @app.route("/Hotel_RES_Post_Select_PropertyCalendar",methods=['POST'])
 def Hotel_RES_Post_Select_PropertyCalendar_all():
     return Hotel_RES_Post_Select_PropertyCalendar(request)
@@ -860,7 +861,7 @@ def Hotel_RES_Get_Select_QueryRoomRouting_all():
     return Hotel_RES_Get_Select_QueryRoomRouting(request)
 @app.route("/HOTEL_RES_POST_select_Paticularreservation",methods=['POST'])
 def HOTEL_RES_POST_select_Paticularreservation_all():
-    return HOTEL_RES_POST_select_Paticularreservation(request)   
+    return HOTEL_RES_POST_select_Paticularreservation(request)
 #</----------------------------/>
 #<---------------frontdesk route----------------------->
 @app.route("/HOTEL_FD_POST_INSERT_UpdateQueueRreservation",methods=['POST'])
@@ -1105,7 +1106,7 @@ def sourcesel():
 @app.route("/HOTEL_REVENUE_MANAGEMENT_POST_SELECT_MARKET_CURRENCY_SELECT",methods=['POST'])
 def currencysource():
     return currencyselect(request)
-  
+
 @app.route("/HOTEL_REVENUE_MANAGEMENT_POST_INSERT_NEGOTIATED",methods=['POST'])
 def negotiatedd():
     return negotiated(request)
@@ -1194,7 +1195,7 @@ def querybilling():
 @app.route("/HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT",methods=['POST'])
 def updatepostingcash():
     return HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request)
-   
+
 @app.route("/HOTEL_CAH_POST_POSTING_HISTORY_LOG",methods=['POST'])
 def historylog():
     return HOTEL_CAH_POST_POSTING_HISTORY_LOG(request)
@@ -1254,27 +1255,27 @@ def originalhistory():
 @app.route("/HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom",methods=['POST'])
 def anotherroom():
     return HOTEL_CAH_POST_UPDATE_TransfertoAnotherRoom(request)
-   
+
 @app.route("/HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD",methods=['POST','GET'])
 def QUERYINHOUSERECORD():
     return HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request)
-   
+
 @app.route("/HOTEL_CASH_PAYMENT_CODE_SELECT",methods=['POST','GET'])
 def PAYMENT_CODE_SELECT():
     return HOTEL_CASH_PAYMENT_CODE_SELECT(request)
-   
+
 @app.route("/HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT",methods=['POST'])
 def UPDATEPOSTINGPAYMENTCHECKOUT():
     return HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request)
-   
 
-  
+
+
 #<-------------------------Business Block------------------------------->
-  
+
 @app.route("/HOTEL_BBL_POST_INSERT_BusinessBlock",methods=['POST'])
 def inquiryprocess():
     return HOTEL_BBL_POST_INSERT_BusinessBlock(request)
-  
+
 
 @app.route("/HOTEL_BBL_POST_UPDATE_Business_Block_Update",methods=['POST'])
 def businessupdate():
@@ -1654,11 +1655,12 @@ def Hotel_END_OF_Day_POST_Departure_Not_Checkedout_all():
 @app.route("/Hotel_END_OF_Day_POST_Roll_Business_date",methods=['POST'])
 def Hotel_END_OF_Day_POST_Roll_Business_date_all():
    return Hotel_END_OF_Day_POST_Roll_Business_date(request)
-
 @app.route("/Hotel_END_OF_Day_POST_Posting_Rooms_charges",methods=['POST'])
 def Hotel_END_OF_Day_POST_Posting_Rooms_charges_all():
    return Hotel_END_OF_Day_POST_Posting_Rooms_charges(request)
+@app.route("/Hotel_END_OF_Day_POST_Run_Additional_procedures",methods=['POST'])
+def Run_Additional_procedures():
+   return Hotel_END_OF_Day_POST_Run_Additional_procedures(request)
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="192.168.99.1",port=5000)
-   
