@@ -95,7 +95,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
 
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_charges,'ReturnCode':'RRTS'},indent=4))
 def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
-    run_additional,list1,list2,no_show_count,list3 = [],[],[],[],[]
+    run_additional,list1,list2,no_show_count,list3,list4 = [],[],[],[],[],[]
     #********************* night audit date******************
 
     date = json.loads(dbget("select roll_business_date from endofday.business_date"))
@@ -155,5 +155,13 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
                                and res_guest_status not in ('cancel,no show') ")
     #print(list3)
     run_additional.append({"Run_additional_procedure":"Reservation Arrival","Iteration": len(list3)})
+
+
+    #**********************************In-house guest**********************************************
+    in_house =  json.loads(dbget(" select * from reservation.res_reservation where res_guest_status='checkin' or res_guest_status='due out'"))
+    for in_house_report in in_house:
+        list4.append(in_house_report['res_unique_id'])
+
+    run_additional.append({"Run_additional_procedure":"In-House Guest","Iteration": len(list4)})
 
     return (json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_additional,'ReturnCode':'RRTS'},indent=4))
