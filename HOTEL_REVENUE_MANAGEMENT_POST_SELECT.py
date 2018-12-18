@@ -41,3 +41,10 @@ def season_code_revenue(request):
     s = json.loads(dbget("select * from revenue_management.season_code"))
     print(s)
     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
+
+
+def Insert_season_code_revenue(request):
+    d = request.json
+    gensql('insert','revenue_management.season_code',d)
+    return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
+                       "Status": "Success","StatusCode": "200"},indent=4))

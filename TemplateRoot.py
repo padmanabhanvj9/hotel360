@@ -133,6 +133,7 @@ from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_depo
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_CancelReason
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Cardtype
 from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Waitlist_reason
+from HOTEL_RES_GET_SELECT_QueryReservationValue import Hotel_RES_GET_SELECT_Privileges
 
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_RestypeInsert
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Alertarea
@@ -147,6 +148,7 @@ from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_D
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_CancelReason
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Cardtype
 from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Waitlist_reason
+from HOTEL_RES_POST_INSERT_InsertReservationValue import Hotel_RES_POST_INSERT_Privileges
 
 from Hotel_RES_POST_SELECT_QueryFutureReservation import ProfileFutureReservation
 from HOTEL_RES_POST_INSERT_UpdateNewReservation import Reservationdonutchart
@@ -156,7 +158,7 @@ from HOTEL_RES_POST_SELECT_QueryHistoryReservation import HOTEL_RES_POST_SELECT_
 from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_INSERT_AttachAcompanyingGuest
 from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_INSERT_DetachAcompanyingGuest
 from HOTEL_RES_POST_INSERT_AttachAcompanyingGuest import HOTEL_RES_POST_SELECT_QueryAccompanyingGuest
-from Hotel_RES_Post_Insert_UpdateGuestPrivileges import Hotel_RES_Get_Select_privileges
+#from Hotel_RES_Post_Insert_UpdateGuestPrivileges import Hotel_RES_Get_Select_privileges
 
 from Hotel_RES_Post_Insert_UpdateFixedChargesReservation import Hotel_RES_Post_SELECT_QueryTransactioncodeCode
 from Hotel_RES_Post_Insert_UpdateFixedChargesReservation import Hotel_RES_Post_SELECT_SelectFixedCharges
@@ -257,6 +259,7 @@ from HOTEL_REM_POST_SELECT_QueryRatecode import HOTEL_REM_POST_SELECT_QueryRatec
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import room_types
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import packages_revenue
 from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import season_code_revenue
+from HOTEL_REVENUE_MANAGEMENT_POST_SELECT import Insert_season_code_revenue
 from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Ratecode
 from HOTEL_REM_POST_INSERT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Negotiated_Rate
 from HOTEL_REM_POST_DELETE import Delete_Negotiated_Rate
@@ -325,6 +328,11 @@ from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_BusinessBlock
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_InventoryContrtol
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_MeetingSpaceType
 from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_GET_SELECT_Block_Type
+
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_POST_INSERT_BusinessBlockStatus
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_POST_INSERT_InventoryContrtol
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_POST_INSERT_MeetingSpaceType
+from HOTEL_BBL_GET_SELECT_QueryDrodown import HOTEL_BBL_POST_INSERT_Block_Type
 
 #<---------------------Packages------------------------------->
 from HOTEL_PAC_POST_INSERT_Package_dropdowns import HOTEL_PAC_POST_INSERT_Forecastgroup
@@ -809,6 +817,9 @@ def Hotel_RES_GET_SELECT_Cardtypeva():
 @app.route("/Hotel_RES_GET_SELECT_Waitlist_reason",methods=['GET'])
 def Hotel_RES_GET_SELECT_Waitlist_reasonva():
    return Hotel_RES_GET_SELECT_Waitlist_reason()
+@app.route("/Hotel_RES_GET_SELECT_Privileges",methods=['GET','POST'])
+def Hotel_RES_GET_SELECT_Privileges_all():
+  return Hotel_RES_GET_SELECT_Privileges()
 
 @app.route("/ProfileFutureReservation",methods=['POST'])
 def futurereservation():
@@ -829,9 +840,7 @@ def HOTEL_RES_POST_INSERT_DetachAcompanyingGuest_all():
 def HOTEL_RES_POST_SELECT_QueryAccompanyingGuest_all():
     return HOTEL_RES_POST_SELECT_QueryAccompanyingGuest(request)
 
-@app.route("/Hotel_RES_Get_Select_privileges",methods=['POST'])
-def Hotel_RES_Get_Select_privileges_all():
-    return Hotel_RES_Get_Select_privileges(request)
+
 @app.route("/Hotel_RES_Post_SELECT_QueryTransactioncodeCode",methods=['POST'])
 def Hotel_RES_Post_SELECT_QueryTransactioncodeCode_all():
     return Hotel_RES_Post_SELECT_QueryTransactioncodeCode(request)
@@ -882,6 +891,10 @@ def HOTEL_FD_GET_SELECT_QueryTracesActivityLogva():
 @app.route("/HOTEL_FD_POST_SELECT_QueryRoomAssignment",methods=['GET'])
 def HOTEL_FD_POST_SELECT_QueryRoomAssignmentva():
     return HOTEL_FD_POST_SELECT_QueryRoomAssignment()
+
+@app.route("/Hotel_RES_POST_INSERT_Privileges",methods=['POST'])
+def Hotel_RES_POST_INSERT_Privileges_one():
+  return Hotel_RES_POST_INSERT_Privileges(request)
 #<--------------------------------------------->
 #<----------------------Room maangement route------------------->
 @app.route('/Hotel_Rm_Post_Insert_Updateroomlist',methods=['POST'])
@@ -1137,6 +1150,10 @@ def select_packages_reveneue():
 def select_season_reveneue():
   return season_code_revenue(request)
 
+@app.route("/HOTEL_REVENUE_MANAGEMENT_Insert_season_code_revenue",methods=['POST'])
+def Insert_season_code_revenue_all():
+  return Insert_season_code_revenue(request)
+
 @app.route("/HOTEL_REVENUE_MANAGEMENT_SELECT_Ratecodes",methods=['POST'])
 def select_ratecodes_reveneue():
   return HOTEL_REM_POST_SELECT_Ratecode(request)
@@ -1387,6 +1404,21 @@ def meeting_space():
 @app.route("/HOTEL_BBL_GET_SELECT_Block_Type",methods=['GET'])
 def HOTEL_BBL_GET_SELECT_Block_Typebgg():
    return HOTEL_BBL_GET_SELECT_Block_Type()
+
+@app.route("/HOTEL_BBL_POST_INSERT_BusinessBlockStatus",methods=['POST'])
+def HOTEL_BBL_POST_INSERT_BusinessBlockStatus_all():
+   return HOTEL_BBL_POST_INSERT_BusinessBlockStatus(request)
+@app.route("/HOTEL_BBL_POST_INSERT_InventoryContrtol",methods=['POST'])
+def inventory():
+   return HOTEL_BBL_POST_INSERT_InventoryContrtol(request)
+@app.route("/HOTEL_BBL_POST_INSERT_MeetingSpaceType",methods=['POST'])
+def HOTEL_BBL_POST_INSERT_MeetingSpaceType_all():
+   return HOTEL_BBL_POST_INSERT_MeetingSpaceType(request)
+@app.route("/HOTEL_BBL_POST_INSERT_Block_Type",methods=['POST'])
+def HOTEL_BBL_POST_INSERT_Block_Type_all():
+   return HOTEL_BBL_POST_INSERT_Block_Type(request)
+
+
 #<-------------------Packages--------------------------------------->
 
 @app.route("/HOTEL_PAC_POST_INSERT_Forecastgroup",methods=['POST'])
