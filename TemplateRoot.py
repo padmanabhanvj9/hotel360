@@ -181,6 +181,8 @@ from HOTEL_FD_POST_INSERT_RoomAssign import HOTEL_FD_POST_UPDATE_RoomAssign
 from HOTEL_FD_GET_SELECT_QueryTracesActivityLog import HOTEL_FD_GET_SELECT_QueryTracesActivityLog
 from HOTEL_FD_POST_UPDATE_CheckinGuestArrivals import HOTEL_FD_POST_UPDATE_CheckinGuestArrivals
 from HOTEL_FD_POST_SELECT_QueryRoomAssignment import HOTEL_FD_POST_SELECT_QueryRoomAssignment
+from HOTEL_FD_GET_SELECT_QueryTracesActivityLog import HOTEL_FD_GET_SELECT_QueryNotes
+from HOTEL_FD_GET_SELECT_QueryTracesActivityLog import HOTEL_FD_GET_SELECT_Querypreference
 #<--------------------------------------------------->
 #<---------------Room management------------------------->
 from Hotel_RM_Post_Insert_Updateroom import hotel_rm_post_insert_updateroomlist
@@ -271,6 +273,7 @@ from HOTEL_REM_POST_UPDATE_UpdateRatecodeSetup import HOTEL_REM_POST_UPDATE_RATE
 from HOTEL_REM_POST_DELETE import Delete_Rate_code
 from HOTEL_REM_POST_DELETE import Delete_Rate_details
 
+
 #<----------------------------------------Cashiering-------------------------->
 from HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING import HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING
 from HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING import HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING
@@ -353,6 +356,7 @@ from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Packag
 from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_Packages_All
 from HOTEL_PAC_POST_DELETE_Package_Code import HOTEL_PAC_POST_DELETE_Package
 from HOTEL_PAC_POST_DELETE_Package_Code import HOTEL_PAC_POST_DELETE_Packagedetails
+from HOTEL_PAC_POST_SELECT_Package_dropdowns import HOTEL_PAC_POST_SELECT_PackagesTrasnactioncode
 #<--------------------------------------------------------------------->
 #<---------------------------------amazonlex---------->
 from AMAZON_RESERVATION_LAMBDA_LEX import AMAZON_RESERVATION_LAMBDA_LEX
@@ -411,6 +415,7 @@ from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Departure_N
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Roll_Business_date
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Posting_Rooms_charges
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Run_Additional_procedures
+from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_print_final_report
 #<-----------------------------PMS Report------------------------------>
 from Hotelpmsreport import GetReservationReport
 from Hotelpmsreport import GetFrontDeskReport
@@ -895,6 +900,13 @@ def HOTEL_FD_POST_SELECT_QueryRoomAssignmentva():
 @app.route("/Hotel_RES_POST_INSERT_Privileges",methods=['POST'])
 def Hotel_RES_POST_INSERT_Privileges_one():
   return Hotel_RES_POST_INSERT_Privileges(request)
+
+@app.route("/HOTEL_FD_GET_SELECT_QueryNotes",methods=['POST'])
+def HOTEL_FD_GET_SELECT_QueryNotes_all():
+  return HOTEL_FD_GET_SELECT_QueryNotes(request)
+@app.route("/HOTEL_FD_GET_SELECT_Querypreference",methods=['POST'])
+def HOTEL_FD_GET_SELECT_Querypreference_al():
+  return HOTEL_FD_GET_SELECT_Querypreference(request)
 #<--------------------------------------------->
 #<----------------------Room maangement route------------------->
 @app.route('/Hotel_Rm_Post_Insert_Updateroomlist',methods=['POST'])
@@ -1492,6 +1504,10 @@ def DELETE_Package():
 @app.route("/HOTEL_PAC_POST_DELETE_Packagedetails",methods=['POST'])
 def DELETE_Packagedetails():
    return HOTEL_PAC_POST_DELETE_Packagedetails(request)
+@app.route("/HOTEL_PAC_POST_SELECT_PackagesTrasnactioncode",methods=['POST'])
+def HOTEL_PAC_POST_SELECT_PackagesTrasnactioncode_alls():
+   return HOTEL_PAC_POST_SELECT_PackagesTrasnactioncode(request)
+
 #dddddddd
 #<------------------------------------------------------------------>
 #PMS Report*************************************************
@@ -1693,6 +1709,9 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges_all():
 @app.route("/Hotel_END_OF_Day_POST_Run_Additional_procedures",methods=['POST'])
 def Run_Additional_procedures():
    return Hotel_END_OF_Day_POST_Run_Additional_procedures(request)
+@app.route("/Hotel_END_OF_Day_POST_print_final_report",methods=['POST'])
+def Hotel_END_OF_Day_POST_print_final_report_all():
+   return Hotel_END_OF_Day_POST_print_final_report(request)
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="192.168.99.1",port=5000)

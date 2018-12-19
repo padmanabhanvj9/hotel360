@@ -39,19 +39,18 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      #print(result)
      for results in result:
        #print("results['rooms_id']",results['rooms_id'])
-       a, b = [],[]  
+       a, b = [],[]
        for roomtype in data['Rate_details_room_types']:
            for package in data['Rate_header_packages']:
-         
+
              if roomtype['rooms_id'] == results['rooms_id']:
-             
+
                a.append(roomtype)
              if package['packages_id'] == results['packages_id']:
                 b.append(package)
            results['packages_id'] = b
        results['rooms_id'] = a
-       
-       
- 
+
+
+
      return(json.dumps({"Return": result,"Status": "Success","StatusCode": "200"},indent=4))
-    

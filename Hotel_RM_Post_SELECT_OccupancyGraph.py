@@ -3,28 +3,29 @@ import json
 import datetime
 from collections import Counter
 def Hotel_RM_Post_SELECT_OccupancyGraph(request):
-   
-   
+
+
     d = request.json
     e ,list1,list2,final_value,list3= {},[],[],[],[]
-    
-    date1 = datetime.datetime.strptime(d['start_date'], '%Y-%m-%d').date() 
+
+    date1 = datetime.datetime.strptime(d['start_date'], '%Y-%m-%d').date()
     date2 = date1 + datetime.timedelta(days=6)
     roomcount = json.loads(dbget("select count(*) from room_management.rm_room_list"))
     print(roomcount[0]['count'])
     sql_value = json.loads(dbget("select res_arrival from reservation.res_reservation \
                                   where res_arrival between '"+str(date1)+"' and   '"+str(date2)+"' "))
-    
-    list1 = [{'date':k,'deduct':v,'nondeduct':roomcount[0]['count'] - v,'total_room':roomcount[0]['count']} for k,v in Counter([i['res_arrival'] for i in sql_value]).items()]
+
+    list1 = [{'date':(datetime.datetime.strptime(k, '%Y-%m-%d').date()).strftime("%B %d"),'deduct':v,'nondeduct':roomcount[0]['count'] - v,'total_room':roomcount[0]['count']} for k,v in Counter([i['res_arrival'] for i in sql_value]).items()]
     print(list1)
     list1_date = [i['date'] for i in list1]
-    while  date1 <= date2:           
+    while  date1 <= date2:
         if str(date1) not in list1_date:
-           list1.append({'date':str(date1),'deduct':0,'nondeduct':roomcount[0]['count'],'total_rooms':roomcount[0]['count']})      
+          # date1 = datetime.datetime.strptime(date1, '%Y-%m-%d').date()
+           list1.append({'date':str(date1.strftime("%B %d")),'deduct':0,'nondeduct':roomcount[0]['count'],'total_rooms':roomcount[0]['count']})
         date1 = date1 + datetime.timedelta(days=1)
-               
+
     final_value = sorted(list1,key = lambda x: x['date'] )
-    
+
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':final_value  ,'ReturnCode':'RRTS'},indent=4))
 
 

@@ -73,7 +73,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                                             where posting_code_description = '"+fix_cha['fixed_charges_transaction_code']+"'"))
       d['res_room'] = fix_cha['res_room']
       d['res_id'] = fix_cha['res_id']
-      d['posting_amount'] = fix_cha['fixed_charges_amount']
+      d['posting_amount'] = fix_cha['fixed_charges_amount'] * fix_cha['fixed_charges_quantity']
       d['posting_date'] = date[0]['roll_business_date']
       d['post_code_id'] = fixed_charge_code[0]['posting_code']
       d['post_window'] = '1'
@@ -165,3 +165,27 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     run_additional.append({"Run_additional_procedure":"In-House Guest","Iteration": len(list4)})
 
     return (json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_additional,'ReturnCode':'RRTS'},indent=4))
+def Hotel_END_OF_Day_POST_print_final_report(request):
+    #*******************************room cleaning report*******************
+    list1,list2 = [],[]
+    date = json.loads(dbget("select roll_business_date from endofday.business_date"))
+    print(date)
+    sql_value = json.loads(dbget("	select * from reservation.res_reservation \
+	where res_guest_status in('due out','checkin','Checkout') and res_arrival <='"+str(date[0]['roll_business_date'])+"' and res_depature >= '"+str(date[0]['roll_business_date'])+"'"))
+
+    for i in sql_value:
+        rooms = json.loads(dbget("select * from room_management.rm_room_list \
+                              where rm_room = '"+str(i['res_room'])+"'"))
+        list1.append({
+        "room":i['res_room'],
+        "room_type":rooms[0]['rm_room_type'],
+        "room_class":rooms[0]['rm_room_class'],
+        "room_status":"Dirty"
+
+        })
+    list2.append({"Report_Name":"RoomCleaningReport","reportstatus":"filed","room_repport_file":list1})
+    #*******************************in-house report**************************
+    in_house =  json.loads(dbget(" select * from reservation.res_reservation where\
+	res_guest_status='checkin' or res_guest_status='due out' and res_arrival <='"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"'"))
+    list2.append({"Report_Name":"IN-houseReport","reportstatus":"filed","room_repport_file":in_house})
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':list2,'ReturnCode':'RRTS'},indent=4))

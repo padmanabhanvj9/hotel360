@@ -3,10 +3,10 @@ import datetime
 from flask import Flask,request, jsonify
 import json
 def Hotel_RES_Post_Insert_UpdateFixedChargesReservation(request):
-    
+
     d = request.json
     print(d)
-    e = { k : v for k,v in d.items() if k in ('Res_id')}       
+    e = { k : v for k,v in d.items() if k in ('Res_id')}
     print(e)
     s = ['RES_Arrival','RES_Depature','PF_Firstname','PF_Mobileno','RES_Nights']
     sql_value = gensql('select','reservation.res_reservation',s,e)
@@ -24,7 +24,7 @@ def Hotel_RES_Post_Insert_UpdateFixedChargesReservation(request):
     charges_begin_date = datetime.datetime.strptime(data1, '%Y-%m-%d').date()
     charges_end_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
     print("str2",charges_begin_date,charges_end_date,type(charges_end_date))
-    
+
     if charges_begin_date >= arr_date and charges_end_date  <= dep_date and arr_date <= charges_end_date:
        sql_value = gensql('insert','reservation.res_fixed_charges',d)
        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
@@ -35,11 +35,10 @@ def Hotel_RES_Post_SELECT_QueryTransactioncodeCode(request):
     package_from = request.json['package_from']
     package_to = request.json['package_to']
 
-    sql_value = json.loads(dbget("select package_code.package_code, package_details.package_code_id,package_details.season_code_id, \
-                                package_details.packages_details_id,package_details.start_date,package_details.end_date,package_details.price \
-                                from packages.package_details \
-                                left join packages.package_code on package_code.package_code_id = package_details.package_code_id \
-                                where package_details.start_date <='"+package_from+"' and package_details.end_date >= '"+package_to+"'"))
+    sql_value = json.loads(dbget("select packages.package_code.package_code,packages.package_code.short_description, \
+                                    packages.package_details.package_code_id,packages.package_details.price from packages.package_details \
+                                    join packages.package_code on packages.package_code.package_code_id =  packages.package_details.package_code_id \
+                                    where '"+str(package_from)+"' <= packages.package_details.start_date or '"+str(package_to)+"' >= packages.package_details.end_date"))
 
 
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
@@ -48,5 +47,3 @@ def Hotel_RES_Post_SELECT_SelectFixedCharges(request):
     d = request.json
     sql_value = json.loads(dbget("select * from reservation.res_fixed_charges where res_id = '"+str(d['res_id'])+"'"))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
-
-    
