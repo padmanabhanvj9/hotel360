@@ -3,6 +3,7 @@ import json
 import datetime
 def HOTEL_RES_POST_INSERT_AttachAcompanyingGuest(request):
     d = request.json
+    d = { k : v for k,v in d.items() if  v != ''}
     gensql('insert','reservation.res_accompanying_guest',d)
     return (json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','Returncode':'RIS'},indent=2))
 

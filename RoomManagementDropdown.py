@@ -12,6 +12,7 @@ def select_condition():
 def select_hkstatus_code():
    sql_value = json.loads(gensql('select','room_management.hkstatus','*'))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
+#*******************************room type********************
 def select_room_type():
    sql_value = json.loads(gensql('select','room_management.room_type','*'))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
