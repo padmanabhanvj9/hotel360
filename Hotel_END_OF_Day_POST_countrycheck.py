@@ -95,7 +95,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
 
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_charges,'ReturnCode':'RRTS'},indent=4))
 def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
-    run_additional,list1,list2,no_show_count,list3,list4 = [],[],[],[],[],[]
+    run_additional,list1,list2,no_show_count,list3,list4,dic_pancy,d = [],[],[],[],[],[],[],{}
     #********************* night audit date******************
 
     date = json.loads(dbget("select roll_business_date from endofday.business_date"))
@@ -164,13 +164,35 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
 
     run_additional.append({"Run_additional_procedure":"In-House Guest","Iteration": len(list4)})
 
+    #***************************************Room Discrepancy********************************
+    room_discrepancy = json.loads(dbget("select * from room_management.rm_room_list \
+                                        where rm_fo_status = 'occupied' and rm_hk_status = 'vacant'"))
+    for discrepancy in room_discrepancy:
+       dic_pancy.append(discrepancy['rm_room'])
+       d['rm_room'] = discrepancy['rm_room']
+       d['rm_room_discrepancy'] = 'Skip'
+       skip_person = gensql('insert','room_management.rm_room_discrepancy',d)
+    sleep_details = json.loads(dbget("select * from room_management.rm_room_list \
+                                    where rm_fo_status = 'vacant' and rm_hk_status = 'occupied'"))
+    for sleep in sleep_details:
+       dic_pancy.append(discrepancy['rm_room'])
+       d['rm_room'] = sleep['rm_room']
+       d['rm_room_discrepancy'] = 'Sleep'
+       sleep_person = gensql('insert','room_management.rm_room_discrepancy',d)
+    person_details = json.loads(dbget("select * from room_management.rm_room_list"))
+    preson_differ = list(filter(lambda x:x['rm_hk_person']!=x['rm_fo_person'],person_details))
+    for preson in preson_differ:
+          d['rm_room'] = preson['rm_room']
+          d['rm_room_discrepancy'] = 'Person'
+          person_differ_details = gensql('insert','room_management.rm_room_discrepancy',d)
+    run_additional.append({"Run_additional_procedure":"Room Discrepancies","Iteration": len(dic_pancy)})
     return (json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_additional,'ReturnCode':'RRTS'},indent=4))
 def Hotel_END_OF_Day_POST_print_final_report(request):
     #*******************************room cleaning report*******************
     list1,list2 = [],[]
     date = json.loads(dbget("select roll_business_date from endofday.business_date"))
     print(date)
-    sql_value = json.loads(dbget("	select * from reservation.res_reservation \
+    sql_value = json.loads(dbget("select * from reservation.res_reservation \
 	where res_guest_status in('due out','checkin','Checkout') and res_arrival <='"+str(date[0]['roll_business_date'])+"' and res_depature >= '"+str(date[0]['roll_business_date'])+"'"))
 
     for i in sql_value:

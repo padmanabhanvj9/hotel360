@@ -17,6 +17,8 @@ def HOTEL_CASH_RESERVATION_STATUS(request):
 
     if balance =="due out":
         status = "Check out"
+        psql_value = dbput("update room_management.rm_room_list set rm_fo_status = 'vacant', \
+                           rm_reservation_status = 'not reserved',rm_fo_person= '0',rm_room = 'Dirty' where rm_room = '"+str(res_room)+"' ")
         sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id="+res_id+" and res_room="+res_room+" ")
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully',"ReturnCode":"RUS"}, sort_keys=True, indent=4))
     else:

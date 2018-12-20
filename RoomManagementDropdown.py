@@ -1,7 +1,7 @@
 from sqlwrapper import gensql,dbget
 import json
 def select_roomstatus():
-   sql_value = json.loads(gensql('select','room_management.hkstatus','*'))
+   sql_value = json.loads(gensql('select','room_management.room_status','*'))
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue': sql_value ,'ReturnCode':'RRTS'},indent=4))
 def select_class():
    sql_value = json.loads(gensql('select','room_management.room_class','*'))
