@@ -10,7 +10,7 @@ def Hotel_END_OF_Day_POST_countrycheck(request):
      #                     where res_arrival='"+str(today_date)+"'"))
    coutry2 = json.loads(dbget("select pf_individual_profile.pf_individual_country  ,res_reservation.* from reservation.res_reservation \
                           left join profile.pf_individual_profile on pf_individual_profile.pf_id = res_reservation.pf_id \
-                          where res_arrival='"+str(today_date)+"'"))
+                          where res_arrival <='"+str(today_date)+"' and res_depature >='"+str(today_date)+"' "))
 
 
   # country1  = country1 + coutry2

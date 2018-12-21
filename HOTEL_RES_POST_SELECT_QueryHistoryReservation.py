@@ -34,10 +34,7 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      #print(data)
      #print(type(data['Rate_header']))
      rate_details = data['Rate_details']
-     #for rate_detail in rate_details:
-         
-        #  if s['adults'] == 4:
-              #print(list(filter(lambda x:x['rate_detail'],rate_detail))
+
      value = data['Rate_header']
      result = [d for d in value if d['begin_sell_date'] >= s['arrival_date'] and d['end_sell_date'] <= s['departure_date']]
      #print(type(result))
@@ -47,25 +44,24 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
        a, b = [],[]
        for roomtype in data['Rate_details_room_types']:
            for package in data['Rate_header_packages']:
-             for rate_detail in rate_details:
 
-                 if roomtype['rooms_id'] == results['rooms_id']:
+             if roomtype['rooms_id'] == results['rooms_id']:
 
-                   a.append(roomtype)
-                 if package['packages_id'] == results['packages_id']:
-                    b.append(package)
-                 if roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 4:
-                    a.append({'room_rate':rate_detail['four_adult_amount']})
-                 elif roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 3:
-                     a.append({'room_rate':rate_detail['three_adult_amount']})
-                 elif roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 2:
-                     a.append({'room_rate':rate_detail['two_adult_amount']})
-                 elif roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 1:
-                     a.append({'room_rate':rate_detail['one_adult_amount']})
-                 
+               a.append(roomtype)
+             if package['packages_id'] == results['packages_id']:
+                b.append(package)
            results['packages_id'] = b
        results['rooms_id'] = a
-
-
+     for room_details in result:
+        for rate_detail in rate_details:
+                 if room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 4:
+                    #i = data['Rate_details_room_types'].index(roomtype)
+                     a.append({'room_rate' : rate_detail['four_adult_amount']})
+                 elif room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 3:
+                     a.append({'room_rate':rate_detail['three_adult_amount']})
+                 elif room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 2:
+                     a.append({'room_rate':rate_detail['two_adult_amount']})
+                 elif room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 1:
+                     a.append({'room_rate':rate_detail['one_adult_amount']})
 
      return(json.dumps({"Return": result,"Status": "Success","StatusCode": "200"},indent=4))
