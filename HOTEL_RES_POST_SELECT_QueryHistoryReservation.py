@@ -31,8 +31,13 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      rate_code = []
      #query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
      data = json.loads(HOTEL_REM_POST_SELECT_SelectRatesetupAll(request))
-     print(data)
+     #print(data)
      #print(type(data['Rate_header']))
+     rate_details = data['Rate_details']
+     #for rate_detail in rate_details:
+         
+        #  if s['adults'] == 4:
+              #print(list(filter(lambda x:x['rate_detail'],rate_detail))
      value = data['Rate_header']
      result = [d for d in value if d['begin_sell_date'] >= s['arrival_date'] and d['end_sell_date'] <= s['departure_date']]
      #print(type(result))
@@ -42,12 +47,22 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
        a, b = [],[]
        for roomtype in data['Rate_details_room_types']:
            for package in data['Rate_header_packages']:
+             for rate_detail in rate_details:
 
-             if roomtype['rooms_id'] == results['rooms_id']:
+                 if roomtype['rooms_id'] == results['rooms_id']:
 
-               a.append(roomtype)
-             if package['packages_id'] == results['packages_id']:
-                b.append(package)
+                   a.append(roomtype)
+                 if package['packages_id'] == results['packages_id']:
+                    b.append(package)
+                 if roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 4:
+                    a.append({'room_rate':rate_detail['four_adult_amount']})
+                 elif roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 3:
+                     a.append({'room_rate':rate_detail['three_adult_amount']})
+                 elif roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 2:
+                     a.append({'room_rate':rate_detail['two_adult_amount']})
+                 elif roomtype['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 1:
+                     a.append({'room_rate':rate_detail['one_adult_amount']})
+                 
            results['packages_id'] = b
        results['rooms_id'] = a
 

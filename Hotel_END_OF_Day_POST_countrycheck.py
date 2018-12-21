@@ -31,7 +31,7 @@ def Hotel_END_OF_Day_POST_Roll_Business_date(request):
    print(date)
    tomorrow_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
    dbput("update endofday.business_date set roll_business_date = '"+str(tomorrow_date)+"'")
-   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':'Record Updated Successfully','ReturnCode':'RUS'},indent=4))
+   return(json.dumps({'Status': 'Success', 'StatusCode': '200','Date':str(tomorrow_date),'ReturnValue':'Record Updated Successfully','ReturnCode':'RUS'},indent=4))
 
 def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    print("Hello world")
@@ -108,7 +108,7 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
                                and res_guest_status = 'arrival'"))
     #print(no_show)
 
-
+    no_show_start_time = datetime.datetime.now()
     for no_show_report in no_show:
         no_show_count.append(no_show_report['res_guest_status'])
         no_show_update = dbput("update reservation.res_reservation set res_guest_status = 'no show' \
@@ -116,24 +116,28 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
                                and res_unique_id = '"+str(no_show_report['res_unique_id'])+"'")
 
         #print(no_show_update)
-    run_additional.append({"Run_additional_procedure":"Reservation No Show","Iteration": len(no_show_count)})
+    no_show_end_time = datetime.datetime.now()
+    run_additional.append({"Run_additional_procedure":"Reservation No Show","start_time":str(no_show_start_time.strftime("%H:%M:%S")),"end_time":str(no_show_end_time.strftime("%H:%M:%S")),"Iteration": len(no_show_count),"Status":"Completed"})
     #*********************************Due in ************************************************
     due_in_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
     due_in = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
                                where res_arrival='"+str(due_in_date)+"'"))
+    due_in_start_time = datetime.datetime.now()
     for due_in_report in due_in:
         list1.append(due_in_report['res_unique_id'])
         due_in_update = dbput("update reservation.res_reservation set res_guest_status = 'due in' \
                                where res_id = '"+str(due_in_report['res_id'])+"' \
                                and res_unique_id = '"+str(due_in_report['res_unique_id'])+"' \
                                and res_guest_status not in ('cancel')")
-
-    run_additional.append({"Run_additional_procedure":"Reservation Due In","Iteration": len(list1)})
+    due_in_end_time = datetime.datetime.now()
+    run_additional.append({"Run_additional_procedure":"Reservation Due In",
+                           "start_time":str(due_in_start_time.strftime("%H:%M:%S")),"end_time":str(due_in_end_time.strftime("%H:%M:%S")),"Iteration": len(list1),"Status":"Completed"})
 
     #************************************************* Due Out****************************************
     due_out_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
     due_out = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
                                where res_depature='"+str(due_out_date)+"'"))
+    due_out_start_time = datetime.datetime.now()
     for due_out_report in due_out:
         list2.append(due_out_report['res_unique_id'])
         due_out_update = dbput("update reservation.res_reservation set res_guest_status = 'due out' \
@@ -141,12 +145,15 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
                                and res_unique_id = '"+str(due_out_report['res_unique_id'])+"' \
                                and res_guest_status not in ('cancel,no show')")
     print(list2)
-    run_additional.append({"Run_additional_procedure":"Reservation Due Out","Iteration": len(list2)})
+    due_out_end_time = datetime.datetime.now()
+    run_additional.append({"Run_additional_procedure":"Reservation Due Out",
+                           "start_time":str(due_out_start_time.strftime("%H:%M:%S")),"end_time":due_out_end_time.strftime("%H:%M:%S"),"Iteration": len(list2),"Status":"Completed"})
 
     #*******************************arrival ****************************************************************
     #arrival_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
     arrivals = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
                                where res_arrival='"+str(date[0]['roll_business_date'])+"'"))
+    arrival_start_time = datetime.datetime.now()
     for arrivals_report in arrivals:
         list3.append(arrivals_report['res_unique_id'])
         arrivals_report_update = dbput("update reservation.res_reservation set res_guest_status = 'arrival' \
@@ -154,19 +161,24 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
                                and res_unique_id = '"+str(arrivals_report['res_unique_id'])+"' \
                                and res_guest_status not in ('cancel,no show') ")
     #print(list3)
-    run_additional.append({"Run_additional_procedure":"Reservation Arrival","Iteration": len(list3)})
+    arrival_end_time = datetime.datetime.now()
+    run_additional.append({"Run_additional_procedure":"Reservation Arrival",
+                           "start_time":str(arrival_start_time.strftime("%H:%M:%S")),"end_time":str(arrival_end_time.strftime("%H:%M:%S")),"Iteration": len(list3),"Status":"Completed"})
 
 
     #**********************************In-house guest**********************************************
     in_house =  json.loads(dbget(" select * from reservation.res_reservation where res_guest_status='checkin' or res_guest_status='due out'"))
+    in_house_start_time = datetime.datetime.now()
     for in_house_report in in_house:
         list4.append(in_house_report['res_unique_id'])
-
-    run_additional.append({"Run_additional_procedure":"In-House Guest","Iteration": len(list4)})
+    in_house_end_time = datetime.datetime.now()
+    run_additional.append({"Run_additional_procedure":"In-House Guest",
+                           "start_time":str(in_house_start_time.strftime("%H:%M:%S")),"end_time":str(in_house_end_time.strftime("%H:%M:%S")),"Iteration": len(list4),"Status":"Completed"})
 
     #***************************************Room Discrepancy********************************
     room_discrepancy = json.loads(dbget("select * from room_management.rm_room_list \
                                         where rm_fo_status = 'occupied' and rm_hk_status = 'vacant'"))
+    room_disc_start_time = datetime.datetime.now()
     for discrepancy in room_discrepancy:
        dic_pancy.append(discrepancy['rm_room'])
        d['rm_room'] = discrepancy['rm_room']
@@ -185,8 +197,17 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
           d['rm_room'] = preson['rm_room']
           d['rm_room_discrepancy'] = 'Person'
           person_differ_details = gensql('insert','room_management.rm_room_discrepancy',d)
-    run_additional.append({"Run_additional_procedure":"Room Discrepancies","Iteration": len(dic_pancy)})
-    return (json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_additional,'ReturnCode':'RRTS'},indent=4))
+    room_disc_end_time = datetime.datetime.now()
+    run_additional.append({"Run_additional_procedure":"Room Discrepancies",
+                           "start_time":str(room_disc_start_time.strftime("%H:%M:%S")),"end_time":str(room_disc_end_time.strftime("%H:%M:%S")),"Iteration": len(dic_pancy),"Status":"Completed"})
+    def serialize(obj):
+        if isinstance(obj, datetime.date):
+       
+               return obj.__str__()
+
+        if isinstance(obj, datetime.time):
+               return obj.__str__()
+    return (json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_additional,'ReturnCode':'RRTS'},indent=4,default=serialize))
 def Hotel_END_OF_Day_POST_print_final_report(request):
     #*******************************room cleaning report*******************
     list1,list2 = [],[]
