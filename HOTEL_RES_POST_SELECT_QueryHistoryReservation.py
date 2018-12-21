@@ -34,7 +34,7 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      #print(data)
      #print(type(data['Rate_header']))
      rate_details = data['Rate_details']
-
+     
      value = data['Rate_header']
      result = [d for d in value if d['begin_sell_date'] >= s['arrival_date'] and d['end_sell_date'] <= s['departure_date']]
      #print(type(result))
@@ -52,16 +52,24 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
                 b.append(package)
            results['packages_id'] = b
        results['rooms_id'] = a
-     for room_details in result:
-        for rate_detail in rate_details:
-                 if room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 4:
-                    #i = data['Rate_details_room_types'].index(roomtype)
-                     a.append({'room_rate' : rate_detail['four_adult_amount']})
-                 elif room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 3:
-                     a.append({'room_rate':rate_detail['three_adult_amount']})
-                 elif room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 2:
-                     a.append({'room_rate':rate_detail['two_adult_amount']})
-                 elif room_details['rooms_id'] == rate_detail['rooms_id'] and s['adults'] == 1:
-                     a.append({'room_rate':rate_detail['one_adult_amount']})
 
+     print("rate", rate_details)
+     
+     for room_details in result:
+        rooms = room_details['rooms_id']
+        if len(rooms) == 0:
+            pass
+        else:
+            for room in rooms:
+               for rate in rate_details:
+                  #if room['rooms_id'] == rate['rooms_id']: 
+                     if s['adults'] == 4:
+                        room['room_rate'] = rate['four_adult_amount']       
+                     elif s['adults'] == 3:
+                        room['room_rate'] = rate['three_adult_amount']
+                     elif s['adults'] == 2:
+                         room['room_rate'] = rate['two_adult_amount']
+                     elif s['adults'] == 1:
+                         room['room_rate'] = rate['one_adult_amount']
+                 
      return(json.dumps({"Return": result,"Status": "Success","StatusCode": "200"},indent=4))
