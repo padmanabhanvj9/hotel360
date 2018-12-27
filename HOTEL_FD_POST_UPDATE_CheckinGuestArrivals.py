@@ -66,7 +66,8 @@ def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
        print(sql_value)
        alertcount = json.loads(dbget("select count(*) from reservation.res_alert where res_id = '"+str(res_id)+"' \
                                       and res_unique_id = '"+str(unique_id)+"'"))
-       if len(alertcount) !=0:
+       print(alertcount)
+       if alertcount[0]['count'] !=0:
           alertvalue = json.loads(dbget("select * from reservation.res_alert where res_id = '"+str(res_id)+"' \
                                       and res_unique_id = '"+str(unique_id)+"'"))
           return(json.dumps({'Status': 'Success', 'StatusCode': '200', 'alertvalue':alertvalue,'Return': 'Alert Got Successfully','ReturnCode':'AGS'}, sort_keys=True, indent=4))
