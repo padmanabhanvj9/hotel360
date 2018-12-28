@@ -22,7 +22,7 @@ def Hotel_END_OF_Day_POST_Departure_Not_Checkedout(request):
    print(date)
    date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
    result = json.loads(dbget("select * from reservation.res_reservation \
-                            where res_guest_status = 'due out' and res_depature = '"+str(date)+"' and res_guest_balance  = 0"))
+                            where res_guest_status = 'due out' and res_depature = '"+str(date)+"' "))
 
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result,'ReturnCode':'RRTS'},indent=4))
 
