@@ -26,7 +26,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  business_block.block_status.status,\
 			  business_block.block_type.block_type,\
 			  business_block.inventory_control.inventory_control,\
-			  profile.ratecode.ratecode,\
+			  revenue_management.ratecode.rate_code as ratecode,\
 			  reservation.payment.payment_description,\
 			  catering_reason_id, reservation.cancel_reason.reason reason_one, room_cancel_reason,(select reservation.cancel_reason.reason from reservation.cancel_reason where reservation.cancel_reason.id = business_block.block_cancel_catering.room_cancel_reason) as reason_two,\
                           business_block.meeting_space_type.size_type\
@@ -40,7 +40,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  left join reservation.restype on restype.id = block_room.res_type_id\
 			  left join profile.pf_company_profile on pf_company_profile.pf_id = business_block_definite.pf_id \
 			  left join business_block.inventory_control on inventory_control.inventory_control_id = block_room.inventory_control_id \
-                          left join profile.ratecode on profile.ratecode.id = block_room.ratecode_id \
+                          left join revenue_management.ratecode on revenue_management.ratecode.ratecode_id = block_room.ratecode_id \
 			  left join business_block.block_business_details on block_business_details.block_id = business_block_definite.block_id \
 			  left join reservation.payment on reservation.payment.id = block_business_details.payments_id  \
 			  left join business_block.block_catering on business_block.block_catering.block_id = business_block_definite.block_id \
@@ -50,9 +50,13 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  left join business_block.meeting_space_type on meeting_space_type.id = block_meeting.meeting_space_type_id where business_block_definite.block_id = '"+block_id+"' "))
     profiletype = json.loads(dbget("select pf_id from business_block.business_block_definite where block_id='"+block_id+"' "))
     profile_id = profiletype[0]['pf_id']
-
+    packages = json.loads(dbget("select packages.package_code.package_code, packages.package_code.package_code_id \
+	                         from business_block.block_packages \
+	                          left join packages.package_code on package_code.package_code_id = block_packages.packages_id\
+                                where block_packages.block_id='"+block_id+"'"))
+    print(packages)
     pftype = json.loads(dbget("select pf_type,pf_account from profile.pf_company_profile where pf_id = '"+profile_id+"'"))
     
-    print(s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
+    #print(s)
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','packages':packages,'ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
    

@@ -6,7 +6,7 @@ import random
 def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
     d = request.json
     
-    x,y,z,p,r = {},{},{},{},{}
+    x,y,z,p,r,pack = {},{},{},{},{},{}
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
     RES_Log_Date = datetime.datetime.utcnow().date()
@@ -59,7 +59,14 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
     #<---------------------------rooms tab-------------------------->   
     #y = { k : v for k,v in d.items()if v != ''  if  k  in ('Rooms')}
     y = d['Rooms']
-    y = { k : v for k,v in y.items() if  v != ''}
+    if y['packages'] != "":
+        for val in y['packages']: 
+            pack['block_id'] = count
+            pack['packages_id'] = val
+            gensql('insert','business_block.block_packages',pack)
+    else:
+        pass
+    y = { k : v for k,v in y.items() if  v != '' if k not in ('packages')}
     
     print("Rooms",y,type(y),len(y))
     if len(y) != 0:
