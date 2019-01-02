@@ -33,7 +33,9 @@ def room_types(request):
     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
 
 def packages_revenue(request):
-    s = json.loads(dbget("SELECT * FROM revenue_management.packages_codes"))
+     s = json.loads(dbget("SELECT currency.id,currency.currency,currency.currency_description \
+                         * FROM packages.package_code \
+                         left join profile.currency on currency.id = package_code.currency_id"))
     print(s)
     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
 
