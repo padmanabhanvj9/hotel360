@@ -36,8 +36,8 @@ def packages_revenue(request):
      s = json.loads(dbget("SELECT currency.id,currency.currency,currency.currency_description \
                          * FROM packages.package_code \
                          left join profile.currency on currency.id = package_code.currency_id"))
-    print(s)
-    return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
+     print(s)
+     return(json.dumps({"Return": s,"Status": "Success","StatusCode": "200"},indent=4))
 
 def season_code_revenue(request):
     s = json.loads(dbget("select * from revenue_management.season_code"))
