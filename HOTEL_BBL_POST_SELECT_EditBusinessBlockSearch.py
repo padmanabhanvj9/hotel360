@@ -3,6 +3,7 @@ from sqlwrapper import gensql,dbget
 import datetime
 
 def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
+    packages_details = []
     d = request.json
     block_id = d.get("block_id")
     s = json.loads(dbget("select   pf_company_profile.pf_account,block_room.block_room_id,block_room.res_type_id,block_room.cutoff_date,block_room.cutoff_days, \
@@ -50,13 +51,24 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
 			  left join business_block.meeting_space_type on meeting_space_type.id = block_meeting.meeting_space_type_id where business_block_definite.block_id = '"+block_id+"' "))
     profiletype = json.loads(dbget("select pf_id from business_block.business_block_definite where block_id='"+block_id+"' "))
     profile_id = profiletype[0]['pf_id']
-    packages = json.loads(dbget("select packages.package_code.package_code, packages.package_code.package_code_id \
+    package = json.loads(dbget("select packages_id \
 	                         from business_block.block_packages \
-	                          left join packages.package_code on package_code.package_code_id = block_packages.packages_id\
-                                where block_packages.block_id='"+block_id+"'"))
-    print(packages)
+                                where block_id='"+block_id+"'"))
+    
+    print(package)
+    for packages in package:
+        
+      pac_details = json.loads(dbget("SELECT currency.id,currency.currency,currency.currency_description, \
+                         * FROM packages.package_code \
+                         left join profile.currency on currency.id = package_code.currency_id \
+                         where packages.package_code.package_code_id = '"+str(packages['packages_id'])+"'"))
+      print(type(pac_details))
+      if len(pac_details) != 0:
+        packages_details.append(pac_details[0])
+      else:
+          pass
     pftype = json.loads(dbget("select pf_type,pf_account from profile.pf_company_profile where pf_id = '"+profile_id+"'"))
     
     #print(s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','packages':packages,'ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','packages':packages_details,'ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
    
