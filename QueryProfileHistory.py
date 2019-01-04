@@ -45,7 +45,9 @@ def getprofilestatistics(sql_value):
 
         nights += int(i['res_nights'])
         rooms += int(i['res_number_of_rooms'])
-        rate += int(i['res_rate'])
+        if i['res_rate'] is not None:
+           
+           rate += i['res_rate']
 
         status.append(i['res_guest_status'])
         if i['res_guest_status'] in 'cancel':
