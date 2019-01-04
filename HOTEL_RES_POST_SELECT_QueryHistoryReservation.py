@@ -28,7 +28,7 @@ def QueryHistoryReservation(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result  ,'ReturnCode':'RRTS'},indent=4))
 def HOTEL_RES_POST_SELECT_RateQuery(request):
      s = request.json
-     rate_code = []
+     rate_code ,ratecode_rooms_id,ratecode_packages_id= [],[],[]
      #query = requests.post("https://hotel360.herokuapp.com/HOTEL_REM_POST_SELECT_SelectRatesetupAll")
      data = json.loads(HOTEL_REM_POST_SELECT_SelectRatesetupAll(request))
      #print(data)
@@ -38,23 +38,48 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
      value = data['Rate_header']
      result = [d for d in value if d['begin_sell_date'] >= s['arrival_date'] and d['end_sell_date'] <= s['departure_date']]
      #print(type(result))
-     #print(result)
+     for results in result:
+         ratecode_rooms_id.append(results['rooms_id'])
+         ratecode_packages_id.append(results['packages_id'])
+     print(ratecode_rooms_id)
+     print(ratecode_packages_id)
+     for ratecode_room in ratecode_rooms_id:
+         rec1 = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id, room_type.room_type_id,room_type.room_type \
+                             from revenue_management.rooms_selected join revenue_management.room_type on \
+                             rooms_selected.room_type_id = room_type.room_type_id \
+                             where revenue_management.rooms_selected.rooms_id='"+str(ratecode_room)+"'"))
+     print(rec1)
+
+     for ratecode_package in ratecode_packages_id:
+      rec2 = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
+                             packages_codes.package_code,packages_codes.package_code_id\
+                             from revenue_management.packages_selected\
+                             join revenue_management.packages_codes on packages_selected.package_code_id =  \
+                             packages_codes.package_code_id \
+                             where revenue_management.packages_selected.packages_id='"+str(ratecode_package)+"'"))
+     print(rec2)
+     a, b = [],[]
      for results in result:
        #print("results['rooms_id']",results['rooms_id'])
-       a, b = [],[]
-       for roomtype in data['Rate_details_room_types']:
-           for package in data['Rate_header_packages']:
-
-             if roomtype['rooms_id'] == results['rooms_id']:
-
-               a.append(roomtype)
-             if package['packages_id'] == results['packages_id']:
-                b.append(package)
-           results['packages_id'] = b
-       results['rooms_id'] = a
-
-     print("rate", rate_details)
+      
+       for roomtype in rec1:
      
+             #print(roomtype['rooms_selected_id'],results['rooms_id'])
+               
+             if roomtype['rooms_id'] == results['rooms_id']:
+               #print(roomtype['rooms_selected_id'],results['rooms_id'])
+               #print(roomtype)
+               a.append(roomtype)
+             
+           
+       results['rooms_id'] = a
+     for results in result:
+         for package in rec2:
+             if package['packages_id'] == results['packages_id']:
+                    b.append(package)
+         results['packages_id'] = b     
+     #print("rate", rate_details)
+     #return(json.dumps({"Return": result,"Status": "Success","StatusCode": "200"},indent=4))
      for room_details in result:
         rooms = room_details['rooms_id']
         if len(rooms) == 0:
