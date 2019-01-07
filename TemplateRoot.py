@@ -431,6 +431,9 @@ from Hotelpmsreport import GetReservationNoshowreport
 from Hotelpmsreport import futurebooking
 from Hotelpmsreport import HistoryBooking
 from Hotelpmsreport import Cashiergettotalamount
+
+#<----------------------------------MERGE MODULE-------------------------------.
+from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_GetTodayRoomAvailabilityArrival
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -1712,6 +1715,12 @@ def Run_Additional_procedures():
 @app.route("/Hotel_END_OF_Day_POST_print_final_report",methods=['POST'])
 def Hotel_END_OF_Day_POST_print_final_report_all():
    return Hotel_END_OF_Day_POST_print_final_report(request)
+
+#<--------------------------PMS Merge module webservice
+@app.route("/Hotel_PMS_Select_GetTodayRoomAvailabilityArrival",methods=['POST'])
+def Hotel_PMS_Select_GetTodayRoomAvailabilityArrival_all():
+   return Hotel_PMS_Select_GetTodayRoomAvailabilityArrival(request)
+
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="192.168.99.1",port=5000)
