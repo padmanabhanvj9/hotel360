@@ -30,6 +30,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
 
 def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     d = request.json
+    ac_log = {}
+    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     print(d)
     e = { k : v for k,v in d.items() if v != "" }
     print(e)
@@ -40,6 +42,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     #print(res_id)
     Posting_date = datetime.datetime.utcnow().date()
     Revenue_date = datetime.datetime.utcnow().date()
+    #payment log screen
     s = {}
     s['Posting_date'] = Posting_date
     s['Revenue_date'] = Revenue_date
@@ -65,7 +68,16 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
           status = "Check out"
           sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id="+res_id+" and res_room="+res_room+" ")
           psql = dbput("update room_management.rm_room_list set rm_room_status = 'Dirty',rm_fo_status = 'vacant',rm_reservation_status = 'not reserved',rm_fo_person = '0' where rm_room ='"+str(res_room)+"'")
-          print(psql)   
+          print(psql)
+        
+          ac_log['Emp_Id'] = '121'
+          ac_log['Emp_Firstname'] = "Ranimangama"
+          ac_log['RES_Log_Date'] = Posting_date
+          ac_log['RES_Log_Time'] = RES_Log_Time.time().strftime("%H:%M:%S")
+          ac_log['RES_Action_Type'] = "Reservation Checkout"
+          ac_log['RES_Description'] = "Reservation should be checkout.The room number is"+str(res_room)
+          ac_log['Res_id'] = str(res_id)
+          sql_value = gensql('insert','reservation.res_activity_log',ac_log)
         else:
           return(json.dumps({'Status':'Failure','Return':'Unable to update'}, sort_keys=True, indent=4))
   

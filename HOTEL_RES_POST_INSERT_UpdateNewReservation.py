@@ -76,7 +76,6 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
-   
     s['RES_Log_Date'] = RES_Log_Date
     s['RES_Log_Time'] = RES_Log_Time
     s['RES_Action_Type'] = RES_Action_Type
