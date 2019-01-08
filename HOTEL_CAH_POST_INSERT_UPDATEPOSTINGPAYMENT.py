@@ -46,7 +46,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     s['User_role'] = "Supervisor"
     s['User_name'] = "david"
     s['Res_id'] = res_id
-    s['Posting_action'] = "Night Audit posting"
+    s['Posting_action'] = "posting manually"
     s['Posting_reason'] = "Payment posted for"+" "+res_id+ "and"+d.get("res_room")
     s['Posting_description'] = "Payment posted successfully"
     gensql('insert','cashiering.posting_history_log',s)
@@ -65,7 +65,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
           status = "Check out"
           sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id="+res_id+" and res_room="+res_room+" ")
           psql = dbput("update room_management.rm_room_list set rm_room_status = 'Dirty',rm_fo_status = 'vacant',rm_reservation_status = 'not reserved',rm_fo_person = '0' where rm_room ='"+str(res_room)+"'")
-              
+          print(psql)   
         else:
           return(json.dumps({'Status':'Failure','Return':'Unable to update'}, sort_keys=True, indent=4))
   
