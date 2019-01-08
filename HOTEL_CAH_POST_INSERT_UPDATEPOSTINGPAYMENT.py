@@ -64,6 +64,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
         if balance1 =="due out":
           status = "Check out"
           sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' where res_id="+res_id+" and res_room="+res_room+" ")
+          psql = dbput("update room_management.rm_room_list set rm_room_status = 'Dirty',rm_fo_status = 'vacant',rm_reservation_status = 'not reserved',rm_fo_person = '0' where rm_room ='"+str(res_room)+"'")
+              
         else:
           return(json.dumps({'Status':'Failure','Return':'Unable to update'}, sort_keys=True, indent=4))
   

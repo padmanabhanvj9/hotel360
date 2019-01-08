@@ -18,7 +18,7 @@ def HOTEL_RES_POST_UPDATE_RoomMove(request):
     print(rm_room,type(rm_room))
     rm_room = str(rm_room)[1:-1]
     print(rm_room)
-    fo_status = "vaccant"
+    fo_status = "vacant"
     res_status = "not reserved"
     #rm_hk_status = "vaccant"
     psql = dbput("update room_management.rm_room_list set rm_fo_status = '"+fo_status+"', \

@@ -22,7 +22,7 @@ def HOTEL_RES_GET_SELECT_RoomUnassign(request):
             rooms += ","+"'"+str(i['res_room'])+"'"
     print(rooms)        
     
-    fo_status = "vaccant"
+    fo_status = "vacant"
     res_status = "not reserved"
     psql = dbput("update room_management.rm_room_list set rm_fo_status = '"+fo_status+"',rm_reservation_status = '"+res_status+"',rm_fo_person = '0' where rm_room in ("+rooms+")")
     print(psql)
