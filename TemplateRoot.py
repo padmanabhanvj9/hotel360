@@ -431,7 +431,7 @@ from Hotelpmsreport import GetReservationNoshowreport
 from Hotelpmsreport import futurebooking
 from Hotelpmsreport import HistoryBooking
 from Hotelpmsreport import Cashiergettotalamount
-
+from Hotelpmsreport import RoomHistory
 #<----------------------------------MERGE MODULE-------------------------------.
 from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_GetTodayRoomAvailabilityArrival
 from flask_cors import CORS
@@ -1556,7 +1556,9 @@ def futurebooking_all():
 @app.route("/Cashiergettotalamount",methods=['POST'])
 def Cashiergettotalamount_all():
    return Cashiergettotalamount(request)
-
+@app.route("/RoomHistory",methods=['POST'])
+def RoomHistory_all():
+   return RoomHistory(request)
 #<------------------------account receviable----------------------------->
 #<--------------------Account Receivable------------------------------>
 @app.route("/HOTEL_AR_POST_INSERT_AccountSetup",methods=['POST'])
@@ -1570,6 +1572,8 @@ def UPDATE_AccountSetup():
 @app.route("/HOTEL_AR_POST_SELECT_AccountSetup",methods=['POST'])
 def SELECT_AccountSetup():
    return HOTEL_AR_POST_SELECT_AccountSetup(request)
+
+
 
 @app.route("/HOTEL_AR_POST_DELETE_AccountSetup",methods=['POST'])
 def DELETE_AccountSetup():
