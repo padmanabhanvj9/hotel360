@@ -110,7 +110,8 @@ def HOTEL_AR_POST_UPDATE_AdjustBillingpost(request):
     s['acc_posting_time'] = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     s['acc_user_id']  = d['emp_id']
     history = gensql('insert','account_receivable.account_posting_history',s)
-    sql = json.loads(dbget("select sum(posting_amount) from account_receivable.account_billing_post where account_no = '"+str(d['account_no'])+"'"))
+    sql = json.loads(dbget("select sum(posting_amount) from account_receivable.account_billing_post where account_no = '"+str(d['account_no'])+"' \
+                                                 and invoice_no = '"+d['invoice_no']+"'"))
     psql = dbput("update account_receivable.accout_inivoice  \
                    set invoice_amount = '"+str(sql[0]['sum'])+"', open_amount = '"+str(sql[0]['sum'])+"' \
                     where invoice_no='"+str(d['invoice_no'])+"'")
