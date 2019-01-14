@@ -46,7 +46,7 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
     if acc[0]['open_amount'] != None:
         
  
-        sumof =sum(item['open_amount'] for item in acc)
+        sumof =sum(item['open_amount'] for item in acc if item['open_amount'] is not None)
         acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sumof)+"' \
                                   where account_number = '"+str(i['account_no'])+"'")
         print(acc_bala)
