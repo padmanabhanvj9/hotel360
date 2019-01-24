@@ -7,3 +7,8 @@ def hotel_rm_post_select_queryroomlist(request):
     db_res = json.loads(dbget(sql))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':db_res  ,'ReturnCode':'RRTS'},indent=4))
 
+def hotel_rm_post_insert_roomcount(request):
+   d = request.json
+   gensql('insert','room_management.room_available',d)
+   return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
+                      "Status": "Success","StatusCode": "200"},indent=4))

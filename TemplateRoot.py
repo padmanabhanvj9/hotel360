@@ -205,7 +205,7 @@ from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_select_query
 from Hotel_RM_Post_Select_Queryroommaintenance import hotel_rm_post_delete_deleteroommaintenance
 from Hotel_Rm_Post_Update_UpdateRoomCondition import hotel_rm_post_update_updateroomcondition
 from Hotel_RM_Post_Select_Queryoutoforderservice import hotel_rm_post_update_updateoutoforderservice
-
+from Hotel_Rm_Post_Select_QueryRoomList import hotel_rm_post_insert_roomcount
 #pending webservice
 from Hotel_RM_Post_SELECT_OccupancyGraph import Hotel_RM_Post_SELECT_OccupancyGraph
 from Hotel_Rm_Post_Insert_UpdateGuestServiceStatus import hotel_rm_post_Update_guestservicestatus
@@ -980,7 +980,9 @@ def hotel_rm_post_update_updateroomconditiond():
 def Updateoutoforderservice():
    return hotel_rm_post_update_updateoutoforderservice(request)
 
-
+@app.route("/hotel_rm_post_insert_roomcount",methods=['POST'])
+def hotel_rmpost_insert_roomcount():
+ return hotel_rm_post_insert_roomcount(request)
 #Pending room management--------------------------
 
 @app.route('/Hotel_RM_Post_SELECT_OccupancyGraph',methods=['POST'])
