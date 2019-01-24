@@ -301,6 +301,7 @@ from HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT import HOTEL_CAH_POST_INSERT_UPD
 from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_INSERT_BusinessBlock
 from HOTEL_BBL_POST_UPDATE_Business_Block_Update import HOTEL_BBL_POST_UPDATE_Business_Block_Update
 from HOTEL_BBL_POST_INSERT_Business_Block_Notes import HOTEL_BBL_POST_INSERT_Business_Block_Notes
+from HOTEL_BBL_POST_INSERT_Business_Block_Notes import HOTEL_BBL_POST_SELECT_Business_Block_Notes
 from HOTEL_BBL_POST_INSERT_GroupCancel import HOTEL_BBL_POST_INSERT_GroupCancel
 from HOTEL_BBL_GET_SELECT_BusinessBlockSearch import HOTEL_BBL_GET_SELECT_BusinessBlockSearch
 from HOTEL_BBL_POST_SELECT_Business_Block_activitylog import HOTEL_BBL_POST_SELECT_Business_Block_activitylog
@@ -432,8 +433,14 @@ from Hotelpmsreport import futurebooking
 from Hotelpmsreport import HistoryBooking
 from Hotelpmsreport import Cashiergettotalamount
 from Hotelpmsreport import RoomHistory
+
 #<----------------------------------MERGE MODULE-------------------------------.
 from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_GetTodayRoomAvailabilityArrival
+from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_cancel_DepositRuleReservation
+from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_BlockFollowupDecisiondate
+from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_Blockcutoffdatecutoffdays
+from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_DepositDueDate
+from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_Roominglistdue_date
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -1402,6 +1409,9 @@ def specific_SelectRoomtype():
 @app.route("/HOTEL_BBL_POST_SELECT_gridservice",methods=['POST'])
 def HOTEL_BBL_POST_SELECT_gridservicevv():
    return HOTEL_BBL_POST_SELECT_gridservice(request)
+@app.route("/HOTEL_BBL_POST_SELECT_Business_Block_Notes",methods=['POST'])
+def HOTEL_BBL_POST_SELECT_Business_Block_Notes_all():
+   return HOTEL_BBL_POST_SELECT_Business_Block_Notes(request)
 
 #<------------------Buiness Block dropdown---------->
 @app.route("/HOTEL_BBL_GET_SELECT_BusinessBlockStatus",methods=['GET'])
@@ -1556,6 +1566,7 @@ def futurebooking_all():
 @app.route("/Cashiergettotalamount",methods=['POST'])
 def Cashiergettotalamount_all():
    return Cashiergettotalamount(request)
+
 @app.route("/RoomHistory",methods=['POST','GET'])
 def RoomHistory_all():
    return RoomHistory(request)
@@ -1572,8 +1583,6 @@ def UPDATE_AccountSetup():
 @app.route("/HOTEL_AR_POST_SELECT_AccountSetup",methods=['POST'])
 def SELECT_AccountSetup():
    return HOTEL_AR_POST_SELECT_AccountSetup(request)
-
-
 
 @app.route("/HOTEL_AR_POST_DELETE_AccountSetup",methods=['POST'])
 def DELETE_AccountSetup():
@@ -1724,6 +1733,26 @@ def Hotel_END_OF_Day_POST_print_final_report_all():
 @app.route("/Hotel_PMS_Select_GetTodayRoomAvailabilityArrival",methods=['POST'])
 def Hotel_PMS_Select_GetTodayRoomAvailabilityArrival_all():
    return Hotel_PMS_Select_GetTodayRoomAvailabilityArrival(request)
+
+@app.route("/Hotel_PMS_cancel_DepositRuleReservation",methods=['POST'])
+def Hotel_PMS_cancel_DepositRuleReservation_all():
+   return Hotel_PMS_cancel_DepositRuleReservation(request)
+
+
+@app.route("/Hotel_PMS_Select_BlockFollowupDecisiondate",methods=['POST'])
+def Hotel_PMS_Select_BlockFollowupDecisiondate_all():
+   return Hotel_PMS_Select_BlockFollowupDecisiondate(request)
+@app.route("/Hotel_PMS_Select_Blockcutoffdatecutoffdays",methods=['POST'])
+def Hotel_PMS_Select_Blockcutoffdatecutoffdays_all():
+   return Hotel_PMS_Select_Blockcutoffdatecutoffdays(request)
+
+@app.route("/Hotel_PMS_Select_DepositDueDate",methods=['POST'])
+def Hotel_PMS_Select_DepositDueDate_all():
+   return Hotel_PMS_Select_DepositDueDate(request)
+
+@app.route("/Hotel_PMS_Select_Roominglistdue_date",methods=['POST'])
+def Hotel_PMS_Select_Roominglistdue_date_ALL():
+   return Hotel_PMS_Select_Roominglistdue_date(request)
 
 if __name__ == "__main__":
     #app.run(debug=True)

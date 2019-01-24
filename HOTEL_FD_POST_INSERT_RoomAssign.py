@@ -15,13 +15,43 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
     Today_date = datetime.datetime.utcnow().date()
     Today_date = str(Today_date)
     
-    arrival = dbget("select res_arrival from reservation.res_reservation where res_id = '"+res_id+"' and res_unique_id = '"+unique_id+"' ")
+    arrival = dbget("select res_arrival,res_room_type,res_block_code from reservation.res_reservation where res_id = '"+res_id+"' and res_unique_id = '"+unique_id+"' ")
     arrival = json.loads(arrival)
     print(arrival)
     arrival_date = arrival[0]['res_arrival']
     #print(arrival_date,type(arrival_date))
 
     #print(arrival[0]['res_arrival'])
+    if arrival[0]['res_block_code'] is not None and arrival[0]['res_block_code'] != 'PM':
+        if arrival[0]['res_room_type']== 'Kngn':
+           sql = dbput("update business_block.current_grid set kngn = kngn +'1' where block_id='"+str(arrival[0]['res_block_code'])+"' and grid_type =3")
+           print(sql)
+        elif arrival[0]['res_room_type'] =='Kngs':
+             sql = dbput("update business_block.current_grid set kngs = kngs+'1' where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql)
+        elif arrival[0]['res_room_type'] =='Ksbn':
+             sql = dbput("update business_block.current_grid set Ksbn = Ksbn+'1'  where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql) 
+        elif arrival[0]['res_room_type'] == 'Ksbs':
+             print("workingits fine")
+             sql = dbput("update business_block.current_grid set ksbs = ksbs +'1' where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql)
+        elif arrival[0]['res_room_type'] =='Sjsn' :
+             sql = dbput("update business_block.current_grid set sjsn = sjsn+'1'  where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql)
+        elif arrival[0]['res_room_type'] =='Sdbn':
+             sql = dbput("update business_block.current_grid set sdbn = sdbn +'1' where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql)
+        elif arrival[0]['res_room_type'] =='Sjss':
+             sql = dbput("update business_block.current_grid set sjss = sjss +'1' where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql)
+        elif arrival[0]['res_room_type'] =='Comp':
+             sql = dbput("update business_block.current_grid set comp = comp +'1' where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
+             print(sql)
+    else:
+        pass
+    pickup = dbput("update business_block.room_revenue set room_nights_picked  = room_nights_picked + '1'  where block_id='"+str(arrival[0]['res_block_code'])+"'")
+    print(pickup)
     if Today_date == arrival_date:
         e['res_guest_status'] = "arrival"
         

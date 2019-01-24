@@ -110,6 +110,7 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
     s['room_nights'] = totalrooms
     s['net_revenue'] = rate2
     s['net_rate'] = Average_Rate
+    s['room_nights_picked'] = '0'
     s['room_nights_available'] = totalrooms
     sql2 = gensql('insert','business_block.room_revenue',s)
     print(sql2)

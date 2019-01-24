@@ -27,7 +27,7 @@ def HOTEL_CASH_RESERVATION_STATUS(request):
         ac_log['RES_Log_Date'] = Posting_date
         ac_log['RES_Log_Time'] = RES_Log_Time.time().strftime("%H:%M:%S")
         ac_log['RES_Action_Type'] = "Checkout Reservation"
-        ac_log['RES_Description'] = "Reservation should be checkout.The room number is"+str(res_room)
+        ac_log['RES_Description'] = "Reservation should be checkout.The room number is"+" "+str(res_room)
         ac_log['Res_id'] = str(res_id)
         sql_value = gensql('insert','reservation.res_activity_log',ac_log)
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully',"ReturnCode":"RUS"}, sort_keys=True, indent=4))

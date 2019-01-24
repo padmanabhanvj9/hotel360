@@ -1,9 +1,11 @@
 import datetime
 from sqlwrapper import gensql, dbget, dbput
 import json
+from Hotel_END_OF_Day_POST_countrycheck import HOTEL_REM_POST_SELECT_SelectRateForReservation,get_rate
 #from flask import Flask,request, jsonify
 #app = Flask(__name__)
 #@app.route("/HOTEL_BBL_POST_INSERT_GroupReservations",methods = ['POST'])
+
 def HOTEL_BBL_POST_INSERT_GroupReservation(request):
     
     d = request.json
@@ -40,6 +42,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         update = dbput("update profile.profile_id set profile_id = '"+str(select[0]['profile_id']+1)+"'")
         select_data = json.loads(dbget("select \
                                        reservation.market.marketgroup_description,\
+                                       business_block_definite.pf_id as companyaccount, \
                           reservation.res_source.sourcedescription,\
                           reservation.origin.origindescription \
     			  from business_block.business_block_definite \
@@ -73,7 +76,10 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         w['res_origin']=select_data[0]['origindescription']
         w['res_res_type']=rate_code_detail[0]['restype_description']
         w['res_rate_code']=rate_code_detail[0]['ratecode']
-        w['res_rate']="100"
+        w['res_block'] = select_data[0]['companyaccount']
+        data = HOTEL_REM_POST_SELECT_SelectRateForReservation(w['res_arrival'],w['res_rate_code'],w['res_room_type'],int(w['res_adults']))
+         
+        w['res_rate']=data
         sqlvalue = json.loads(dbget("select confirmation_no from business_block.group_confirmation"))
         #print(sqlvalue,type(sqlvalue))
         sqlvalue = int(sqlvalue[0]['confirmation_no'])

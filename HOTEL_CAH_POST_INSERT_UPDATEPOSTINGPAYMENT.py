@@ -25,7 +25,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
     s['Posting_description'] = "Payment posted successfully"
     gensql('insert','cashiering.posting_history_log',s)
     gensql('insert','cashiering.posting_original_history_log',s)
-   
+    dbput("update reservation.guest_deposit set total_amount = total_amount+'"+str(d['Postig_amount'])+"'\
+                        where res_id = '"+d['res_id']+"'")
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
 
 def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
@@ -39,7 +40,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     print(sql)
     #d['Posting_date'] = Posting_date
     res_id = d.get("res_id")
-    #print(res_id)
+    print(res_id,type(res_id),type(d['Postig_amount']))
     Posting_date = datetime.datetime.utcnow().date()
     Revenue_date = datetime.datetime.utcnow().date()
     #payment log screen
@@ -54,6 +55,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     s['Posting_description'] = "Payment posted successfully"
     gensql('insert','cashiering.posting_history_log',s)
     gensql('insert','cashiering.posting_original_history_log',s)
+    #dbput("update reservation.guest_deposit set total_amount = total_amount+'"+str(d['Postig_amount'])+"'\
+     #                   where res_id = '"+d['res_id']+"'")
     balance = json.loads(dbget("select res_guest_balance from reservation.res_reservation \
                                 where res_room="+d.get("res_room")+" and res_id="+d.get("res_id")+" "))
     print("balance",balance[0]['res_guest_balance'],type(balance[0]['res_guest_balance']))
@@ -75,7 +78,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
           ac_log['RES_Log_Date'] = Posting_date
           ac_log['RES_Log_Time'] = RES_Log_Time.time().strftime("%H:%M:%S")
           ac_log['RES_Action_Type'] = "Reservation Checkout"
-          ac_log['RES_Description'] = "Reservation should be checkout.The room number is"+str(res_room)
+          ac_log['RES_Description'] = "Reservation should be checkout.The room number is"+" "+str(res_room)
           ac_log['Res_id'] = str(res_id)
           sql_value = gensql('insert','reservation.res_activity_log',ac_log)
         else:

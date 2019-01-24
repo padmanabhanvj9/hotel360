@@ -26,3 +26,10 @@ def HOTEL_BBL_POST_INSERT_Business_Block_Notes(request):
     gensql('insert','business_block.business_block_activity_log',s)
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
 
+def HOTEL_BBL_POST_SELECT_Business_Block_Notes(request):
+  d = request.json
+  sql= json.loads(dbget("select notetype.notetype,* from business_block.business_block_notes \
+                        left join profile.notetype on notetype.id=business_block_notes.notes_type \
+                         where block_id= '"+str(d['block_id'])+"'"))
+  return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'ReturnCode':'RRTS'},indent=4))
+   
