@@ -286,7 +286,22 @@ def Hotel_END_OF_Day_POST_Run_guestbalance(request):
              value = amount[0]['sum'] - payment[0]['sum']
              print(value)
              final.append({"balance":value,'res_id':group_id})
-   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':final,'ReturnCode':'RRTS'},indent=4))
+   list1 = [dict(s,balance=fin['balance']) for s in sql_value for fin in final if s['res_id'] == fin['res_id'] ]
+   print(list1)
+   '''
+   print("sql_value", sql_value)
+   for s in sql_value:
+      print("s",s)
+      for fin in final:
+         print("fin",fin)
+         print(s['res_id'],type(s['res_id']),fin['res_id'],type(fin['res_id']))
+         if s['res_id'] == fin['res_id']:
+            s['balance'] = fin['balance']
+         else:
+            pass
+   '''         
+   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':list1,'ReturnCode':'RRTS'},indent=4))
+   #return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':final,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     run_additional,list1,list2,no_show_count,list3,list4,dic_pancy,d = [],[],[],[],[],[],[],{}
