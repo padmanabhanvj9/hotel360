@@ -49,9 +49,6 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         print(pickup)
     
         
-
-    #if Today_date == arrival_date:
-     #   e['res_guest_status'] = "arrival"
      if Today_date == arrival_date:
         e['res_guest_status'] = "arrival"
         
