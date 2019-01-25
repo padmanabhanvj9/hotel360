@@ -224,6 +224,70 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    print("packages is pending")
 
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':run_charges,'ReturnCode':'RRTS'},indent=4))
+
+
+def Hotel_END_OF_Day_POST_Run_guestbalance(request):
+   res_id_lists,group_ids,final = [],[],[]
+   '''
+   value1 = json.loads(dbget("SELECT pf_company_profile.pf_account,res_reservation.* FROM reservation.res_reservation \
+                               left join profile.pf_company_profile on pf_company_profile.pf_id = res_reservation.res_block \
+                               where res_reservation.res_guest_status in ('checkin','due out') "))
+    print(value1) 
+    value2 = json.loads(dbget("select pf_company_profile.pf_account,res_reservation.* from reservation.res_reservation \
+                            left join profile.pf_company_profile on pf_company_profile.pf_id = res_reservation.res_block \
+                             where CURRENT_DATE between res_arrival and res_depature and res_guest_status='Check out' "))  
+    print(value2)
+    sql_value = value1+value2
+    print(sql_value)
+    '''
+   sql_value = json.loads(dbget("select * from reservation.res_reservation where res_arrival <= '2019-01-24' and res_depature >= '2019-01-24' \
+	AND res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
+
+   for i in sql_value:
+      if i['res_block'] is None:
+         if i['res_id'] in res_id_lists:
+            pass
+         else:
+          res_id_lists.append(i['res_id'])
+      else:
+         if i['res_id'] in group_ids:
+            pass
+         else:
+          group_ids.append(i['res_id'])
+   print("individual profile",res_id_lists)
+   print("ind+company",group_ids)
+   for res_id_list in res_id_lists:
+       amount = json.loads(dbget("select sum(posting_amount) FROM cashiering.billing_post where res_id='"+str(res_id_list)+"' \
+                  and post_window in (1)"))
+       deposit = json.loads(dbget("select sum(res_deposit_amount) from reservation.res_deposit where res_id='"+str(res_id_list)+"' "))
+       payment=json.loads(dbget("select sum(postig_amount)FROM cashiering.posting_payment where res_id='"+str(res_id_list)+"' "))
+       
+       if payment[0]['sum'] is None:
+         value = deposit[0]['sum'] - amount[0]['sum']
+         print(value)
+         final.append({"balance":value,'res_id':res_id_list})
+       else:
+          
+          value = amount[0]['sum'] - (deposit[0]['sum'] + payment[0]['sum'])
+          print(value)
+          final.append({"balance":value,'res_id':res_id_list})
+   if len(group_ids) != 0:
+      for group_id in group_ids:
+          amount = json.loads(dbget("select sum(posting_amount) FROM cashiering.billing_post where res_id='"+str(group_id)+"' \
+                     and post_window in (1)"))
+          payment=json.loads(dbget("select sum(postig_amount)FROM cashiering.posting_payment where res_id='"+str(group_id)+"' "))
+          
+          if payment[0]['sum'] is None:
+            value = amount[0]['sum']
+            print(value)
+            final.append({"balance":value,'res_id':group_id})
+          else:
+             
+             value = amount[0]['sum'] - payment[0]['sum']
+             print(value)
+             final.append({"balance":value,'res_id':group_id})
+   return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':final,'ReturnCode':'RRTS'},indent=4))
+
 def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     run_additional,list1,list2,no_show_count,list3,list4,dic_pancy,d = [],[],[],[],[],[],[],{}
     #********************* night audit date******************
