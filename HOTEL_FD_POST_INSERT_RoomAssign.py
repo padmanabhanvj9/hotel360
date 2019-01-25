@@ -48,7 +48,8 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         pickup = dbput("update business_block.room_revenue set room_nights_picked  = room_nights_picked + '1'  where block_id='"+str(arrival[0]['res_block_code'])+"'")
         print(pickup)
     
-        
+     else:
+            pass
      if Today_date == arrival_date:
         e['res_guest_status'] = "arrival"
         
