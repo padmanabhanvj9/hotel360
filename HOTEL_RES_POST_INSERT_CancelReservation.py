@@ -4,7 +4,8 @@ import json
 import datetime
 def HOTEL_RES_POST_INSERT_CancelReservation(request):
     d = request.json
-    sql_value = gensql('insert','reservation.cancel_reservation',d)
+    z = {k : v for k,v in d.items() if k not in ('Res_Arrival','Res_Depature','Res_Room_Type')}
+    sql_value = gensql('insert','reservation.cancel_reservation',z)
     Res_id = d.get("Res_id")
     Res_unique_id = d.get("Res_unique_id")
     e,a = {},{}
@@ -13,6 +14,13 @@ def HOTEL_RES_POST_INSERT_CancelReservation(request):
     a['Res_guest_status'] = "cancel"
     sql_value = gensql('update','reservation.res_reservation',a,e)
     print(sql_value)
+    initial=datetime.datetime.strptime(d['Res_Depature'], '%Y-%m-%d').date()
+    depature_minus = initial - datetime.timedelta(days=1)
+    
+    bookedcount = dbput("update room_management.room_available set available_count=available_count + '1',\
+                            booked_count = booked_count - '1' where rm_room = \
+                            '"+str(d['Res_Room_Type'])+"' and \
+                            rm_date between '"+str(d['Res_Arrival'])+"' and '"+str(depature_minus)+"' ")
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
     print(RES_Log_Time)

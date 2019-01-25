@@ -5,6 +5,18 @@ import random
 def HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request):
     d = request.json
 
+    #availablecount
+    initial=datetime.datetime.strptime(d['RES_Depature'], '%Y-%m-%d').date()
+    depature_minus = initial - datetime.timedelta(days=1)
+    booking_count = json.loads(dbget("select sum(available_count) from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
+                                  and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"'"))
+    if booking_count[0]['sum'] == 0 or booking_count[0]['sum'] < int(d['RES_Number_Of_Rooms']):
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
+    bookedcount = dbput("update room_management.room_available set available_count=available_count - \
+                            '1', \
+                            booked_count = booked_count + '1' where rm_room = \
+                            '"+str(d['RES_Room_Type'])+"' and \
+                            rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"' ")
     id = d.get("Res_id")
     pf_id = d.get("pf_id")
     res_unique_id = d.get("Res_unique_id")

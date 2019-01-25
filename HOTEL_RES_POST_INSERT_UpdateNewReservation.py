@@ -12,12 +12,18 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     RES_Arrival = str(d.get("RES_Arrival"))
     print(RES_Arrival)
     RES_Depature = str(d.get("RES_Depature"))
+    initial=datetime.datetime.strptime(d['RES_Depature'], '%Y-%m-%d').date()
+    depature_minus = initial - datetime.timedelta(days=1)
     sqlcount = ("select count(*) from reservation.res_reservation \
                  where pf_mobileno = '"+PF_Mobileno+"' and RES_Arrival = '"+RES_Arrival+"' and RES_Depature = '"+RES_Depature+"'")
     countdata = dbget(sqlcount)
     countdata = json.loads(countdata)
     print(countdata)
     print(countdata[0]['count'],type(countdata[0]['count']))
+    booking_count = json.loads(dbget("select sum(available_count) from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
+                                  and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"'"))
+    if booking_count[0]['sum'] == 0 or booking_count[0]['sum'] < int(d['RES_Number_Of_Rooms']):
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
 
     if countdata[0]['count'] > 0:
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation Already Exist','ReturnCode':'RAE'}, sort_keys=True, indent=4)) 
@@ -59,6 +65,12 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     for number in range(number_of_rooms):
         d['RES_Number_Of_Rooms'] = str(1)
         sql_value = gensql('insert','reservation.res_reservation',d)
+        bookedcount = dbput("update room_management.room_available set available_count=available_count - \
+                            '"+str(d['RES_Number_Of_Rooms'])+"', \
+                            booked_count = booked_count + '"+str(d['RES_Number_Of_Rooms'])+"' where rm_room = \
+                            '"+str(d['RES_Room_Type'])+"' and \
+                            rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"' ")
+                                                                                                                
     print(d)
     data = d.get("PF_Firstname")
     number = d.get("RES_Confnumber")

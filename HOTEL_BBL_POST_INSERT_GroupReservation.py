@@ -12,6 +12,8 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
     #print(d)
     x = {}
     res_block_code = d[0]["res_block_code"]
+    initial=datetime.datetime.strptime(d[0]['res_depature'], '%Y-%m-%d').date()
+    depature_minus = initial - datetime.timedelta(days=1)
     #print("hello",res_block_code,type(res_block_code))
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
     RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
@@ -90,6 +92,13 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         w['res_confnumber'] = confirmation_no
         psqlvalue = gensql('insert','reservation.res_reservation',w)
         #print(psqlvalue)
+
+        bookedcount = dbput("update room_management.room_available set available_count=available_count - \
+                            '1', \
+                            booked_count = booked_count + '1' where rm_room = \
+                            '"+str(w['res_room_type'])+"' and \
+                            rm_date between '"+str(w['res_arrival'])+"' and '"+str(depature_minus)+"' ")
+                 
 
     s = {}
     s['user_role'] = "Supervisor"
