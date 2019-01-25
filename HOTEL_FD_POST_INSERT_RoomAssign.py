@@ -47,10 +47,10 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
              print(sql)
         pickup = dbput("update business_block.room_revenue set room_nights_picked  = room_nights_picked + '1'  where block_id='"+str(arrival[0]['res_block_code'])+"'")
         print(pickup)
-    
-     else:
-            pass
-     if Today_date == arrival_date:
+    else:
+        pass
+        
+    if Today_date == arrival_date:
         e['res_guest_status'] = "arrival"
         
         sql_value = gensql('update','reservation.res_reservation',e,a)
@@ -58,7 +58,6 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         print(room)
         res_status = "reserved"
         sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
-       
     else:
         e['res_guest_status'] = "due in"
     
@@ -69,6 +68,8 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
        
         print(sql_value)
         
-    
+    #if Today_date == arrival_date:
+     #   e['res_guest_status'] = "arrival"
+  
        
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
