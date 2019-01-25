@@ -133,13 +133,17 @@ def Hotel_PMS_Select_Blockcutoffdatecutoffdays(request):
 
 def Hotel_PMS_Select_DepositDueDate(request):
     d = request.json
-    sql = json.loads(dbget("select res_due_date from reservation.res_deposit \
-                           where res_id = '"+str(d['res_id'])+"' and res_block is null or res_block = '' "))
+    sql = json.loads(dbget("select res_due_date,res_deposit_amount from reservation.res_deposit \
+                           where res_id = '"+str(d['res_id'])+"' and res_unique_id = '"+str(d['res_unique_id'])+"'  "))
     print(sql)
     businessdate = datetime.datetime.strptime(date[0]['roll_business_date'], '%Y-%m-%d').date()
-    
+    psql = json.loads(dbget("select res_block from reservation.res_reservation \
+                                 where res_id = '"+str(d['res_id'])+"' and res_unique_id = '"+str(d['res_unique_id'])+"' "))
+    print(psql)
     for i in sql:
-        if i['res_due_date'] is not None:
+       
+      if psql[0]['res_block'] is None:
+        if i['res_due_date'] is not None and i['res_deposit_amount'] is None or i['res_deposit_amount'] == '':
             dateform = datetime.datetime.strptime(i['res_due_date'], '%Y-%m-%d').date()
             print(dateform)
             date2 = dateform + datetime.timedelta(days=1)

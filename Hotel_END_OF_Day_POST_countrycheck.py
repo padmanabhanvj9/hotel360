@@ -98,7 +98,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    print(date)
    #****************************************Posting fixed rate****************************************************
    sql_value = json.loads(dbget("select res_arrival,res_depature,res_rate,res_id,fixed_rate,	(select count(*) from reservation.res_fixed_rate where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"') from reservation.res_fixed_rate \
-                                 where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"'"))
+                                 where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' and res_room_type not in ('PM')"))
    print(sql_value)
    fixed_rate_id = ''
    status = ['no show','cancel']
@@ -110,7 +110,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
             fixed_rate_id+=","+"'"+str(i['res_id'])+"'"
             
          psql = json.loads(dbget("select res_block,res_room,pf_firstname,res_guest_status from reservation.res_reservation \
-                                  where res_id = '"+str(i['res_id'])+"'"))
+                                  where res_id = '"+str(i['res_id'])+"'  and res_room_type not in ('PM')"))
          for s in psql:
            if s['res_guest_status'] not in status:
                if s['res_block'] is None:
@@ -150,11 +150,11 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    #****************************************Posting Rooms and tax charges **************************************************
          sql_value = json.loads(dbget("select * from reservation.res_reservation \
                                        where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' \
-                                       and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel')"))
+                                       and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
       else:
          sql_value = json.loads(dbget("select * from reservation.res_reservation \
                                        where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' \
-                                       and res_guest_status not in ('no show','cancel')"))
+                                       and res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
    for i in sql_value:
          data = HOTEL_REM_POST_SELECT_SelectRateForReservation(date[0]['roll_business_date'],i['res_rate_code'],i['res_room_type'],i['res_adults'])
          if i['res_block'] is None:       

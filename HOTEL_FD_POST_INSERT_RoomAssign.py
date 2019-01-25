@@ -19,9 +19,6 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
     arrival = json.loads(arrival)
     print(arrival)
     arrival_date = arrival[0]['res_arrival']
-    #print(arrival_date,type(arrival_date))
-
-    #print(arrival[0]['res_arrival'])
     if arrival[0]['res_block_code'] is not None and arrival[0]['res_block_code'] != 'PM':
         if arrival[0]['res_room_type']== 'Kngn':
            sql = dbput("update business_block.current_grid set kngn = kngn +'1' where block_id='"+str(arrival[0]['res_block_code'])+"' and grid_type =3")
@@ -48,27 +45,17 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         elif arrival[0]['res_room_type'] =='Comp':
              sql = dbput("update business_block.current_grid set comp = comp +'1' where block_id='"+str(arrival[0]['res_block_code'])+"'  and grid_type =3")
              print(sql)
-    else:
-        pass
-    pickup = dbput("update business_block.room_revenue set room_nights_picked  = room_nights_picked + '1'  where block_id='"+str(arrival[0]['res_block_code'])+"'")
-    print(pickup)
-    if Today_date == arrival_date:
-        e['res_guest_status'] = "arrival"
-        
-        sql_value = gensql('update','reservation.res_reservation',e,a)
-        room = e.get("Res_room")
-        print(room)
-        res_status = "reserved"
-        sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
-       
-    else:
-        e['res_guest_status'] = "due in"
+        pickup = dbput("update business_block.room_revenue set room_nights_picked  = room_nights_picked + '1'  where block_id='"+str(arrival[0]['res_block_code'])+"'")
+        print(pickup)
     
-        sql_value = gensql('update','reservation.res_reservation',e,a)
-        room = e.get("Res_room")
-        res_status = "reserved"
-        sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
-       
-        print(sql_value)
+        
+
+    #if Today_date == arrival_date:
+     #   e['res_guest_status'] = "arrival"
+        
+    sql_value = gensql('update','reservation.res_reservation',e,a)
+    room = e.get("Res_room")
+    sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = 'reserved' where rm_room in ("+room+")")
+   
        
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
