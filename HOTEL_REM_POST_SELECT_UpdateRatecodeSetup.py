@@ -132,10 +132,10 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
 
       print("rate_details  ",rate_details, len(rate_details))
-    
+         
       for rate in rate_details:
           #print("rate",rate)
-          detail_rate = json.loads(dbget("SELECT rates_all.rates_id, rates_all.ratecode_id, \
+          get_detail_rate = json.loads(dbget("SELECT rates_all.rates_id, rates_all.ratecode_id, \
                                               rates_all.rate_details_id, season_code.*, rates_all.rate_date,\
                                               rates_all.one_adult_rate, rates_all.two_adult_rate, rates_all.three_adult_rate,\
                                               rates_all.four_adult_rate, rates_all.one_child_rate,rates_all.two_child_rate,\
@@ -145,32 +145,33 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                               rates_all.season_code_id = season_code.season_code_id join \
                                               revenue_management.rate_tier on \
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
-                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))[0]
-
+                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
+          if len(get_detail_rate) != 0:
+             detail_rate = get_detail_rate[0] 
           #print("rateof", detail_rate,type(detail_rate))
           
           
               
-          x = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id,\
+             x = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id,\
                                                            room_type.id as roomid,room_type.type as roomstype\
                                                            from revenue_management.rooms_selected  join room_management.room_type on \
                                                            rooms_selected.room_type_id = room_type.id \
                                                           where rooms_selected.rooms_id='"+str(detail_rate['rooms_id'])+"' "))
-          rate['rooms'] = x
+             rate['rooms'] = x
               
               
-          y = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
+             y = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
                                 package_code.package_code,package_code.package_code_id\
                                 from revenue_management.packages_selected\
                                 join packages.package_code on packages_selected.package_code_id =  \
                                 package_code.package_code_id  where \
                                 packages_selected.packages_id='"+str(detail_rate['packages_id'])+"'"))
           
-          rate['packages'] = y
+             rate['packages'] = y
 
-          detail_rate['rooms'] = x
-          detail_rate['packages'] = y
-          rate['advanced_details'] = detail_rate
+             detail_rate['rooms'] = x
+             detail_rate['packages'] = y
+             rate['advanced_details'] = detail_rate
           
       cords['rate_details'] = rate_details        
 
