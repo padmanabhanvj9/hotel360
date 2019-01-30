@@ -995,7 +995,7 @@ def hotel_rm_post_Update_guestservicestatus_all():
 @app.route('/hotel_rm_post_select_OutoforderRoomsonly',methods=['POST'])
 def hotel_rm_post_select_OutoforderRoomsonly_all():
    return hotel_rm_post_select_OutoforderRoomsonly(request)
-@app.route('/hotel_rm_post_Select_Turndown_management',methods=['POST'])
+@app.route('/hotel_rm_post_Select_Turndown_management',methods=['POST','GET'])
 def hotel_rm_post_Select_Turndown_management_all():
    return hotel_rm_post_Select_Turndown_management(request)
 @app.route('/Hotel_RM_Post_SELECT_FacilityForecast',methods=['POST'])
