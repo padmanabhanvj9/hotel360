@@ -37,10 +37,10 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
     
     
       cords['packages'] = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
-                             packages_codes.package_code,packages_codes.package_code_id\
+                             package_code.package_code,package_code.package_code_id\
                              from revenue_management.packages_selected\
-                             join revenue_management.packages_codes on packages_selected.package_code_id =  \
-                             packages_codes.package_code_id  where packages_selected.packages_id='"+str(cords['packages_id'])+"'"))
+                             join packages.package_code on packages_selected.package_code_id =  \
+                             package_code.package_code_id  where packages_selected.packages_id='"+str(cords['packages_id'])+"'"))
 
       rate_details = json.loads(dbget("select * from revenue_management.rate_details \
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
@@ -74,11 +74,12 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
               
               
           y = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
-                                                              packages_codes.package_code,packages_codes.package_code_id\
-                                                              from revenue_management.packages_selected\
-                                                              join revenue_management.packages_codes on packages_selected.package_code_id =  \
-                                                              packages_codes.package_code_id  where \
-                                                              packages_selected.packages_id='"+str(detail_rate['packages_id'])+"'"))
+                                package_code.package_code,package_code.package_code_id\
+                                from revenue_management.packages_selected\
+                                join packages.package_code on packages_selected.package_code_id =  \
+                                package_code.package_code_id  where \
+                                packages_selected.packages_id='"+str(detail_rate['packages_id'])+"'"))
+          
           rate['packages'] = y
 
           detail_rate['rooms'] = x
@@ -122,10 +123,10 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
     
     
       cords['packages'] = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
-                             packages_codes.package_code,packages_codes.package_code_id\
+                             package_code.package_code,package_code.package_code_id\
                              from revenue_management.packages_selected\
-                             join revenue_management.packages_codes on packages_selected.package_code_id =  \
-                             packages_codes.package_code_id  where packages_selected.packages_id='"+str(cords['packages_id'])+"'"))
+                             join packages.package_code on packages_selected.package_code_id =  \
+                             package_code.package_code_id  where packages_selected.packages_id='"+str(cords['packages_id'])+"'"))
 
       rate_details = json.loads(dbget("select * from revenue_management.rate_details \
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
@@ -147,7 +148,9 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))[0]
 
           #print("rateof", detail_rate,type(detail_rate))
-                     
+          
+          
+              
           x = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id,\
                                                            room_type.id as roomid,room_type.type as roomstype\
                                                            from revenue_management.rooms_selected  join room_management.room_type on \
@@ -157,11 +160,12 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
               
               
           y = json.loads(dbget("select packages_selected.packages_selected_id,packages_selected.packages_id,\
-                                                              packages_codes.package_code,packages_codes.package_code_id\
-                                                              from revenue_management.packages_selected\
-                                                              join revenue_management.packages_codes on packages_selected.package_code_id =  \
-                                                              packages_codes.package_code_id  where \
-                                                              packages_selected.packages_id='"+str(detail_rate['packages_id'])+"'"))
+                                package_code.package_code,package_code.package_code_id\
+                                from revenue_management.packages_selected\
+                                join packages.package_code on packages_selected.package_code_id =  \
+                                package_code.package_code_id  where \
+                                packages_selected.packages_id='"+str(detail_rate['packages_id'])+"'"))
+          
           rate['packages'] = y
 
           detail_rate['rooms'] = x
@@ -169,8 +173,6 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
           rate['advanced_details'] = detail_rate
           
       cords['rate_details'] = rate_details        
-    #print("--------------------------------------")
-    #print("records   ",records,"len",len(records))       
-    return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
 
+    return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
 
