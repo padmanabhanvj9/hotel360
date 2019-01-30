@@ -2,19 +2,20 @@ from sqlwrapper import gensql,dbget,dbput
 import json
 import datetime
 def hotel_rm_post_Select_Turndown_management(request):
-    turn_down ,e= [],{}
-    today_date = datetime.datetime.utcnow().date()
+    turn_down = []
+    b_date = json.loads(dbget("SELECT roll_business_date as b_date FROM endofday.business_date"))
+    
     sql_value = json.loads(dbget("select res_reservation.res_room,res_reservation.res_guest_status,res_traces.* from reservation.res_traces \
                                  left join reservation.res_reservation on res_reservation.res_unique_id = res_traces.res_unique_id \
-                                where traces_date = '"+str(today_date)+"' and res_guest_status not in ('no show, cancel')"))
+                                where traces_date = '"+str(b_date[0]['b_date'])+"' and res_guest_status not in ('no show, cancel')"))
     for i in sql_value:
         psql = json.loads(dbget("select rm_room_list.rm_room_type,rm_room_list.rm_room_status,rm_room_list.rm_room_class from  \
                                 room_management.rm_room_list where rm_room = '"+str(i['res_room'])+"'"))
         print(psql)
         
+        if len(psql) != 0: 
         
-        
-        turn_down.append({'room':i['res_room'],
+           turn_down.append({'room':i['res_room'],
                           'roomtype':psql[0]['rm_room_type'],
                           'roomstatus':psql[0]['rm_room_status'],
                           'roomclass':psql[0]['rm_room_class'],
@@ -24,6 +25,7 @@ def hotel_rm_post_Select_Turndown_management(request):
                           'res_id':i['res_id'],
                           'res_unique_id':i['res_unique_id'],
                           'traces_id':i['traces_id']})
+           
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':turn_down  ,'ReturnCode':'RRTS'},indent=4))
 
 def hotel_rm_post_update_Turndown_management(request):
