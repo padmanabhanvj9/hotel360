@@ -55,8 +55,12 @@ def ratedetailss(request):
     print("get_code",get_code)
 
     gensql('insert','revenue_management.rate_details',get_code)
+
+    
     rate_details_id = json.loads(gensql('select','revenue_management.rate_details','max(rate_details_id) as number1',get_code))
     print(rate_details_id)
+    days_in = {}
+    
     e['rate_details_id'] = int(rate_details_id[0]['number1'])
     
     room_id = json.loads(dbget("select max(rooms_id) as number1 from revenue_management.rooms_selected"))
@@ -78,6 +82,10 @@ def ratedetailss(request):
        e['packages_id'] =  int(package_id[0]['number2']+1)
     print("3333",e)
 
+    days_in = d['days']
+    days_in['rate_details_id'] = int(rate_details_id[0]['number1'])
+    gensql('insert','revenue_management.rate_days',days_in)
+    
     days = d['days']
     day1 = [ k  for k,v in days.items() if v != 0 ]
     #print(a,days,day1)
@@ -96,3 +104,4 @@ def ratedetailss(request):
     return(json.dumps({"Return": "Record Inserted Successfully",
                        "ReturnCode": "RIS","Status": "Success","StatusCode": "200"},indent=4))
            
+          
