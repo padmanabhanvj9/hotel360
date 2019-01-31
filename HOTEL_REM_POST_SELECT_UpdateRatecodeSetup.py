@@ -52,7 +52,7 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
           get_detail_rate = json.loads(dbget("SELECT rates_all.rates_id, rates_all.ratecode_id, \
                                               rates_all.rate_details_id, season_code.*, rates_all.rate_date,\
                                               rates_all.one_adult_rate, rates_all.two_adult_rate, rates_all.three_adult_rate,\
-                                              rates_all.four_adult_rate, rates_all.extra_adult_rate, rates_all.one_child_rate,rates_all.two_child_rate,\
+                                              rates_all.four_adult_rate, rates_all.extra_adult_rate,rates_all.one_child_rate,rates_all.two_child_rate,\
                                               rates_all.extra_child_rate, rates_all.rooms_id, rates_all.packages_id,\
                                               rate_tier.* from revenue_management.rates_all join \
                                               revenue_management.season_code on \
@@ -83,8 +83,14 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
           
              rate['packages'] = y
 
+             z = json.loads(dbget("select * from revenue_management.rate_days where \
+                                   rate_details_id='"+str(rate['rate_details_id'])+"' "))
+             
+
              detail_rate['rooms'] = x
              detail_rate['packages'] = y
+             detail_rate['days'] = z
+             
              rate['advanced_details'] = detail_rate
           
       cords['rate_details'] = rate_details        
@@ -171,8 +177,12 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
           
              rate['packages'] = y
 
+             z = json.loads(dbget("select * from revenue_management.rate_days where \
+                                   rate_details_id='"+str(rate['rate_details_id'])+"' "))
+
              detail_rate['rooms'] = x
              detail_rate['packages'] = y
+             detail_rate['days'] = z
              rate['advanced_details'] = detail_rate
           
       cords['rate_details'] = rate_details        
