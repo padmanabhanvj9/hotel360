@@ -61,7 +61,9 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
           if len(get_detail_rate) != 0:
-             detail_rate = get_detail_rate[0] 
+             detail_rate = get_detail_rate[0]
+             if  detail_rate['rate_tier_id'] != 0:
+                 detail_rate['packages_id'] = 0   
           #print("rateof", detail_rate,type(detail_rate))
           
           
@@ -155,7 +157,9 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
           if len(get_detail_rate) != 0:
-             detail_rate = get_detail_rate[0] 
+             detail_rate = get_detail_rate[0]
+             if  detail_rate['rate_tier_id'] != 0:
+                 detail_rate['packages_id'] = 0
           #print("rateof", detail_rate,type(detail_rate))
           
           
