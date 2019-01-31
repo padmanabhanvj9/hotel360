@@ -46,7 +46,7 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
 
       print("rate_details  ",rate_details, len(rate_details))
-    
+      no = 0
       for rate in rate_details:
           #print("rate",rate)
           get_detail_rate = json.loads(dbget("SELECT rates_all.rates_id, rates_all.ratecode_id, \
@@ -60,10 +60,14 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                               revenue_management.rate_tier on \
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
+
+          print("-----------------------------------")
+          print("get_detail_rate", get_detail_rate,len(get_detail_rate))
+          
           if len(get_detail_rate) != 0:
-             detail_rate = get_detail_rate[0]
+             detail_rate = get_detail_rate[no]
              if  detail_rate['rate_tier_id'] != 0:
-                 detail_rate['packages_id'] = 0   
+                 detail_rate['packages_id'] = 0
           #print("rateof", detail_rate,type(detail_rate))
           
           
@@ -94,7 +98,8 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
              detail_rate['days'] = z
              
              rate['advanced_details'] = detail_rate
-          
+
+          no+=1
       cords['rate_details'] = rate_details        
 
     return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
@@ -142,7 +147,7 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
 
       print("rate_details  ",rate_details, len(rate_details))
-         
+      no = 0   
       for rate in rate_details:
           #print("rate",rate)
           get_detail_rate = json.loads(dbget("SELECT rates_all.rates_id, rates_all.ratecode_id, \
@@ -157,11 +162,10 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
           if len(get_detail_rate) != 0:
-             detail_rate = get_detail_rate[0]
+             detail_rate = get_detail_rate[0] 
+             print("rateof", detail_rate,type(detail_rate))
              if  detail_rate['rate_tier_id'] != 0:
                  detail_rate['packages_id'] = 0
-          #print("rateof", detail_rate,type(detail_rate))
-          
           
               
              x = json.loads(dbget("select rooms_selected.rooms_selected_id,rooms_selected.rooms_id,\
@@ -188,7 +192,8 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
              detail_rate['packages'] = y
              detail_rate['days'] = z
              rate['advanced_details'] = detail_rate
-          
+
+          no+=1
       cords['rate_details'] = rate_details        
 
     return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
