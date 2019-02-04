@@ -20,8 +20,17 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     countdata = json.loads(countdata)
     print(countdata)
     print(countdata[0]['count'],type(countdata[0]['count']))
+    normal_count = json.loads(dbget("select count(*) from room_management.room_available where rm_date between '"+str(d['RES_Arrival'])+"' \
+                                     and '"+str(depature_minus)+"' and rm_room = '"+str(d['RES_Room_Type'])+"'"))
+                              
+    if normal_count[0]['count'] == 0:
+               return(json.dumps({'Status': 'Failure', 'StatusCode': '200','Return': 'Roomtype or date is not Declare','ReturnCode':'RODND'}, sort_keys=True, indent=4)) 
+    else:
+
+        pass
     booking_count = json.loads(dbget("select sum(available_count) from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
                                   and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"'"))
+    
     if booking_count[0]['sum'] == 0 or booking_count[0]['sum'] < int(d['RES_Number_Of_Rooms']):
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
 
