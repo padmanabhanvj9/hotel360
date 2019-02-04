@@ -74,6 +74,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
             gensql('insert','business_block.item_inventory',inventory)
     else:
         pass
+    '''
     y = { k : v for k,v in y.items() if  v != '' if k not in ('packages','inventory_control_id')}
     
     print("Rooms",y,type(y),len(y))
@@ -84,7 +85,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
         
     else:
         pass
-     '''
+     
     #<------------------------details tab----------------------------->    
     #z = { k : v for k,v in d.items()if v != ''  if  k  in ('Block_details')}
     z = d['Block_details']
