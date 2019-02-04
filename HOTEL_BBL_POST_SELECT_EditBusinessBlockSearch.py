@@ -8,7 +8,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
     block_id = d.get("block_id")
     s = json.loads(dbget("select   pf_company_profile.pf_account,block_room.block_room_id,block_room.res_type_id,block_room.cutoff_date,block_room.cutoff_days, \
 			  block_room.inventory_control_id,block_room.ratecode_id,block_room.print_rate,block_room.suppress_rate,\
-			  block_room.packages,block_room.trace_code,block_room.follow_date,\
+			  block_room.packages,block_room.trace_code,block_room.follow_date,block_room.decision_date,\
 			  business_block_definite.*,\
 			  block_business_details.business_details_id,block_business_details.res_method_id,block_business_details.payments_id,\
 			  block_business_details.rooming_list_duedate,block_business_details.arrivaltime,block_business_details.depaturetime,\
@@ -67,6 +67,7 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
         packages_details.append(pac_details[0])
       else:
           pass
+    '''
     inventorys = json.loads(dbget("select item_inventory_id \
 	                         from business_block.item_inventory \
                                 where block_id='"+block_id+"'"))
@@ -77,8 +78,9 @@ def HOTEL_BBL_POST_SELECT_EditBusinessBlockSearch(request):
             inventory_details.append(ite_inen[0])
         else:
             pass
+    '''
     pftype = json.loads(dbget("select pf_type,pf_account from profile.pf_company_profile where pf_id = '"+profile_id+"'"))
     
     #print(s)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','inventory':inventory_details,'packages':packages_details,'ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200','packages':packages_details,'ReturnValue':s,'profiletype':pftype[0]['pf_type'],'accountname':pftype[0]['pf_account'],'ReturnCode':'RRTS'},indent=4))
    
