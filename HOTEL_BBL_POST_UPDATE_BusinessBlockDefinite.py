@@ -69,7 +69,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     b = { k : v for k,v in y.items() if v != '' if k not in ('block_id','packages')}
     #print(b)
     #c['block_id'] = block_id
-    c = { k : v for k,v in y.items() if k != '' if k in ('block_id','packages')}
+    c = { k : v for k,v in y.items() if k != '' if k in ('block_id')}
     #print(c)
     
     #print("Rooms",b,type(b),len(b))  
