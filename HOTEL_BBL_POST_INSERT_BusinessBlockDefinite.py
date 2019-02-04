@@ -66,6 +66,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
             gensql('insert','business_block.block_packages',pack)
     else:
         pass
+    '''
     if y['inventory_control_id'] != "":
         for values in y['inventory_control_id']: 
             inventory['block_id'] = count
@@ -83,6 +84,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
         
     else:
         pass
+     '''
     #<------------------------details tab----------------------------->    
     #z = { k : v for k,v in d.items()if v != ''  if  k  in ('Block_details')}
     z = d['Block_details']
