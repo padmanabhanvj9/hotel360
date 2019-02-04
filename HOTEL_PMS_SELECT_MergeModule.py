@@ -95,12 +95,7 @@ def Hotel_PMS_Select_Blockcutoffdatecutoffdays(request):
                            where business_block_definite.block_id = '"+str(d['block_id'])+"' and block_room.block_id='"+str(d['block_id'])+"'"))
     print(sql)
     initial=datetime.datetime.strptime(sql[0]['block_created_date'], '%Y-%m-%d').date()
-    date1 = initial + datetime.timedelta(days=1)
-    date2 = date1 + datetime.timedelta(days=sql[0]['cutoff_days'])
-    delta = date2-date1
-    print(delta)
-    end_date = initial + datetime.timedelta(days=delta.days+1)
-    print("end_date",end_date)
+    
     if sql[0]['cutoff_date'] is not None:
         dateform = datetime.datetime.strptime(sql[0]['cutoff_date'], '%Y-%m-%d').date()
         print(sql[0]['cutoff_date'])
@@ -115,7 +110,12 @@ def Hotel_PMS_Select_Blockcutoffdatecutoffdays(request):
         pass
     
     if sql[0]['cutoff_days'] is not None:
-      
+        date1 = initial + datetime.timedelta(days=1)
+        date2 = date1 + datetime.timedelta(days=sql[0]['cutoff_days'])
+        delta = date2-date1
+        print(delta)
+        end_date = initial + datetime.timedelta(days=delta.days+1)
+        print("end_date",end_date)
         for i in range(delta.days + 1):
         #print(i)
             print("checkinf for loop",date1 + datetime.timedelta(i))
