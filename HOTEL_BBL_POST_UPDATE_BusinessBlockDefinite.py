@@ -46,7 +46,8 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
             pack['block_id'] = y['block_id']
             pack['packages_id'] = val
             gensql('insert','business_block.block_packages',pack)
-     '''
+     
+    '''
     if y['inventory_control_id'] == "":
         pass
     else:
