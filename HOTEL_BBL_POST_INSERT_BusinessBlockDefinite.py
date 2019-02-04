@@ -75,7 +75,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
     else:
         pass
     '''
-    y = { k : v for k,v in y.items() if  v != '' if k not in ('packages','inventory_control_id')}
+    y = { k : v for k,v in y.items() if  v != '' if k not in ('packages')}
     
     print("Rooms",y,type(y),len(y))
     if len(y) != 0:
