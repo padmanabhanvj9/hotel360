@@ -46,6 +46,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
             pack['block_id'] = y['block_id']
             pack['packages_id'] = val
             gensql('insert','business_block.block_packages',pack)
+     '''
     if y['inventory_control_id'] == "":
         pass
     else:
@@ -55,6 +56,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
             inventory['block_id'] = y['block_id']
             inventory['item_inventory_id'] = vals
             gensql('insert','business_block.item_inventory',inventory)
+    '''
     
     block_id = y.get("block_id")
     #y = { k : v for k,v in r.items() if v != '' }
