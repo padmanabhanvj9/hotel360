@@ -74,7 +74,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     
     #print("Rooms",b,type(b),len(b))  
     #print("block_meeting",m,type(m),len(m))
-    y = { k : v for k,v in r.items() if v != ''if k not in ('packages') }
+    y = { k : v for k,v in y.items() if v != ''if k not in ('packages') }
     if sqlcount[0]['count'] == 0:
             print("insert room")
             #y = { k : v for k,v in r.items() if v != '' }
