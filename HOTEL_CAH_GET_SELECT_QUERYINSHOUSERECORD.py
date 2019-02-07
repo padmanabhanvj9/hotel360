@@ -4,7 +4,7 @@ import json
 
 def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
 
-   value1 = json.loads(dbget("SELECT pf_company_profile.pf_account,res_reservation.* FROM reservation.res_reservation \
+    value1 = json.loads(dbget("SELECT pf_company_profile.pf_account,res_reservation.* FROM reservation.res_reservation \
                                left join profile.pf_company_profile on pf_company_profile.pf_id = res_reservation.res_block \
                                where res_reservation.res_guest_status in ('checkin','due out') and res_room_type not in ('PM') "))
     print(value1) 
