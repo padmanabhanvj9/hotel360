@@ -10,6 +10,7 @@ def UpdateProfileNotes(request):
     d = request.json
     sql_value = gensql('insert','profile.pf_notes',d)
     s = {}
+    print(d['pf_id'])
     s['Emp_Id'] = '121'
     s['Emp_Firstname'] = "daisy"
     s['Emp_Lastname'] = "veroni"

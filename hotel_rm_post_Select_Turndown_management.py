@@ -35,6 +35,10 @@ def hotel_rm_post_update_Turndown_management(request):
     e = { k : v for k,v in d.items() if k != '' if k in ('traces_id')}
 
     print(e)
+    RES_Log_Date = datetime.datetime.utcnow().date()
+    print(RES_Log_Date)
+    a['resloved_by'] = "Daisy"
+    a['resloved_on'] = RES_Log_Date
     gensql('update','reservation.res_traces',a,e)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 def hotel_rm_post_select_Dropdown_Turndown_management(request):
