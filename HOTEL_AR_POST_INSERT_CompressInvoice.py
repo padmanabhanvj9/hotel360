@@ -1,7 +1,7 @@
 from sqlwrapper import gensql, dbget,dbput
 import datetime
 import json
-
+from collections import Counter
 def HOTEL_AR_POST_INSERT_CompressInvoice(request):
     d = request.json
     s ,z,f= {},[],{}
@@ -57,15 +57,21 @@ def HOTEL_AR_POST_DELETE_UnCompressInvoice(request):
 
 
 def HOTEL_AR_POST_SELECT_YearViewAmount(request):
-    period_view = []
-    yearview = json.loads(dbget("select  invoice_date,open_amount  from account_receivable.accout_inivoice \
-                              order by DATE(invoice_date)"))
+    period_view,one_view = [],[]
+    yearview = json.loads(dbget("select to_char(to_timestamp (date_part('month', invoice_date)::text, 'MM'), 'Month'),date_part('year',invoice_date)::text as years,open_amount from account_receivable.accout_inivoice"))
     print(yearview)
 
     for i in yearview:
-        period = datetime.datetime.strptime(i['invoice_date'],'%Y-%m-%d').date()
-        print(period.strftime('%b,%y'))
-        period_view.append({'period':period.strftime('%b,%Y'),'Balance':i['open_amount']})
+      #for s in period_view:
+        #value = str(i['to_char']) + " "+ str(i['years'])
+        
+             period_view.append({'period': str(i['to_char']) + " "+ str(i['years']),'Balance':i['open_amount']}) 
+        
+        #period = datetime.datetime.strptime(i['invoice_date'],'%Y-%m-%d').date()
+        #print(period.strftime('%b,%y'))
+        #priod_view.append({'period':period.strftime('%b,%Y'),'Balance':i['open_amount']})
+
+        
     return(json.dumps({'Status': 'Success', 'StatusCode': '200',
                        'ReturnValue': period_view  ,'ReturnCode':'RRTS'},indent=4))
 

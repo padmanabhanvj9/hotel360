@@ -24,7 +24,7 @@ def HOTEL_REM_POST_SELECT_SelectRateForReservation(r_date, r_code, r_room, r_adu
                              rates_all.season_code_id = season_code.season_code_id join \
                              revenue_management.rate_tier on \
                              rates_all.rate_tier_id = rate_tier.rate_tier_id join \
-                  revenue_management.ratecode on rates_all.ratecode_id = ratecode.ratecode_id \
+                             revenue_management.ratecode on rates_all.ratecode_id = ratecode.ratecode_id \
                              where rate_date='"+r_date+"' and rate_code='"+r_code+"' "))
                              #where rate_date='"+r_date+"' "))
    print("rate1", rate1, len(rate1))
@@ -97,13 +97,17 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    date = json.loads(dbget("select roll_business_date from endofday.business_date"))
    print(date)
    #****************************************Posting fixed rate****************************************************
-   sql_value = json.loads(dbget("select res_arrival,res_depature,res_rate,res_id,fixed_rate,	(select count(*) from reservation.res_fixed_rate where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"') from reservation.res_fixed_rate \
+   sql_value = json.loads(dbget("select res_arrival,res_depature,res_rate,res_id,fixed_rate	from reservation.res_fixed_rate \
                                  where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' and res_room_type not in ('PM')"))
    print(sql_value)
+   sql_count_value = json.loads(dbget("select count(*) from reservation.res_fixed_rate where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"'"))
+   print(sql_count_value)
    fixed_rate_id = ''
    status = ['no show','cancel']
-   if len(sql_value) >0:
+   if sql_count_value[0]['count'] !=0:
+      print("its cameeeee")
       for i in sql_value:
+         
          if len(fixed_rate_id) == 0:
             fixed_rate_id+="'"+str(i['res_id'])+"'"
          else:
@@ -143,19 +147,19 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   run_charges.append({'room':s['res_room'],
                                          'name':s['pf_firstname'],
                                          'posting':'posting room and tax'})
-      print(fixed_rate_id,type(fixed_rate_id))
+   print("sdadsa",fixed_rate_id,type(fixed_rate_id))
    
-      if len(fixed_rate_id) > 0:
+   if len(fixed_rate_id) > 0:
          
    #****************************************Posting Rooms and tax charges **************************************************
-         sql_value = json.loads(dbget("select * from reservation.res_reservation \
+         psqlvalues = json.loads(dbget("select * from reservation.res_reservation \
                                        where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' \
                                        and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
-      else:
-         sql_value = json.loads(dbget("select * from reservation.res_reservation \
+   else:
+         psqlvalues = json.loads(dbget("select * from reservation.res_reservation \
                                        where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' \
                                        and res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
-   for i in sql_value:
+   for i in psqlvalues:
          data = HOTEL_REM_POST_SELECT_SelectRateForReservation(date[0]['roll_business_date'],i['res_rate_code'],i['res_room_type'],i['res_adults'])
          if i['res_block'] is None:       
             d['res_room'] = i['res_room']
