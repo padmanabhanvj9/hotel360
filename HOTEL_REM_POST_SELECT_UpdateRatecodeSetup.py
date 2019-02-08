@@ -45,7 +45,7 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
       rate_details = json.loads(dbget("select * from revenue_management.rate_details \
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
 
-      print("rate_details  ",rate_details, len(rate_details))
+      #print("rate_details  ",rate_details, len(rate_details))
       no = 0
       for rate in rate_details:
           #print("rate",rate)
@@ -62,7 +62,7 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
 
           print("-----------------------------------")
-          print("get_detail_rate", get_detail_rate,len(get_detail_rate))
+          #print("get_detail_rate", get_detail_rate,len(get_detail_rate))
           
           if len(get_detail_rate) != 0:
              detail_rate = get_detail_rate[no]
@@ -146,7 +146,7 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
       rate_details = json.loads(dbget("select * from revenue_management.rate_details \
                                        where ratecode_id='"+str(cords['ratecode_id'])+"'"))
 
-      print("rate_details  ",rate_details, len(rate_details))
+      #print("rate_details  ",rate_details, len(rate_details))
       no = 0   
       for rate in rate_details:
           #print("rate",rate)
@@ -163,7 +163,7 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                               where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
           if len(get_detail_rate) != 0:
              detail_rate = get_detail_rate[0] 
-             print("rateof", detail_rate,type(detail_rate))
+             #print("rateof", detail_rate,type(detail_rate))
              if  detail_rate['rate_tier_id'] != 0:
                  detail_rate['packages_id'] = 0
           

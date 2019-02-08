@@ -86,7 +86,7 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
                           
              new_records.append(new_record)
              
-     print("new_records",new_records)        
+     #print("new_records",new_records)        
      #print("roomytpe",set(ratecode_packages_id))
      #final_value = sorted(new_records,key = lambda x: x['rates'] )
      #for new_record in new_records:
@@ -159,5 +159,8 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
                      elif s['adults'] == 1:
                          room['room_rate'] = rate['one_adult_amount']
      '''
-                 
+     for i in new_records:
+       if 'rates' in i:
+            print('success')
+            i['rates'] = sorted(i['rates'],key = lambda x: x['roomstype'] )          
      return(json.dumps({"Return": new_records,"Status": "Success","StatusCode": "200"},indent=4))
