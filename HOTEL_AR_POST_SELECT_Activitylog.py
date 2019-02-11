@@ -37,7 +37,7 @@ def HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely(request):
                                        where account_number = '"+str(d['account_no'])+"'"))
     setupamount = acc_set[0]['account_balance'] - d['posting_amount']
     d['posting_date'] = Posting_date
-    d['posting_status'] = "Apply Payment Selectively"
+    d['posting_status'] = "Apply"
     gensql('insert','account_receivable.invoice_payment',d)
     
     sql = dbput("update account_receivable.account_setup set account_balance = '"+str(setupamount)+"' \
