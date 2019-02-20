@@ -32,15 +32,21 @@ def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
                   and post_window in (1)"))
        deposit = json.loads(dbget("select sum(res_deposit_amount) from reservation.res_deposit where res_id='"+str(res_id_list)+"' "))
        payment=json.loads(dbget("select sum(postig_amount)FROM cashiering.posting_payment where res_id='"+str(res_id_list)+"' "))
-       
+       print(amount,deposit,payment)
        if payment[0]['sum'] is None:
-         value = deposit[0]['sum'] - amount[0]['sum']
-         print(value)
+         if amount[0]['sum'] is None:
+            value = deposit[0]['sum']
+         else:   
+            value = deposit[0]['sum'] - amount[0]['sum']
+         print("ind",value)
          final.append({"balance":value,'res_id':res_id_list})
        else:
+          if amount[0]['sum'] is None:
+             value = deposit[0]['sum'] + payment[0]['sum']
+          else:
           
-          value = amount[0]['sum'] - (deposit[0]['sum'] + payment[0]['sum'])
-          print(value)
+            value = amount[0]['sum'] - (deposit[0]['sum'] + payment[0]['sum'])
+          print("indpayment",value)
           final.append({"balance":value,'res_id':res_id_list})
    if len(group_ids) != 0:
       for group_id in group_ids:
@@ -49,12 +55,17 @@ def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
           payment=json.loads(dbget("select sum(postig_amount)FROM cashiering.posting_payment where res_id='"+str(group_id)+"' "))
           
           if payment[0]['sum'] is None:
-            value = amount[0]['sum']
-            print(value)
-            final.append({"balance":value,'res_id':group_id})
+             if amount[0]['sum'] is None:
+                value = 0
+             else:
+               value = amount[0]['sum']
+             print(value)
+             final.append({"balance":value,'res_id':group_id})
           else:
-             
-             value = amount[0]['sum'] - payment[0]['sum']
+             if amount[0]['sum'] is None:
+                value = payment[0]['sum']
+             else:
+                value = amount[0]['sum'] - payment[0]['sum']
              print(value)
              final.append({"balance":value,'res_id':group_id})
    list1 = [dict(s,balance=fin['balance']) for s in sql_value for fin in final if s['res_id'] == fin['res_id'] ]
