@@ -1583,7 +1583,7 @@ def INSERT_AccountSetup():
 def UPDATE_AccountSetup():
    return HOTEL_AR_POST_UPDATE_AccountSetup(request)
 
-@app.route("/HOTEL_AR_POST_SELECT_AccountSetup",methods=['GET'])
+@app.route("/HOTEL_AR_POST_SELECT_AccountSetup",methods=['GET','POST'])
 def SELECT_AccountSetup():
    return HOTEL_AR_POST_SELECT_AccountSetup(request)
 
