@@ -73,7 +73,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         w['created_by'] = "Ranimanagama"
         w['created_on'] = RES_Log_Date
         w['Res_id'] = Res_id
-        w['res_market']= select_data[0]['marketgroup_description']
+        w['res_market']= select_data[0]['marketgroup_description'] if select_data[0]['marketgroup_description'] is not None else ""
         w['res_source'] =select_data[0]['sourcedescription']
         w['res_origin']=select_data[0]['origindescription']
         w['res_res_type']=rate_code_detail[0]['restype_description']
