@@ -66,7 +66,8 @@ def HOTEL_BBL_POST_UPDATE_UpdateGrid(request):
           rate2 += rate1
           print("firstrate",rate2)
     print("net_revenue",rate2)
-    Average_Rate = (rate2/totalrooms)
+    rate2 = round(rate2,2)
+    Average_Rate = round((rate2/totalrooms),2)
     print(Average_Rate,type(Average_Rate))
    # s['block_id'] = block_id
    # s['room_nights'] = totalrooms

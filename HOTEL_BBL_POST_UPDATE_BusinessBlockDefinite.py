@@ -37,7 +37,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     #<---------------------------rooms tab-------------------------->   
     y = d['Rooms']
     pack,inventory = {},{}
-    if y['packages'] == "":
+    if len(y['packages']) == 0:
         pass
     else:
         print("packages update")

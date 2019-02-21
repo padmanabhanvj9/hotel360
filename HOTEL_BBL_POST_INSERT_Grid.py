@@ -108,8 +108,8 @@ def HOTEL_BBL_POST_INSERT_Grid(request):
     print(Average_Rate,type(Average_Rate))
     s['block_id'] = block_id
     s['room_nights'] = totalrooms
-    s['net_revenue'] = rate2
-    s['net_rate'] = Average_Rate
+    s['net_revenue'] = round(rate2,2)
+    s['net_rate'] = round(Average_Rate,2)
     s['room_nights_picked'] = '0'
     s['room_nights_available'] = totalrooms
     sql2 = gensql('insert','business_block.room_revenue',s)
