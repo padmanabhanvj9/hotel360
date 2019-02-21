@@ -7,10 +7,18 @@ def hotel_rm_post_insert_updateroomlist(request):
     print(gensql('insert','room_management.RM_Room_List',d))
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
 
+    
+    
 def hotel_rm_post_insert_updateroomcondition(request):
     d = request.json
-    print(gensql('insert','room_management.RM_Room_Condition',d))
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    slcount = json.loads(dbget("select count(*) from room_management.RM_Room_Condition  where rm_room = '"+d['rm_room']+"'"))
+    print(slcount)
+    if slcount[0]['count'] ==0:
+       print(gensql('insert','room_management.RM_Room_Condition',d))
+       return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    else:
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Already Exist','ReturnCode':'RAE'}, sort_keys=True, indent=4))
+
 
 def hotel_rm_post_insert_updateoutoforderservice(request):
     if request.json.get('From_Room') and request.json.get('To_Room'):

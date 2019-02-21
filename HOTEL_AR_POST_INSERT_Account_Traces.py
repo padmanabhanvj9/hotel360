@@ -5,7 +5,7 @@ import json
 def HOTEL_AR_POST_INSERT_AccountTraces(request):
     d = request.json
     f = { k : v for k,v in d.items() if v != ''}
-   
+    f['created_on'] = datetime.datetime.utcnow().date()
     gensql('insert','account_receivable.account_traces',f)
     
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
@@ -15,10 +15,11 @@ def HOTEL_AR_POST_INSERT_AccountTraces(request):
 def HOTEL_AR_POST_UPDATE_AccountTraces(request):
     d = request.json
     print(d)
-    a = { k : v for k,v in d.items() if k not in ('account_number')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('account_number')}
     print(a)
-    e = { k : v for k,v in d.items() if k in ('account_number')}
+    e = { k : v for k,v in d.items() if v != '' if k in ('account_number')}
     print(e)
+   
     gensql('update','account_receivable.account_traces',a,e)
     return(json.dumps({"Return": "Record Updated Successfully","ReturnCode": "RUS",
                        "Status": "Success","StatusCode": "200"},indent=4))
