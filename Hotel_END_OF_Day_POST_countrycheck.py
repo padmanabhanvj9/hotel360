@@ -203,13 +203,13 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
 
 
    for fix_cha in fixed_charge:
-      fixed_charge_code = json.loads(dbget("select posting_code from cashiering.billing_code \
-                                            where posting_code_description = '"+fix_cha['fixed_charges_transaction_code']+"'"))
+      fixed_charge_code = json.loads(dbget("select package_code_id from packages.package_code \
+                                            where package_code = '"+fix_cha['fixed_charges_transaction_code']+"'"))
       d['res_room'] = fix_cha['res_room']
       d['res_id'] = fix_cha['res_id']
       d['posting_amount'] = fix_cha['fixed_charges_amount'] * fix_cha['fixed_charges_quantity']
       d['posting_date'] = date[0]['roll_business_date']
-      d['post_code_id'] = fixed_charge_code[0]['posting_code']
+      d['post_code_id'] = fixed_charge_code[0]['package_code_id']
       d['post_window'] = '1'
       d['posting_supplement'] = 'Night Audit Posting'
       d['posting_reference'] = 'Night Audit Posting posting fixed chrages'
