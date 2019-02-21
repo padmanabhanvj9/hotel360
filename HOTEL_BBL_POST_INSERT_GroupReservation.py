@@ -89,7 +89,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         #print(confirmation_no,type(confirmation_no))
         psql = dbput("update business_block.group_confirmation set confirmation_no = '"+str(confirmation_no)+"'")
         #print(psql)
-        w['res_confnumber'] = "PMS"+confirmation_no
+        w['res_confnumber'] = "PMS"+str(confirmation_no)
         psqlvalue = gensql('insert','reservation.res_reservation',w)
         #print(psqlvalue)
 
