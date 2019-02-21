@@ -1,4 +1,3 @@
-
 from sqlwrapper import gensql, dbget, dbput
 import json
 import datetime
@@ -15,10 +14,17 @@ def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
    RES_Log_Date = datetime.datetime.utcnow().date()
    print(RES_Log_Date)
    RES_Log_Date = str(RES_Log_Date)
-   arrival = dbget("select res_arrival, res_adults,res_room from reservation.res_reservation where res_id = '"+res_id+"' and pf_id = '"+pf_id+"' and res_unique_id = '"+unique_id+"'")
-  
-   arrival = json.loads(arrival)
+   arrival = json.loads(dbget("select res_arrival, res_adults,res_room, res_guest_status \
+                               from reservation.res_reservation where \
+                               res_id = '"+res_id+"' and pf_id = '"+pf_id+"' and \
+                               res_unique_id = '"+unique_id+"'"))
+
    print(arrival)
+   if arrival[0]['res_guest_status'] not in ('arrival','due in'):
+      return(json.dumps({'Status': 'Success', 'StatusCode': '200',
+                         'Return': 'Can not Check-iin if reservation status not in arrival or due in',
+                         'ReturnCode':'CNC'}, sort_keys=True, indent=4))
+   
    print(arrival[0]['res_arrival'],type(arrival[0]['res_arrival']))
    today_arrival = (arrival[0]['res_arrival'])
    adult = arrival[0]['res_adults']

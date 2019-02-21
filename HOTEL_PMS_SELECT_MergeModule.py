@@ -9,6 +9,8 @@ yesterday_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%
 
     
 #todays_date = datetime.datetime.utcnow().date()
+
+
 def Hotel_PMS_Select_GetTodayRoomAvailabilityArrival(request):
     
     final = []
@@ -24,10 +26,12 @@ def Hotel_PMS_Select_GetTodayRoomAvailabilityArrival(request):
                             select 'reservation' ,count(*) from reservation.res_reservation where created_on='"+str(date[0]['roll_business_date'])+"' \
                             union  \
                             select 'room_availability' ,count(*) from room_management.rm_room_list where rm_reservation_status='not reserved'  "))
+
     print(sql)
+    #print(sorted(sql, key = lambda i: i['dash_board']))
    
-   
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'ReturnCode':'RRTS'},indent=4))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200',
+                       'ReturnValue':sorted(sql, key = lambda i: i['dash_board']),'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_PMS_cancel_DepositRuleReservation(request):
     RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)

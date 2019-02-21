@@ -4,6 +4,12 @@ import json
 def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
     
     d = request.json
+    status = json.loads(dbget("SELECT res_guest_status FROM reservation.res_reservation \
+                               where res_unique_id='"+d['Res_unique_id']+"' and res_id='"+d['Res_id']+"'"))
+
+    if status[0]['res_guest_status'] in ('checkin','checkout','due out'):
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Can not Put in Queue. Reservation checked-in','ReturnCode':'CND'}, sort_keys=True, indent=4))
+    
     totday_date = datetime.datetime.utcnow().date()
     
     sql_value = json.loads(dbget("select res_arrival from reservation.res_reservation where res_id = '"+str(d['Res_id'])+"' and res_unique_id = '"+str(d['Res_unique_id'])+"'"))

@@ -3,7 +3,7 @@ import datetime
 import json
 
 def HOTEL_AR_POST_INSERT_ARTransfer(request):
-    
+   
    From_account = request.json['From_account']
    Invoice_no = request.json['Invoice_no']
    To_aacount = request.json['To_aacount']
