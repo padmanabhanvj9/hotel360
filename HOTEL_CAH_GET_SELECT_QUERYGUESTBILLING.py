@@ -18,10 +18,10 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
         #print("else")
         res_data[0]['company'] = ''
     #print(res_data)    
-    billing_data = json.loads(dbget("select billing_post.*,package_details.* \
-                                     from cashiering.billing_post  join packages.package_details on \
-                                    cashiering.billing_post.post_code_id = \
-                                    packages.package_details.package_code_id \
+    billing_data = json.loads(dbget("select billing_post.*,package_code.* \
+                                     from cashiering.billing_post  join packages.package_code \
+                                     on cashiering.billing_post.post_code_id = \
+                                     packages.package_code.package_code_id \
                                     where cashiering.billing_post.res_id='"+d['res_id']+"' and \
                                     cashiering.billing_post.res_room='"+d['res_room']+"' "))
     #print("billing",billing_data,type(billing_data))
