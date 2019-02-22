@@ -20,15 +20,17 @@ def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
                   and post_window in (1)"))
        deposit = json.loads(dbget("select sum(res_deposit_amount) from reservation.res_deposit where res_id='"+str(res_id_list)+"' "))
        payment=json.loads(dbget("select sum(postig_amount)FROM cashiering.posting_payment where res_id='"+str(res_id_list)+"' "))
-       print(amount,deposit,payment)
+       
        if payment[0]['sum'] is None:
           payment[0]['sum'] = 0
        if amount[0]['sum'] is None:
           amount[0]['sum'] = 0
        if deposit[0]['sum'] is None:
           deposit[0]['sum'] = 0
-       res_balance = amount[0]['sum'] - deposit[0]['sum'] + payment[0]['sum']
-       res_idlist['balance'] = res_balance        
+       res_balance = amount[0]['sum'] - (deposit[0]['sum'] + payment[0]['sum'])
+       res_idlist['balance'] = res_balance
+       print(res_idlist['pf_firstname'],"- deposit: ", deposit,"payment: ",payment,
+             "posting_amount: ", amount, "Balance: ",res_idlist['balance'])
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value,'ReturnCode':'RRTS'},indent=4))
     
 
