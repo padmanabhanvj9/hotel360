@@ -103,7 +103,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    sql_count_value = json.loads(dbget("select count(*) from reservation.res_fixed_rate where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"'"))
    print(sql_count_value)
    fixed_rate_id = ''
-   status = ['no show','cancel']
+   status = ['no show','cancel','waitlist']
    if sql_count_value[0]['count'] !=0:
       print("its cameeeee")
       for i in sql_value:
