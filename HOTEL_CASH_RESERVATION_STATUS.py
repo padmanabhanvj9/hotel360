@@ -37,7 +37,6 @@ def HOTEL_CASH_RESERVATION_STATUS(request):
     #return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
     #return(json.dumps({'Balance': balance,'status':sql4}, sort_keys=True, indent=4))
 
-   
 def HOTEL_CASH_UpdateReinstateRervaiton(request):
     
     d = request.json
@@ -51,12 +50,13 @@ def HOTEL_CASH_UpdateReinstateRervaiton(request):
     print(sql_value)
 
     balance = sql_value[0]['res_guest_status']
-    
+    print("res_room", res_room, type(res_room))
     if balance =="Check out":
         status = "due out"
         psql_value = dbput("update room_management.rm_room_list set rm_fo_status = 'occupied', \
-                            rm_reservation_status = 'reserved',rm_fo_person= '"+sql_value[0]['res_adults']+"',\
+                            rm_reservation_status = 'reserved',rm_fo_person= '"+str(sql_value[0]['res_adults'])+"'\
                             where rm_room = '"+str(res_room)+"' ")
+        print("psql", psql_value)
         sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' \
                            where res_id="+res_id+" and res_room="+res_room+" ")
         ac_log['Emp_Id'] = '121'
@@ -71,5 +71,4 @@ def HOTEL_CASH_UpdateReinstateRervaiton(request):
     else:
         return(json.dumps({'Status':'Failure','Return':'Unable to update'}, sort_keys=True, indent=4))
     
-     
-         
+    
