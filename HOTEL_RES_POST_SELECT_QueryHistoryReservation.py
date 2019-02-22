@@ -50,7 +50,11 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
                                     from profile.pf_negotiated_rate join revenue_management.ratecode \
                                     on pf_negotiated_rate.pf_rate_code = ratecode.rate_code\
                                     where pf_negotiated_rate.pf_id='"+s['com_pf_id']+"'"))
-
+         
+         print("pf_ids: ", pf_ids, type(pf_ids))
+         if len(pf_ids) == 0:
+             return(json.dumps({"Return":"Negotiated Code is not present for this pfofile","Return_code":"RNP"
+                                ,"Status": "Success","StatusCode": "200"},indent=4))
          ids = str([''+str(pf['ratecode_id'])+'' for pf in pf_ids])[1:-1]
          print(ids, type(ids))
          data = json.loads(HOTEL_REM_POST_SELECT_GetRatecodeSetup(ids))
