@@ -37,4 +37,39 @@ def HOTEL_CASH_RESERVATION_STATUS(request):
     #return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
     #return(json.dumps({'Balance': balance,'status':sql4}, sort_keys=True, indent=4))
 
+   
+def HOTEL_CASH_UpdateReinstateRervaiton(request):
+    
+    d = request.json
+    ac_log = {}
+    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    Posting_date = datetime.datetime.utcnow().date()
+    res_id = request.json['res_id']
+    res_room = request.json['res_room']
+    sql_value = json.loads(dbget("select * from reservation.res_reservation \
+                                  where res_id="+res_id+" and res_room="+res_room+" "))
+    print(sql_value)
+
+    balance = sql_value[0]['res_guest_status']
+    
+    if balance =="Check out":
+        status = "due out"
+        psql_value = dbput("update room_management.rm_room_list set rm_fo_status = 'occupied', \
+                            rm_reservation_status = 'reserved',rm_fo_person= '"+sql_value[0]['res_adults']+"',\
+                            where rm_room = '"+str(res_room)+"' ")
+        sql_value = dbput("update reservation.res_reservation set res_guest_status = '"+status+"' \
+                           where res_id="+res_id+" and res_room="+res_room+" ")
+        ac_log['Emp_Id'] = '121'
+        ac_log['Emp_Firstname'] = "Ranimangama"
+        ac_log['RES_Log_Date'] = Posting_date
+        ac_log['RES_Log_Time'] = RES_Log_Time.time().strftime("%H:%M:%S")
+        ac_log['RES_Action_Type'] = "Due out Reservation"
+        ac_log['RES_Description'] = "Reservation should be due out.The room number is"+" "+str(res_room)
+        ac_log['Res_id'] = str(res_id)
+        sql_value = gensql('insert','reservation.res_activity_log',ac_log)
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully',"ReturnCode":"RUS"}, sort_keys=True, indent=4))
+    else:
+        return(json.dumps({'Status':'Failure','Return':'Unable to update'}, sort_keys=True, indent=4))
+    
+     
          
