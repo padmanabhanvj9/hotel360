@@ -27,7 +27,7 @@ def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
           amount[0]['sum'] = 0
        if deposit[0]['sum'] is None:
           deposit[0]['sum'] = 0
-       res_balance = deposit[0]['sum'] + payment[0]['sum'] - amount[0]['sum']
+       res_balance = amount[0]['sum'] - deposit[0]['sum'] + payment[0]['sum']
        res_idlist['balance'] = res_balance        
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value,'ReturnCode':'RRTS'},indent=4))
     
