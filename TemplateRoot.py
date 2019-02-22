@@ -296,6 +296,7 @@ from HOTEL_CAH_GET_SELECT_QUERYINSHOUSERECORD import HOTEL_CAH_POST_SELECT_QUERY
 
 from HOTEL_CASH_BILLING_CODE_SELECT import HOTEL_CASH_PAYMENT_CODE_SELECT
 from HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT import HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT
+from HOTEL_CASH_RESERVATION_STATUS import HOTEL_CASH_UpdateReinstateRervaiton
 #<-------------------------------------------------------------------------------------------------->
 #<-----------------------Business Block---------------------------------------------------------->
 from HOTEL_BBL_POST_INSERT_BusinessBlock import HOTEL_BBL_POST_INSERT_BusinessBlock
@@ -1310,7 +1311,9 @@ def PAYMENT_CODE_SELECT():
 def UPDATEPOSTINGPAYMENTCHECKOUT():
     return HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request)
 
-
+@app.route("/HOTEL_CASH_UpdateReinstateRervaiton",methods=['POST'])
+def updatereservationstatus():
+    return HOTEL_CASH_UpdateReinstateRervaiton(request)
 
 #<-------------------------Business Block------------------------------->
 
@@ -1762,5 +1765,5 @@ def Hotel_END_OF_Day_POST_Run_guestbalance_all():
    return Hotel_END_OF_Day_POST_Run_guestbalance(request)
 
 if __name__ == "__main__":
-    #app.run(debug=True)
-    app.run(host="192.168.99.1",port=5000)
+    app.run(debug=True)
+    #app.run(host="127.0.0.1",port=5000)
