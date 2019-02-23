@@ -1728,10 +1728,10 @@ def Hotel_END_OF_Day_POST_Roll_Business_date_all():
 @app.route("/Hotel_END_OF_Day_POST_Posting_Rooms_charges",methods=['POST'])
 def Hotel_END_OF_Day_POST_Posting_Rooms_charges_all():
    return Hotel_END_OF_Day_POST_Posting_Rooms_charges(request)
-@app.route("/Hotel_END_OF_Day_POST_Run_Additional_procedures",methods=['POST'])
+@app.route("/Hotel_END_OF_Day_POST_Run_Additional_procedures",methods=['POST','GET'])
 def Run_Additional_procedures():
    return Hotel_END_OF_Day_POST_Run_Additional_procedures(request)
-@app.route("/Hotel_END_OF_Day_POST_print_final_report",methods=['POST'])
+@app.route("/Hotel_END_OF_Day_POST_print_final_report",methods=['POST','GET'])
 def Hotel_END_OF_Day_POST_print_final_report_all():
    return Hotel_END_OF_Day_POST_print_final_report(request)
 
