@@ -1716,10 +1716,10 @@ def HOTEL_AR_POST_SELECT_AccountTypeDropdown_all():
 
 
 #<---------------------------------End of day route-------------------->
-@app.route("/Hotel_END_OF_Day_POST_countrycheck",methods=['POST'])
+@app.route("/Hotel_END_OF_Day_POST_countrycheck",methods=['POST','GET'])
 def Hotel_END_OF_Day_POST_countrycheck_all():
    return Hotel_END_OF_Day_POST_countrycheck(request)
-@app.route("/Hotel_END_OF_Day_POST_Departure_Not_Checkedout",methods=['POST'])
+@app.route("/Hotel_END_OF_Day_POST_Departure_Not_Checkedout",methods=['POST','GET'])
 def Hotel_END_OF_Day_POST_Departure_Not_Checkedout_all():
    return Hotel_END_OF_Day_POST_Departure_Not_Checkedout(request)
 @app.route("/Hotel_END_OF_Day_POST_Roll_Business_date",methods=['POST'])
