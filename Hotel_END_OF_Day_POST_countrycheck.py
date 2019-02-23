@@ -122,7 +122,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   d['res_id'] = i['res_id']
                   d['posting_amount'] = i['res_rate']
                   d['posting_date'] = date[0]['roll_business_date']
-                  d['post_code_id'] = '5020'
+                  d['post_code_id'] = '22'
                   d['post_window'] = '1'
                   d['posting_supplement'] = 'Fixed rate Posting'
                   d['posting_reference'] = 'Fixed rate Posting room chrages'
@@ -137,7 +137,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   d['res_id'] = i['res_id']
                   d['posting_amount'] = i['res_rate']
                   d['posting_date'] = date[0]['roll_business_date']
-                  d['post_code_id'] = '5020'
+                  d['post_code_id'] = '22'
                   d['post_window'] = '2'
                   d['posting_supplement'] = 'Fixed rate Posting'
                   d['posting_reference'] = 'Fixed rate Posting room chrages'
@@ -166,7 +166,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
             d['res_id'] = i['res_id']
             d['posting_amount'] = data
             d['posting_date'] = date[0]['roll_business_date']
-            d['post_code_id'] = '5020'
+            d['post_code_id'] = '22'
             d['post_window'] = '1'
             d['posting_supplement'] = 'Room charges Posting'
             d['posting_reference'] = 'posting room chrages'
@@ -181,7 +181,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
             d['res_id'] = i['res_id']
             d['posting_amount'] = data
             d['posting_date'] = date[0]['roll_business_date']
-            d['post_code_id'] = '5020'
+            d['post_code_id'] = '22'
             d['post_window'] = '2'
             d['posting_supplement'] = 'Room charges Posting'
             d['posting_reference'] = 'posting room chrages'
