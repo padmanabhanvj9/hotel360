@@ -1,6 +1,8 @@
 from sqlwrapper import gensql,dbget,dbput
 import json
 import datetime
+from ApplicationDate import application_date
+
 def HOTEL_RES_POST_INSERT_UpdateDeposit(request):
     
     s,a = {},{}
@@ -13,18 +15,17 @@ def HOTEL_RES_POST_INSERT_UpdateDeposit(request):
     a = {k : v for k,v in d.items() if v != '' }
     print(d['res_id'],type(d['res_id']))
     sql_value = gensql('insert','reservation.res_deposit',a)
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    print(RES_Log_Time)
+    
     #RES_Log_Date = datetime.datetime.utcnow().date()
     if d['RES_Deposit_Amount']  == '':
         pass
     else:
         s = {}
         s['Emp_Id'] = "121"
-        s['Emp_Firstname'] = "Ranimangama"
-        s['RES_Log_Date'] = datetime.datetime.utcnow().date()
-        s['RES_Log_Time'] = RES_Log_Time
+        s['Emp_Firstname'] = "Admin"
+        app_datetime = application_date()
+        s['RES_Log_Date'] = app_datetime[1]
+        s['RES_Log_Time'] = app_datetime[2]
         s['RES_Action_Type'] = "Deposit amount is"+"  "+d['RES_Deposit_Amount']
         s['RES_Description'] = 'deposit amount is paid'
         s['Res_id'] = d['res_id']

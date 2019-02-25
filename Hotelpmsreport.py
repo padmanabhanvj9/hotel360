@@ -1,6 +1,8 @@
 import json
 from sqlwrapper import gensql,dbput,dbget
 import datetime
+from ApplicationDate import application_date
+
 def GetReservationReport(request):
     
    from_date = request.json['from_date']
@@ -163,8 +165,8 @@ def GetRoomDiscrepencies(request):
    from_dates = request.json['from_date']
    to_dates = request.json['to_date']
    print(from_dates,to_dates)
-   current_date = datetime.datetime.utcnow()
-   current_date = current_date.date()
+   #current_date = datetime.datetime.utcnow()
+   #current_date = current_date.date()
    sql = json.loads(dbget("select res_reservation.res_arrival,rm_room_discrepancy.rm_room_discrepancy,res_reservation.res_room from reservation.res_reservation \
                            left join room_management.rm_room_discrepancy on rm_room_discrepancy.rm_room = res_reservation.res_room \
                            where res_arrival between '"+str(from_dates)+"' and '"+str(to_dates)+"'"))
@@ -184,8 +186,8 @@ def GetGuestServiceStatus(request):
    from_dates = request.json['from_date']
    to_dates = request.json['to_date']
    print(from_dates,to_dates)
-   current_date = datetime.datetime.utcnow()
-   current_date = current_date.date()
+   #current_date = datetime.datetime.utcnow()
+   #current_date = current_date.date()
    sql = json.loads(dbget("select res_reservation.res_arrival,guest_service_status.rm_service_status,res_reservation.res_room from reservation.res_reservation \
                            left join room_management.guest_service_status on guest_service_status.rm_room = res_reservation.res_room \
                            where res_arrival between '"+str(from_dates)+"' and '"+str(to_dates)+"'"))
@@ -216,14 +218,17 @@ def GetZerobalanceaccount(request):
      ]
    return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":json_input},indent=2))
 def futurebooking():
-    current_date = datetime.datetime.utcnow()
-    current_date = current_date.date()
+    #current_date = datetime.datetime.utcnow()
+    app_datetime = application_date()
+    current_date = datetime.datetime.strptime(app_datetime[1], "%Y-%m-%d").date()
     #current_date = str(current_date)
     print(current_date)
     dividendlist, dividendlist_add, count_of_year,fin_list = [],[],{},[]
     
     
-    Year1 = json.loads(dbget("select res_arrival from reservation.res_reservation  where  res_arrival > '"+str(current_date)+"' and res_guest_status in ('reserved','due in','arrival') order by res_arrival"))
+    Year1 = json.loads(dbget("select res_arrival from reservation.res_reservation  where  \
+                              res_arrival > '"+str(current_date)+"' and res_guest_status in \
+                              ('reserved','due in','arrival') order by res_arrival"))
     
     
 
@@ -255,14 +260,16 @@ def futurebooking():
     return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":fin_list},indent=2))
 
 def HistoryBooking():
-    current_date = datetime.datetime.utcnow()
-    current_date = current_date.date()
+    app_datetime = application_date()
+    current_date = datetime.datetime.strptime(app_datetime[1], "%Y-%m-%d").date()
     #current_date = str(current_date)
     print(current_date)
     dividendlist, dividendlist_add, count_of_year,fin_list = [],[],{},[]
     
     roomtype = {}
-    Year1 = json.loads(dbget("select res_arrival from reservation.res_reservation  where  res_arrival < '"+str(current_date)+"' and res_guest_status ='Check out' order by res_arrival"))
+    Year1 = json.loads(dbget("select res_arrival from reservation.res_reservation  where  \
+                              res_arrival < '"+str(current_date)+"' and res_guest_status ='Check out' \
+                              order by res_arrival"))
     
    
     print(Year1)
@@ -335,9 +342,11 @@ def Cashiergettotalamount(request):
         return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":res},indent=2))
   
 def RoomHistory(request):
-    today = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    today = app_datetime[1]
     print(today)
-    sql_value = json.loads(dbget("select * from reservation.res_reservation where res_arrival < '"+str(today)+"' order by res_arrival"))
+    sql_value = json.loads(dbget("select * from reservation.res_reservation \
+                                  where res_arrival < '"+str(today)+"' order by res_arrival"))
     #print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
 

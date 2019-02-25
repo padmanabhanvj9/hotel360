@@ -1,11 +1,13 @@
 from sqlwrapper import gensql, dbget,dbput
+from ApplicationDate import application_date
 import datetime
 import json
 
 def HOTEL_AR_POST_INSERT_ArNotes(request):
     d = request.json
     print(d)
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    app_datetime = application_date()
+    RES_Log_Time = app_datetime[0]
 
     d['modified_on'] =  RES_Log_Time
   

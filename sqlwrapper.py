@@ -8,6 +8,7 @@ def dbfetch(sql):
       cur = con.cursor()
      except psycopg2.Error :
        return (json.dumps({'Status': 'Failure','Message':'DB connection Error'}, sort_keys=True, indent=4))
+     print('dbfetch', sql)
      cur.execute(sql)
      result = cur.fetchall()
      fresult = []
@@ -21,6 +22,7 @@ def dbput(sql):
       cur = con.cursor()
     except psycopg2.Error :
        return (json.dumps({'Status': 'Failure','Message':'DB connection Error'}, sort_keys=True, indent=4))
+    print('dbput', sql) 
     cur.execute(sql)
     con.commit()
     return sql
@@ -30,6 +32,7 @@ def dbget(sql):
       cur = con.cursor()
      except psycopg2.Error :
        return (json.dumps({'Status': 'Failure','Message':'DB connection Error'}, sort_keys=True, indent=4))
+     print('dbget', sql)
      cur.execute(sql)
   
      def serialize(obj):

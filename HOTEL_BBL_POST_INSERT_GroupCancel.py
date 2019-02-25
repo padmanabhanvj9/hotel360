@@ -2,7 +2,7 @@ import json
 import random
 from sqlwrapper import gensql,dbget,dbput
 import datetime
-
+from ApplicationDate import application_date
 def HOTEL_BBL_POST_INSERT_GroupCancel(request):
 
     sql_value = json.loads(dbget("select block_cancel_no from business_block.block_cancel"))
@@ -27,12 +27,13 @@ def HOTEL_BBL_POST_INSERT_GroupCancel(request):
     if cancelgrid[0]['count'] > 0:
         deltequery = dbput("delete from business_block.grid where block_id = '"+block_id+"' ; \
                             delete from business_block.current_grid where block_id = '"+block_id+"'")
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = app_datetime[0]
+    RES_Log_Date = app_datetime[1]
     print(RES_Log_Date)
     s = {}
-    s['user_role'] = "Supervisor"
+    s['user_role'] = "Admin"
 
     s['date'] = RES_Log_Date
     s['time'] = RES_Log_Time

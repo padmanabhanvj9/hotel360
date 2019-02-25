@@ -2,6 +2,7 @@ from sqlwrapper import gensql, dbget,dbput
 import datetime
 import json
 from collections import Counter
+from ApplicationDate import application_date
 def HOTEL_AR_POST_INSERT_CompressInvoice(request):
     d = request.json
     s ,z,f= {},[],{}

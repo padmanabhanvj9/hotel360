@@ -8,6 +8,9 @@
 from sqlwrapper import gensql,dbget,dbput
 import datetime
 import json
+from ApplicationDate import application_date
+
+
 def UpdateCompanyProfile(request):
     d = request.json
     select = json.loads(dbget("select * from profile.profile_id"))
@@ -22,19 +25,20 @@ def UpdateCompanyProfile(request):
     data1 = d.get("PF_Firstname")
     pf_type = d['PF_Type']
     
-    PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
-    print(PF_Log_Time)
-    PF_Log_Date = datetime.datetime.utcnow().date()
-    print(PF_Log_Date)
+    #PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    #PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
+    #print(PF_Log_Time)
+    #PF_Log_Date = datetime.datetime.utcnow().date()
+    #print(PF_Log_Date)
     
     PF_Log_Description = "Create "+str(pf_type)+" Profile" + " "+str(data1)
     s = {}
     s['Emp_Id'] = '121'
-    s['Emp_Firstname'] = "daisy"
-    s['Emp_Lastname'] = "veroni"
-    s['PF_Log_Date'] = PF_Log_Date
-    s['PF_Log_Time'] = PF_Log_Time
+    s['Emp_Firstname'] = "Admin"
+    s['Emp_Lastname'] = "User"
+    app_datetime = application_date()
+    s['PF_Log_Date'] = app_datetime[1]
+    s['PF_Log_Time'] = app_datetime[2]
     s['PF_Action_Type'] = "New Profile"
     s['PF_Log_Description'] = PF_Log_Description
     s['pf_id'] = id1
@@ -44,20 +48,21 @@ def UpdateCompanyProfile(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','profileid':id1,'profiletype':pf_type,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
 def UpdateCompanyProfileRecord(request):
     d = request.json
-    PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
-    print(PF_Log_Time)
-    PF_Log_Date = datetime.datetime.utcnow().date()
+    #PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    #PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
+    #print(PF_Log_Time)
+    #PF_Log_Date = datetime.datetime.utcnow().date()
     #print(d)
     e = { k : v for k,v in d.items() if k in ('PF_Id')}
     f = { k : v for k,v in d.items() if k not in ('PF_Id') if v != ''}
     gensql('update','profile.pf_company_profile',f,e)
     s = {}
     s['Emp_Id'] = '121'
-    s['Emp_Firstname'] = "daisy"
-    s['Emp_Lastname'] = "veroni"
-    s['PF_Log_Date'] = PF_Log_Date
-    s['PF_Log_Time'] = PF_Log_Time
+    s['Emp_Firstname'] = "Admin"
+    s['Emp_Lastname'] = "User"
+    app_datetime = application_date()
+    s['PF_Log_Date'] = app_datetime[1]
+    s['PF_Log_Time'] = app_datetime[2]
     s['PF_Action_Type'] = "Update Profile"
     s['PF_Log_Description'] = "Update profile changes"
     s['pf_id'] = d['PF_Id']
@@ -67,20 +72,21 @@ def UpdateCompanyProfileRecord(request):
 
 def UpdateIndividualProfileRecord(request):
     d = request.json
-    PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
-    print(PF_Log_Time)
-    PF_Log_Date = datetime.datetime.utcnow().date()
+    #PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    #PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
+    #print(PF_Log_Time)
+    #PF_Log_Date = datetime.datetime.utcnow().date()
     #print(d)
     e = { k : v for k,v in d.items() if k in ('PF_Id')}
     f = { k : v for k,v in d.items() if k not in ('PF_Id') if v != ''}
     gensql('update','profile.pf_individual_profile',f,e)
     s = {}
     s['Emp_Id'] = '121'
-    s['Emp_Firstname'] = "daisy"
-    s['Emp_Lastname'] = "veroni"
-    s['PF_Log_Date'] = PF_Log_Date
-    s['PF_Log_Time'] = PF_Log_Time
+    s['Emp_Firstname'] = "Admin"
+    s['Emp_Lastname'] = "User"
+    app_datetime = application_date()
+    s['PF_Log_Date'] = app_datetime[1]
+    s['PF_Log_Time'] = app_datetime[2]
     s['PF_Action_Type'] = "Update Profile"
     s['PF_Log_Description'] = "Update profile changes"
     s['pf_id'] = d['PF_Id']

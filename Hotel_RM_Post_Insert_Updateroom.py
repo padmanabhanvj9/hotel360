@@ -1,6 +1,8 @@
 from sqlwrapper import gensql,dbget,dbput
 import json
 import datetime
+from ApplicationDate import application_date
+
 
 def hotel_rm_post_insert_updateroomlist(request):
     d = request.json
@@ -49,7 +51,7 @@ def hotel_rm_post_insert_updateoutoforderservice(request):
 def hotel_rm_post_insert_updateroommaintenance(request):
     d = request.json
     room = request.json['rm_room']
-    d['mainteanance_user'] = 'SUPERVISOR'
+    d['mainteanance_user'] = 'Admin'
     print(d)
     e = { k : v for k,v in d.items() if k  in ('rm_room')}
     f = { k : v for k,v in d.items() if k not  in ('rm_room')}
@@ -75,8 +77,9 @@ def hotel_rm_post_update_resolveroommaintenance(request):
     e = request.json
     print(e)
     d ,s= {},{}
-    d['rm_resolvedon'] =  datetime.datetime.utcnow().date()
-    d['rm_resolvedby'] = 'SUPERVISOR'
+    app_datetime = application_date()
+    d['rm_resolvedon'] =  app_datetime[1]
+    d['rm_resolvedby'] = 'Admin'
 
     sql = json.loads(dbget("select * from room_management.rm_room_mainteanance_acitivity_log where rm_room = '"+e['rm_room']+"' "))
     print(sql,type(sql))

@@ -1,4 +1,5 @@
 from sqlwrapper import gensql, dbget,dbput
+from ApplicationDate import application_date
 import datetime
 import json
 
@@ -24,7 +25,8 @@ def HOTEL_AR_POST_SELECT_AccountPayHistory(request):
 
 def HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely(request):
     d =request.json
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
     s = {}
     
     account_invoie = json.loads(dbget("select open_amount from account_receivable.accout_inivoice \
@@ -57,7 +59,8 @@ def HOTEL_AR_POST_SELECT_ApplyPaymentSelectiviely(request):
     
 def HOTEL_AR_POST_INSERT_UNApplyPayment(request):
     d = request.json
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
     s = {}
     
     account_invoie = json.loads(dbget("select open_amount from account_receivable.accout_inivoice \
@@ -88,7 +91,8 @@ def HOTEL_AR_POST_INSERT_UNApplyPayment(request):
                        "Status": "Success","StatusCode": "200"},indent=4))
 def HOTEL_AR_POST_SELECT_ReversePayment(request):
     d = request.json
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
     s = {}
     
     account_invoie = json.loads(dbget("select open_amount from account_receivable.accout_inivoice \
@@ -131,7 +135,8 @@ def HOTEL_AR_POST_SELECT_UnappyPayment(request):
 
     acc_no = request.json['account_no']
     inv = request.json['invoice_no']
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
     result = json.loads(dbget("select * from account_receivable.invoice_payment\
                            left join cashiering.payment_code on payment_code.payment_code_id = invoice_payment.payment_code_id \
                            where posting_date = '"+str(Posting_date)+"' and account_no = '"+str(acc_no)+"' and invoice_no = '"+str(inv)+"' "))

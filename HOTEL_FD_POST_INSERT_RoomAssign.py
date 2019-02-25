@@ -1,4 +1,4 @@
-
+from ApplicationDate import application_date
 from sqlwrapper import gensql, dbget, dbput
 import json
 import datetime
@@ -12,8 +12,9 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
     print(a)
     a = { k : v for k,v in d.items() if k != '' if k in ('Res_id','Res_unique_id')}
     print(e)
-    Today_date = datetime.datetime.utcnow().date()
-    Today_date = str(Today_date)
+    app_datetime = application_date()
+    Today_date = app_datetime[1]
+    #Today_date = str(Today_date)
     
     arrival = dbget("select res_arrival,res_room_type,res_block_code from reservation.res_reservation where res_id = '"+res_id+"' and res_unique_id = '"+unique_id+"' ")
     arrival = json.loads(arrival)

@@ -1,8 +1,10 @@
 from sqlwrapper import gensql, dbget
 import json
+from ApplicationDate import application_date
 
 
 def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
+   app_datetime = application_date()
    
    value1 = json.loads(dbget("SELECT pf_company_profile.pf_account,res_reservation.* FROM reservation.res_reservation \
                                left join profile.pf_company_profile on pf_company_profile.pf_id = res_reservation.res_block \
@@ -10,7 +12,7 @@ def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
    #print(value1) 
    value2 = json.loads(dbget("select pf_company_profile.pf_account,res_reservation.* from reservation.res_reservation \
                             left join profile.pf_company_profile on pf_company_profile.pf_id = res_reservation.res_block \
-                             where CURRENT_DATE between res_arrival and res_depature and res_guest_status='Check out' and res_room_type not in ('PM') "))  
+                             where res_depature = '"+str(app_datetime[1])+"' and res_guest_status='Check out' and res_room_type not in ('PM') "))  
    #print(value2)
    sql_value = value1+value2
 

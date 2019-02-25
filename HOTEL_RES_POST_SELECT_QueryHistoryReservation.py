@@ -4,7 +4,9 @@ from HOTEL_REM_POST_SELECT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_Sele
 from HOTEL_REM_POST_SELECT_UpdateRatecodeSetup import HOTEL_REM_POST_SELECT_GetRatecodeSetup
 from datetime import datetime, timedelta
 import requests
-#@app.route("/ProfileFutureReservationRecord",methods=['POST'])
+from ApplicationDate import application_date
+
+
 def HOTEL_RES_POST_select_Paticularreservation(request):
     d = request.json
     result = json.loads(dbget("select * from reservation.res_reservation \
@@ -12,14 +14,10 @@ def HOTEL_RES_POST_select_Paticularreservation(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result  ,'ReturnCode':'RRTS'},indent=4))
 def QueryHistoryReservation(request):
     #N = 365
-    current_date = datetime.utcnow().date()
-    current_date = str(current_date)
+    app_datetime = application_date()
+    current_date = app_datetime[1]
     print(current_date)
-    #date_N_days_ago = current_date + timedelta(days=1)
-    #date_N_days_ago = date_N_days_ago.date()
 
-    #date_N_days_ago = str(date_N_days_ago)
-    #print (date_N_days_ago)
     pf_id = request.json['pf_id']
     sql_value = "select * from reservation.res_reservation where pf_id = '"+pf_id+"' and res_arrival <  '"+current_date+"' order by res_arrival desc"
     result = dbget(sql_value)

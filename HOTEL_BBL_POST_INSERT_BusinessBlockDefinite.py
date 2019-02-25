@@ -2,14 +2,16 @@ import datetime
 from sqlwrapper import gensql, dbget, dbput
 import json
 import random
+from ApplicationDate import application_date
 
 def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
     d = request.json
     
     x,y,z,p,r,pack,inventory = {},{},{},{},{},{},{}
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = app_datetime[0]
+    RES_Log_Date = app_datetime[1]
     #print(RES_Log_Date)
     #<---------------generate block id -------------------------------------->
     sql_value = json.loads(dbget("select count_id from business_block.count"))
@@ -46,7 +48,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
        s = {}
        blockcode = x.get("block_code")
        blockid = x.get("block_id")
-       s['user_role'] = "Supervisor"
+       s['user_role'] = "Admin"
        s['date'] = RES_Log_Date
        s['time'] = RES_Log_Time
        s['block_id'] = blockid
@@ -111,7 +113,7 @@ def HOTEL_BBL_POST_INSERT_BusinessBlockDefinite(request):
         sql4 = gensql('insert','business_block.block_catering',p)
         print(sql4)
         s = {}
-        s['user_role'] = "Supervisor"
+        s['user_role'] = "Admin"
         blockid = p.get("block_id")
 
         s['date'] = RES_Log_Date

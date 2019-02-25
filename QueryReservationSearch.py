@@ -3,9 +3,8 @@ import json
 
 
 def QueryReservationSearch():
-    #sql_value = dbget("select pf_company_profile.pf_account,res_reservation.* from reservation.res_reservation \
-     #          full join profile.pf_company_profile on reservation.res_reservation.pf_id = profile.pf_company_profile.pf_id ")
-    #sql_value = gensql('select','reservation.res_reservation','*')
+
+
     sql_value = json.loads(dbget("select pf_individual_profile.pf_firstname as firstname,pf_individual_profile.pf_lastname,\
             pf_individual_profile.pf_language,pf_individual_profile.pf_title,pf_individual_profile.pf_mobileno,pf_individual_profile.pf_individual_vip,\
             pf_company_profile.pf_account, pf_company_profile.pf_type, res_reservation.* from reservation.res_reservation \

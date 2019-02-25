@@ -1,7 +1,7 @@
 import json 
 from sqlwrapper import gensql, dbget,dbput
 import datetime
-
+from ApplicationDate import application_date
 def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
     d = request.json
     print(d)
@@ -12,13 +12,14 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
     #d['Posting_date'] = Posting_date
     res_id = d.get("res_id")
     print(res_id)
-    Posting_date = datetime.datetime.utcnow().date()
-    Revenue_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
+    Revenue_date = app_datetime[1]
     s = {}
     s['Posting_date'] = Posting_date
     s['Revenue_date'] = Revenue_date
-    s['User_role'] = "Supervisor"
-    s['User_name'] = "david"
+    s['User_role'] = "Admin"
+    s['User_name'] = "Admin"
     s['Res_id'] = res_id
     s['Posting_action'] = "Night Audit posting"
     s['Posting_reason'] = "Payment posted for"+" "+res_id+ "and"+d.get("res_room")
@@ -32,7 +33,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENT(request):
 def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     d = request.json
     ac_log = {}
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    app_datetime = application_date()
+    RES_Log_Time = app_datetime[0]
     print(d)
     e = { k : v for k,v in d.items() if v != "" }
     print(e)
@@ -41,14 +43,14 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
     #d['Posting_date'] = Posting_date
     res_id = d.get("res_id")
     print(res_id,type(res_id),type(d['Postig_amount']))
-    Posting_date = datetime.datetime.utcnow().date()
-    Revenue_date = datetime.datetime.utcnow().date()
+    Posting_date = app_datetime[1]
+    Revenue_date = app_datetime[1]
     #payment log screen
     s = {}
     s['Posting_date'] = Posting_date
     s['Revenue_date'] = Revenue_date
-    s['User_role'] = "Supervisor"
-    s['User_name'] = "david"
+    s['User_role'] = "Admin"
+    s['User_name'] = "Admin"
     s['Res_id'] = res_id
     s['Posting_action'] = "posting manually"
     s['Posting_reason'] = "Payment posted for"+" "+res_id+ "and"+d.get("res_room")
@@ -77,9 +79,9 @@ def HOTEL_CAH_POST_INSERT_UPDATEPOSTINGPAYMENTCHECKOUT(request):
           print(psql)
         
           ac_log['Emp_Id'] = '121'
-          ac_log['Emp_Firstname'] = "Ranimangama"
+          ac_log['Emp_Firstname'] = "Admin"
           ac_log['RES_Log_Date'] = Posting_date
-          ac_log['RES_Log_Time'] = RES_Log_Time.time().strftime("%H:%M:%S")
+          ac_log['RES_Log_Time'] = app_datetime[0]
           ac_log['RES_Action_Type'] = "Reservation Checkout"
           ac_log['RES_Description'] = "Reservation should be checkout.The room number is"+" "+str(res_room)
           ac_log['Res_id'] = str(res_id)

@@ -2,6 +2,9 @@ from sqlwrapper import gensql, dbget,dbput
 from flask import Flask,request, jsonify
 import json
 import datetime
+from ApplicationDate import application_date
+
+
 def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     d = request.json
     s,e = {},{}
@@ -29,14 +32,10 @@ def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     #s['res_confnumber'] = res_confnumber[0]['res_confnumber']
     sql_value = gensql('update','reservation.res_reservation',s,e)
     print(sql_value)
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
-    print(RES_Log_Date)
+
     res_id = e.get("res_id")
     Emp_Id = '121'
-    Emp_Firstname = "Daisy"
+    Emp_Firstname = "Admin"
     conf_number = gensql('select','reservation.res_reservation','res_confnumber',e)
     conf_number = json.loads(conf_number)
     print(type(conf_number))
@@ -46,9 +45,9 @@ def HOTEL_RES_POST_INSERT_ReinstateReservation(request):
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
-   
-    s['RES_Log_Date'] = RES_Log_Date
-    s['RES_Log_Time'] = RES_Log_Time
+    app_datetime = application_date()
+    s['RES_Log_Date'] = app_datetime[1]
+    s['RES_Log_Time'] = app_datetime[2]
     s['RES_Action_Type'] = "Reinstate Reservation"
     s['RES_Description'] = "Reinstate Reservation & and confirmation number is" + " " +confirmation_number
     s['Res_id'] = res_id

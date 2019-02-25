@@ -1,14 +1,16 @@
 import datetime
 from sqlwrapper import gensql, dbget, dbput
 import json
+from ApplicationDate import application_date
 def HOTEL_BBL_POST_INSERT_PayMasterReservation(request):
     d = request.json
     x,s = {},{}
     block_id = d.get("block_id")
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
+    app_datetime = application_date()
+    #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = app_datetime[0]
     print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    RES_Log_Date = app_datetime[1]
     print(RES_Log_Date)
 
     psql = json.loads(dbget("select count (*) from reservation.res_reservation where res_block_code='"+block_id+"' and res_room_type in('PM')"))
@@ -32,7 +34,7 @@ def HOTEL_BBL_POST_INSERT_PayMasterReservation(request):
     x['res_guest_status'] = "Definite Block"
     x['res_room_type'] = "PM"
     x['res_number_of_rooms'] = str(1)
-    x['created_by'] = "Ranimanagama"
+    x['created_by'] = "Admin"
     x['created_on'] = RES_Log_Date
     select = json.loads(dbget("select * from reservation.res_id"))
     print(select,type(select),len(select))
@@ -56,7 +58,7 @@ def HOTEL_BBL_POST_INSERT_PayMasterReservation(request):
     print(psqlvalue)
 
     s = {}
-    s['user_role'] = "Supervisor"
+    s['user_role'] = "Admin"
     s['date'] = RES_Log_Date
     s['time'] = RES_Log_Time
     s['block_id'] = block_id

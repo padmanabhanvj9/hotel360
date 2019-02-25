@@ -1,13 +1,17 @@
 from sqlwrapper import gensql,dbget
 import json
 import datetime
+from ApplicationDate import application_date
+
 
 def QueryProfileHistoryRecord(request):
     d = request.json['pf_id']
     print(d)
-    today = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    today = app_datetime[1]
     print(today)
-    sql_value = json.loads(dbget("select * from reservation.res_reservation where pf_id = '"+d+"' and res_arrival < '"+str(today)+"' "))
+    sql_value = json.loads(dbget("select * from reservation.res_reservation where \
+                                  pf_id = '"+d+"' and res_arrival < '"+str(today)+"' "))
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
 
@@ -18,7 +22,9 @@ def QueryProfileStatistics(request):
     last_no_show_rooms,last_status,last_status_room = [],[],[]
     #print(d)
     e ,s= {},{}
-    today = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    #datetime.datetime.strptime('24052010', "%d%m%Y").date()
+    today = datetime.datetime.strptime(app_datetime[1], "%Y-%m-%d").date()
     print(today)
     print((today.year)-1)
 
@@ -68,8 +74,10 @@ def getprofilestatistics(sql_value):
 def QueryProfileFutureRecord(request):
     d = request.json['pf_id']
     print(d)
-    today = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    today = app_datetime[1]
     print(today)
-    sql_value = json.loads(dbget("select * from reservation.res_reservation where pf_id = '"+d+"' and res_arrival > '"+str(today)+"' "))
+    sql_value = json.loads(dbget("select * from reservation.res_reservation where pf_id = '"+d+"' \
+                                  and res_arrival > '"+str(today)+"' "))
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))

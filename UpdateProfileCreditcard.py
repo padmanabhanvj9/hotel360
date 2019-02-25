@@ -1,12 +1,14 @@
 from sqlwrapper import gensql,dbget
 import json
 import datetime
+from ApplicationDate import application_date
+
 def UpdateProfileCreditcard(request):
     d = request.json
     #print(d)
-    PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
-    print(PF_Log_Time)
+    #PF_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    #PF_Log_Time = PF_Log_Time.time().strftime("%H:%M:%S")
+    #print(PF_Log_Time)
    
     gensql('insert','profile.pf_creditcard',d)
     sql_value = json.loads(dbget("select cc_id from profile.pf_creditcard \
@@ -15,10 +17,11 @@ def UpdateProfileCreditcard(request):
     #print(sql_value)
     s = {}
     s['Emp_Id'] = '121'
-    s['Emp_Firstname'] = "daisy"
-    s['Emp_Lastname'] = "veroni"
-    s['PF_Log_Date'] = datetime.datetime.utcnow().date()
-    s['PF_Log_Time'] = PF_Log_Time
+    s['Emp_Firstname'] = "Admin"
+    s['Emp_Lastname'] = "User"
+    app_datetime = application_date()
+    s['PF_Log_Date'] = app_datetime[1]
+    s['PF_Log_Time'] = app_datetime[2]
     s['PF_Action_Type'] = "Profile Creditcard"
     s['PF_Log_Description'] = "credit card details"
     s['pf_id'] = d['pf_id']

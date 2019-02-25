@@ -3,11 +3,12 @@ import json
 from sqlwrapper import gensql,dbget
 import datetime
 #import request
-
+from ApplicationDate import application_date
 def HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING(request):
 
     d = request.json
     print(d)
+    app_datetime = application_date()
     #d['Posting_date'] = Posting_date
     e = { k : v for k,v in d.items() if k in ('Res_id','post_id','res_room')}
     f = { k : v for k,v in d.items() if k not in ('Res_id','post_id','res_room')}
@@ -16,8 +17,8 @@ def HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING(request):
 
     res_id = d.get("Res_id")
 
-    Posting_date = datetime.datetime.utcnow().date()
-    Revenue_date = datetime.datetime.utcnow().date()
+    Posting_date = app_datetime[1]
+    Revenue_date = app_datetime[1]
     result = json.loads(dbget("select log_link_id from cashiering.log_link where link_id='1' "))
     log_id = result[0]['log_link_id']+1
     print(log_id)
@@ -25,8 +26,8 @@ def HOTEL_CAH_POST_UPDATE_UPDATEGUESTBILLING(request):
     s = {}
     s['Posting_date'] = Posting_date
     s['Revenue_date'] = Revenue_date
-    s['User_role'] = "Supervisor"
-    s['User_name'] = "david"
+    s['User_role'] = "Admin"
+    s['User_name'] = "Admin"
     s['Res_id'] = res_id
     s['Posting_action'] = "Night Audit posting"
     s['Posting_reason'] = "Payment posted for"+ " "+res_id

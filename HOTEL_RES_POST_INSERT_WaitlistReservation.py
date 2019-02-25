@@ -1,18 +1,16 @@
 from sqlwrapper import gensql, dbget,dbput
 import datetime
 import json
+from ApplicationDate import application_date
 
 def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     d = request.json
     d = { k : v for k,v in d.items() if  v != ''}
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
-    print(RES_Log_Date)
+    
     Emp_Id = '121'
-    Emp_Firstname = "Ranimangama"
-    d['created_on'] = RES_Log_Date
+    Emp_Firstname = "Admin"
+    app_datetime = application_date()
+    d['created_on'] = app_datetime[1]
     d['created_by'] = Emp_Firstname
     select = json.loads(dbget("select * from reservation.res_id"))
     print(select,type(select),len(select))
@@ -36,9 +34,9 @@ def HOTEL_RES_POST_INSERT_WaitlistReservation(request):
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
-   
-    s['RES_Log_Date'] = RES_Log_Date
-    s['RES_Log_Time'] = RES_Log_Time
+    app_datetime = application_date()
+    s['RES_Log_Date'] = app_datetime[1]
+    s['RES_Log_Time'] = app_datetime[2]
     s['RES_Action_Type'] = "Waitlist Reservation"
     s['RES_Description'] = "Reservation for" +" "+ name+" "+"with number of rooms"+" "+str(number_of_rooms)+" "+" is in waitlist"
     s['Res_id'] = res_id

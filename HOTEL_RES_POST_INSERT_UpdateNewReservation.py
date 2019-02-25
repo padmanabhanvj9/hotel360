@@ -2,7 +2,7 @@ import datetime
 from sqlwrapper import gensql, dbget, dbput
 import random
 import json
-
+from ApplicationDate import application_date
 
 def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     d = request.json
@@ -37,14 +37,10 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     if countdata[0]['count'] > 0:
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation Already Exist','ReturnCode':'RAE'}, sort_keys=True, indent=4)) 
 
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
-    print(RES_Log_Date)
+    app_datetime = application_date()
     Emp_Id = '121'
-    Emp_Firstname = "Ranimangama"
-    d['created_on'] = RES_Log_Date
+    Emp_Firstname = "Admin"
+    d['created_on'] = app_datetime[1]
     d['created_by'] = Emp_Firstname
     
     random_no = (random.randint(1000000000,9999999999))
@@ -97,8 +93,9 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
-    s['RES_Log_Date'] = RES_Log_Date
-    s['RES_Log_Time'] = RES_Log_Time
+    app_datetime = application_date()
+    s['RES_Log_Date'] = app_datetime[1]
+    s['RES_Log_Time'] = app_datetime[2]
     s['RES_Action_Type'] = RES_Action_Type
     s['RES_Description'] = RES_Description
     s['Res_id'] = reservation_id
@@ -108,7 +105,8 @@ def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ConfirmationNumber':RES_Confnumber,'ReturnCode':'RIS'}, sort_keys=True, indent=4))
     
 def Reservationdonutchart():
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    RES_Log_Date = app_datetime[1]
     print(RES_Log_Date)
     checkincount = json.loads(dbget("select count(*) from reservation.res_reservation where res_arrival = '"+str(RES_Log_Date)+"' and res_guest_status in ('checkin')"))
     print(checkincount)
@@ -120,11 +118,6 @@ def Reservationdonutchart():
                    {"title":"checkin","value":checkincount[0]['count'] },
                    {"title":"checkout","value":checkout[0]['count']},
                    {"title":"reservation","value":reservation[0]['count']}
-                   ]
-  
-  
-        
-
-        
+                 ]   
     return(json.dumps({"Return":"Record Retrieved Sucessfully","Return_Code":"RTS","Status": "Success","Status_Code": "200","Returnvalue":json_input},indent=2))
     

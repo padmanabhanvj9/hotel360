@@ -1,6 +1,7 @@
 import datetime
 from sqlwrapper import gensql,dbget,dbput
 import json
+from ApplicationDate import application_date
 def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
     
     d = request.json
@@ -9,8 +10,8 @@ def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
 
     if status[0]['res_guest_status'] in ('checkin','checkout','due out'):
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Can not Put in Queue. Reservation checked-in','ReturnCode':'CND'}, sort_keys=True, indent=4))
-    
-    totday_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    totday_date = app_datetime[1]
     
     sql_value = json.loads(dbget("select res_arrival from reservation.res_reservation where res_id = '"+str(d['Res_id'])+"' and res_unique_id = '"+str(d['Res_unique_id'])+"'"))
     #print(sql_value)
@@ -24,12 +25,12 @@ def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
         print(rm_room,type(rm_room))
         rm_room = str(rm_room)[1:-1]
         #print(rm_room)
-        RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-        RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
+        #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+        RES_Log_Time = app_datetime[0]
         #print(RES_Log_Time)
-        RM_Queue_Date = datetime.datetime.utcnow().date()
+        RM_Queue_Date =app_datetime[1]
         #print(RM_Queue_Date)
-        RM_Queue_Date = str(RM_Queue_Date)
+        #RM_Queue_Date = str(RM_Queue_Date)
         
         psql = dbget("select rm_room_type,rm_room_status,rm_fo_status,rm_room_class from room_management.rm_room_list \
                               where rm_room in ("+rm_room+")")

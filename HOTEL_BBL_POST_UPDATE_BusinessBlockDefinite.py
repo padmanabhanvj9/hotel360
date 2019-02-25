@@ -1,14 +1,16 @@
 import datetime
 from sqlwrapper import gensql, dbget, dbput
 import json
+from ApplicationDate import application_date
 def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
     d = request.json
     
     x,y,z,p,r,a,e,b,c ,f,g,h,i,m,n,u,w = {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
     rm_can1,rm_can2,cat_can1,cat_can2,result_dic ={},{},{},{},{}
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = app_datetime[0]
+    RES_Log_Date = app_datetime[1]
     #print(RES_Log_Date)
     
     x = d['Definite']
@@ -24,7 +26,7 @@ def HOTEL_BBL_POST_UPDATE_BusinessBlockDefinite(request):
        #print(sql1)
        s = {}
        blockid = e.get("block_id")
-       s['user_role'] = "Supervisor"
+       s['user_role'] = "Admin"
        s['date'] = RES_Log_Date
        s['time'] = RES_Log_Time
        s['block_id'] = blockid

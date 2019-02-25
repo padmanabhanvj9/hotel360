@@ -2,6 +2,7 @@ from sqlwrapper import gensql, dbget,dbput
 import json
 import datetime
 from collections import Counter
+from ApplicationDate import application_date
 def get_rate(s):
    if s == 4:
        return('four_adult_rate')
@@ -61,7 +62,8 @@ def HOTEL_REM_POST_SELECT_SelectRateForReservation(r_date, r_code, r_room, r_adu
    print("r_rate", r_rate[0])
    return(r_rate[0])
 def Hotel_END_OF_Day_POST_countrycheck(request):
-   today_date = datetime.datetime.utcnow().date()
+   app_datetime = application_date()
+   today_date = app_datetime[1]
    print(today_date)
    #country1 = json.loads(dbget("select pf_company_profile.pf_company_country  ,res_reservation.* from reservation.res_reservation \
     #                      left join profile.pf_company_profile on pf_company_profile.pf_id = res_reservation.pf_id \
@@ -75,35 +77,37 @@ def Hotel_END_OF_Day_POST_countrycheck(request):
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':coutry2,'ReturnCode':'RRTS'},indent=2))
 
 def Hotel_END_OF_Day_POST_Departure_Not_Checkedout(request):
-
-   date = json.loads(dbget("select roll_business_date from endofday.business_date"))
+   app_datetime = application_date()
+   date = app_datetime[1]
    print(date)
-   date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
+   date = (datetime.datetime.strptime(date,'%Y-%m-%d').date()) + datetime.timedelta(days=1)
    result = json.loads(dbget("select * from reservation.res_reservation \
                             where res_guest_status = 'due out' and res_depature = '"+str(date)+"' "))
 
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':result,'ReturnCode':'RRTS'},indent=4))
 
 def Hotel_END_OF_Day_POST_Roll_Business_date(request):
-   date = json.loads(dbget("select roll_business_date from endofday.business_date"))
+   app_datetime = application_date()
+   date = app_datetime[1]
    print(date)
-   tomorrow_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
+   tomorrow_date = (datetime.datetime.strptime(date,'%Y-%m-%d').date()) + datetime.timedelta(days=1)
    dbput("update endofday.business_date set roll_business_date = '"+str(tomorrow_date)+"'")
    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Date':str(tomorrow_date),'ReturnValue':'Record Updated Successfully','ReturnCode':'RUS'},indent=4))
 
 def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    print("Hello world")
+   app_datetime = application_date()
    run_charges,d,fixed_rate_id = [],{},[]
-   date = json.loads(dbget("select roll_business_date from endofday.business_date"))
+   date = app_datetime[1]
    print(date)
    #****************************************Posting fixed rate****************************************************
    sql_value = json.loads(dbget("select res_arrival,res_depature,res_rate,res_id,fixed_rate	from reservation.res_fixed_rate \
-                                 where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' and res_room_type not in ('PM')"))
+                                 where res_arrival <= '"+str(date)+"' and res_depature >='"+str(date)+"' and res_room_type not in ('PM')"))
    print(sql_value)
-   sql_count_value = json.loads(dbget("select count(*) from reservation.res_fixed_rate where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"'"))
+   sql_count_value = json.loads(dbget("select count(*) from reservation.res_fixed_rate where res_arrival <= '"+str(date)+"' and res_depature >='"+str(date)+"'"))
    print(sql_count_value)
    fixed_rate_id = ''
-   status = ['no show','cancel','waitlist']
+   status = ['no show','cancel','waitlist','arrival']
    if sql_count_value[0]['count'] !=0:
       print("its cameeeee")
       for i in sql_value:
@@ -121,7 +125,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   d['res_room'] = s['res_room']
                   d['res_id'] = i['res_id']
                   d['posting_amount'] = i['res_rate']
-                  d['posting_date'] = date[0]['roll_business_date']
+                  d['posting_date'] = date
                   d['post_code_id'] = '22'
                   d['post_window'] = '1'
                   d['posting_supplement'] = 'Fixed rate Posting'
@@ -136,7 +140,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   d['res_room'] = s['res_room']
                   d['res_id'] = i['res_id']
                   d['posting_amount'] = i['res_rate']
-                  d['posting_date'] = date[0]['roll_business_date']
+                  d['posting_date'] = date
                   d['post_code_id'] = '22'
                   d['post_window'] = '2'
                   d['posting_supplement'] = 'Fixed rate Posting'
@@ -153,19 +157,19 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
          
    #****************************************Posting Rooms and tax charges **************************************************
          psqlvalues = json.loads(dbget("select * from reservation.res_reservation \
-                                       where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' \
-                                       and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
+                                       where res_arrival <= '"+str(date)+"' and res_depature >='"+str(date)+"' \
+                                       and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel','waitlist','arrival') and res_room_type not in ('PM')"))
    else:
          psqlvalues = json.loads(dbget("select * from reservation.res_reservation \
-                                       where res_arrival <= '"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"' \
-                                       and res_guest_status not in ('no show','cancel') and res_room_type not in ('PM')"))
+                                       where res_arrival <= '"+str(date)+"' and res_depature >='"+str(date)+"' \
+                                       and res_guest_status not in ('no show','cancel','waitlist','arrival') and res_room_type not in ('PM')"))
    for i in psqlvalues:
-         data = HOTEL_REM_POST_SELECT_SelectRateForReservation(date[0]['roll_business_date'],i['res_rate_code'],i['res_room_type'],i['res_adults'])
+         data = HOTEL_REM_POST_SELECT_SelectRateForReservation(date,i['res_rate_code'],i['res_room_type'],i['res_adults'])
          if i['res_block'] is None:       
             d['res_room'] = i['res_room']
             d['res_id'] = i['res_id']
             d['posting_amount'] = data
-            d['posting_date'] = date[0]['roll_business_date']
+            d['posting_date'] = date
             d['post_code_id'] = '22'
             d['post_window'] = '1'
             d['posting_supplement'] = 'Room charges Posting'
@@ -180,7 +184,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
             d['res_room'] = i['res_room']
             d['res_id'] = i['res_id']
             d['posting_amount'] = data
-            d['posting_date'] = date[0]['roll_business_date']
+            d['posting_date'] = date
             d['post_code_id'] = '22'
             d['post_window'] = '2'
             d['posting_supplement'] = 'Room charges Posting'
@@ -199,7 +203,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                                    fixed_charges_quantity, fixed_charges_supplement, fixed_charges_id, res_fixed_charges.res_unique_id \
 	                           FROM reservation.res_fixed_charges \
                                    left join reservation.res_reservation on res_reservation.res_unique_id = res_fixed_charges.res_unique_id \
-	                           where fixed_charges_begin_date <= '"+str(date[0]['roll_business_date'])+"' and fixed_charges_end_date >='"+str(date[0]['roll_business_date'])+"'"))
+	                           where fixed_charges_begin_date <= '"+str(date)+"' and fixed_charges_end_date >='"+str(date)+"'"))
 
 
    for fix_cha in fixed_charge:
@@ -208,7 +212,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
       d['res_room'] = fix_cha['res_room']
       d['res_id'] = fix_cha['res_id']
       d['posting_amount'] = fix_cha['fixed_charges_amount'] * fix_cha['fixed_charges_quantity']
-      d['posting_date'] = date[0]['roll_business_date']
+      d['posting_date'] = date
       d['post_code_id'] = fixed_charge_code[0]['package_code_id']
       d['post_window'] = '1'
       d['posting_supplement'] = 'Night Audit Posting'
@@ -310,11 +314,11 @@ def Hotel_END_OF_Day_POST_Run_guestbalance(request):
 def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     run_additional,list1,list2,no_show_count,list3,list4,dic_pancy,d = [],[],[],[],[],[],[],{}
     #********************* night audit date******************
-
-    date = json.loads(dbget("select roll_business_date from endofday.business_date"))
+    app_datetime = application_date()
+    date = app_datetime[1]
     print(date)
 
-    no_show_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) - datetime.timedelta(days=1)
+    no_show_date = (datetime.datetime.strptime(date,'%Y-%m-%d').date()) - datetime.timedelta(days=1)
     #******************** Reservation No show***********************
     no_show = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
                                where res_arrival='"+str(no_show_date)+"' \
@@ -332,7 +336,7 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     no_show_end_time = datetime.datetime.now()
     run_additional.append({"Run_additional_procedure":"Reservation No Show","start_time":str(no_show_start_time.strftime("%H:%M:%S")),"end_time":str(no_show_end_time.strftime("%H:%M:%S")),"Iteration": len(no_show_count),"Status":"Completed"})
     #*********************************Due in ************************************************
-    due_in_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
+    due_in_date = (datetime.datetime.strptime(date,'%Y-%m-%d').date()) + datetime.timedelta(days=1)
     due_in = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
                                where res_arrival='"+str(due_in_date)+"'"))
     due_in_start_time = datetime.datetime.now()
@@ -341,13 +345,13 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
         due_in_update = dbput("update reservation.res_reservation set res_guest_status = 'due in' \
                                where res_id = '"+str(due_in_report['res_id'])+"' \
                                and res_unique_id = '"+str(due_in_report['res_unique_id'])+"' \
-                               and res_guest_status not in ('cancel')")
+                               and res_guest_status not in ('cancel,no show','waitilist')")
     due_in_end_time = datetime.datetime.now()
     run_additional.append({"Run_additional_procedure":"Reservation Due In",
                            "start_time":str(due_in_start_time.strftime("%H:%M:%S")),"end_time":str(due_in_end_time.strftime("%H:%M:%S")),"Iteration": len(list1),"Status":"Completed"})
 
     #************************************************* Due Out****************************************
-    due_out_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
+    due_out_date = (datetime.datetime.strptime(date,'%Y-%m-%d').date()) + datetime.timedelta(days=1)
     due_out = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
                                where res_depature='"+str(due_out_date)+"'"))
     due_out_start_time = datetime.datetime.now()
@@ -356,7 +360,7 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
         due_out_update = dbput("update reservation.res_reservation set res_guest_status = 'due out' \
                                where res_id = '"+str(due_out_report['res_id'])+"' \
                                and res_unique_id = '"+str(due_out_report['res_unique_id'])+"' \
-                               and res_guest_status not in ('cancel,no show')")
+                               and res_guest_status not in ('cancel,no show','waitilist','arrival')")
     print(list2)
     due_out_end_time = datetime.datetime.now()
     run_additional.append({"Run_additional_procedure":"Reservation Due Out",
@@ -365,14 +369,14 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     #*******************************arrival ****************************************************************
     #arrival_date = (datetime.datetime.strptime(date[0]['roll_business_date'],'%Y-%m-%d').date()) + datetime.timedelta(days=1)
     arrivals = json.loads(dbget("select res_id,res_unique_id,res_guest_status from reservation.res_reservation \
-                               where res_arrival='"+str(date[0]['roll_business_date'])+"'"))
+                               where res_arrival='"+str(date)+"'"))
     arrival_start_time = datetime.datetime.now()
     for arrivals_report in arrivals:
         list3.append(arrivals_report['res_unique_id'])
         arrivals_report_update = dbput("update reservation.res_reservation set res_guest_status = 'arrival' \
                                where res_id = '"+str(arrivals_report['res_id'])+"' \
                                and res_unique_id = '"+str(arrivals_report['res_unique_id'])+"' \
-                               and res_guest_status not in ('cancel,no show') ")
+                               and res_guest_status not in ('cancel,no show','waitlist') ")
     #print(list3)
     arrival_end_time = datetime.datetime.now()
     run_additional.append({"Run_additional_procedure":"Reservation Arrival",
@@ -424,10 +428,11 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
 def Hotel_END_OF_Day_POST_print_final_report(request):
     #*******************************room cleaning report*******************
     list1,list2 = [],[]
-    date = json.loads(dbget("select roll_business_date from endofday.business_date"))
+    app_datetime = application_date()
+    date = app_datetime[1]
     print(date)
     sql_value = json.loads(dbget("select * from reservation.res_reservation \
-	where res_guest_status in('due out','checkin','Checkout') and res_arrival <='"+str(date[0]['roll_business_date'])+"' and res_depature >= '"+str(date[0]['roll_business_date'])+"'"))
+	where res_guest_status in('due out','checkin','Checkout') and res_arrival <='"+str(date)+"' and res_depature >= '"+str(date)+"'"))
 
     for i in sql_value:
         rooms = json.loads(dbget("select * from room_management.rm_room_list \
@@ -442,6 +447,6 @@ def Hotel_END_OF_Day_POST_print_final_report(request):
     list2.append({"Report_Name":"RoomCleaningReport","reportstatus":"filed","room_repport_file":list1})
     #*******************************in-house report**************************
     in_house =  json.loads(dbget(" select * from reservation.res_reservation where\
-	res_guest_status='checkin' or res_guest_status='due out' and res_arrival <='"+str(date[0]['roll_business_date'])+"' and res_depature >='"+str(date[0]['roll_business_date'])+"'"))
+	res_guest_status='checkin' or res_guest_status='due out' and res_arrival <='"+str(date)+"' and res_depature >='"+str(date)+"'"))
     list2.append({"Report_Name":"IN-houseReport","reportstatus":"filed","room_repport_file":in_house})
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':list2,'ReturnCode':'RRTS'},indent=4))

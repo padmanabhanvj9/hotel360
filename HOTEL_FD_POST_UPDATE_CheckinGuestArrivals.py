@@ -1,6 +1,7 @@
 from sqlwrapper import gensql, dbget, dbput
 import json
 import datetime
+from ApplicationDate import application_date
 def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
     
    d = request.json
@@ -8,10 +9,11 @@ def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
    unique_id = d.get("Res_unique_id")
    pf_id = d.get("pf_id")
    a = {}
-   RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-   RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
+   app_datetime = application_date()
+   #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+   RES_Log_Time = app_datetime[0]
    print(RES_Log_Time)
-   RES_Log_Date = datetime.datetime.utcnow().date()
+   RES_Log_Date = app_datetime[1]
    print(RES_Log_Date)
    RES_Log_Date = str(RES_Log_Date)
    arrival = json.loads(dbget("select res_arrival, res_adults,res_room, res_guest_status \
@@ -54,7 +56,7 @@ def HOTEL_FD_POST_UPDATE_CheckinGuestArrivals(request):
        print(sql_value)
        res_id = e.get("Res_id")
        Emp_Id = '121'
-       Emp_Firstname = "daisy"
+       Emp_Firstname = "Admin"
        s = {}
        s['Emp_Id'] = Emp_Id
        s['Emp_Firstname'] = Emp_Firstname

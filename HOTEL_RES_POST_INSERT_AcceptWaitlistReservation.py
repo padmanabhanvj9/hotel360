@@ -2,6 +2,8 @@ from sqlwrapper import gensql, dbget,dbput
 import datetime
 import json
 import random
+from ApplicationDate import application_date
+
 def HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request):
     d = request.json
 
@@ -45,20 +47,15 @@ def HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request):
     sql_value = dbput("update reservation.res_reservation set res_Confnumber = '"+res_confnumber+"',res_guest_status = '"+res_guest_status+"' \
                        where res_id = '"+id+"' and pf_id = '"+pf_id+"' and res_unique_id in("+res_unique_id+") ")
     print(d)
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
-    print(RES_Log_Date)
-  
+    
     Emp_Id = '121'
-    Emp_Firstname = "Ranimangama"
+    Emp_Firstname = "Admin"
     s = {}
     s['Emp_Id'] = Emp_Id
     s['Emp_Firstname'] = Emp_Firstname
-   
-    s['RES_Log_Date'] = RES_Log_Date
-    s['RES_Log_Time'] = RES_Log_Time
+    app_datetime = application_date()
+    s['RES_Log_Date'] = app_datetime[1]
+    s['RES_Log_Time'] = app_datetime[2]
     s['RES_Action_Type'] = "New Reservation"
     s['RES_Description'] = "Reservation for "+id+" "+"is changed from waitlist to reserved status and the confirmation number is "+ res_confnumber
     s['Res_id'] = id

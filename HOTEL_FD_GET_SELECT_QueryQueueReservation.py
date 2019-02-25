@@ -1,6 +1,7 @@
 from sqlwrapper import gensql, dbget
 import json
 from collections import Counter
+
 def HOTEL_FD_POST_SELECT_QueryQueueReservation(request):
     roomtype,l = [],[]
     sql = json.loads(dbget("select  rm_room_list.rm_room_status as roomstatus,rm_room_list.rm_fo_status as frontoffice, \

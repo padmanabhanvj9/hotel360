@@ -2,6 +2,7 @@ import datetime
 from sqlwrapper import gensql, dbget, dbput
 import json
 from Hotel_END_OF_Day_POST_countrycheck import HOTEL_REM_POST_SELECT_SelectRateForReservation,get_rate
+from ApplicationDate import application_date
 #from flask import Flask,request, jsonify
 #app = Flask(__name__)
 #@app.route("/HOTEL_BBL_POST_INSERT_GroupReservations",methods = ['POST'])
@@ -15,10 +16,11 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
     initial=datetime.datetime.strptime(d[0]['res_depature'], '%Y-%m-%d').date()
     depature_minus = initial - datetime.timedelta(days=1)
     #print("hello",res_block_code,type(res_block_code))
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
+    app_datetime = application_date()
+    #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = app_datetime[0]
     #print(RES_Log_Time)
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    RES_Log_Date = app_datetime[1]
     #print(RES_Log_Date)
     
     select = json.loads(dbget("select * from reservation.res_id"))
@@ -70,7 +72,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         gensql('insert','profile.pf_individual_profile',x)
         w['pf_id'] = id1
         w['res_guest_status'] = "reserved" 
-        w['created_by'] = "Ranimanagama"
+        w['created_by'] = "Admin"
         w['created_on'] = RES_Log_Date
         w['Res_id'] = Res_id
         w['res_market']= select_data[0]['marketgroup_description'] if select_data[0]['marketgroup_description'] is not None else ""

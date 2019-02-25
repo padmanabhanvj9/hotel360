@@ -2,6 +2,7 @@ import json
 import random
 from sqlwrapper import gensql,dbget,dbput
 import datetime
+from ApplicationDate import application_date
 def HOTEL_BBL_POST_UPDATE_Business_Block_Update(request):
     d = request.json
     x = d['Inquiry']
@@ -36,11 +37,12 @@ def HOTEL_BBL_POST_UPDATE_Business_Block_Update(request):
        else:
            RES_Description +=  "|" + i
     print(RES_Description)
-    s['user_role'] = "Supervisor"
+    s['user_role'] = "Admin"
     block_id = e.get("block_id")
-    RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
-    RES_Log_Time = RES_Log_Time.time().strftime("%H:%M:%S")
-    RES_Log_Date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    #RES_Log_Time = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    RES_Log_Time = app_datetime[0]
+    RES_Log_Date = app_datetime[1]
     print(RES_Log_Date)
     s['date'] = RES_Log_Date
     s['time'] = RES_Log_Time

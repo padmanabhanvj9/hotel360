@@ -15,10 +15,7 @@ def MergeProfile(request):
                 #print(merge_p)
               else:
                 merge_p[""+a+""] = b
-    #if merge_p['pf_type'] == 'individual':
-    #    print(merge_p['pf_type'])
-    #    a = { k : v for k,v in merge_p.items() if k != 'pf_type'}
-    #    e = { k : v for k,v in merge_p.items() if k == 'pf_type'}
+ 
         
     print(merge_p)           
     return (json.dumps({"merge_profile":merge_p},indent=2))

@@ -1,10 +1,13 @@
 from sqlwrapper import gensql, dbget,dbput
+from ApplicationDate import application_date
 import datetime
 import json
-
+#fetch_date = application_date()
+#print(fetch_date)
 def HOTEL_AR_POST_INSERT_AccountInvoice(request):
+    app_datetime = application_date()
     d = request.json
-    Posting_date = datetime.datetime.utcnow().date()
+    Posting_date = app_datetime[1]
     select = json.loads(dbget("select * from account_receivable.invoice_no"))
     print(select,type(select),len(select))
 
@@ -20,7 +23,8 @@ def HOTEL_AR_POST_INSERT_AccountInvoice(request):
     return(json.dumps({"Return": "Record Inserted Successfully","ReturnCode": "RIS",
                        "Status": "Success","StatusCode": "200","invoice_num":invoice_id},indent=4))
 def HOTEL_AR_POST_INSERT_Billingpost(request):
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
     result = request.json
     s ,amount= {},0
     d = result['bills']
@@ -60,11 +64,11 @@ def HOTEL_AR_POST_INSERT_Billingpost(request):
         acc_bala = dbput("update account_receivable.account_setup set account_balance = '"+str(sumof)+"' \
                                       where account_number = '"+str(i['account_no'])+"'")
         print(acc_bala)
-        
+        app_datetime = application_date()
         s['invoice_id'] = i['invoice_no']
         s['acc_action'] = "posting charges"
-        s['acc_post_date'] = Posting_date
-        s['acc_posting_time'] = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+        s['acc_post_date'] = app_datetime[1]
+        s['acc_posting_time'] = app_datetime[0]
         s['acc_user_id']  = i['emp_id']
         history = gensql('insert','account_receivable.account_posting_history',s)
         
@@ -100,7 +104,8 @@ def HOTEL_AR_POST_SELECT_AccountInvoice(request):
 def HOTEL_AR_POST_UPDATE_AdjustBillingpost(request):
     d = request.json
     print(d)
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
     z= {}
     s = {}
     amount = json.loads(dbget("select posting_amount from account_receivable.account_billing_post \
@@ -116,11 +121,12 @@ def HOTEL_AR_POST_UPDATE_AdjustBillingpost(request):
     print(e)
     print("adjust",z)
     gensql('update','account_receivable.account_billing_post',z,e)
+    app_datetime = application_date()
     s['invoice_id'] = e['invoice_no']
     s['acc_action'] = a['reason_text']
     s['acc_posting_reason'] = a['reason_code']
     s['acc_post_date'] = Posting_date
-    s['acc_posting_time'] = datetime.datetime.utcnow()+datetime.timedelta(hours=5, minutes=30)
+    s['acc_posting_time'] = app_datetime[0]
     s['acc_user_id']  = d['emp_id']
     history = gensql('insert','account_receivable.account_posting_history',s)
     sql = json.loads(dbget("select sum(posting_amount) from account_receivable.account_billing_post where account_no = '"+str(d['account_no'])+"' \
@@ -141,7 +147,7 @@ def HOTEL_AR_POST_UPDATE_AdjustBillingpost(request):
                        "Status": "Success","StatusCode": "200"},indent=4))
 def HOTEL_AR_POST_INSERT_Billingpayment(request):
     d = request.json
-    Posting_date = datetime.datetime.utcnow().date()
+    #Posting_date = application_date([1])
     s = {}
     setup = json.loads(dbget("select account_balance from account_receivable.account_setup where account_number = '"+d['account_no']+"'"))
     setupamount = setup[0]['account_balance'] - d['posting_amount']
@@ -149,14 +155,15 @@ def HOTEL_AR_POST_INSERT_Billingpayment(request):
     account_invoie = json.loads(dbget("select open_amount from account_receivable.accout_inivoice where account_number = '"+d['account_no']+"' and acc_invoice_satus not in ('Compress')"))
     acc_inv = account_invoie[0]['open_amount'] - d['posting_amount']
     print(acc_inv)
-    d['posting_date'] = Posting_date
+    app_datetime = application_date()
+    d['posting_date'] = app_datetime[1]
     d['posting_status'] = "Apply Payment"
     gensql('insert','account_receivable.invoice_payment',d)
     sql = dbput("update account_receivable.account_setup set account_balance = '"+str(setupamount)+"' where account_number = '"+d['account_no']+"'")
     psql = dbput("update account_receivable.accout_inivoice set open_amount = '"+str(acc_inv)+"' where account_number = '"+d['account_no']+"'")
     s['account_no'] = d['account_no']
     s['payment_type_id'] = d['payment_code_id']
-    s['post_date'] = Posting_date
+    s['post_date'] = app_datetime[1]
     s['payment_amount'] = d['posting_amount']
    
     gensql('insert','account_receivable.account_pay_history',s)

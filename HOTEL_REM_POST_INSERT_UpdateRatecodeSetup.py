@@ -6,18 +6,7 @@ def HOTEL_REM_POST_INSERT_UpdateRatecodeSetup(request):
     #print(d)
     e = { k : v for k,v in d.items() if k in ('begin_sell_date','end_sell_date','market_id','source_id','display_sequence')}
     print("0000",e)
-    #rate_code_details = d['rate_code_details']
-    #print(rate_code_details)
-    #sell_controls = d['sell_controls']
-    #print(sell_controls)
-    #transaction_details = d['transaction_details']
-    #print(transaction_details)
-    #components = d['components']
-    #print(components)
-    #room_types = d['room_types']
-    #print("room_types",room_types,type(room_types))
-    #package = d['package']
-    #print("package",package,type(package))
+
     gensql('insert','revenue_management.ratecode',d['rate_code_details'])
     #chang to max
     ratecode_id = json.loads(gensql('select','revenue_management.ratecode','max(ratecode_id) as id1',d['rate_code_details']))

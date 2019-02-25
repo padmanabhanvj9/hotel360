@@ -1,7 +1,7 @@
 import json
 from sqlwrapper import gensql,dbget,dbput
 import datetime
-
+from ApplicationDate import application_date
 def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
     to_amount = {}
     result = request.json
@@ -14,7 +14,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
     Total_posting = result['Total_posting']
     print(res_id,res_room,Total_amount,type(res_id),type(res_room),type(Total_amount))
     #print(d,type(d),len(d))
-    Posting_date = datetime.datetime.utcnow().date()
+    app_datetime = application_date()
+    Posting_date = app_datetime[1]
 
     fo_count = json.loads(dbget('select * from cashiering.folio_number'))
     print(fo_count[0]['folio_no'],type(fo_count[0]['folio_no']))
@@ -59,7 +60,7 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
     #dbput("update reservation.res_reservation set res_guest_balance = res_guest_balance + "+str(int(Total_amount))+" \
     #       where res_id='"+res_id+"' and res_room='"+res_room+"' ")
     
-    Revenue_date = datetime.datetime.utcnow().date()
+    Revenue_date = app_datetime[1]
     
     result = json.loads(dbget("select log_link_id from cashiering.log_link where link_id='1' "))
     log_id = result[0]['log_link_id']+1
@@ -69,8 +70,8 @@ def HOTEL_CAH_POST_INSERT_UPDATEGUESTBILLING(request):
     s = {}
     s['Posting_date'] = Posting_date
     s['Revenue_date'] = Revenue_date
-    s['User_role'] = "Supervisor"
-    s['User_name'] = "david"
+    s['User_role'] = "Admin"
+    s['User_name'] = "Admin"
     s['Res_id'] = res_id
     s['Posting_action'] = "General posting"
     s['Posting_reason'] = "Payment posted for"+ " "+res_id
