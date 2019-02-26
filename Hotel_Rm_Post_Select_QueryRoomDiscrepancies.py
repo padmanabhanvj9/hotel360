@@ -42,7 +42,7 @@ def hotel_rm_post_select_queryroomdiscrepancies(request):
     
    
 
-    sql = json.loads(dbget('select * from  room_management.rm_room_list '))
+    sql = json.loads(dbget('select * from  room_management.rm_room_list order by rm_room'))
     #print(sql)
 
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql,'ReturnCode':'RRTS'},indent=4))
