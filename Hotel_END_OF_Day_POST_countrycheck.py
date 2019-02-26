@@ -393,6 +393,7 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
                            "start_time":str(in_house_start_time.strftime("%H:%M:%S")),"end_time":str(in_house_end_time.strftime("%H:%M:%S")),"Iteration": len(list4),"Status":"Completed"})
 
     #***************************************Room Discrepancy********************************
+    '''
     room_discrepancy = json.loads(dbget("select * from room_management.rm_room_list \
                                         where rm_fo_status = 'occupied' and rm_hk_status = 'vacant'"))
     room_disc_start_time = datetime.datetime.now()
@@ -417,6 +418,7 @@ def Hotel_END_OF_Day_POST_Run_Additional_procedures(request):
     room_disc_end_time = datetime.datetime.now()
     run_additional.append({"Run_additional_procedure":"Room Discrepancies",
                            "start_time":str(room_disc_start_time.strftime("%H:%M:%S")),"end_time":str(room_disc_end_time.strftime("%H:%M:%S")),"Iteration": len(dic_pancy),"Status":"Completed"})
+    '''                           
     def serialize(obj):
         if isinstance(obj, datetime.date):
        

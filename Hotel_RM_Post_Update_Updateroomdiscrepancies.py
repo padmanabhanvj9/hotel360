@@ -14,13 +14,17 @@ def hotel_rm_post_update_updateroomdiscrepancies(request):
         print(gensql('update','room_management.RM_Room_List',d,e))
         if res != RM_HK_Status:
             print(res,RM_HK_Status)
-            if res == 'occupied' and RM_HK_Status == 'vaccant':
-               i['rm_room_discrepancy'] = 'sleep'
-               i['rm_room'] = RM_Room
+            if res == 'occupied' and RM_HK_Status == 'vacant':
+               d['rm_room_discrepancy'] = 'Sleep'
+               e['rm_room'] = RM_Room
+               gensql('update','room_management.rm_room_list',d,e)
+            elif res == 'vacant' and RM_HK_Status == 'occupied':
+               d['rm_room_discrepancy'] = 'Skip'
+               e['rm_room'] = RM_Room
+               gensql('update','room_management.rm_room_list',d,e)
             else:
-               i['rm_room_discrepancy'] = 'skip'
-               i['rm_room'] = RM_Room
-            print(gensql('insert','room_management.rm_room_discrepancy',i))
+                pass
+            
         #print(gensql('update','room_management.RM_Room_List',d,e))    
     elif request.json.get('RM_Room') and request.json.get('RM_HK_Person'):
         RM_Room = request.json['RM_Room']
@@ -33,9 +37,9 @@ def hotel_rm_post_update_updateroomdiscrepancies(request):
         d['RM_HK_Person'] = RM_HK_Person
         print(gensql('update','room_management.RM_Room_List',d,e))
         if res != RM_HK_Person:    
-            i['rm_room_discrepancy'] = 'person'
-            i['rm_room'] = RM_Room
-            print(gensql('insert','room_management.rm_room_discrepancy',i))    
+            d['rm_room_discrepancy'] = 'Person'
+            e['rm_room'] = RM_Room
+            print(gensql('update','room_management.rm_room_list',d,e))    
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
 
     
