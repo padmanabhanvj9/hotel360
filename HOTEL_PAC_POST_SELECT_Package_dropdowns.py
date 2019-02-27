@@ -37,16 +37,22 @@ def HOTEL_PAC_POST_SELECT_Packages(request):
                    join packages.posting_rhythm on package_code.posting_rhythm_id = posting_rhythm.posting_rhythm_id\
                    join packages.calculate_rule on package_code.calculate_rule_id = calculate_rule.calculate_rule_id\
                    where package_code.package_code_id="+str(d['package_code_id'])+" "))
-    #print(x,len(x))
-    x1,x2 = [],[]
+    print(x,len(x))
+    
     if len(x) == 1 :
       x1 = json.loads(dbget("select item_inventory_selected_id,item_id,item_inventory.* from packages.item_inventory_selected join\
                    packages.item_inventory on item_inventory_selected.item_inventory_id = item_inventory.item_inventory_id\
                    where item_id = "+str(x[0]['item_inventory_selected_id'])+" "))
-      x2 = json.loads(dbget("SELECT alternate_selected.alternates_selected_id, alternate_id, package_code.package_code_id, package_code.package_code\
-	           FROM packages.alternate_selected join packages.package_code on package_code.alternates_selected_id = \
-	           alternate_selected.alternate_id where \
-	           alternate_selected.alternate_id = "+str(x[0]['alternates_selected_id'])+" "))
+      x2 = json.loads(dbget("SELECT alternate_selected.alternates_selected_id, alternate_id,\
+                             alternate_selected.package_code_id\
+	                     FROM packages.alternate_selected join packages.package_code on \
+	                     package_code.alternates_selected_id = \
+	                     alternate_selected.alternate_id where \
+	                     alternate_selected.alternate_id = "+str(x[0]['alternates_selected_id'])+" "))
+      for ids in x2:
+          ids['package_code'] = json.loads(dbget("select package_code from \
+                                                  packages.package_code where \
+                                                  package_code_id='"+str(ids['package_code_id'])+"'"))[0]['package_code']
     y = json.loads(dbget("select packages_details_id,package_code_id,start_date,end_date,price,allowance,season_code.*\
                   from packages.package_details join revenue_management.season_code on package_details.season_code_id =\
                   season_code.season_code_id where package_code_id="+str(d['package_code_id'])+""))
