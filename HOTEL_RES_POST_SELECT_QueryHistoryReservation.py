@@ -57,7 +57,7 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
          print(ids, type(ids))
          data = json.loads(HOTEL_REM_POST_SELECT_GetRatecodeSetup(ids))
          
-     print("data",data)
+     #print("data",data)
      
      list_roomtypes = [ r['r_type'] for r in json.loads(dbget("SELECT type as r_type \
                                                                FROM room_management.room_type"))]
@@ -69,10 +69,12 @@ def HOTEL_RES_POST_SELECT_RateQuery(request):
              new_record = {}
              new_record['rate_code'] = record['rate_code']
              #new_records.append(new_record)
+             
              for detail in record['rate_details']:
-                 
+                print("detail: ", detail)    
                 if detail['start_date'] >= s['arrival_date'] or detail['end_date'] <= s['departure_date']:
                     
+                  if 'rooms' in detail:  
                     new_record['rates'] = [dict(rm, rate=detail['advanced_details'][get_rate(s['adults'])]) for rm in detail['rooms']]
 
                     new_rooms = [] 
