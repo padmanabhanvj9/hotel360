@@ -48,7 +48,7 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
       #print("rate_details  ",rate_details, len(rate_details))
       no = 0
       for rate in rate_details:
-          #print("rate",rate)
+          print("rate",rate)
           get_detail_rate = json.loads(dbget("SELECT rates_all.rates_id, rates_all.ratecode_id, \
                                               rates_all.rate_details_id, season_code.*, rates_all.rate_date,\
                                               rates_all.one_adult_rate, rates_all.two_adult_rate, rates_all.three_adult_rate,\
@@ -59,13 +59,15 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
                                               rates_all.season_code_id = season_code.season_code_id join \
                                               revenue_management.rate_tier on \
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
-                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
+                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' and \
+                                              rates_all.rate_details_id='"+str(rate['rate_details_id'])+"'  "))
 
           print("-----------------------------------")
           #print("get_detail_rate", get_detail_rate,len(get_detail_rate))
           
           if len(get_detail_rate) != 0:
              detail_rate = get_detail_rate[no]
+             #print("detail_rate", detail_rate)
              if  detail_rate['rate_tier_id'] != 0:
                  detail_rate['packages_id'] = 0
           #print("rateof", detail_rate,type(detail_rate))
@@ -99,7 +101,7 @@ def HOTEL_REM_POST_SELECT_UpdateRatecodeSetup(request):
              
              rate['advanced_details'] = detail_rate
 
-          no+=1
+          #no=len(get_detail_rate)-1
       cords['rate_details'] = rate_details        
 
     return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
@@ -160,7 +162,8 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
                                               rates_all.season_code_id = season_code.season_code_id join \
                                               revenue_management.rate_tier on \
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
-                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
+                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' and \
+                                              rates_all.rate_details_id='"+str(rate['rate_details_id'])+"'  "))
           if len(get_detail_rate) != 0:
              detail_rate = get_detail_rate[0] 
              #print("rateof", detail_rate,type(detail_rate))
@@ -193,7 +196,7 @@ def HOTEL_REM_POST_SELECT_SelectRatesetupAll(request):
              detail_rate['days'] = z
              rate['advanced_details'] = detail_rate
 
-          no+=1
+          #no+=1
       cords['rate_details'] = rate_details        
 
     return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
@@ -256,7 +259,8 @@ def HOTEL_REM_POST_SELECT_GetRatecodeSetup(ids):
                                               rates_all.season_code_id = season_code.season_code_id join \
                                               revenue_management.rate_tier on \
                                               rates_all.rate_tier_id = rate_tier.rate_tier_id \
-                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' "))
+                                              where rates_all.ratecode_id='"+str(rate['ratecode_id'])+"' and \
+                                              rates_all.rate_details_id='"+str(rate['rate_details_id'])+"'  "))
 
           print("-----------------------------------")
           #print("get_detail_rate", get_detail_rate,len(get_detail_rate))
@@ -296,7 +300,7 @@ def HOTEL_REM_POST_SELECT_GetRatecodeSetup(ids):
              
              rate['advanced_details'] = detail_rate
 
-          no+=1
+          #no+=1
       cords['rate_details'] = rate_details        
 
     return(json.dumps({"records":records,"return_code":"RRS","message":"Record Retrived Successfully"},indent=4))
