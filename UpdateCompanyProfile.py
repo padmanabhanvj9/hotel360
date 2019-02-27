@@ -79,6 +79,7 @@ def UpdateIndividualProfileRecord(request):
     #print(d)
     e = { k : v for k,v in d.items() if k in ('PF_Id')}
     f = { k : v for k,v in d.items() if k not in ('PF_Id') if v != ''}
+    n,q = {},{}
     gensql('update','profile.pf_individual_profile',f,e)
     s = {}
     s['Emp_Id'] = '121'
