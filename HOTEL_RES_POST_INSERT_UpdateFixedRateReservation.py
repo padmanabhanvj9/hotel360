@@ -4,12 +4,17 @@ import datetime
 def HOTEL_RES_POST_INSERT_UpdateFixedRateReservation(request):
     d = request.json
     print(d)
-    a = { k : v for k,v in d.items() if v != ''}
-    print(a)
-    sql_value = gensql('insert','reservation.res_fixed_rate',a)
-    print(sql_value)
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
-	
+    sqlcount = json.loads(dbget("select count(*) from reservation.res_fixed_rate where res_id = '"+str(d['Res_id'])+"'"))
+    if sqlcount[0]['count'] == 0:
+        a = { k : v for k,v in d.items() if v != ''}
+        print(a)
+        sql_value = gensql('insert','reservation.res_fixed_rate',a)
+        print(sql_value)
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+    else:
+       return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Already Exist','ReturnCode':'RAS'}, sort_keys=True, indent=4))
+     
+            
 def HOTEL_RES_POST_SELECT_QueryFixedRateReservation(request):
  try:
     d = request.json

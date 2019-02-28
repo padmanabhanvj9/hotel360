@@ -137,23 +137,34 @@ def Hotel_PMS_Select_Blockcutoffdatecutoffdays(request):
 
 def Hotel_PMS_Select_DepositDueDate(request):
     d = request.json
-    sql = json.loads(dbget("select res_due_date,res_deposit_amount from reservation.res_deposit \
+    sql = json.loads(dbget("select COUNT(*) from reservation.res_deposit \
                            where res_id = '"+str(d['res_id'])+"' and res_unique_id = '"+str(d['res_unique_id'])+"'  "))
     print(sql)
     businessdate = datetime.datetime.strptime(date[0]['roll_business_date'], '%Y-%m-%d').date()
-    psql = json.loads(dbget("select res_block from reservation.res_reservation \
+    psql = json.loads(dbget("select * from reservation.res_reservation \
                                  where res_id = '"+str(d['res_id'])+"' and res_unique_id = '"+str(d['res_unique_id'])+"' "))
     print(psql)
+    initial=datetime.datetime.strptime(psql[0]['created_on'], '%Y-%m-%d').date()
     for i in sql:
        
       if psql[0]['res_block'] is None:
-        if i['res_due_date'] is not None and i['res_deposit_amount'] is None or i['res_deposit_amount'] == '':
-            dateform = datetime.datetime.strptime(i['res_due_date'], '%Y-%m-%d').date()
-            print(dateform)
-            date2 = dateform + datetime.timedelta(days=1)
-            if dateform == businessdate:
+        if sql[0]['count'] == 0:
+            initial = datetime.datetime.strptime(psql[0]['created_on'], '%Y-%m-%d').date()
+            print(initial)
+            date1 = initial + datetime.timedelta(days=1)
+            date2 = date1 + datetime.timedelta(days=5)
+            delta = date2-date1
+            print(delta)
+            end_date = initial + datetime.timedelta(days=delta.days+1)
+            print("end_date",end_date)
+           
+            for i in range(delta.days + 1):
+                    #print(i)
+                 print("checkinf for loop",date1 + datetime.timedelta(i))
+        
+            if date1 + datetime.timedelta(i) == businessdate:
                 return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Valid','ReturnCode':'RV'}, sort_keys=True, indent=4))
-            elif date2 == businessdate:
+            elif end_date == businessdate:
                 return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record InValid','ReturnCode':'RIV'}, sort_keys=True, indent=4))
            
         else:

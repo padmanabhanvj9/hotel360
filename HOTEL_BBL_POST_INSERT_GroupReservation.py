@@ -75,6 +75,7 @@ def HOTEL_BBL_POST_INSERT_GroupReservation(request):
         w['created_by'] = "Admin"
         w['created_on'] = RES_Log_Date
         w['Res_id'] = Res_id
+        w['res_rtc'] = w['res_room_type']
         w['res_market']= select_data[0]['marketgroup_description'] if select_data[0]['marketgroup_description'] is not None else ""
         w['res_source'] =select_data[0]['sourcedescription'] if select_data[0]['sourcedescription'] is not None else ""
         w['res_origin']=select_data[0]['origindescription'] if select_data[0]['origindescription'] is not None else ""

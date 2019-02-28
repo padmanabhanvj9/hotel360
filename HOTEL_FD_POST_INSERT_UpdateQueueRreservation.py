@@ -14,8 +14,10 @@ def HOTEL_FD_POST_INSERT_UpdateQueueRreservation(request):
     totday_date = app_datetime[1]
     
     sql_value = json.loads(dbget("select res_arrival from reservation.res_reservation where res_id = '"+str(d['Res_id'])+"' and res_unique_id = '"+str(d['Res_unique_id'])+"'"))
-    #print(sql_value)
+    print(totday_date)
     arrival = datetime.datetime.strptime(sql_value[0]['res_arrival'],'%Y-%m-%d').date()
+    totday_date = datetime.datetime.strptime(totday_date,'%Y-%m-%d').date()
+    
     if totday_date == arrival:
         res_id = d.get("Res_id")
         rm_room = d.get("rm_room")
