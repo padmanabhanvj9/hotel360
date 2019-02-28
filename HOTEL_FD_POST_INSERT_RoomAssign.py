@@ -50,8 +50,11 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         print(pickup)
     else:
         pass
-        
-    if Today_date == arrival_date:
+    arrival = datetime.datetime.strptime(arrival[0]['res_arrival'],'%Y-%m-%d').date()
+    totday_date = datetime.datetime.strptime(Today_date,'%Y-%m-%d').date()
+    yesterday= totday_date - datetime.timedelta(days=1)
+    print(yesterday)
+    if totday_date == arrival:
         e['res_guest_status'] = "arrival"
         
         sql_value = gensql('update','reservation.res_reservation',e,a)
@@ -59,7 +62,9 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         print(room)
         res_status = "reserved"
         sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
-    else:
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+
+    elif yesterday ==  totday_date:
         e['res_guest_status'] = "due in"
     
         sql_value = gensql('update','reservation.res_reservation',e,a)
@@ -68,9 +73,13 @@ def HOTEL_FD_POST_UPDATE_RoomAssign(request):
         sqlvalue = dbput("update room_management.rm_room_list set rm_reservation_status = '"+res_status+"' where rm_room in ("+room+")")
        
         print(sql_value)
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+    else:
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Assign Not Available','ReturnCode':'RANA'}, sort_keys=True, indent=4))
+
         
     #if Today_date == arrival_date:
      #   e['res_guest_status'] = "arrival"
   
        
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}, sort_keys=True, indent=4))
+    

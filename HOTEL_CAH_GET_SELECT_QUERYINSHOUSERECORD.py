@@ -18,7 +18,7 @@ def HOTEL_CAH_POST_SELECT_QUERYINHOUSERECORD(request):
 
    for res_idlist in sql_value:
        res_id_list = res_idlist['res_id']
-       amount = json.loads(dbget("select sum(posting_amount) FROM cashiering.billing_post where res_id='"+str(res_id_list)+"' \
+       amount = json.loads(dbget("select sum(posting_amount*posting_quantity) FROM cashiering.billing_post where res_id='"+str(res_id_list)+"' \
                   and post_window in (1)"))
        deposit = json.loads(dbget("select sum(res_deposit_amount) from reservation.res_deposit where res_id='"+str(res_id_list)+"' "))
        payment=json.loads(dbget("select sum(postig_amount)FROM cashiering.posting_payment where res_id='"+str(res_id_list)+"' "))
