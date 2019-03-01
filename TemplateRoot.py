@@ -445,6 +445,7 @@ from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_Blockcutoffdatecutoffd
 from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_DepositDueDate
 from HOTEL_PMS_SELECT_MergeModule import Hotel_PMS_Select_Roominglistdue_date
 from Hotel_END_OF_Day_POST_countrycheck import Hotel_END_OF_Day_POST_Run_guestbalance
+from HOTEL_PMS_SELECT_MergeModule import totay_arrivals_reservation
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
