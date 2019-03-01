@@ -28,13 +28,13 @@ def HOTEL_CAH_POST_SELECT_QUERYGUESTBILLING(request):
     w1,w2,w3,w4,window1,window = 0,0,0,0,{},[]
     for i in billing_data:
         if int(i['post_window']) == 1:
-            w1 += int(i['posting_amount'])
+            w1 += int(i['posting_amount']*i['posting_quantity'])
         elif int(i['post_window']) == 2:
-            w2 += int(i['posting_amount'])
+            w2 += int(i['posting_amount']*i['posting_quantity'])
         elif int(i['post_window']) == 3:
-            w3 += int(i['posting_amount'])
+            w3 += int(i['posting_amount']*i['posting_quantity'])
         else:
-            w4 += int(i['posting_amount'])
+            w4 += int(i['posting_amount']*i['posting_quantity'])
     #print(w1,w2,w3,w4,type(w1))        
     window1['w1_total'] = w1
     window1['w2_total'] = w2
