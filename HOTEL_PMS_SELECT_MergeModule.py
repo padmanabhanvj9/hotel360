@@ -189,3 +189,13 @@ def Hotel_PMS_Select_Roominglistdue_date(request):
         pass
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'No Record','ReturnCode':'NOR'}, sort_keys=True, indent=4))
 
+def totay_arrivals_reservation(request):
+    sql_value = json.loads(dbget("select * from reservation.res_reservation where res_arrival = '"+str(date[0]['roll_business_date'])+"' \
+                                  and res_guest_status not in ('no show','cancel','waitlist','reserved')"))
+    psql_value = json.loads(dbget("select * from reservation.res_reservation where created_on = '"+str(date[0]['roll_business_date'])+"' \
+                                     and res_guest_status not in ('no show','cancel','waitlist')"))
+    return(json.dumps({'Status': 'Success', 'StatusCode': '200',
+                       'Today_arrival':sql_value,'Today_booked_reservation':psql_value,'ReturnCode':'RRTS'},indent=4))
+
+
+
