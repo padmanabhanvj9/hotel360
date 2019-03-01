@@ -1766,6 +1766,10 @@ def Hotel_PMS_Select_Roominglistdue_date_ALL():
 def Hotel_END_OF_Day_POST_Run_guestbalance_all():
    return Hotel_END_OF_Day_POST_Run_guestbalance(request)
 
+@app.route("/Today_booking_and_today_arrival_reservation",methods=['POST','GET'])
+def Today_booking_and_today_arrival_reservation_all():
+   return totay_arrivals_reservation(request)
+
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="192.168.99.1",port=5000)
