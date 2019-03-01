@@ -8,15 +8,27 @@ def HOTEL_RES_POST_INSERT_AcceptWaitlistReservation(request):
     d = request.json
 
     #availablecount
+    RES_Arrival_date = datetime.datetime.strptime(d['RES_Arrival'], '%Y-%m-%d').date()
     initial=datetime.datetime.strptime(d['RES_Depature'], '%Y-%m-%d').date()
     depature_minus = initial - datetime.timedelta(days=1)
-    booking_count = json.loads(dbget("select sum(available_count) from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
-                                  and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"'"))
-    if booking_count[0]['sum'] is None:
-          return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
    
-    if booking_count[0]['sum'] == 0 or booking_count[0]['sum'] < int(d['RES_Number_Of_Rooms']):
-        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
+    delta = initial - RES_Arrival_date         # timedelta
+    print(delta)
+   
+    normal_count = json.loads(dbget("select count(*) from room_management.room_available where rm_date between '"+str(d['RES_Arrival'])+"' \
+                                     and '"+str(depature_minus)+"' and rm_room = '"+str(d['RES_Room_Type'])+"'"))
+                             
+    if normal_count[0]['count'] == delta.days:
+        pass
+    else:
+
+       return(json.dumps({'Status': 'Failure', 'StatusCode': '200','Return': 'Roomtype or date is not Declare','ReturnCode':'RODND'}, sort_keys=True, indent=4)) 
+    booking_count = json.loads(dbget("select * from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
+                                  and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"'"))
+    for check_booking in booking_count:
+        
+        if check_booking['available_count'] < int(d['RES_Number_Of_Rooms']):
+            return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
     bookedcount = dbput("update room_management.room_available set available_count=available_count - \
                             '1', \
                             booked_count = booked_count + '1' where rm_room = \
