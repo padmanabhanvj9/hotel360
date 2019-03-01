@@ -41,16 +41,20 @@ def Hotel_RM_Post_SELECT_FacilityForecast(request):
 
    sql_value = json.loads(dbget("select res_arrival,res_depature,res_adults,res_child,res_number_of_rooms from reservation.res_reservation \
                                      where res_arrival between   '"+str(date1)+"' and '"+str(date2)+"' \
-                    and res_depature between   '"+str(date1)+"' and '"+str(date2)+"' \
-                    order by res_arrival,res_depature "))
+                    order by res_arrival "))
    #print(sql_value)
+   pql_value = json.loads(dbget("select res_arrival,res_depature,res_adults,res_child,res_number_of_rooms from reservation.res_reservation \
+                                     where  res_depature between   '"+str(date1)+"' and '"+str(date2)+"' \
+                    order by res_depature "))
    arrival_count = 0
    print(Counter([i['res_arrival'] for i in sql_value]))
    def arrival_and_dep_rooms(date1,name):
        #print('name',name)
        arrival = [v for k,v in Counter([i[""+name+""] for i in sql_value if i[""+name+""]==str(date1)]).items()]
        return (arrival[0] if len(arrival)!=0 else 0)
-
+   def depature_rooms(date1,name):
+       arrival = [v for k,v in Counter([i[""+name+""] for i in pql_value if i[""+name+""]==str(date1)]).items()]
+       return (arrival[0] if len(arrival)!=0 else 0)
    def inhouse(date1,name):
        inhouse_count = sum([ i[""+name+""]
                            for i in sql_value
@@ -59,11 +63,17 @@ def Hotel_RM_Post_SELECT_FacilityForecast(request):
        #or date1 in datetime.datetime.strptime(i['res_depature'], '%Y-%m-%d').date()])
 
        return(inhouse_count)
+   def stay_over_rooms(date1):
+     stay_over = json.loads(dbget("select count(*) from reservation.res_reservation \
+                where res_guest_status in ('checkin','due out') and res_arrival>=  '"+str(date1)+"' and res_depature< '"+str(date1)+"'"))
+     return (stay_over[0]['count'] if len(stay_over)!=0 else 0)
 
    while  date1 <= date2:
         list2.append({'days':date1.strftime("%A"),'date':str(date1),'values':{'arrival_rooms':arrival_and_dep_rooms(date1,name='res_arrival'),
-                                                  'depature_rooms':arrival_and_dep_rooms(date1,name='res_depature'),
-                                                  'adult_inhouse':inhouse(date1,name='res_adults'),
+                                                  'depature_rooms':depature_rooms(date1,name='res_depature'),
+                                                   'adult_inhouse':inhouse(date1,name='res_adults'),
+                                                  'stay_over':stay_over_rooms(date1),
+                                                  'Total_cleaning':stay_over_rooms(date1)+depature_rooms(date1,name='res_depature'),
                                                   'child_inhouse':inhouse(date1,name='res_child')}})
         date1 = date1 + datetime.timedelta(days=1)
    #print(list2)
