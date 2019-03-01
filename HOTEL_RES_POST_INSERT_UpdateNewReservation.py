@@ -6,34 +6,48 @@ from ApplicationDate import application_date
 
 def HOTEL_RES_POST_INSERT_UpdateNewReservation(request):
     d = request.json
+    datelist = []
     d = { k : v for k,v in d.items() if  v != ''}
     PF_Mobileno = str(d.get("PF_Mobileno"))
     print(PF_Mobileno)
     RES_Arrival = str(d.get("RES_Arrival"))
     print(RES_Arrival)
     RES_Depature = str(d.get("RES_Depature"))
+    RES_Arrival_date = datetime.datetime.strptime(RES_Arrival, '%Y-%m-%d').date()
     initial=datetime.datetime.strptime(d['RES_Depature'], '%Y-%m-%d').date()
     depature_minus = initial - datetime.timedelta(days=1)
+    delta = initial - RES_Arrival_date         # timedelta
+    print(delta)
+   
     sqlcount = ("select count(*) from reservation.res_reservation \
                  where pf_mobileno = '"+PF_Mobileno+"' and RES_Arrival = '"+RES_Arrival+"' and RES_Depature = '"+RES_Depature+"'")
     countdata = dbget(sqlcount)
     countdata = json.loads(countdata)
     print(countdata)
     print(countdata[0]['count'],type(countdata[0]['count']))
+    #************************************checkin count for room available***********************
     normal_count = json.loads(dbget("select count(*) from room_management.room_available where rm_date between '"+str(d['RES_Arrival'])+"' \
                                      and '"+str(depature_minus)+"' and rm_room = '"+str(d['RES_Room_Type'])+"'"))
                               
-    if normal_count[0]['count'] == 0:
-               return(json.dumps({'Status': 'Failure', 'StatusCode': '200','Return': 'Roomtype or date is not Declare','ReturnCode':'RODND'}, sort_keys=True, indent=4)) 
+    if delta.days==normal_count[0]['count']:
+        pass
     else:
 
-        pass
-    booking_count = json.loads(dbget("select sum(available_count) from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
-                                  and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"'"))
+       return(json.dumps({'Status': 'Failure', 'StatusCode': '200','Return': 'Roomtype or date is not Declare','ReturnCode':'RODND'}, sort_keys=True, indent=4)) 
+  
+    #*****************************************************checking all date room available*****************
+    booking_count = json.loads(dbget("select * from room_management.room_available where rm_room= '"+str(d['RES_Room_Type'])+"'\
+                                  and rm_date between '"+str(d['RES_Arrival'])+"' and '"+str(depature_minus)+"' order by rm_date"))
+    for check_booking in booking_count:
     
-    if booking_count[0]['sum'] == 0 or booking_count[0]['sum'] < int(d['RES_Number_Of_Rooms']):
-        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
+      if int(d['RES_Number_Of_Rooms']) > check_booking['available_count']:
+        
+         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Booking is Not Available','ReturnCode':'BNA'}, sort_keys=True, indent=4)) 
 
+
+        #date1 = date1 + datetime.timedelta(days=7)
+
+    #***********************************reservation already exist*****************************
     if countdata[0]['count'] > 0:
         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Reservation Already Exist','ReturnCode':'RAE'}, sort_keys=True, indent=4)) 
 
