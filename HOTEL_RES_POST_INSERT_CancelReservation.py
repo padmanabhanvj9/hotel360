@@ -28,6 +28,7 @@ def HOTEL_RES_POST_INSERT_CancelReservation(request):
     Emp_Id = '121'
     Emp_Firstname = "Admin"
 
+    
     select = json.loads(dbget("select * from reservation.cancel_id"))
     print(select,type(select),len(select))
     print(select[0]['id'])
