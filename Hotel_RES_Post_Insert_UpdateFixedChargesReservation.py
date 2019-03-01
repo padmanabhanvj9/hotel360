@@ -38,7 +38,7 @@ def Hotel_RES_Post_SELECT_QueryTransactioncodeCode(request):
     sql_value = json.loads(dbget("select packages.package_code.package_code,packages.package_code.short_description, \
                                     packages.package_details.package_code_id,packages.package_details.price from packages.package_details \
                                     join packages.package_code on packages.package_code.package_code_id =  packages.package_details.package_code_id \
-                                    where '"+str(package_from)+"' <= packages.package_details.start_date or '"+str(package_to)+"' >= packages.package_details.end_date"))
+                                    where '"+str(package_from)+"' >= packages.package_details.start_date or '"+str(package_to)+"' >= packages.package_details.end_date"))
 
 
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','ReturnValue':sql_value  ,'ReturnCode':'RRTS'},indent=4))
