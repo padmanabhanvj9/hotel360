@@ -44,23 +44,26 @@ def HOTEL_REM_POST_SELECT_SelectRateForReservation(r_date, r_code, r_room, r_adu
            r_id+= ","+"'"+str(room)+"'"
 
    print(r_id)
-   rate2 = json.loads(dbget("select rooms_selected.*,room_type.type from revenue_management.rooms_selected \
+   if len(r_id) !=0:
+      rate2 = json.loads(dbget("select rooms_selected.*,room_type.type from revenue_management.rooms_selected \
                              join room_management.room_type\
                           on rooms_selected.room_type_id = room_type.id \
                           where rooms_id in ("+r_id+")"))
+   
+      print("rate2",rate2)
 
-   print("rate2",rate2)
+      for rates in rate2:
 
-   for rates in rate2:
-
-       if rates['type'] == r_room:
+        if rates['type'] == r_room:
            print("type", rates['type'])
            ro_id = rates['rooms_id']
            break
 
-   r_rate = [r[get_rate(r_adult)]  for r in rate1 if r['rooms_id']== ro_id]
-   print("r_rate", r_rate[0])
-   return(r_rate[0])
+      r_rate = [r[get_rate(r_adult)]  for r in rate1 if r['rooms_id']== ro_id]
+      print("r_rate", r_rate[0])
+      return(r_rate[0])
+   else:
+      return(0)
 def Hotel_END_OF_Day_POST_countrycheck(request):
    app_datetime = application_date()
    today_date = app_datetime[1]
@@ -126,7 +129,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   d['res_id'] = i['res_id']
                   d['posting_amount'] = i['res_rate']
                   d['posting_date'] = date
-                  d['post_code_id'] = '22'
+                  d['post_code_id'] = '33'
                   d['post_window'] = '1'
                   d['posting_supplement'] = 'Fixed rate Posting'
                   d['posting_reference'] = 'Fixed rate Posting room chrages'
@@ -141,7 +144,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
                   d['res_id'] = i['res_id']
                   d['posting_amount'] = i['res_rate']
                   d['posting_date'] = date
-                  d['post_code_id'] = '22'
+                  d['post_code_id'] = '33'
                   d['post_window'] = '2'
                   d['posting_supplement'] = 'Fixed rate Posting'
                   d['posting_reference'] = 'Fixed rate Posting room chrages'
@@ -158,11 +161,11 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
    #****************************************Posting Rooms and tax charges **************************************************
          psqlvalues = json.loads(dbget("select * from reservation.res_reservation \
                                        where res_arrival <= '"+str(date)+"' and res_depature >='"+str(date)+"' \
-                                       and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel','waitlist','arrival') and res_room_type not in ('PM')"))
+                                       and res_id not in ("+fixed_rate_id+") and res_guest_status not in ('no show','cancel','waitlist','arrival','reserved') and res_room_type not in ('PM')"))
    else:
          psqlvalues = json.loads(dbget("select * from reservation.res_reservation \
                                        where res_arrival <= '"+str(date)+"' and res_depature >='"+str(date)+"' \
-                                       and res_guest_status not in ('no show','cancel','waitlist','arrival') and res_room_type not in ('PM')"))
+                                       and res_guest_status not in ('no show','cancel','waitlist','arrival','reserved') and res_room_type not in ('PM')"))
    for i in psqlvalues:
          data = HOTEL_REM_POST_SELECT_SelectRateForReservation(date,i['res_rate_code'],i['res_room_type'],i['res_adults'])
          if i['res_block'] is None:       
@@ -170,7 +173,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
             d['res_id'] = i['res_id']
             d['posting_amount'] = data
             d['posting_date'] = date
-            d['post_code_id'] = '22'
+            d['post_code_id'] = '33'
             d['post_window'] = '1'
             d['posting_supplement'] = 'Room charges Posting'
             d['posting_reference'] = 'posting room chrages'
@@ -185,7 +188,7 @@ def Hotel_END_OF_Day_POST_Posting_Rooms_charges(request):
             d['res_id'] = i['res_id']
             d['posting_amount'] = data
             d['posting_date'] = date
-            d['post_code_id'] = '22'
+            d['post_code_id'] = '33'
             d['post_window'] = '2'
             d['posting_supplement'] = 'Room charges Posting'
             d['posting_reference'] = 'posting room chrages'
