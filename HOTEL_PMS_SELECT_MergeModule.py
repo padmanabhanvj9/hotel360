@@ -23,7 +23,7 @@ def Hotel_PMS_Select_GetTodayRoomAvailabilityArrival(request):
                             union \
                             select 'due_out' , count(*) from reservation.res_reservation where res_guest_status='due out' and  res_depature ='"+str(next_day)+"' \
                             union \
-                            select 'reservation' ,count(*) from reservation.res_reservation where created_on='"+str(date[0]['roll_business_date'])+"' \
+                            select 'reservation' ,count(*) from reservation.res_reservation where created_on='"+str(date[0]['roll_business_date'])+"' and res_guest_status = 'reserved' \
                             union  \
                             select 'room_availability' ,count(*) from room_management.rm_room_list where rm_reservation_status='not reserved'  "))
 
