@@ -1,4 +1,4 @@
-from sqlwrapper import gensql
+from sqlwrapper import gensql,dbget
 import json
 def insert_roomstatus(request):
     d = request.json   
