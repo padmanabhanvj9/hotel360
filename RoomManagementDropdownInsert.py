@@ -28,6 +28,7 @@ def insert_room_type(request):
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))    
 def insert_room_no(request):
     d = request.json
+    d = {k:v for k,v in d.items() if v!= ''}
     sql_value = gensql('insert','room_management.rm_room_list',d)
     print(sql_value)
     return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'},indent=4))    
