@@ -626,6 +626,9 @@ def tiltledf():
 @app.route("/Profile/Title_insert",methods=['POST'])
 def tiltledSDFDf():
    return Title_insert(request)
+@app.route("Profile/profilepreferencevalue_insert ",methods=['POST'])
+def preferenceinsert():
+   return profilepreferencevalue_insert(request)
 #<----------------------------------------------------------->
 
 #</----------------reservation route--------->
