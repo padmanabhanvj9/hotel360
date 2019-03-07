@@ -75,6 +75,7 @@ from profileinsertvalue import profilenotetype_insert
 from profileinsertvalue import profilepreferencegroup_insert
 from profileinsertvalue import profilepreferencevalue_insert
 from profileinsertvalue import Title_insert
+from profileinsertvalue import addpreference
 
 #</------profile webservice-------------------/>
 
@@ -628,7 +629,7 @@ def tiltledSDFDf():
    return Title_insert(request)
 @app.route("Profile/profilepreferencevalue_insert ",methods=['POST'])
 def preferenceinsert():
-   return profilepreferencevalue_insert(request)
+   return addpreference(request)
 #<----------------------------------------------------------->
 
 #</----------------reservation route--------->
